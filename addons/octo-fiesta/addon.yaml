@@ -1,0 +1,28 @@
+name: Octo-Fiesta
+description: Subsonic proxy with multi-provider music streaming integration
+version: 1.0.0
+slug: octo-fiesta
+image: ghcr.io/v1ck3s/octo-fiesta:latest
+arch:
+  - amd64
+  - armv7
+  - aarch64
+ports:
+  8080/tcp: null
+volumes:
+  - config:/config
+network_mode: bridge
+restart: unless-stopped
+homeassistant_api: false
+environment:
+  ASPNETCORE_ENVIRONMENT: Production
+  ASPNETCORE_URLS: "http://+:8080"
+  Library__DownloadPath: /config/octo-fiesta/downloads
+  Subsonic__Url: "http://localhost:4533"
+  Subsonic__MusicService: "SquidWTF"
+  Subsonic__StorageMode: "Permanent"
+  Subsonic__EnableExternalPlaylists: "true"
+  Subsonic__ExplicitFilter: "All"
+  Subsonic__DownloadMode: "Track"
+  Subsonic__CacheDurationHours: "1"
+  Subsonic__FolderTemplate: "{artist}/{album}/{track} - {title}"
