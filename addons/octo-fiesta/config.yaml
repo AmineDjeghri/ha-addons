@@ -38,7 +38,7 @@ options:
   qobuz_auth_token: ""
   qobuz_user_id: ""
   qobuz_quality: ""
-  squidwtf_source: "Qobuz"
+  squidwtf_source: "Tidal"
   squidwtf_quality: ""
   squidwtf_instance_timeout: 5
   squidwtf_instance: ""
@@ -50,7 +50,7 @@ options:
 schema:
   subsonic_url: url
   admin_username: str?
-  admin_password: str?
+  admin_password: password?
   music_service: list(SquidWTF|Deezer|Qobuz|Yandex)
   storage_mode: list(Permanent|Cache)
   cache_duration_hours: int
