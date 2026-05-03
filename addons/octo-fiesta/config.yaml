@@ -58,7 +58,7 @@ schema:
   cache_duration_hours: int
   enable_external_playlists: bool
   playlists_directory: str
-  explicit_filter: list(All|Explicit|Clean)
+  explicit_filter: list(All|ExplicitOnly|CleanOnly)
   download_mode: list(Track|Album|Playlist)
   auto_upgrade_quality: bool
   folder_template: str

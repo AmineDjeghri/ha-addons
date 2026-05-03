@@ -2,75 +2,58 @@
 # shellcheck shell=bash
 set -e
 
+# Helper: export env var only if config value is non-empty
+export_if_set() {
+    local env_name=$1
+    local config_key=$2
+    local value
+    value=$(bashio::config "$config_key")
+    if [ -n "$value" ]; then
+        export "$env_name=$value"
+    fi
+}
+
 # ===== SUBSONIC SETTINGS =====
-export Subsonic__Url=$(bashio::config 'subsonic_url')
-export Subsonic__MusicService=$(bashio::config 'music_service')
-export Subsonic__StorageMode=$(bashio::config 'storage_mode')
-export Subsonic__CacheDurationHours=$(bashio::config 'cache_duration_hours')
-export Subsonic__EnableExternalPlaylists=$(bashio::config 'enable_external_playlists')
-export Subsonic__PlaylistsDirectory=$(bashio::config 'playlists_directory')
-export Subsonic__ExplicitFilter=$(bashio::config 'explicit_filter')
-export Subsonic__DownloadMode=$(bashio::config 'download_mode')
-export Subsonic__AutoUpgradeQuality=$(bashio::config 'auto_upgrade_quality')
-export Subsonic__FolderTemplate=$(bashio::config 'folder_template')
-export Subsonic__RetryDuration=$(bashio::config 'retry_duration')
-export Subsonic__ForceMinimal=$(bashio::config 'force_minimal')
-
-if bashio::config.has_value 'admin_username'; then
-    export Subsonic__AdminUsername=$(bashio::config 'admin_username')
-fi
-
-if bashio::config.has_value 'admin_password'; then
-    export Subsonic__AdminPassword=$(bashio::config 'admin_password')
-fi
+export_if_set Subsonic__Url subsonic_url
+export_if_set Subsonic__MusicService music_service
+export_if_set Subsonic__StorageMode storage_mode
+export_if_set Subsonic__CacheDurationHours cache_duration_hours
+export_if_set Subsonic__EnableExternalPlaylists enable_external_playlists
+export_if_set Subsonic__PlaylistsDirectory playlists_directory
+export_if_set Subsonic__ExplicitFilter explicit_filter
+export_if_set Subsonic__DownloadMode download_mode
+export_if_set Subsonic__AutoUpgradeQuality auto_upgrade_quality
+export_if_set Subsonic__FolderTemplate folder_template
+export_if_set Subsonic__RetryDuration retry_duration
+export_if_set Subsonic__ForceMinimal force_minimal
+export_if_set Subsonic__AdminUsername admin_username
+export_if_set Subsonic__AdminPassword admin_password
 
 # ===== LIBRARY SETTINGS =====
-export Library__DownloadPath=$(bashio::config 'library_download_path')
+export_if_set Library__DownloadPath library_download_path
 
 # ===== DEEZER SETTINGS =====
-if bashio::config.has_value 'deezer_arl'; then
-    export Deezer__Arl=$(bashio::config 'deezer_arl')
-fi
-if bashio::config.has_value 'deezer_arl_fallback'; then
-    export Deezer__ArlFallback=$(bashio::config 'deezer_arl_fallback')
-fi
-if bashio::config.has_value 'deezer_quality'; then
-    export Deezer__Quality=$(bashio::config 'deezer_quality')
-fi
+export_if_set Deezer__Arl deezer_arl
+export_if_set Deezer__ArlFallback deezer_arl_fallback
+export_if_set Deezer__Quality deezer_quality
 
 # ===== QOBUZ SETTINGS =====
-if bashio::config.has_value 'qobuz_auth_token'; then
-    export Qobuz__UserAuthToken=$(bashio::config 'qobuz_auth_token')
-fi
-if bashio::config.has_value 'qobuz_user_id'; then
-    export Qobuz__UserId=$(bashio::config 'qobuz_user_id')
-fi
-if bashio::config.has_value 'qobuz_quality'; then
-    export Qobuz__Quality=$(bashio::config 'qobuz_quality')
-fi
+export_if_set Qobuz__UserAuthToken qobuz_auth_token
+export_if_set Qobuz__UserId qobuz_user_id
+export_if_set Qobuz__Quality qobuz_quality
 
 # ===== SQUIDWTF SETTINGS =====
-export SquidWTF__Source=$(bashio::config 'squidwtf_source')
-export SquidWTF__InstanceTimeoutSeconds=$(bashio::config 'squidwtf_instance_timeout')
-if bashio::config.has_value 'squidwtf_quality'; then
-    export SquidWTF__Quality=$(bashio::config 'squidwtf_quality')
-fi
-if bashio::config.has_value 'squidwtf_instance'; then
-    export SquidWTF__Instances__0=$(bashio::config 'squidwtf_instance')
-fi
-if bashio::config.has_value 'squidwtf_instances_url'; then
-    export SquidWTF__InstancesUrl=$(bashio::config 'squidwtf_instances_url')
-fi
+export_if_set SquidWTF__Source squidwtf_source
+export_if_set SquidWTF__InstanceTimeoutSeconds squidwtf_instance_timeout
+export_if_set SquidWTF__Quality squidwtf_quality
+export_if_set SquidWTF__Instances__0 squidwtf_instance
+export_if_set SquidWTF__InstancesUrl squidwtf_instances_url
 
 # ===== YANDEX MUSIC SETTINGS =====
-export Yandex__Language=$(bashio::config 'yandex_language')
-export Yandex__IncludeUnavailable=$(bashio::config 'yandex_include_unavailable')
-if bashio::config.has_value 'yandex_oauth_token'; then
-    export Yandex__OAuthToken=$(bashio::config 'yandex_oauth_token')
-fi
-if bashio::config.has_value 'yandex_quality'; then
-    export Yandex__Quality=$(bashio::config 'yandex_quality')
-fi
+export_if_set Yandex__Language yandex_language
+export_if_set Yandex__IncludeUnavailable yandex_include_unavailable
+export_if_set Yandex__OAuthToken yandex_oauth_token
+export_if_set Yandex__Quality yandex_quality
 
 # ===== ASP.NET CORE =====
 export ASPNETCORE_ENVIRONMENT=Production
