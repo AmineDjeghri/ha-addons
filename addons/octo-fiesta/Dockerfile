@@ -19,4 +19,4 @@ RUN if command -v apt-get >/dev/null 2>&1; then \
 COPY run.sh /
 RUN chmod a+x /run.sh
 
-ENTRYPOINT [ "/run.sh" ]
+ENTRYPOINT ["/run.sh"]
