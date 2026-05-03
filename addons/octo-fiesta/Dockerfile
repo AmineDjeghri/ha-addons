@@ -3,9 +3,9 @@ FROM ${BUILD_FROM}
 
 # Install bashio for reading HA addon options (upstream .NET image doesn't have it)
 RUN if command -v apt-get >/dev/null 2>&1; then \
-        apt-get update && apt-get install -y --no-install-recommends curl ca-certificates bash; \
+        apt-get update && apt-get install -y --no-install-recommends curl ca-certificates bash jq; \
     elif command -v apk >/dev/null 2>&1; then \
-        apk add --no-cache curl ca-certificates bash; \
+        apk add --no-cache curl ca-certificates bash jq; \
     fi \
     && mkdir -p /tmp/bashio \
     && curl -L -s https://github.com/hassio-addons/bashio/archive/v0.16.2.tar.gz | tar -xzf - --strip 1 -C /tmp/bashio \
