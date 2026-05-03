@@ -1,0 +1,81 @@
+name: Octo-Fiesta
+description: Subsonic proxy with multi-provider music streaming integration
+version: "1.0.0"
+slug: octo-fiesta
+url: "https://github.com/aminedjeghri/ha-addons/tree/main/addons/octo-fiesta"
+arch:
+  - amd64
+  - armv7
+  - aarch64
+init: false
+ports:
+  8080/tcp: 8080
+ports_description:
+  8080/tcp: Web interface
+map:
+  - config:rw
+webui: "http://[HOST]:[PORT:8080]"
+backup_exclude:
+  - "**/downloads/**"
+options:
+  subsonic_url: "http://localhost:4533"
+  admin_username: ""
+  admin_password: ""
+  music_service: "SquidWTF"
+  storage_mode: "Permanent"
+  cache_duration_hours: 1
+  enable_external_playlists: true
+  playlists_directory: "playlists"
+  explicit_filter: "All"
+  download_mode: "Track"
+  auto_upgrade_quality: false
+  folder_template: "{artist}/{album}/{track} - {title}"
+  retry_duration: 1
+  force_minimal: false
+  library_download_path: "/config/octo-fiesta/downloads"
+  deezer_arl: ""
+  deezer_arl_fallback: ""
+  deezer_quality: ""
+  qobuz_auth_token: ""
+  qobuz_user_id: ""
+  qobuz_quality: ""
+  squidwtf_source: "Qobuz"
+  squidwtf_quality: ""
+  squidwtf_instance_timeout: 5
+  squidwtf_instance: ""
+  squidwtf_instances_url: ""
+  yandex_oauth_token: ""
+  yandex_quality: ""
+  yandex_language: "ru"
+  yandex_include_unavailable: false
+schema:
+  subsonic_url: url
+  admin_username: str?
+  admin_password: str?
+  music_service: list(SquidWTF|Deezer|Qobuz|Yandex)
+  storage_mode: list(Permanent|Cache)
+  cache_duration_hours: int
+  enable_external_playlists: bool
+  playlists_directory: str
+  explicit_filter: list(All|Explicit|Clean)
+  download_mode: list(Track|Album|Playlist)
+  auto_upgrade_quality: bool
+  folder_template: str
+  retry_duration: int
+  force_minimal: bool
+  library_download_path: str
+  deezer_arl: str?
+  deezer_arl_fallback: str?
+  deezer_quality: str?
+  qobuz_auth_token: str?
+  qobuz_user_id: str?
+  qobuz_quality: str?
+  squidwtf_source: list(Qobuz|Tidal)
+  squidwtf_quality: str?
+  squidwtf_instance_timeout: int
+  squidwtf_instance: str?
+  squidwtf_instances_url: str?
+  yandex_oauth_token: str?
+  yandex_quality: str?
+  yandex_language: str
+  yandex_include_unavailable: bool

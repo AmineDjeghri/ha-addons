@@ -1,0 +1,7 @@
+{
+  "build_from": {
+    "aarch64": "ghcr.io/v1ck3s/octo-fiesta:latest",
+    "amd64": "ghcr.io/v1ck3s/octo-fiesta:latest",
+    "armv7": "ghcr.io/v1ck3s/octo-fiesta:latest"
+  }
+}
