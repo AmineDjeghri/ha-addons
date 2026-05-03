@@ -9,17 +9,15 @@ arch:
   - aarch64
 init: false
 ports:
-  8080/tcp: 8080
+  8080/tcp: 5274
 ports_description:
   8080/tcp: Web interface
 map:
   - config:rw
   - media:rw
-webui: "http://[HOST]:[PORT:8080]"
-backup_exclude:
-  - "**/downloads/**"
+webui: "http://[HOST]:[PORT:5274]"
 options:
-  subsonic_url: "http://localhost:4533"
+  subsonic_url: "http://homeassistant.local:4533"
   admin_username: ""
   admin_password: ""
   music_service: "SquidWTF"
