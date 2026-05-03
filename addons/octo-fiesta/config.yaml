@@ -14,6 +14,7 @@ ports_description:
   8080/tcp: Web interface
 map:
   - config:rw
+  - media:rw
 webui: "http://[HOST]:[PORT:8080]"
 backup_exclude:
   - "**/downloads/**"
@@ -32,7 +33,7 @@ options:
   folder_template: "{artist}/{album}/{track} - {title}"
   retry_duration: 1
   force_minimal: false
-  library_download_path: "/config/octo-fiesta/downloads"
+  library_download_path: "/media/music"
   deezer_arl: ""
   deezer_arl_fallback: ""
   deezer_quality: ""
