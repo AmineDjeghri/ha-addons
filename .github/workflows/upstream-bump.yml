@@ -1,0 +1,50 @@
+name: Upstream Version Bump
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # Daily at 06:00 UTC
+  workflow_dispatch:      # Manual trigger too
+
+jobs:
+  check-and-bump:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Get latest upstream release
+        id: upstream
+        run: |
+          LATEST=$(curl -sL \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/V1ck3s/octo-fiesta/releases/latest \
+            | jq -r '.tag_name // empty')
+          echo "latest=$LATEST" >> $GITHUB_OUTPUT
+          echo "Latest upstream: $LATEST"
+
+      - name: Get current pinned version
+        id: current
+        run: |
+          CURRENT=$(grep -oP 'octo-fiesta:\K[^"]+' addons/octo-fiesta/build.json | head -1)
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          echo "Current pinned: $CURRENT"
+
+      - name: Bump versions
+        if: steps.upstream.outputs.latest != '' && steps.upstream.outputs.latest != steps.current.outputs.current
+        run: |
+          NEW=${{ steps.upstream.outputs.latest }}
+          OLD=${{ steps.current.outputs.current }}
+          echo "Bumping $OLD → $NEW"
+
+          # Update build.json (all architectures)
+          sed -i "s|octo-fiesta:${OLD}|octo-fiesta:${NEW}|g" addons/octo-fiesta/build.json
+
+          # Update config.yaml version
+          sed -i "s|version: \"${OLD}\"|version: \"${NEW}\"|g" addons/octo-fiesta/config.yaml
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Bump octo-fiesta ${OLD} → ${NEW}"
+          git push
