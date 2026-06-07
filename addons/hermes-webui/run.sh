@@ -69,6 +69,9 @@ export_if_set HERMES_WEBUI_SESSIONS_MAX        sessions_max
 #   1. Do the rsync ourselves (bypassing the root phase)
 #   2. Spoof whoami → "hermeswebui" so the root-phase check is skipped
 #   3. WANTED_UID/GID=0 so the hermeswebui-phase UID assertion passes
+git config --global user.email "ha-addon@localhost"
+git config --global user.name "Home Assistant"
+
 mkdir -p /app /uv_cache
 rsync -a /apptoo/ /app/
 mkdir -p /tmp/ha_bin
