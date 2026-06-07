@@ -22,15 +22,37 @@ This addon is recommended to be used with the [Hermes Agent HA addon](https://gi
 
 ### Shared mode (recommended)
 
-If you are running the [Hermes Agent HA addon](https://github.com/WolframRavenwolf/hermes-ha-addon), set `hermes_home` to its `.hermes` data directory (default: `/addon_configs/0a6523c6_hermes_agent/.hermes`). The WebUI will share the same config, API keys, profiles, memory, and skills as the agent — no separate setup needed.
+If you are running the [Hermes Agent HA addon](https://github.com/WolframRavenwolf/hermes-ha-addon), the default directory will be used. For example `/addon_configs/0a6523c6_hermes_agent/.hermes`). The WebUI will share the same config, API keys, profiles, memory, and skills as the agent — no separate setup needed.
+You will go through the onboarding wizard to configure providers on first start, most fields will be autofilled.
 
-> **Note:** Having both the agent and the WebUI writing to the same `state.db` simultaneously can cause database locking. If you see lock errors, stop the agent addon while using the WebUI, or use the WebUI exclusively for chat and keep the agent for background tasks.
+
+Both addons run as separate containers but mount the **same `.hermes` directory** from the HA host filesystem. The WebUI imports the agent's Python package directly from that shared directory — there is no duplication and no syncing needed.
+
+```mermaid
+graph TD
+    HOST["🖥️ HA Host filesystem\n/addon_configs/…/.hermes/"]
+
+    subgraph agent_container["Hermes Agent addon (WolframRavenwolf/hermes-ha-addon)"]
+        CLI["hermes CLI\n(runs AI, updates agent)"]
+    end
+
+    subgraph webui_container["Hermes WebUI addon (This addon)"]
+        SERVER["Python web server\n(browser interface)"]
+        AIAGENT["AIAgent (imported from\nhermes-agent package)"]
+        SERVER --> AIAGENT
+    end
+
+    HOST -- "bind mount (read/write)" --> CLI
+    HOST -- "bind mount (read/write)" --> AIAGENT
+
+    BROWSER["🌐 Browser"] --> SERVER
+```
+
+> **Updating the agent:** Always update the Hermes Agent from the **Hermes Agent addon** (via its terminal/CLI), not from the update button inside this WebUI. Both addons share the same files on disk, so any update done in the Agent addon is instantly visible here too.
 
 ### Isolated mode
 
-Leave `hermes_home` empty to run the WebUI with its own independent data in `/data/hermes`. You will go through the onboarding wizard to configure providers on first start.
-
-WebUI sessions and settings are always stored in this addon's own persistent directory (`/data/hermes-webui/`), separate from the agent data.
+It will run the WebUI with its own independent data in `/data/hermes`. You will go through the onboarding wizard to configure providers on first start.
 
 ## Access
 
