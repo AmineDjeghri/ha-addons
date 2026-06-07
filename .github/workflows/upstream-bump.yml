@@ -6,7 +6,7 @@ on:
   workflow_dispatch:      # Manual trigger too
 
 jobs:
-  check-and-bump:
+  bump-octo-fiesta:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -47,4 +47,49 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Bump octo-fiesta ${OLD} → ${NEW}"
+          git push
+
+  bump-hermes-webui:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Get latest upstream release
+        id: upstream
+        run: |
+          # GitHub releases use v-prefixed tags; GHCR images are published without the v prefix
+          TAG=$(curl -sL \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/nesquena/hermes-webui/releases/latest \
+            | jq -r '.tag_name // empty')
+          LATEST="${TAG#v}"   # strip leading v for GHCR compatibility
+          echo "latest=$LATEST" >> $GITHUB_OUTPUT
+          echo "Latest upstream (no-v): $LATEST"
+
+      - name: Get current pinned version
+        id: current
+        run: |
+          CURRENT=$(grep -oP 'hermes-webui:\K[^"]+' addons/hermes-webui/build.json | head -1)
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          echo "Current pinned: $CURRENT"
+
+      - name: Bump versions
+        if: steps.upstream.outputs.latest != '' && steps.upstream.outputs.latest != steps.current.outputs.current
+        run: |
+          NEW=${{ steps.upstream.outputs.latest }}
+          OLD=${{ steps.current.outputs.current }}
+          echo "Bumping $OLD → $NEW"
+
+          # Update build.json (all architectures) — tags on GHCR have no v prefix
+          sed -i "s|hermes-webui:${OLD}|hermes-webui:${NEW}|g" addons/hermes-webui/build.json
+
+          # Update config.yaml version
+          sed -i "s|version: \"${OLD}\"|version: \"${NEW}\"|g" addons/hermes-webui/config.yaml
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Bump hermes-webui ${OLD} → ${NEW}"
           git push

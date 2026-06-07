@@ -1,0 +1,37 @@
+name: Hermes WebUI
+description: Lightweight web UI for Hermes Agent — browser-based chat, session management, workspace file browser, and more
+version: "0.51.299"
+slug: hermes-webui
+url: "https://github.com/aminedjeghri/ha-addons/tree/main/addons/hermes-webui"
+arch:
+  - amd64
+  - aarch64
+init: false
+ports:
+  8787/tcp: 8787
+ports_description:
+  8787/tcp: Hermes WebUI
+map:
+  - config:rw
+  - all_addon_configs:rw
+webui: "http://[HOST]:[PORT:8787]"
+options:
+  hermes_home: ""
+  password: ""
+  agent_dir: ""
+  default_workspace: ""
+  default_model: ""
+  hermes_config_path: ""
+  csp_connect_extra: ""
+  agent_cache_max: 25
+  sessions_max: 100
+schema:
+  hermes_home: str?
+  password: password?
+  agent_dir: str?
+  default_workspace: str?
+  default_model: str?
+  hermes_config_path: str?
+  csp_connect_extra: str?
+  agent_cache_max: int?
+  sessions_max: int?
