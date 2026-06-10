@@ -1,6 +1,6 @@
 name: Hermes WebUI
 description: Lightweight web UI for Hermes Agent — browser-based chat, session management, workspace file browser, and more
-version: "0.51.340"
+version: "0.51.347"
 slug: hermes-webui
 url: "https://github.com/aminedjeghri/ha-addons/tree/main/addons/hermes-webui"
 arch:
