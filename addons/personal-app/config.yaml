@@ -1,6 +1,6 @@
 name: Personal App
 description: Personal app with FastAPI backend and NiceGUI frontend
-version: "1.0.2"
+version: "1.0.3"
 slug: personal-app
 url: "https://github.com/aminedjeghri/ha-addons/tree/main/addons/personal-app"
 arch:
