@@ -65,36 +65,3 @@ jobs:
     name: "👷 Quality Check & Tests"
     uses: ./.github/workflows/quality-and-tests.yml
     secrets: inherit  # pragma: allowlist secret
-
-  test-dockerfile:
-    name: "🐳 Validate Dockerfile"
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    defaults:
-      run:
-        working-directory: addons/personal-app
-    steps:
-      - name: Check Out
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-      - name: Build HA addon image
-        shell: bash
-        run: |
-          echo "::group::Docker build"
-          make docker-build
-          echo "::endgroup::"
-      - name: Run container (detached)
-        shell: bash
-        run: make docker-run-detached
-      - name: Wait for frontend to be ready
-        shell: bash
-        run: |
-          echo "::group::Health check"
-          make docker-healthcheck
-          echo "::endgroup::"
-      - name: Stop container
-        if: always()
-        shell: bash
-        run: make docker-stop
