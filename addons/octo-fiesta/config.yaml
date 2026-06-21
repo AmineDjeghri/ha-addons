@@ -50,7 +50,7 @@ options:
 schema:
   subsonic_url: url
   admin_username: str?
-  admin_password: password?
+  admin_password: password? # pragma: allowlist secret
   music_service: list(SquidWTF|Deezer|Qobuz|Yandex)
   storage_mode: list(Permanent|Cache)
   cache_duration_hours: int

@@ -36,4 +36,3 @@ http://YOUR_HA_IP:8080
 ```
 
 Use the same credentials as your Navidrome server.
-

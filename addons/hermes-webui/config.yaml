@@ -27,7 +27,7 @@ options:
   sessions_max: 100
 schema:
   hermes_home: str?
-  password: password?
+  password: password? # pragma: allowlist secret
   agent_dir: str?
   default_workspace: str?
   default_model: str?

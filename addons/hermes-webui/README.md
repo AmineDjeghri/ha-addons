@@ -18,7 +18,7 @@ HA Addon for [Hermes WebUI](https://github.com/nesquena/hermes-webui) — a ligh
 
 For the full list of upstream environment variables see the [official configuration reference](https://github.com/nesquena/hermes-webui#overrides-only-needed-if-auto-detection-misses).
 
-This addon is recommended to be used with the [Hermes Agent HA addon](https://github.com/WolframRavenwolf/hermes-ha-addon). 
+This addon is recommended to be used with the [Hermes Agent HA addon](https://github.com/WolframRavenwolf/hermes-ha-addon).
 
 ### Shared mode (recommended)
 

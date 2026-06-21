@@ -1,0 +1,10 @@
+name: 'Cleanup Artifacts & Caches'
+description: 'Clean build artifacts, test caches, and Python cache files'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Clean build artifacts & test caches
+      shell: bash
+      working-directory: addons/personal-app
+      run: make clean
