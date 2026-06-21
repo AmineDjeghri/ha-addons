@@ -1,6 +1,6 @@
 [project]
 name = "personal-app-backend"
-version = "1.0.0"
+version = "1.0.1"
 description = "This is the backend of the personal app."
 requires-python = ">=3.14,<3.15"
 dependencies = [
