@@ -106,20 +106,21 @@ jobs:
           make build-package
           echo "::endgroup::"
 
-      - name: Publish to GitHub Release
-        if: steps.semantic_release.outputs.released == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_ENTERPRISE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        shell: bash
-        run: |
-          VERSION="${{ steps.semantic_release.outputs.version }}"
-          export GH_HOST=$(echo "$GITHUB_SERVER_URL" | sed 's|https://||')
-          gh release upload "v${VERSION}" dist/*.whl dist/*.tar.gz --clobber
-
-      - name: Cleanup Artifacts
-        if: always()
-        uses: ./.github/actions/cleanup-artifacts
+# No need to publish to GitHub Release in this project
+#      - name: Publish to GitHub Release
+#        if: steps.semantic_release.outputs.released == 'true'
+#        env:
+#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          GH_ENTERPRISE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        shell: bash
+#        run: |
+#          VERSION="${{ steps.semantic_release.outputs.version }}"
+#          export GH_HOST=$(echo "$GITHUB_SERVER_URL" | sed 's|https://||')
+#          gh release upload "v${VERSION}" dist/*.whl dist/*.tar.gz --clobber
+#
+#      - name: Cleanup Artifacts
+#        if: always()
+#        uses: ./.github/actions/cleanup-artifacts
 
   docs:
     name: "📚 Deploy Docs"

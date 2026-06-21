@@ -26,8 +26,7 @@ COPY frontend/src ./frontend/src
 
 # Install all workspace packages (uv auto-downloads Python 3.14 if needed).
 # --frozen: use exact versions from uv.lock
-# --no-dev:  skip dev/docs dependencies (pytest, ruff, mkdocs, etc.)
-RUN uv sync --all-packages --frozen --no-dev
+RUN uv sync --all-packages --frozen
 
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
