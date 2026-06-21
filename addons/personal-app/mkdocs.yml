@@ -2,7 +2,7 @@ site_name: personal-app
 site_description: Documentation
 site_author: Amine Djeghri
 docs_dir: .
-# site_url: #TODO: Fill when deployment CI added
+# site_url:
 #site_dir: public
 #repo_url:
 #edit_uri: blob/main/docs/

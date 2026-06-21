@@ -1,7 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
 
-# The app is imported from the backend source
 from personal_app_backend.app import app
 
 
@@ -11,19 +10,36 @@ def client():
     return TestClient(app)
 
 
-@pytest.mark.integration
-def test_post_chat_message_integration(client):
-    """Test the /api/chat endpoint by making a real call to the LLM.
+def test_metrics_summary_status(client):
+    """GET /api/metrics/summary returns 200 with expected fields."""
+    response = client.get("/api/metrics/summary")
 
-    This is an integration test and requires a configured environment with a running LLM.
-    """
-    response = client.post("/api/hello")
-
-    # Assert: Check for a successful response and valid content
     assert response.status_code == 200
-    response_data = response.json()
-    assert "response" in response_data
-    assert isinstance(response_data["response"], str)
-    # Check that the response is not empty and not an error message
-    assert len(response_data["response"]) > 0
-    assert not response_data["response"].lower().startswith("error")
+    data = response.json()
+    assert data["status"] == "ok"
+    assert isinstance(data["uptime_seconds"], float)
+    assert data["uptime_seconds"] >= 0
+    assert isinstance(data["cpu_percent"], float)
+    assert isinstance(data["memory_used_mb"], float)
+    assert isinstance(data["memory_percent"], float)
+
+
+def test_metrics_request_counters_increment(client):
+    """Each request to the metrics endpoint increments the request counters."""
+    before = client.get("/api/metrics/summary").json()
+
+    client.get("/api/metrics/summary")
+    client.get("/api/metrics/summary")
+
+    after = client.get("/api/metrics/summary").json()
+
+    assert after["requests_total"] > before["requests_total"]
+    assert after["requests_2xx"] > before["requests_2xx"]
+
+
+def test_metrics_fields_are_non_negative(client):
+    """All numeric metric fields must be >= 0."""
+    data = client.get("/api/metrics/summary").json()
+
+    for field in ("requests_total", "requests_2xx", "requests_4xx", "requests_5xx"):
+        assert data[field] >= 0, f"{field} should be non-negative"
