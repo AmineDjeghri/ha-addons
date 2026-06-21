@@ -28,10 +28,14 @@ endif
 
 install-dev: ## Install all dev dependencies (CPU)
 	@echo "${YELLOW}=========> Installing dependencies...\n  \
-	 Development dependencies (dev & docs) will be installed by default in install-dev.${NC}"
-	@$(UV) sync --all-packages
+	 Development dependencies (dev & docs) will be installed by install-dev.${NC}"
+	@$(UV) sync --all-packages --all-groups
 	@echo "${GREEN}Dependencies installed.${NC}"
 
+install-prod: ## Install all dev dependencies (CPU)
+	@echo "${YELLOW}=========> Installing dependencies (PROD)...${NC}"
+	@$(UV) sync --all-packages
+	@echo "${GREEN}Dependencies installed.${NC}"
 
 install-frontend: ## Install frontend dependencies
 	@echo "${YELLOW}=========> Installing frontend dependencies...${NC}"

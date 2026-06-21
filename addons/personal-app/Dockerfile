@@ -24,7 +24,7 @@ COPY frontend/pyproject.toml ./frontend/
 COPY backend/src ./backend/src
 COPY frontend/src ./frontend/src
 
-# Install all workspace packages (uv auto-downloads Python 3.14 if needed).
+# Install production packages only (uv auto-downloads Python 3.14 if needed).
 # --frozen: use exact versions from uv.lock
 RUN uv sync --all-packages --frozen
 
