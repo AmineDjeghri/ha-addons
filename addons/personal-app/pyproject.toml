@@ -1,6 +1,6 @@
 [project]
 name = "personal-app"
-version = "1.0.4"
+version = "1.1.0"
 description = "This is the personal app. check the frontend and backend folders for more details."
 readme = "README.md"
 requires-python = ">=3.14, <3.15"
