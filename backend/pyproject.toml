@@ -1,19 +1,15 @@
 [project]
 name = "personal-app-backend"
-version = "1.0.1"
+version = "1.0.2"
 description = "This is the backend of the personal app."
 requires-python = ">=3.14,<3.15"
 dependencies = [
 
   # software engineering & api
   "fastapi[standard]",
-  "asyncio==4.0.0",
-  "numpy==2.4.6",
-  "pandas",
-  "itsdangerous",
 
-  "pydantic>=2.13.4,<2.16",
-  "pydantic-settings>=2.12.0",
+  "pydantic==2.13.4",
+  "pydantic-settings==2.14.2",
   "loguru==0.7.3",
   "requests==2.34.2",
   "psutil>=6.0.0",
