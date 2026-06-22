@@ -1,5 +1,6 @@
 import ast
 import timeit
+from personal_app_backend.backend_settings import logger
 
 
 def safe_eval(x):
