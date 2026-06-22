@@ -40,6 +40,27 @@ if [ -n "$hermes_home" ] && [ "$hermes_home" != "null" ]; then
     # its Python package into the venv. Symlink our agent into that path.
     mkdir -p /home/hermeswebui/.hermes
     ln -sfn "${hermes_home}/hermes-agent" /home/hermeswebui/.hermes/hermes-agent
+
+    # Workspace: persist in hermes_agent's addon config dir (accessible from both addons,
+    # backed up with the agent, survives hermes-webui reinstall)
+    HERMES_AGENT_HOME=$(dirname "$hermes_home")
+
+    # Share config and local data from hermes_agent (covers gh auth, npm, pip, and
+    # any XDG-compliant tool — no per-tool overrides needed)
+    [ -d "$HERMES_AGENT_HOME/.config" ] && ln -sfn "$HERMES_AGENT_HOME/.config" /root/.config
+    [ -d "$HERMES_AGENT_HOME/.local" ]  && ln -sfn "$HERMES_AGENT_HOME/.local"  /root/.local
+    export XDG_CONFIG_HOME="$HERMES_AGENT_HOME/.config"
+    export XDG_DATA_HOME="$HERMES_AGENT_HOME/.local/share"
+
+    # Share git config (includes credential helper set up by `gh auth setup-git`)
+    [ -f "$HERMES_AGENT_HOME/.gitconfig" ] && ln -sfn "$HERMES_AGENT_HOME/.gitconfig" /root/.gitconfig
+
+    WORKSPACE_DIR="$HERMES_AGENT_HOME/workspace"
+    mkdir -p "$WORKSPACE_DIR"
+    chmod 777 "$WORKSPACE_DIR"
+    # Only auto-set if the user hasn't configured a custom default_workspace
+    export HERMES_WEBUI_DEFAULT_WORKSPACE="$WORKSPACE_DIR"
+    bashio::log.info "Workspace: ${WORKSPACE_DIR}"
 else
     export HERMES_HOME="/data/hermes"
     mkdir -p /data/hermes

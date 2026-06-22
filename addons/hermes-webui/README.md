@@ -22,15 +22,13 @@ This addon is recommended to be used with the [Hermes Agent HA addon](https://gi
 
 ### Shared mode (recommended)
 
-If you are running the [Hermes Agent HA addon](https://github.com/WolframRavenwolf/hermes-ha-addon), the default directory will be used. For example `/addon_configs/0a6523c6_hermes_agent/.hermes`). The WebUI will share the same config, API keys, profiles, memory, and skills as the agent — no separate setup needed.
-You will go through the onboarding wizard to configure providers on first start, most fields will be autofilled.
+If you are running the [Hermes Agent HA addon](https://github.com/WolframRavenwolf/hermes-ha-addon), this addon auto-discovers it and mounts its config directory. For example: `/addon_configs/0a6523c6_hermes_agent/`. The WebUI will share the same config, API keys, profiles, memory, and skills as the agent — no separate setup needed.
 
-
-Both addons run as separate containers but mount the **same `.hermes` directory** from the HA host filesystem. The WebUI imports the agent's Python package directly from that shared directory — there is no duplication and no syncing needed.
+Both addons run as **separate Docker containers** but access the **same directories** from the HA host filesystem via volume mounts. There is no duplication and no syncing needed.
 
 ```mermaid
 graph TD
-    HOST["🖥️ HA Host filesystem\n/addon_configs/…/.hermes/"]
+    HOST["🖥️ HA Host filesystem\n/addon_configs/…_hermes_agent/"]
 
     subgraph agent_container["Hermes Agent addon (WolframRavenwolf/hermes-ha-addon)"]
         CLI["hermes CLI\n(runs AI, updates agent)"]
@@ -49,6 +47,23 @@ graph TD
 ```
 
 > **Updating the agent:** Always update the Hermes Agent from the **Hermes Agent addon** (via its terminal/CLI), not from the update button inside this WebUI. Both addons share the same files on disk, so any update done in the Agent addon is instantly visible here too.
+
+### Shared environment
+
+In shared mode, the webui container mirrors the hermes_agent's environment on every start. The following are shared automatically — **no manual setup required**:
+
+| What                          | How                                             | Details                                              |
+|-------------------------------|-------------------------------------------------|------------------------------------------------------|
+| **Agent data** (`.hermes/`)   | `HERMES_HOME` env var                           | Profiles, sessions, memory, skills, API keys         |
+| **Tool config** (`.config/`)  | symlink + `XDG_CONFIG_HOME`                     | `gh` auth, npm, pip, and all XDG-compliant tools     |
+| **Local data** (`.local/`)    | symlink + `XDG_DATA_HOME`                       | uv-installed packages, local binaries, app data      |
+| **Git config** (`.gitconfig`) | symlink                                         | User config, credential helper (`gh auth setup-git`) |
+| **Workspace** (`workspace/`)  | auto-created + `HERMES_WEBUI_DEFAULT_WORKSPACE` | Where you want to work (for example cloned repos)    |
+
+> **Note:** These symlinks and env vars are set at container startup. If the hermes_agent hasn't booted yet (dirs don't exist), they are silently skipped and created on the next restart.
+
+
+
 
 ### Isolated mode
 
