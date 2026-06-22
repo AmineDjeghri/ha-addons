@@ -1166,7 +1166,7 @@ wheels = [
 
 [[package]]
 name = "personal-app"
-version = "1.0.4"
+version = "1.1.0"
 source = { virtual = "." }
 
 [package.dev-dependencies]
@@ -1213,7 +1213,7 @@ docs = [
 
 [[package]]
 name = "personal-app-backend"
-version = "1.0.4"
+version = "1.1.0"
 source = { editable = "backend" }
 dependencies = [
     { name = "fastapi", extra = ["standard"] },
@@ -1236,7 +1236,7 @@ requires-dist = [
 
 [[package]]
 name = "personal-app-frontend"
-version = "1.0.4"
+version = "1.1.0"
 source = { editable = "frontend" }
 dependencies = [
     { name = "loguru" },
