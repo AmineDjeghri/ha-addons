@@ -74,13 +74,8 @@ def time_function(func):
 
         end_time = timeit.default_timer()
         execution_time = round(end_time - start_time, 2)
-        if result:
-            if "reason" in result:
-                result["reason"] = f" Execution time: {execution_time}s | " + result["reason"]
 
-            if "output" in result:
-                result["output"] = f" Execution time: {execution_time}s | " + result["output"]
-            logger.debug(f"Function {func.__name__} took {execution_time} seconds to execute.")
+        logger.debug(f"Function {func.__name__} took {execution_time} seconds to execute.")
 
         return result
 
