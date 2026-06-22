@@ -16,6 +16,7 @@ members = ["frontend", "backend"]
 [tool.uv]
 managed = true
 default-groups = []
+index-strategy = "unsafe-best-match"
 
 [dependency-groups]
 # if you add new dependencies here, you can add them to [tool.uv] default-groups up above if you want to install them by default
@@ -68,10 +69,11 @@ version_toml = [
 version_variables = [
     "config.yaml:version",
 ]
-version_pattern = "v(?P<version>\\d+\\.\\d+\\.\\d+(?:[-.]\\w+)?)"  # matches v1.0.0, v1.0.0-rc.1, etc.
+tag_format = "personal-app-v{version}"
+version_pattern = "personal-app-v(?P<version>\\d+\\.\\d+\\.\\d+(?:[-.]\\w+)?)"  # matches personal-app-v1.0.0, personal-app-v1.0.0-rc.1, etc.
 upload_to_vcs_release = false  # Semantic-release automatically creates GitHub releases. Publication is handled by main-release.yml and dev-release.yml
 commit_author = "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-commit_message = "chore(release): v{version} [skip ci]"
+commit_message = "chore(release): personal-app-v{version} [skip ci]"
 
 [tool.semantic_release.branches.main]
 match = "main"
