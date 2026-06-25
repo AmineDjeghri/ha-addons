@@ -1,6 +1,6 @@
 {
   "build_from": {
-    "aarch64": "ghcr.io/nesquena/hermes-webui:0.51.616",
-    "amd64": "ghcr.io/nesquena/hermes-webui:0.51.616"
+    "aarch64": "ghcr.io/nesquena/hermes-webui:0.51.647",
+    "amd64": "ghcr.io/nesquena/hermes-webui:0.51.647"
   }
 }
