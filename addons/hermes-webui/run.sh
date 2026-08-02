@@ -98,14 +98,8 @@ printf '#!/bin/sh\necho hermeswebui\n' > /tmp/ha_bin/whoami
 chmod +x /tmp/ha_bin/whoami
 export PATH="/tmp/ha_bin:/root/.local/bin:/home/hermeswebui/.local/bin:${PATH}"
 
-# Tier 2: install hermes-agent from PyPI instead of rebuilding it from the
-# shared agent source. hermes-agent refuses non-editable wheel builds
-# ("Building wheels or sdists for hermes-agent is not supported"), so building
-# the shared source on every boot kills the WebUI. Installing the released
-# wheel from PyPI decouples the WebUI from the agent's source tree — no build,
-# no version drift risk from the local checkout.
-# (The agent source symlink above is kept only so the init's install block runs;
-#  the install itself now pulls from PyPI.)
+# Install hermes-agent from PyPI instead of rebuilding the shared agent source
+# (hermes-agent refuses non-editable wheel builds and crashed the WebUI on boot).
 sed -i \
   's|uv pip install "$_stage_src\[all\]"|uv pip install "hermes-agent[all]"|' \
   /hermeswebui_init.bash
