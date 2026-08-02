@@ -98,5 +98,11 @@ printf '#!/bin/sh\necho hermeswebui\n' > /tmp/ha_bin/whoami
 chmod +x /tmp/ha_bin/whoami
 export PATH="/tmp/ha_bin:/root/.local/bin:/home/hermeswebui/.local/bin:${PATH}"
 
+# Install hermes-agent from PyPI instead of rebuilding the shared agent source
+# (hermes-agent refuses non-editable wheel builds and crashed the WebUI on boot).
+sed -i \
+  's|uv pip install "$_stage_src\[all\]"|uv pip install "hermes-agent[all]"|' \
+  /hermeswebui_init.bash
+
 bashio::log.info "Starting Hermes WebUI on port 8787..."
 exec /hermeswebui_init.bash
