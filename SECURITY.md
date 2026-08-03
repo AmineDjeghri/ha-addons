@@ -13,6 +13,8 @@ reporting** (preferred):
 
 - https://github.com/AmineDjeghri/ha-addons/security/advisories/new
 
+You can also reach us directly by email: **contact@aminedjeghri.com**
+
 When reporting, please include as much of the following as possible:
 
 - A description of the vulnerability and its impact
