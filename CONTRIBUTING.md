@@ -146,7 +146,3 @@ entries are generated from conventional commits — so meaningful, well-scoped c
 
 Tags are created **automatically** by semantic-release on merge to `main`. **Do NOT create tags manually** — it will
 confuse semantic-release and cause incorrect version bumps.
-
-> **Note:** This repository's `CONTRIBUTING.md` and license follow the same template as the maintainer's other
-> projects (e.g. `personal-os-setup`), adapted to Home Assistant add-ons. Add-ons with their own contributing guide
-> (e.g. `personal-app`) take precedence over this repo-wide guide.
