@@ -2,6 +2,11 @@
 
 First off, thanks for taking the time to contribute! ❤️
 
+This is the **home for multiple Home Assistant add-ons**. Each add-on is
+self-contained under [`addons/<name>/`](addons/), and some add-ons ship their
+**own** `CONTRIBUTING.md`, code of conduct, tooling, and docs. Always check the
+add-on's folder first — if it has its own contributing guide, that guide wins.
+
 ## 1. Code of Conduct
 
 This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md).
@@ -11,13 +16,25 @@ By participating, you are expected to uphold this code. Please report unacceptab
 
 - Amine DJEGHRI
 
-## 3. Best practices 💡
+## 3. Add-ons overview
 
-- **Docstring** your scripts and functions — especially for shell scripts and Python inside the add-ons,
-  where clear comments help future maintainers.
-- Use the `pre-commit` hooks to ensure your code is formatted correctly and is of good quality.
+| Add-on | Type | Own tooling & docs |
+|--------|------|--------------------|
+| [`addons/personal-app`](addons/personal-app/) | Python (FastAPI + NiceGUI) | Yes — own `Makefile`, `pyproject.toml`, `uv.lock`, `mkdocs.yml`, pre-commit, `CONTRIBUTING.md` |
+| [`addons/hermes-webui`](addons/hermes-webui/) | Shell / container wrapper | No — see repo-wide guidelines below |
+| [`addons/nocto-fiesta`](addons/nocto-fiesta/) | Shell / container wrapper | No — see repo-wide guidelines below |
+
+> **For `personal-app`, follow its own [`CONTRIBUTING.md`](addons/personal-app/CONTRIBUTING.md).**
+> It documents the Makefile commands, `uv` workflow, and pre-commit hooks for that add-on.
+> (A MkDocs docs site may be published to the `gh-pages` branch in the future.)
+
+## 4. Best practices (repo-wide, for the shell-based add-ons) 💡
+
 - Home Assistant add-ons follow the [Add-on configuration](https://developers.home-assistant.io/docs/add-ons/configuration/)
-  schema (`config.yaml`). Keep every add-on self-contained under [`addons/<name>/`](addons/).
+  schema (`config.yaml`). Keep every add-on self-contained under `addons/<name>/`
+  with its `config.yaml`, `Dockerfile`, `build.json` (if any), and `README.md`.
+- Write clear comments in shell scripts and fail fast (`set -euo pipefail`).
+- **Docstring** functions and classes in any Python you touch, so docs can be generated.
 
 - Secret scanning ([detect-secrets](https://github.com/Yelp/detect-secrets) is configured as a pre-commit hook):
     - Use `.pre-commit-config.yaml` for **structural/file-level exclusions** — e.g. excluding whole files, known
@@ -29,30 +46,18 @@ By participating, you are expected to uphold this code. Please report unacceptab
     - Do **not** add entire workflow or config files to `--exclude-files` just to silence one line — use the inline
       pragma instead, so real leaks in those files are still caught.
 
-## 4. How to contribute
+## 5. How to contribute
 
-### 4.1 File structure (🌳 Tree)
-
-Each add-on lives under [`addons/<name>/`](addons/) with:
-
-- `config.yaml` — add-on configuration (name, version, slug, description, etc.)
-- `Dockerfile` — the container build
-- `build.yaml` — optional build config (architectures, base image)
-- `README.md` / `DOCS.md` — user-facing documentation
-
-### 4.2 Local development
+### 5.1 Local development
 
 - Fork the repository and clone your fork.
-- Install pre-commit hooks:
+- If you're working on `personal-app`, follow its own contributing guide
+  (Makefile + `uv` workflow).
+- For the other add-ons, make your changes under `addons/<name>/` and ensure the
+  YAML/config is valid.
+- Optional repo-wide quality checks run in CI (see the workflows under `.github/workflows/`).
 
-  ```bash
-  pip install pre-commit
-  pre-commit install
-  ```
-
-- Make your changes to the relevant add-on under `addons/<name>/`.
-
-### 4.3. Pushing your work
+### 5.2. Pushing your work
 
 - Before you start working on an issue, please comment on (or create) the issue and wait for it to be assigned to you.
   If someone has already been assigned but didn't have the time to work on it lately, please communicate with them and
@@ -61,7 +66,7 @@ Each add-on lives under [`addons/<name>/`](addons/) with:
 1. Create a branch from **`main`** and respect the naming convention: `feature/your-feature-name`
    or `fix/your-bug-name`.
 2. Before committing your code:
-    - Run `pre-commit run --all-files` to check the code style & linting.
+    - Run the add-on's own quality checks (for `personal-app`: `make pre-commit` and `make test`).
     - Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) — see the
       [Commit Convention](#commit-convention) section below.
 3. Open a pull request targeting **`main`**. Keep the PR description concise (1–2 lines): what changed and why.
@@ -133,7 +138,7 @@ BREAKING CHANGE: /options no longer supports the old key
 👷 ci: add pull_request trigger to pipeline
 ```
 
-## 5. Release process
+## 6. Release process
 
 Releases are driven by [python-semantic-release](https://python-semantic-release.readthedocs.io/) in CI
 (`main-release.yml` / `dev-release.yml`), scoped per add-on (e.g. `personal-app`). Version bumps and changelog
@@ -143,4 +148,5 @@ Tags are created **automatically** by semantic-release on merge to `main`. **Do 
 confuse semantic-release and cause incorrect version bumps.
 
 > **Note:** This repository's `CONTRIBUTING.md` and license follow the same template as the maintainer's other
-> projects (e.g. `personal-os-setup`), adapted to Home Assistant add-ons.
+> projects (e.g. `personal-os-setup`), adapted to Home Assistant add-ons. Add-ons with their own contributing guide
+> (e.g. `personal-app`) take precedence over this repo-wide guide.
