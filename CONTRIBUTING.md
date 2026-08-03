@@ -21,8 +21,7 @@ By participating, you are expected to uphold this code. Please report unacceptab
 | Add-on | Type | Own tooling & docs |
 |--------|------|--------------------|
 | [`addons/personal-app`](addons/personal-app/) | Python (FastAPI + NiceGUI) | Yes — own `Makefile`, `pyproject.toml`, `uv.lock`, `mkdocs.yml`, pre-commit, `CONTRIBUTING.md` |
-| [`addons/hermes-webui`](addons/hermes-webui/) | Shell / container wrapper | No — see repo-wide guidelines below |
-| [`addons/nocto-fiesta`](addons/nocto-fiesta/) | Shell / container wrapper | No — see repo-wide guidelines below |
+| Other addons (ex: addons/hermes-webui/) | Shell / container wrapper | No — see repo-wide guidelines below |
 
 > **For `personal-app`, follow its own [`CONTRIBUTING.md`](addons/personal-app/CONTRIBUTING.md).**
 > It documents the Makefile commands, `uv` workflow, and pre-commit hooks for that add-on.
