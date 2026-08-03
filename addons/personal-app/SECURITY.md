@@ -11,7 +11,7 @@ contributions.
 To report a security vulnerability privately, use **GitHub private vulnerability
 reporting** (preferred):
 
-- https://github.com/AmineDjeghri/python-package-template/security/advisories/new
+- https://github.com/AmineDjeghri/ha-addons/security/advisories/new
 
 You can also reach us directly by email: **contact@aminedjeghri.com**
 
