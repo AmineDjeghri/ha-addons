@@ -96,11 +96,7 @@ rsync -a /apptoo/ /app/
 mkdir -p /tmp/ha_bin
 printf '#!/bin/sh\necho hermeswebui\n' > /tmp/ha_bin/whoami
 chmod +x /tmp/ha_bin/whoami
-# Expose this container's own venv CLI: /app/venv is created by the init script
-# with hermes-agent installed from PyPI (the agent's shared venv is not usable
-# here — its symlinks target /config/.hermes/..., see README "Venv handling").
-# Makes `hermes` available for day-to-day commands (doctor, config, mcp, skills)
-# — never for updates, which must run from the Hermes Agent addon.
+# Expose this container's own venv 
 export PATH="/tmp/ha_bin:/root/.local/bin:/home/hermeswebui/.local/bin:/app/venv/bin:${PATH}"
 
 # Install hermes-agent from PyPI instead of rebuilding the shared agent source
