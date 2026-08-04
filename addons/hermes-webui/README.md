@@ -62,7 +62,7 @@ flowchart TD
     end
 
     HA -- "bind mount (rw)" --> A_HOME
-    HA -- "bind mounts (rw) /addon_configs + /config + /data" --> W_HOME
+    HA -- "bind mounts (rw) /addon_configs + /data" --> W_HOME
     A_HOME -- "/config/.hermes" --> SHARED
     W_HOME -- "/addon_configs/…/.hermes" --> SHARED
     W_SRC -- "symlink → .hermes/hermes-agent" --> SHARED
@@ -90,6 +90,38 @@ flowchart TD
 > in the WebUI. The shared venv + uv runtime are built for the agent's path. Always run
 > `hermes` (updates, CLI) from the **agent addon**, not from the WebUI container.
 
+#### Why two virtual environments?
+
+The two containers share the **code** (the git checkout) and the **data**
+(`HERMES_HOME`) — never their **environment**:
+
+- **Agent addon** — the engine runs **from source**: `hermes-agent` is installed
+  **editable** (`uv pip install -e .[all]`) into `.hermes/hermes-agent/venv/`.
+  Editable means the package is not copied into `site-packages`: Python imports
+  load straight from the git checkout, so the agent can read and modify its own
+  code (self-modifiable source), and a `git pull` takes effect immediately.
+- **WebUI addon** — the server imports Hermes **in-process** (the `AIAgent`), so
+  its own venv `/app/venv` (CPython 3.12) installs `hermes-agent[all]` **from
+  PyPI**: a stable, self-contained, disposable snapshot. The agent's venv cannot
+  be used here (its absolute symlinks target `/config/.hermes/…`, a path that
+  only exists inside the agent container) and should not be shared anyway —
+  virtual environments are isolated by design, and the WebUI must keep working
+  even without the agent addon (isolated mode).
+
+#### Command line (CLI) in this addon
+
+`run.sh` adds `/app/venv/bin` to `PATH`, so the `hermes` CLI is available
+directly in this container (`hermes doctor`, `hermes config get`, `hermes mcp`,
+…) and operates on the shared `HERMES_HOME`, exactly like on the agent addon.
+
+> **Never run `hermes update` / `/update` from this container.** It performs a
+> `git pull` on the shared checkout followed by an editable reinstall — into a
+> venv that is wiped at the next image re-init — and could conflict with the
+> agent's editable install. Always update from the **Hermes Agent addon**. This
+> container's PyPI version re-aligns automatically on each add-on update (the
+> init script reinstalls the latest release); check drift with `hermes --version`
+> in both containers.
+
 #### Where files live on the HA host
 
 | Host path | Agent addon | WebUI addon | Contents |
@@ -101,6 +133,11 @@ flowchart TD
 | `…/.local` | `/config/.local` | symlink `/root/.local` (`XDG_DATA_HOME`) | uv/npm installs, local binaries |
 | `…/.gitconfig` | `/config/.gitconfig` | symlink `/root/.gitconfig` | git identity + credential helper |
 | `/data/hermes-webui` | — | `/data/hermes-webui` | WebUI state (sessions, settings, model cache) |
+
+> **HA Core config access is provided through APIs instead: the **Supervisor API**
+> (`http://supervisor`, authenticated with the auto-injected `SUPERVISOR_TOKEN`)
+> for add-on and Core logs, and the **HA REST/WebSocket API** for entity states
+> and automation configuration.
 
 > **Updating the agent:** Always update the Hermes Agent from the **Hermes Agent addon** (via its terminal/CLI), not from the update button inside this WebUI. Both addons share the same files on disk, so any update done in the Agent addon is instantly visible here too.
 
