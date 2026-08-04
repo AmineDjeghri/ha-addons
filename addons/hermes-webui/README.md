@@ -26,25 +26,81 @@ If you are running the [Hermes Agent HA addon](https://github.com/WolframRavenwo
 
 Both addons run as **separate Docker containers** but access the **same directories** from the HA host filesystem via volume mounts. There is no duplication and no syncing needed.
 
+### Architecture
+
+Two **separate Docker containers** share the **same directories** on the HA host
+(`/addon_configs/<slug>_hermes_agent/`) via volume mounts — no duplication, no syncing.
+The WebUI mirrors the agent's environment on every start (see [Shared environment](#shared-environment)).
+
 ```mermaid
-graph TD
-    HOST["🖥️ HA Host filesystem\n/addon_configs/…_hermes_agent/"]
+flowchart TD
+    HA["🖥️ Home Assistant OS / Supervisor"]
+    BROWSER["🌐 Browser"] --> WEBUI_SRV
+    TG["✈️ Telegram"] --> AGENT_PROC
+    SHARED[("📁 addon_configs/…_hermes_agent<br/>.hermes · workspace · .config · .local · .gitconfig")]
 
-    subgraph agent_container["Hermes Agent addon (WolframRavenwolf/hermes-ha-addon)"]
-        CLI["hermes CLI\n(runs AI, updates agent)"]
+    subgraph AGENT["🐳 Hermes Agent addon<br/>(WolframRavenwolf/hermes-ha-addon)"]
+        A_HOME["/config — private addon-config mount"]
+        A_VENV["hermes-agent/venv<br/>CPython 3.11 · editable install"]
+        A_RUNTIME[".hermes-runtime/python/generation-*/<br/>uv-managed CPython 3.11"]
+        AGENT_PROC["hermes CLI + gateway<br/>Telegram · cron · sessions · dashboard"]
+        A_HOME --- A_VENV
+        A_VENV -. absolute symlinks .-> A_RUNTIME
+        AGENT_PROC --> A_VENV
     end
 
-    subgraph webui_container["Hermes WebUI addon (This addon)"]
-        SERVER["Python web server\n(browser interface)"]
-        AIAGENT["AIAgent (imported from\nhermes-agent package)"]
-        SERVER --> AIAGENT
+    subgraph WEBUI["🐳 Hermes WebUI addon (this addon)"]
+        W_HOME["/addon_configs/…_hermes_agent<br/>(auto-discovered HERMES_HOME)"]
+        W_APP["/app — webui app (rsync from /apptoo)"]
+        W_VENV["/app/venv — CPython 3.12<br/>hermes-agent[all] (PyPI) + webui deps<br/>.deps_installed fast-restart marker"]
+        W_SRC["/home/hermeswebui/.hermes/hermes-agent<br/>symlink → shared agent source"]
+        W_TMP["/tmp/hermes-agent-build<br/>first boot only · rsync staging (then removed)"]
+        WEBUI_SRV["python server.py — WebUI :8787"]
+        W_APP --- W_VENV
+        WEBUI_SRV --> W_APP
+        W_SRC -. rsync .-> W_TMP
     end
 
-    HOST -- "bind mount (read/write)" --> CLI
-    HOST -- "bind mount (read/write)" --> AIAGENT
+    HA -- "bind mount (rw)" --> A_HOME
+    HA -- "bind mounts (rw) /addon_configs + /config + /data" --> W_HOME
+    A_HOME -- "/config/.hermes" --> SHARED
+    W_HOME -- "/addon_configs/…/.hermes" --> SHARED
+    W_SRC -- "symlink → .hermes/hermes-agent" --> SHARED
 
-    BROWSER["🌐 Browser"] --> SERVER
+    subgraph LEGEND["📖 Concepts at a glance"]
+        L1["📁 .hermes = HERMES_HOME — agent data<br/>config.yaml · .env · SOUL.md · memories/ · skills/<br/>sessions/ · logs/ · cron/ · state.db · auth.json"]
+        L2["📁 workspace = working directory (Hermes concept)<br/>where the agent works: files & cloned repos<br/>created by the WebUI, stored with the agent's data"]
+        L3["🔗 .config · .local · .gitconfig = tool state<br/>gh auth · uv/npm installs · git identity<br/>mirrored into the WebUI via symlinks"]
+        L4["🗄️ /data/hermes-webui = WebUI-ONLY<br/>browser state: session list · settings · model cache"]
+        L5["🐍 /app + /app/venv = WebUI-ONLY<br/>webui app + its Python env — container-local,<br/>disposable, recreated on image re-init"]
+    end
 ```
+
+#### Venv handling
+
+| | Hermes Agent addon | Hermes WebUI addon |
+|---|---|---|
+| Python runtime | CPython 3.11, **uv-managed** in `.hermes-runtime/python/generation-*/` (inside the shared checkout) | CPython 3.12 from the image |
+| Virtual env | `.hermes/hermes-agent/venv/` — **on shared disk**, **editable install** (the agent can read/modify its own code) | `/app/venv/` — **container-local**, disposable (recreated when the image re-initialises) |
+| How deps are installed | editable, from the shared git checkout | `hermes-agent[all]` **from PyPI** + `requirements.txt` + `hindsight-client`, guarded by the `.deps_installed` marker |
+| Path resolution | venv symlinks are absolute → `/config/.hermes/…` (resolves in the agent container) | the shared venv's symlinks point at `/config/.hermes/…`, which **does not exist** here — so the WebUI never uses the agent's venv |
+
+> The two containers reach the *same* `.hermes` directory through **different mount
+> points**: `/config/.hermes` in the agent addon, `/addon_configs/<slug>_hermes_agent/.hermes`
+> in the WebUI. The shared venv + uv runtime are built for the agent's path. Always run
+> `hermes` (updates, CLI) from the **agent addon**, not from the WebUI container.
+
+#### Where files live on the HA host
+
+| Host path | Agent addon | WebUI addon | Contents |
+|---|---|---|---|
+| `addon_configs/<slug>_hermes_agent/.hermes` | `/config/.hermes` | `…/.hermes` via `HERMES_HOME` | `config.yaml`, `.env`, `SOUL.md`, `memories/`, `skills/`, `sessions/`, `logs/`, `state.db`, `cron/`, `plugins/`, `hermes-agent/` |
+| `…/.hermes/hermes-agent` | `/config/.hermes/hermes-agent` | symlink `/home/hermeswebui/.hermes/hermes-agent` | git checkout + `venv/` + `.hermes-runtime/` |
+| `…/workspace` | `/config/workspace` | `HERMES_WEBUI_DEFAULT_WORKSPACE` | working files, cloned repos (e.g. this one) |
+| `…/.config` | `/config/.config` | symlink `/root/.config` (`XDG_CONFIG_HOME`) | `gh` auth, npm/pip tool config |
+| `…/.local` | `/config/.local` | symlink `/root/.local` (`XDG_DATA_HOME`) | uv/npm installs, local binaries |
+| `…/.gitconfig` | `/config/.gitconfig` | symlink `/root/.gitconfig` | git identity + credential helper |
+| `/data/hermes-webui` | — | `/data/hermes-webui` | WebUI state (sessions, settings, model cache) |
 
 > **Updating the agent:** Always update the Hermes Agent from the **Hermes Agent addon** (via its terminal/CLI), not from the update button inside this WebUI. Both addons share the same files on disk, so any update done in the Agent addon is instantly visible here too.
 
