@@ -134,9 +134,7 @@ directly in this container (`hermes doctor`, `hermes config get`, `hermes mcp`,
 | `…/.gitconfig` | `/config/.gitconfig` | symlink `/root/.gitconfig` | git identity + credential helper |
 | `/data/hermes-webui` | — | `/data/hermes-webui` | WebUI state (sessions, settings, model cache) |
 
-> **HA Core config is intentionally not mounted** in this container (`secrets.yaml`,
-> `automations.yaml` and the rest of the Home Assistant configuration). Read-only
-> access is provided through APIs instead: the **Supervisor API**
+> **HA Core config access is provided through APIs instead: the **Supervisor API**
 > (`http://supervisor`, authenticated with the auto-injected `SUPERVISOR_TOKEN`)
 > for add-on and Core logs, and the **HA REST/WebSocket API** for entity states
 > and automation configuration.
