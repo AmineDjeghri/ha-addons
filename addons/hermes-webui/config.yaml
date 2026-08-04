@@ -12,7 +12,6 @@ ports:
 ports_description:
   8787/tcp: Hermes WebUI
 map:
-  - config:rw
   - all_addon_configs:rw
 webui: "http://[HOST]:[PORT:8787]"
 options:
