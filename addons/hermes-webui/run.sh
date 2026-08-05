@@ -99,11 +99,21 @@ chmod +x /tmp/ha_bin/whoami
 # Expose this container's own venv 
 export PATH="/tmp/ha_bin:/root/.local/bin:/home/hermeswebui/.local/bin:/app/venv/bin:${PATH}"
 
-# Install hermes-agent from PyPI instead of rebuilding the shared agent source
-# (hermes-agent refuses non-editable wheel builds and crashed the WebUI on boot).
-sed -i \
-  's|uv pip install "$_stage_src\[all\]"|uv pip install "hermes-agent[all]"|' \
-  /hermeswebui_init.bash
+# Install hermes-agent editable from the shared agent checkout so the WebUI
+# follows the agent's version (0.20+) instead of the PyPI wheel (frozen at 0.19).
+# hermes-agent refuses non-editable wheel/sdist builds by design (RuntimeError),
+# so editable is the only supported source path.
+# If no agent checkout is reachable (isolated mode), fall back to PyPI.
+if [ -e "${hermes_home}/hermes-agent/pyproject.toml" ]; then
+  sed -i \
+    's|uv pip install "$_stage_src\[all\]"|uv pip install -e "$_agent_src[all]"|' \
+    /hermeswebui_init.bash
+else
+  sed -i \
+    's|uv pip install "$_stage_src\[all\]"|uv pip install "hermes-agent[all]"|' \
+    /hermeswebui_init.bash
+  bashio::log.warning "Agent checkout not found — installing hermes-agent from PyPI (isolated mode)"
+fi
 
 bashio::log.info "Starting Hermes WebUI on port 8787..."
 exec /hermeswebui_init.bash
