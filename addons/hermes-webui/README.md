@@ -82,7 +82,7 @@ flowchart TD
 |---|---|---|
 | Python runtime | CPython 3.11, **uv-managed** in `.hermes-runtime/python/generation-*/` (inside the shared checkout) | CPython 3.12 from the image |
 | Virtual env | `.hermes/hermes-agent/venv/` — **on shared disk**, **editable install** (the agent can read/modify its own code) | `/app/venv/` — **container-local**, disposable (recreated when the image re-initialises) |
-| How deps are installed | editable, from the shared git checkout | `hermes-agent[all]` **from PyPI** + `requirements.txt` + `hindsight-client`, guarded by the `.deps_installed` marker |
+| How deps are installed | editable, from the shared git checkout | `hermes-agent[all]` **editable, from the shared git checkout** (PyPI fallback in isolated mode) + `requirements.txt` + `hindsight-client`, guarded by the `.deps_installed` marker |
 | Path resolution | venv symlinks are absolute → `/config/.hermes/…` (resolves in the agent container) | the shared venv's symlinks point at `/config/.hermes/…`, which **does not exist** here — so the WebUI never uses the agent's venv |
 
 > The two containers reach the *same* `.hermes` directory through **different mount
@@ -101,12 +101,13 @@ The two containers share the **code** (the git checkout) and the **data**
   load straight from the git checkout, so the agent can read and modify its own
   code (self-modifiable source), and a `git pull` takes effect immediately.
 - **WebUI addon** — the server imports Hermes **in-process** (the `AIAgent`), so
-  its own venv `/app/venv` (CPython 3.12) installs `hermes-agent[all]` **from
-  PyPI**: a stable, self-contained, disposable snapshot. The agent's venv cannot
-  be used here (its absolute symlinks target `/config/.hermes/…`, a path that
-  only exists inside the agent container) and should not be shared anyway —
-  virtual environments are isolated by design, and the WebUI must keep working
-  even without the agent addon (isolated mode).
+  its own venv `/app/venv` (CPython 3.12) installs `hermes-agent[all]` **editable
+  from the shared git checkout**: the WebUI then runs the same code version as
+  the agent (no PyPI drift — hermes-agent refuses non-editable wheel builds by
+  design, so editable is the only supported source path). When no agent checkout
+  is reachable, `run.sh` falls back to a PyPI install (isolated mode). The
+  agent's venv cannot be used here (its absolute symlinks target
+  `/config/.hermes/…`, a path that only exists inside the agent container).
 
 #### Command line (CLI) in this addon
 
@@ -117,10 +118,10 @@ directly in this container (`hermes doctor`, `hermes config get`, `hermes mcp`,
 > **Never run `hermes update` / `/update` from this container.** It performs a
 > `git pull` on the shared checkout followed by an editable reinstall — into a
 > venv that is wiped at the next image re-init — and could conflict with the
-> agent's editable install. Always update from the **Hermes Agent addon**. This
-> container's PyPI version re-aligns automatically on each add-on update (the
-> init script reinstalls the latest release); check drift with `hermes --version`
-> in both containers.
+> agent's editable install. Always update from the **Hermes Agent addon**. The
+> WebUI's editable install follows the agent's checkout automatically: after an
+> agent update, the new version applies here on the next container restart;
+> check drift with `hermes --version` in both containers.
 
 #### Where files live on the HA host
 
