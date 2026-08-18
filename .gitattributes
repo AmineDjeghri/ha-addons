@@ -1,0 +1,19 @@
+# Normalize line endings: LF in the repo, native on checkout
+* text=auto
+
+# Shell scripts must always use LF (CRLF breaks them)
+*.sh text eol=lf
+
+# Workflow files: keep LF in repo (web editor writes LF; avoids whole-file diffs)
+.github/workflows/*.yml text eol=lf
+.github/workflows/*.yaml text eol=lf
+
+# Explicitly mark binary files so Git never touches them
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.zip binary
