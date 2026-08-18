@@ -23,14 +23,20 @@ export_if_set Subsonic__PlaylistsDirectory playlists_directory
 export_if_set Subsonic__ExplicitFilter explicit_filter
 export_if_set Subsonic__DownloadMode download_mode
 export_if_set Subsonic__AutoUpgradeQuality auto_upgrade_quality
+export_if_set Subsonic__DisableLibraryScan disable_library_scan
 export_if_set Subsonic__FolderTemplate folder_template
-export_if_set Subsonic__RetryDuration retry_duration
-export_if_set Subsonic__ForceMinimal force_minimal
 export_if_set Subsonic__AdminUsername admin_username
 export_if_set Subsonic__AdminPassword admin_password
 
 # ===== LIBRARY SETTINGS =====
 export_if_set Library__DownloadPath library_download_path
+
+# ===== LYRICS SETTINGS =====
+export_if_set Lyrics__Enabled lyrics_enabled
+export_if_set Lyrics__LrclibBaseUrl lyrics_lrclib_base_url
+export_if_set Lyrics__WriteLrcFile lyrics_write_lrc_file
+export_if_set Lyrics__AllowPlainFallback lyrics_allow_plain_fallback
+export_if_set Lyrics__TimeoutSeconds lyrics_timeout_seconds
 
 # ===== DEEZER SETTINGS =====
 export_if_set Deezer__Arl deezer_arl
@@ -44,8 +50,9 @@ export_if_set Qobuz__Quality qobuz_quality
 
 # ===== SQUIDWTF SETTINGS =====
 export_if_set SquidWTF__Source squidwtf_source
-export_if_set SquidWTF__InstanceTimeoutSeconds squidwtf_instance_timeout
 export_if_set SquidWTF__Quality squidwtf_quality
+export_if_set SquidWTF__Country squidwtf_country
+export_if_set SquidWTF__InstanceTimeoutSeconds squidwtf_instance_timeout
 export_if_set SquidWTF__Instances__0 squidwtf_instance
 export_if_set SquidWTF__InstancesUrl squidwtf_instances_url
 
