@@ -13,35 +13,62 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Get latest upstream release
+      - name: Get latest upstream dev commit
         id: upstream
         run: |
-          LATEST=$(curl -sL \
+          SHA=$(curl -sL \
             -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/V1ck3s/octo-fiesta/releases/latest \
-            | jq -r '.tag_name // empty')
-          echo "latest=$LATEST" >> $GITHUB_OUTPUT
-          echo "Latest upstream: $LATEST"
+            https://api.github.com/repos/V1ck3s/octo-fiesta/commits/dev \
+            | jq -r '.sha // empty')
+          SHA7="${SHA:0:7}"
+          echo "sha=$SHA" >> $GITHUB_OUTPUT
+          echo "sha7=$SHA7" >> $GITHUB_OUTPUT
+          echo "Latest upstream dev: $SHA7"
 
       - name: Get current pinned version
         id: current
         run: |
-          CURRENT=$(grep -oP 'octo-fiesta:\K[^"]+' addons/octo-fiesta/build.json | head -1)
+          CURRENT=$(grep -oP '^version: "\K[^"]+' addons/octo-fiesta/config.yaml | head -1)
           echo "current=$CURRENT" >> $GITHUB_OUTPUT
           echo "Current pinned: $CURRENT"
 
       - name: Bump versions
-        if: steps.upstream.outputs.latest != '' && steps.upstream.outputs.latest != steps.current.outputs.current
+        if: steps.upstream.outputs.sha7 != '' && format('dev-{0}', steps.upstream.outputs.sha7) != steps.current.outputs.current
         run: |
-          NEW=${{ steps.upstream.outputs.latest }}
-          OLD=${{ steps.current.outputs.current }}
+          NEW="dev-${{ steps.upstream.outputs.sha7 }}"
+          OLD="${{ steps.current.outputs.current }}"
+          OLD_SHA7="${OLD#dev-}"
+          NEW_SHA7="${{ steps.upstream.outputs.sha7 }}"
           echo "Bumping $OLD → $NEW"
 
-          # Update build.json (all architectures)
-          sed -i "s|octo-fiesta:${OLD}|octo-fiesta:${NEW}|g" addons/octo-fiesta/build.json
-
-          # Update config.yaml version
+          # Update config.yaml version (build.json stays pinned to :dev)
           sed -i "s|version: \"${OLD}\"|version: \"${NEW}\"|g" addons/octo-fiesta/config.yaml
+
+          # Generate changelog section from commits since last dev bump
+          COMMITS=$(curl -sL \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/V1ck3s/octo-fiesta/compare/${OLD_SHA7}...${{ steps.upstream.outputs.sha }}" \
+            | jq -r '.commits[] | "- [" + (.commit.message | split("\n")[0]) + "](" + .html_url + ")"' \
+            | head -20)
+
+          NEW_DATE=$(date +%F)
+          # Prepend section; keep header + new section + previous dev sections (max 9 old)
+          {
+            echo "# Changelog"
+            echo ""
+            echo "For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases)."
+            echo ""
+            echo "## ${NEW} — ${NEW_DATE}"
+            echo ""
+            echo "${COMMITS}"
+            echo ""
+            echo "[Compare ${OLD_SHA7}...${NEW_SHA7}](https://github.com/V1ck3s/octo-fiesta/compare/${OLD_SHA7}...${NEW_SHA7})"
+            echo ""
+            echo "---"
+            echo ""
+            # Previous dev sections (max 9): lines after the first '## ' heading
+            awk '/^## /{count++} count>=1 && count<=9{print}' addons/octo-fiesta/CHANGELOG.md
+          } > /tmp/changelog.tmp && mv /tmp/changelog.tmp addons/octo-fiesta/CHANGELOG.md
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
