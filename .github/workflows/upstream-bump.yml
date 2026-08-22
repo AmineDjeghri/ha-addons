@@ -120,3 +120,61 @@ jobs:
           git add -A
           git commit -m "Bump hermes-webui ${OLD} → ${NEW}"
           git push
+
+  bump-beets:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Get latest beets release
+        id: upstream
+        run: |
+          VERSION=$(curl -sL https://pypi.org/pypi/beets/json | jq -r '.info.version // empty')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Latest beets: $VERSION"
+
+      - name: Get current pinned version
+        id: current
+        run: |
+          CURRENT=$(grep -oP '^version: "\K[^"]+' addons/beets/config.yaml | head -1)
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          echo "Current pinned: $CURRENT"
+
+      - name: Bump versions
+        if: steps.upstream.outputs.version != '' && steps.upstream.outputs.version != steps.current.outputs.current
+        run: |
+          NEW=${{ steps.upstream.outputs.version }}
+          OLD=${{ steps.current.outputs.current }}
+          echo "Bumping $OLD → $NEW"
+
+          # Update config.yaml version and the Dockerfile pin
+          sed -i "s|^version: \"${OLD}\"|version: \"${NEW}\"|" addons/beets/config.yaml
+          sed -i "s|ENV BEETS_VERSION=.*|ENV BEETS_VERSION=${NEW}|" addons/beets/Dockerfile
+
+          # Changelog section from the upstream GitHub release notes
+          BODY=$(curl -sL -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/beetbox/beets/releases/tags/v${NEW}" \
+            | jq -r '.body // "Release notes not available."')
+          NEW_DATE=$(date +%F)
+          {
+            echo "# Changelog"
+            echo ""
+            echo "For full upstream release notes see the [official Beets releases](https://github.com/beetbox/beets/releases)."
+            echo ""
+            echo "## ${NEW} — ${NEW_DATE}"
+            echo ""
+            echo "${BODY}"
+            echo ""
+            echo "---"
+            echo ""
+            # Previous sections (max 9): lines after the first '## ' heading
+            awk '/^## /{count++} count>=1 && count<=9{print}' addons/beets/CHANGELOG.md
+          } > /tmp/changelog.tmp && mv /tmp/changelog.tmp addons/beets/CHANGELOG.md
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: bump beets ${OLD} → ${NEW}"
+          git push
