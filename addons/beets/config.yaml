@@ -23,6 +23,7 @@ options:
   timid: false
   incremental: true
   duplicate_action: "skip"
+  genre_source: "album"
   duplicates_enabled: true
   duplicates_interval_hours: 12
   navidrome_url: ""
@@ -42,6 +43,7 @@ schema:
   timid: bool
   incremental: bool
   duplicate_action: list(add|remove|skip)
+  genre_source: list(album|artist|track)
   duplicates_enabled: bool
   duplicates_interval_hours: int
   navidrome_url: str?

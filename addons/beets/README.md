@@ -25,6 +25,7 @@ It is designed to complement **Octo-Fiesta**: tracks downloaded into `/media/mus
 | `timid` | `false` | Confirm matches before applying — only effective with `quiet` off (not recommended headless) |
 | `incremental` | `true` | Skip albums already in the library |
 | `duplicate_action` | `skip` | Duplicates during import: `add`, `remove` or `skip` |
+| `genre_source` | `album` | Genre lookup scope: `album` (one set per album), `artist` (per artist) or `track` (per-song genres) |
 | `duplicates_enabled` | `true` | Periodically check for duplicate tracks and report them (nothing is deleted) |
 | `duplicates_interval_hours` | `12` | Interval for the duplicates check |
 | `navidrome_url` | *(empty)* | e.g. `homeassistant.local:4533` — empty disables the rescan trigger |
@@ -50,6 +51,7 @@ On startup the addon generates `/data/beets/config.yaml` from the options above 
 | `import.duplicate_action` | `duplicate_action` option | Duplicate handling during import |
 | `import.resume` | `skip` | Never prompt to resume an interrupted import (no TTY in the addon) |
 | `plugins` | `fetchart lastgenre embedart titlecase chroma` | Cover art, genres, embedded art, title casing, AcoustID fingerprints |
+| `lastgenre.source` | `genre_source` option | Genre lookup: album-level, artist-level or per-track |
 | `fetchart.fetch_for_asis` | `yes` | Fetch cover art from online sources even for `asis` imports |
 | `acoustid.apikey` | `acoustid_apikey` option | Required for chroma fingerprint lookups |
 

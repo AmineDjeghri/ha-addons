@@ -26,6 +26,7 @@ QUIET_FALLBACK=$(bashio::config 'quiet_fallback')
 TIMID=$(bashio::config 'timid')
 INCREMENTAL=$(bashio::config 'incremental')
 DUPLICATE_ACTION=$(bashio::config 'duplicate_action')
+GENRE_SOURCE=$(bashio::config 'genre_source')
 DUPLICATES_ENABLED=$(bashio::config 'duplicates_enabled')
 DUPLICATES_INTERVAL=$(bashio::config 'duplicates_interval_hours')
 NAVIDROME_URL=$(bashio::config 'navidrome_url')
@@ -60,6 +61,8 @@ import:
 plugins: fetchart lastgenre embedart titlecase chroma
 fetchart:
   fetch_for_asis: yes
+lastgenre:
+  source: ${GENRE_SOURCE}
 EOF
     if [ -n "${ACOUSTID_APIKEY}" ]; then
         printf 'acoustid:\n  apikey: %s\n' "${ACOUSTID_APIKEY}" >> "${CONFIG_FILE}"
