@@ -62,6 +62,18 @@ import:
 match:
   strong_rec_thresh: 0.05
   medium_rec_thresh: 0.3
+  distance_weights:
+    data_source: 0.0
+    missing_tracks: 0.0
+    explicit: 0.0
+    country: 0.0
+    media: 0.0
+    tracks: 2.5
+    track_title: 4.0
+    track_index: 4.0
+    track_length: 2.0
+    track_artist: 5.0
+    unmatched_tracks: 0.0
   preferred:
     countries: [XW, US, GB|UK, FR]
     media: [CD, Digital Media|File]
