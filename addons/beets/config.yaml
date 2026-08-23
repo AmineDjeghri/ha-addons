@@ -1,6 +1,6 @@
 name: Beets
 description: Music library manager and auto-tagger for your music library
-version: "2.13.1.1"
+version: "2.13.1"
 slug: beets
 url: "https://github.com/aminedjeghri/ha-addons/tree/main/addons/beets"
 arch:

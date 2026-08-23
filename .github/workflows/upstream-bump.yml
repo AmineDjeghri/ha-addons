@@ -139,22 +139,18 @@ jobs:
         id: current
         run: |
           CURRENT=$(grep -oP '^version: "\K[^"]+' addons/beets/config.yaml | head -1)
-          # Addon-only fixes bump a 4th component (e.g. 2.13.1.1); compare only
-          # the beets release part (first 3 components).
-          BASE=$(printf '%s' "$CURRENT" | cut -d. -f1-3)
           echo "current=$CURRENT" >> $GITHUB_OUTPUT
-          echo "base=$BASE" >> $GITHUB_OUTPUT
-          echo "Current pinned: $CURRENT (base $BASE)"
+          echo "Current pinned: $CURRENT"
 
       - name: Bump versions
-        if: steps.upstream.outputs.version != '' && steps.upstream.outputs.version != steps.current.outputs.base
+        if: steps.upstream.outputs.version != '' && steps.upstream.outputs.version != steps.current.outputs.current
         run: |
           NEW=${{ steps.upstream.outputs.version }}
           OLD=${{ steps.current.outputs.current }}
           echo "Bumping $OLD → $NEW"
 
-          # Update config.yaml version (replaces any addon patch suffix) and the Dockerfile pin
-          sed -i -E "s|^version: \"[0-9]+\.[0-9]+\.[0-9]+[^\"]*\"|version: \"${NEW}\"|" addons/beets/config.yaml
+          # Update config.yaml version and the Dockerfile pin
+          sed -i "s|^version: \"${OLD}\"|version: \"${NEW}\"|" addons/beets/config.yaml
           sed -i "s|ENV BEETS_VERSION=.*|ENV BEETS_VERSION=${NEW}|" addons/beets/Dockerfile
 
           # Changelog section from the upstream GitHub release notes
