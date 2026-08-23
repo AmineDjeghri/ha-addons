@@ -26,14 +26,15 @@ ENV BEETS_VERSION=2.13.1
 
 # Install Beets pinned to the upstream release, with the plugins used here.
 # Chroma (AcoustID fingerprinting) uses fpcalc from the chromaprint package.
-# The HA addon builder injects its own wheel index (wheels.home-assistant.io)
-# which only carries older versions of some deps (e.g. mediafile <= 0.13.0),
-# so we install from PyPI explicitly. build-base is a temporary fallback in
-# case a dependency has no musllinux wheel and needs compiling.
+# The HA base image ships a pip.conf pointing at wheels.home-assistant.io,
+# which only carries older versions of some deps (e.g. mediafile <= 0.13.0).
+# The CLI flags force PyPI as the default index and pick the best version
+# across any leftover indexes. build-base is a temporary fallback in case a
+# dependency has no musllinux wheel and needs compiling.
 RUN apk add --no-cache --virtual .beets-build build-base \
-    && env -u PIP_INDEX_URL -u PIP_EXTRA_INDEX_URL -u UV_INDEX_URL \
-           UV_DEFAULT_INDEX=https://pypi.org/simple \
-       uv tool install --python 3.14 \
+    && uv tool install --python 3.14 \
+           --default-index https://pypi.org/simple \
+           --index-strategy unsafe-best-match \
            "beets[fetchart,lastgenre,embedart,titlecase,chroma]==${BEETS_VERSION}" \
     && apk del .beets-build \
     && ln -s /root/.local/bin/beet /usr/local/bin/beet
