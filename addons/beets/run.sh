@@ -26,6 +26,7 @@ QUIET_FALLBACK=$(bashio::config 'quiet_fallback')
 TIMID=$(bashio::config 'timid')
 INCREMENTAL=$(bashio::config 'incremental')
 DUPLICATE_ACTION=$(bashio::config 'duplicate_action')
+GENRE_SOURCE=$(bashio::config 'genre_source')
 DUPLICATES_ENABLED=$(bashio::config 'duplicates_enabled')
 DUPLICATES_INTERVAL=$(bashio::config 'duplicates_interval_hours')
 NAVIDROME_URL=$(bashio::config 'navidrome_url')
@@ -46,6 +47,7 @@ write_beets_config() {
     cat > "${CONFIG_FILE}" <<EOF
 directory: ${LIBRARY_PATH}
 library: ${DATA_DIR}/library.db
+artist_credit: yes
 import:
   write: ${WRITE}
   copy: no
@@ -57,9 +59,83 @@ import:
   incremental: ${INCREMENTAL}
   duplicate_action: ${DUPLICATE_ACTION}
   resume: skip
-plugins: fetchart lastgenre embedart titlecase chroma
+match:
+  strong_rec_thresh: 0.05
+  medium_rec_thresh: 0.3
+  preferred:
+    countries: [XW, US, GB|UK, FR]
+    media: [CD, Digital Media|File]
+  ignored: track_length
+plugins: fetchart lastgenre embedart titlecase chroma duplicates ftintitle musicbrainz
 fetchart:
+  minwidth: 500
+  enforce_ratio: yes
+  sources: coverart itunes filesystem
   fetch_for_asis: yes
+embedart:
+  auto: yes
+  ifempty: yes
+titlecase:
+  auto: yes
+  all_caps: yes
+  fields:
+    - title
+    - album
+  preserve:
+    - "A"
+    - "An"
+    - "The"
+    - "And"
+    - "But"
+    - "Or"
+    - "Nor"
+    - "For"
+    - "So"
+    - "Yet"
+    - "At"
+    - "By"
+    - "In"
+    - "Of"
+    - "On"
+    - "To"
+    - "Up"
+    - "As"
+    - "Per"
+    - "Via"
+    - "With"
+    - "From"
+    - "Into"
+    - "Over"
+    - "Upon"
+    - "Off"
+    - "Out"
+    - "Around"
+    - "About"
+    - "Before"
+    - "After"
+    - "Under"
+    - "Between"
+    - "Without"
+    - "Le"
+    - "La"
+    - "Les"
+lastgenre:
+  source: ${GENRE_SOURCE}
+  count: 4
+  prefer_specific: no
+  separator: "; "
+ftintitle:
+  auto: yes
+  drop: yes
+  keep_in_artist: yes
+musicbrainz:
+  extra_tags: [alias, year]
+  search_limit: 7
+duplicates:
+  keys: [title, albumartist]
+  tiebreak:
+    items: [bitrate, added]
+  delete: no
 EOF
     if [ -n "${ACOUSTID_APIKEY}" ]; then
         printf 'acoustid:\n  apikey: %s\n' "${ACOUSTID_APIKEY}" >> "${CONFIG_FILE}"
