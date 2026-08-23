@@ -26,6 +26,7 @@ It is designed to complement **Octo-Fiesta**: tracks downloaded into `/media/mus
 | `incremental` | `true` | Skip albums already in the library |
 | `duplicate_action` | `skip` | Duplicates during import: `add`, `remove` or `skip` |
 | `genre_source` | `track` | Genre lookup scope: `album` (one set per album), `artist` (per artist) or `track` (per-song genres) |
+| `genre_mode` | `combine` | Genre handling: `keep` = keep existing (Tidal) genres, `overwrite` = replace with Last.fm, `combine` = merge existing + Last.fm |
 | `duplicates_enabled` | `true` | Periodically check for duplicate tracks and report them (nothing is deleted) |
 | `duplicates_interval_hours` | `12` | Interval for the duplicates check |
 | `navidrome_url` | *(empty)* | e.g. `homeassistant.local:4533` — empty disables the rescan trigger |
@@ -54,7 +55,7 @@ On startup the addon generates `/data/beets/config.yaml` from the options above 
 | `plugins` | `fetchart lastgenre embedart titlecase chroma duplicates ftintitle musicbrainz` | Cover art, genres, embedded art, title casing, fingerprints, duplicate reports, featured artists, MusicBrainz extras |
 | `match` | strong 0.05, custom distance weights (no penalty for source/media/country/missing or unmatched tracks), preferred countries `XW/US/GB\|UK/FR` + CD/Digital Media, ignore track length | Favours FR/US/GB editions; Tidal rips with bonus tracks don't get penalized into as-is |
 | `titlecase` | all-caps kept, fields title+album, preserve list incl. French articles (Le/La/Les) | Title casing without mangling abbreviations or French titles |
-| `lastgenre` | `source` = `genre_source` option, `count: 4`, separator `"; "` | Up to 4 genres per track/album |
+| `lastgenre` | `source` = `genre_source` option, `count: 4`, separator `"; "`, `force`/`keep_existing` from `genre_mode` | Up to 4 genres per track/album; keep/overwrite/combine with existing genres |
 | `fetchart` | minwidth 500, sources coverart/itunes/filesystem, `fetch_for_asis` | Higher-res art, also for `asis` imports |
 | `embedart` | auto, only if empty | Embed art only when missing |
 | `ftintitle` | auto, drop from artist, keep in artist field | `Song (feat. X)` in titles |

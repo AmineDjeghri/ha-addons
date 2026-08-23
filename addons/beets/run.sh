@@ -27,6 +27,14 @@ TIMID=$(bashio::config 'timid')
 INCREMENTAL=$(bashio::config 'incremental')
 DUPLICATE_ACTION=$(bashio::config 'duplicate_action')
 GENRE_SOURCE=$(bashio::config 'genre_source')
+GENRE_MODE=$(bashio::config 'genre_mode')
+# keep = preserve existing (Tidal) genres; overwrite = replace with Last.fm;
+# combine = merge existing + Last.fm (force + keep_existing).
+case "${GENRE_MODE}" in
+    overwrite) LASTGENRE_FORCE=yes; LASTGENRE_KEEP=no ;;
+    combine)   LASTGENRE_FORCE=yes; LASTGENRE_KEEP=yes ;;
+    *)         LASTGENRE_FORCE=no;  LASTGENRE_KEEP=no ;;
+esac
 DUPLICATES_ENABLED=$(bashio::config 'duplicates_enabled')
 DUPLICATES_INTERVAL=$(bashio::config 'duplicates_interval_hours')
 NAVIDROME_URL=$(bashio::config 'navidrome_url')
@@ -136,6 +144,8 @@ lastgenre:
   count: 4
   prefer_specific: no
   separator: "; "
+  force: ${LASTGENRE_FORCE}
+  keep_existing: ${LASTGENRE_KEEP}
 ftintitle:
   auto: yes
   drop: yes
@@ -187,13 +197,14 @@ run_import() {
     (
         flock -n 9 || { log "Import skipped: another import is running"; exit 0; }
         log "Importing: ${args[*]}"
-        # -v keeps per-album progress (album, match result, genres, art);
-        # -vv would flood the log with debug events and MusicBrainz IDs.
-        # beets' event traces ("Sending event: …") leak through at -v in the
-        # threaded importer (thread-local log levels) — filter them out.
+        # -vv + filter: full progress including genre resolutions
+        # ("Resolved (…): [genres]") without the noise — event traces,
+        # chroma fingerprint UUID dumps, ftintitle no-ops, MusicBrainz
+        # request UUIDs. awk (not grep -v) keeps pipefail safe on empty
+        # output.
         set -o pipefail
-        if /usr/local/bin/beet -c "${CONFIG_FILE}" -v import "${args[@]}" 2>&1 \
-            | awk '!/^Sending event:/' \
+        if /usr/local/bin/beet -c "${CONFIG_FILE}" -vv import "${args[@]}" 2>&1 \
+            | awk '!/^Sending event:/ && !/^ftintitle: .*Not changing/ && !/^chroma: .*matched recordings/ && !/^chroma: chroma: fingerprinted/ && !/^musicbrainz: Requesting MusicBrainz release/ && !/^musicbrainz: Searching for/ && !/^musicbrainz: Found /' \
             | tee -a "${LOG_FILE}"; then
             log "Import finished OK"
             navidrome_scan
