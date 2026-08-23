@@ -177,8 +177,12 @@ run_import() {
         log "Importing: ${args[*]}"
         # -v keeps per-album progress (album, match result, genres, art);
         # -vv would flood the log with debug events and MusicBrainz IDs.
+        # beets' event traces ("Sending event: …") leak through at -v in the
+        # threaded importer (thread-local log levels) — filter them out.
         set -o pipefail
-        if /usr/local/bin/beet -c "${CONFIG_FILE}" -v import "${args[@]}" 2>&1 | tee -a "${LOG_FILE}"; then
+        if /usr/local/bin/beet -c "${CONFIG_FILE}" -v import "${args[@]}" 2>&1 \
+            | awk '!/^Sending event:/' \
+            | tee -a "${LOG_FILE}"; then
             log "Import finished OK"
             navidrome_scan
         else
