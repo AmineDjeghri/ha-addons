@@ -82,5 +82,5 @@ Restart the addon: the startup step runs a full incremental import of the librar
 
 ## Notes
 
-- Logs: addon **Log** tab + `/data/beets/import.log` (grows indefinitely — truncate it occasionally).
+- Logs: addon **Log** tab + `/data/beets/import.log` (auto-rotated at startup when over 10 MB — one `.1` backup is kept).
 - `import.incremental: yes` and `duplicate_action: skip` are deliberately safe defaults for a headless environment.

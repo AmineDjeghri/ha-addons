@@ -99,7 +99,10 @@ run_import() {
     (
         flock -n 9 || { log "Import skipped: another import is running"; exit 0; }
         log "Importing: ${args[*]}"
-        if /usr/local/bin/beet -c "${CONFIG_FILE}" -vv import "${args[@]}" >> "${LOG_FILE}" 2>&1; then
+        # -vv streams per-track progress; tee keeps import.log and the add-on
+        # Log tab in sync (pipefail preserves the real exit code).
+        set -o pipefail
+        if /usr/local/bin/beet -c "${CONFIG_FILE}" -vv import "${args[@]}" 2>&1 | tee -a "${LOG_FILE}"; then
             log "Import finished OK"
             navidrome_scan
         else
@@ -122,8 +125,12 @@ run_duplicates() {
 }
 
 # ---- Startup -------------------------------------------------------------
+# Rotate the import log at startup so /data (and HA backups) stay bounded.
+if [ -f "${LOG_FILE}" ] && [ "$(stat -c %s "${LOG_FILE}" 2>/dev/null)" -gt 10485760 ]; then
+    mv -f "${LOG_FILE}" "${LOG_FILE}.1"
+fi
 write_beets_config
-BEETS_VERSION=$(/usr/local/bin/beet -c "${CONFIG_FILE}" version | head -1)
+BEETS_VERSION=$(/usr/local/bin/beet -c "${CONFIG_FILE}" version | grep '^beets ' | head -1)
 log "Beets addon started — ${BEETS_VERSION}, library: ${LIBRARY_PATH}"
 if [ ! -d "${LIBRARY_PATH}" ]; then
     log "WARN: library path ${LIBRARY_PATH} does not exist yet (media mount not ready?)"
