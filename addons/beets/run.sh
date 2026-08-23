@@ -99,10 +99,10 @@ run_import() {
     (
         flock -n 9 || { log "Import skipped: another import is running"; exit 0; }
         log "Importing: ${args[*]}"
-        # -vv streams per-track progress; tee keeps import.log and the add-on
-        # Log tab in sync (pipefail preserves the real exit code).
+        # -v keeps per-album progress (album, match result, genres, art);
+        # -vv would flood the log with debug events and MusicBrainz IDs.
         set -o pipefail
-        if /usr/local/bin/beet -c "${CONFIG_FILE}" -vv import "${args[@]}" 2>&1 | tee -a "${LOG_FILE}"; then
+        if /usr/local/bin/beet -c "${CONFIG_FILE}" -v import "${args[@]}" 2>&1 | tee -a "${LOG_FILE}"; then
             log "Import finished OK"
             navidrome_scan
         else
