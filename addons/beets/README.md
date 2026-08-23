@@ -50,9 +50,16 @@ On startup the addon generates `/data/beets/config.yaml` from the options above 
 | `import.incremental` | `incremental` option | Skip albums already in the library |
 | `import.duplicate_action` | `duplicate_action` option | Duplicate handling during import |
 | `import.resume` | `skip` | Never prompt to resume an interrupted import (no TTY in the addon) |
-| `plugins` | `fetchart lastgenre embedart titlecase chroma` | Cover art, genres, embedded art, title casing, AcoustID fingerprints |
-| `lastgenre.source` | `genre_source` option | Genre lookup: album-level, artist-level or per-track |
-| `fetchart.fetch_for_asis` | `yes` | Fetch cover art from online sources even for `asis` imports |
+| `artist_credit` | `yes` | Keep MusicBrainz display names (e.g. *Angèle*) |
+| `plugins` | `fetchart lastgenre embedart titlecase chroma duplicates ftintitle musicbrainz` | Cover art, genres, embedded art, title casing, fingerprints, duplicate reports, featured artists, MusicBrainz extras |
+| `match` | strong 0.05, preferred countries `XW/US/GB/FR` + CD/Digital Media, ignore track length | Favours FR/US/GB editions; streaming length drift doesn't penalize matching |
+| `titlecase` | all-caps kept, fields title+album, preserve list incl. French articles (Le/La/Les) | Title casing without mangling abbreviations or French titles |
+| `lastgenre` | `source` = `genre_source` option, `count: 4`, separator `"; "` | Up to 4 genres per track/album |
+| `fetchart` | minwidth 500, sources coverart/itunes/filesystem, `fetch_for_asis` | Higher-res art, also for `asis` imports |
+| `embedart` | auto, only if empty | Embed art only when missing |
+| `ftintitle` | auto, drop from artist, keep in artist field | `Song (feat. X)` in titles |
+| `musicbrainz` | extra tags alias/year, search limit 7 | Extra MusicBrainz fields; enables `beet mbsync` |
+| `duplicates` | keys title+albumartist, tiebreak bitrate/added, `delete: no` | Deterministic report-only duplicate check |
 | `acoustid.apikey` | `acoustid_apikey` option | Required for chroma fingerprint lookups |
 
 ## Updating options — restart required
