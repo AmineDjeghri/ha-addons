@@ -23,7 +23,7 @@ options:
   timid: false
   incremental: true
   duplicate_action: "skip"
-  genre_source: "album"
+  genre_source: "track"
   duplicates_enabled: true
   duplicates_interval_hours: 12
   navidrome_url: ""

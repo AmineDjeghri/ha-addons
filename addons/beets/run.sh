@@ -63,7 +63,7 @@ match:
   strong_rec_thresh: 0.05
   medium_rec_thresh: 0.3
   preferred:
-    countries: [XW, US, GB, FR]
+    countries: [XW, US, GB|UK, FR]
     media: [CD, Digital Media|File]
   ignored: track_length
 plugins: fetchart lastgenre embedart titlecase chroma duplicates ftintitle musicbrainz
