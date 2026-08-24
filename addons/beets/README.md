@@ -93,6 +93,21 @@ All runs are serialized with `flock` on `/data/beets/import.lock` — imports ne
 
 Restart the addon: the startup step runs a full incremental import of the library, catching anything new.
 
+## Manual interactive review
+
+To review matches yourself — the classic beets experience with colored diffs (`≠ Album: … -> …`, green = added, red = removed) and the per-album prompt `[A]pply, More candidates, Skip, Use as-is, as Tracks, Group albums` — run an interactive import from the **Advanced SSH & Web Terminal** addon (the one with docker access):
+
+```bash
+docker exec -it "$(docker ps -q -f name=beets)" sh -c \
+  'printf "import:\n  quiet: no\n  timid: yes\n" > /tmp/interactive.yaml && \
+   /usr/local/bin/beet -c /data/beets/config.yaml -c /tmp/interactive.yaml import /media/music'
+```
+
+- This overrides `quiet`/`timid` **for this run only** — the addon's automatic imports stay quiet/headless.
+- Container names use the new `app_` prefix (e.g. `app_ffaaaf16_beets`), not `addon_` — use `docker ps | grep beets` to find the exact name.
+- Use the full path `/usr/local/bin/beet` — the bare command is not on PATH in `docker exec` shells.
+- After reviewing, the automatic quiet import keeps handling new downloads as usual.
+
 ## Notes
 
 - Logs: addon **Log** tab + `/data/beets/import.log` (auto-rotated at startup when over 10 MB — one `.1` backup is kept).
