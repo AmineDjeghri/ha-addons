@@ -28,6 +28,9 @@ INCREMENTAL=$(bashio::config 'incremental')
 DUPLICATE_ACTION=$(bashio::config 'duplicate_action')
 GENRE_SOURCE=$(bashio::config 'genre_source')
 GENRE_MODE=$(bashio::config 'genre_mode')
+GENRE_WHITELIST=$(bashio::config 'genre_whitelist')
+GENRE_COUNT=$(bashio::config 'genre_count')
+GENRE_WHITELIST_EXTRA=$(bashio::config 'genre_whitelist_extra')
 # keep = preserve existing (Tidal) genres; overwrite = replace with Last.fm;
 # combine = merge existing + Last.fm (force + keep_existing).
 case "${GENRE_MODE}" in
@@ -35,6 +38,19 @@ case "${GENRE_MODE}" in
     combine)   LASTGENRE_FORCE=yes; LASTGENRE_KEEP=yes ;;
     *)         LASTGENRE_FORCE=no;  LASTGENRE_KEEP=no ;;
 esac
+# Custom whitelist: the plugin's bundled genres.txt plus user extras
+# (case-insensitive). Only used when extras are configured; otherwise the
+# genre_whitelist boolean decides (false = keep every tag, no filtering).
+if [ -n "${GENRE_WHITELIST_EXTRA}" ]; then
+    WL_SRC="$(find /root/.local -type f -path '*/beetsplug/lastgenre/genres.txt' 2>/dev/null | head -1)"
+    if [ -n "${WL_SRC}" ]; then
+        cp "${WL_SRC}" /data/beets/genres-extra.txt
+        for extra in ${GENRE_WHITELIST_EXTRA}; do
+            echo "${extra}" | tr '[:upper:]' '[:lower:]' >> /data/beets/genres-extra.txt
+        done
+        GENRE_WHITELIST=/data/beets/genres-extra.txt
+    fi
+fi
 DUPLICATES_ENABLED=$(bashio::config 'duplicates_enabled')
 DUPLICATES_INTERVAL=$(bashio::config 'duplicates_interval_hours')
 NAVIDROME_URL=$(bashio::config 'navidrome_url')
@@ -141,11 +157,12 @@ titlecase:
     - "Les"
 lastgenre:
   source: ${GENRE_SOURCE}
-  count: 4
+  count: ${GENRE_COUNT}
   prefer_specific: no
   separator: "; "
   force: ${LASTGENRE_FORCE}
   keep_existing: ${LASTGENRE_KEEP}
+  whitelist: ${GENRE_WHITELIST}
 ftintitle:
   auto: yes
   drop: yes
