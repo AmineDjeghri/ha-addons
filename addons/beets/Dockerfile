@@ -39,6 +39,10 @@ RUN apk add --no-cache --virtual .beets-build build-base \
     && apk del .beets-build \
     && ln -s /root/.local/bin/beet /usr/local/bin/beet
 
+# Genre whitelist supplement (Spotify/EveryNoise catalog + regional descriptors):
+# merged with beets' bundled genres.txt at startup when genre_whitelist is enabled.
+COPY genres-extra.txt /genres-extra.txt
+
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
 

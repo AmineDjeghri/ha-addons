@@ -25,7 +25,7 @@ options:
   duplicate_action: "skip"
   genre_source: "track"
   genre_mode: "combine"
-  genre_whitelist: false
+  genre_whitelist: true
   genre_count: 12
   genre_whitelist_extra: []
   duplicates_enabled: true
