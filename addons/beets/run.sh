@@ -224,7 +224,7 @@ run_import() {
         # output.
         set -o pipefail
         if /usr/local/bin/beet -c "${CONFIG_FILE}" -vv import "${args[@]}" 2>&1 \
-            | awk '!/^Sending event:/ && !/^ftintitle: .*Not changing/ && !/^titlecase: .*does not exist/ && !/^chroma: .*matched recordings/ && !/^chroma: chroma: fingerprinted/ && !/^musicbrainz: Requesting MusicBrainz release/ && !/^musicbrainz: Searching for/ && !/^musicbrainz: Found /' \
+            | awk '!/^Sending event:/ && !/^ftintitle: .*Not changing/ && !/^ftintitle: \// && !/^titlecase: .*does not exist/ && !/^chroma: .*matched recordings/ && !/^chroma: chroma: fingerprinted/ && !/^musicbrainz: Requesting MusicBrainz release/ && !/^musicbrainz: Searching for/ && !/^musicbrainz: Found /' \
             | tee -a "${LOG_FILE}"; then
             log "Import finished OK"
             navidrome_scan
