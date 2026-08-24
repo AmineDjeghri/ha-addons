@@ -57,6 +57,7 @@ On startup the addon generates `/data/beets/config.yaml` from the options above 
 | `artist_credit` | `yes` | Keep MusicBrainz display names (e.g. *Angèle*) |
 | `plugins` | `fetchart lastgenre embedart titlecase chroma duplicates ftintitle musicbrainz` | Cover art, genres, embedded art, title casing, fingerprints, duplicate reports, featured artists, MusicBrainz extras |
 | `match` | strong 0.05, custom distance weights (no penalty for source/media/country/missing or unmatched tracks), preferred countries `XW/US/GB\|UK/FR` + CD/Digital Media, ignore track length | Favours FR/US/GB editions; Tidal rips with bonus tracks don't get penalized into as-is |
+| `import` | `threaded: no` — serialized lookups | MusicBrainz rate-limits by IP (~1 req/s); parallel requests cause 503 bursts on big imports |
 | `titlecase` | all-caps kept, fields title+album, preserve list incl. French articles (Le/La/Les) | Title casing without mangling abbreviations or French titles |
 | `lastgenre` | `source` = `genre_source` option, `count` = `genre_count`, separator `"; "`, `force`/`keep_existing` from `genre_mode`, `whitelist` = merged genres.txt + `genres-extra.txt` + `genre_whitelist_extra` | Genres per track/album; keep/overwrite/combine with existing genres; merged whitelist (beets + Spotify/regional supplement + extras) |
 | `fetchart` | minwidth 500, sources coverart/itunes/filesystem, `fetch_for_asis` | Higher-res art, also for `asis` imports |
