@@ -26,7 +26,7 @@ options:
   genre_source: "track"
   genre_mode: "combine"
   genre_whitelist: false
-  genre_count: 6
+  genre_count: 12
   genre_whitelist_extra: []
   duplicates_enabled: true
   duplicates_interval_hours: 12

@@ -28,7 +28,7 @@ It is designed to complement **Octo-Fiesta**: tracks downloaded into `/media/mus
 | `genre_source` | `track` | Genre lookup scope: `album` (one set per album), `artist` (per artist) or `track` (per-song genres) |
 | `genre_mode` | `combine` | Genre handling: `keep` = keep existing (Tidal) genres, `overwrite` = replace with Last.fm, `combine` = merge existing + Last.fm |
 | `genre_whitelist` | `false` | `lastgenre` whitelist filtering: `true` = only "real" genres pass, `false` = keep every tag (existing genres are never removed) |
-| `genre_count` | `6` | Maximum number of genres per track/album |
+| `genre_count` | `12` | Maximum number of genres per track/album |
 | `genre_whitelist_extra` | *(empty)* | Extra genres appended to the default whitelist (e.g. `dance`) — used only when the whitelist is enabled |
 | `duplicates_enabled` | `true` | Periodically check for duplicate tracks and report them (nothing is deleted) |
 | `duplicates_interval_hours` | `12` | Interval for the duplicates check |
