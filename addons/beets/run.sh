@@ -13,6 +13,11 @@ CONFIG_FILE="${DATA_DIR}/config.yaml"
 LOG_FILE="${DATA_DIR}/import.log"
 LOCK_FILE="${DATA_DIR}/import.lock"
 
+# /data/beets must exist before anything writes into it (the whitelist merge
+# below, config, lock, logs). A fresh /data (first boot, reinstall) has no
+# beets directory yet — without this, the cp below fails and set -e aborts.
+mkdir -p "${DATA_DIR}"
+
 # ---- Options -------------------------------------------------------------
 LIBRARY_PATH=$(bashio::config 'library_path')
 WATCH_ENABLED=$(bashio::config 'watch_enabled')
@@ -60,8 +65,6 @@ NAVIDROME_URL=$(bashio::config 'navidrome_url')
 NAVIDROME_USER=$(bashio::config 'navidrome_user')
 NAVIDROME_PASSWORD=$(bashio::config 'navidrome_password')
 ACOUSTID_APIKEY=$(bashio::config 'acoustid_apikey')
-
-mkdir -p "${DATA_DIR}"
 
 # ---- Helpers -------------------------------------------------------------
 log() {
