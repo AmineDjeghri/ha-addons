@@ -51,7 +51,8 @@ schema:
   genre_mode: list(keep|overwrite|combine)
   genre_whitelist: bool
   genre_count: int
-  genre_whitelist_extra: list(str)?
+  genre_whitelist_extra:
+    - str
   duplicates_enabled: bool
   duplicates_interval_hours: int
   navidrome_url: str?
