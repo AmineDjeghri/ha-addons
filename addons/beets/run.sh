@@ -106,7 +106,10 @@ plugins: fetchart lastgenre embedart titlecase chroma duplicates ftintitle music
 fetchart:
   minwidth: 500
   enforce_ratio: yes
-  sources: coverart itunes filesystem
+  sources:
+    - coverart
+    - itunes
+    - filesystem=*
   fetch_for_asis: yes
 embedart:
   auto: yes
@@ -221,7 +224,7 @@ run_import() {
         # output.
         set -o pipefail
         if /usr/local/bin/beet -c "${CONFIG_FILE}" -vv import "${args[@]}" 2>&1 \
-            | awk '!/^Sending event:/ && !/^ftintitle: .*Not changing/ && !/^chroma: .*matched recordings/ && !/^chroma: chroma: fingerprinted/ && !/^musicbrainz: Requesting MusicBrainz release/ && !/^musicbrainz: Searching for/ && !/^musicbrainz: Found /' \
+            | awk '!/^Sending event:/ && !/^ftintitle: .*Not changing/ && !/^titlecase: .*does not exist/ && !/^chroma: .*matched recordings/ && !/^chroma: chroma: fingerprinted/ && !/^musicbrainz: Requesting MusicBrainz release/ && !/^musicbrainz: Searching for/ && !/^musicbrainz: Found /' \
             | tee -a "${LOG_FILE}"; then
             log "Import finished OK"
             navidrome_scan
