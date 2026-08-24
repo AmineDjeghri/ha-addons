@@ -38,16 +38,19 @@ case "${GENRE_MODE}" in
     combine)   LASTGENRE_FORCE=yes; LASTGENRE_KEEP=yes ;;
     *)         LASTGENRE_FORCE=no;  LASTGENRE_KEEP=no ;;
 esac
-# Custom whitelist: the plugin's bundled genres.txt plus user extras
-# (case-insensitive). Only used when extras are configured; otherwise the
-# genre_whitelist boolean decides (false = keep every tag, no filtering).
-if [ -n "${GENRE_WHITELIST_EXTRA}" ]; then
+# When the whitelist is enabled, build a merged whitelist file: beets' bundled
+# genres.txt + the bundled supplement (/genres-extra.txt — Spotify/EveryNoise
+# catalog + regional descriptors) + user extras (case-insensitive).
+# When disabled, no filtering happens (every tag is kept).
+if [ "${GENRE_WHITELIST}" = "true" ]; then
     WL_SRC="$(find /root/.local -type f -path '*/beetsplug/lastgenre/genres.txt' 2>/dev/null | head -1)"
     if [ -n "${WL_SRC}" ]; then
         cp "${WL_SRC}" /data/beets/genres-extra.txt
+        cat /genres-extra.txt >> /data/beets/genres-extra.txt
         for extra in ${GENRE_WHITELIST_EXTRA}; do
             echo "${extra}" | tr '[:upper:]' '[:lower:]' >> /data/beets/genres-extra.txt
         done
+        sort -u -o /data/beets/genres-extra.txt /data/beets/genres-extra.txt
         GENRE_WHITELIST=/data/beets/genres-extra.txt
     fi
 fi
