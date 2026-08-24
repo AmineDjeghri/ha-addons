@@ -94,6 +94,36 @@ All runs are serialized with `flock` on `/data/beets/import.lock` — imports ne
 
 Restart the addon: the startup step runs a full incremental import of the library, catching anything new.
 
+## Docker commands
+
+Run from the **Advanced SSH & Web Terminal** addon (the one with docker access). The container is named `app_<slug>` (new supervisor naming); `$(docker ps -q -f name=beets)` finds it without hardcoding. Bare `beet` is not on PATH in `docker exec` shells — always use `/usr/local/bin/beet`.
+
+```bash
+# Back up the database before any reinstall (uninstall deletes /data — mandatory)
+docker cp "$(docker ps -q -f name=beets)":/data/beets /tmp/beets-backup
+
+# Restore the backup after reinstalling
+docker cp /tmp/beets-backup "$(docker ps -q -f name=beets)":/data/beets
+
+# Albums imported today, with their genres
+docker exec "$(docker ps -q -f name=beets)" /usr/local/bin/beet -c /data/beets/config.yaml ls -a added:today -f '$albumartist - $album ($year) | $genres'
+
+# Library statistics
+docker exec "$(docker ps -q -f name=beets)" /usr/local/bin/beet -c /data/beets/config.yaml stats
+
+# Duplicate report (report only — nothing is deleted)
+docker exec "$(docker ps -q -f name=beets)" /usr/local/bin/beet -c /data/beets/config.yaml duplicates -k title -k albumartist
+
+# Re-apply genres library-wide (after changing genre options)
+docker exec "$(docker ps -q -f name=beets)" /usr/local/bin/beet -c /data/beets/config.yaml lastgenre -A
+
+# Backfill missing cover art
+docker exec "$(docker ps -q -f name=beets)" /usr/local/bin/beet -c /data/beets/config.yaml fetchart
+
+# Sync the database after restoring files from a backup
+docker exec "$(docker ps -q -f name=beets)" /usr/local/bin/beet -c /data/beets/config.yaml update
+```
+
 ## Manual interactive review
 
 To review matches yourself — the classic beets experience with colored diffs (`≠ Album: … -> …`, green = added, red = removed) and the per-album prompt `[A]pply, More candidates, Skip, Use as-is, as Tracks, Group albums` — run an interactive import from the **Advanced SSH & Web Terminal** addon (the one with docker access):
