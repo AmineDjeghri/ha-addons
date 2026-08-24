@@ -86,6 +86,9 @@ import:
   incremental: ${INCREMENTAL}
   duplicate_action: ${DUPLICATE_ACTION}
   resume: skip
+  # Serialize requests: MusicBrainz rate-limits by IP (~1 req/s); the default
+  # threaded: yes fires parallel lookups and gets 503 bursts on big imports.
+  threaded: no
 match:
   strong_rec_thresh: 0.05
   medium_rec_thresh: 0.3
