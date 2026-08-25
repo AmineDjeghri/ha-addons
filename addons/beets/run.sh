@@ -271,15 +271,22 @@ fi
 run_import
 
 LAST_DUPLICATES_RUN=$(date +%s)
+LAST_DAILY_RUN_DATE=""
+
+TARGET_MINUTES=$((10#${DAILY_TIME%%:*} * 60 + 10#${DAILY_TIME##*:}))
 
 # ---- Main loop -----------------------------------------------------------
 while true; do
     NOW=$(date +%s)
+    NOW_HHMM=$(date +%H:%M)
+    NOW_DATE=$(date +%Y-%m-%d)
 
-    # Daily full incremental sweep — catches anything the watch missed.
-    if [ "${DAILY_INCREMENTAL}" = "true" ] && [ "$(date +%H:%M)" = "${DAILY_TIME}" ]; then
+    # Daily full incremental sweep — "target time passed and not run yet today" avoids missing an exact-minute match between infrequent loop samples.
+    if [ "${DAILY_INCREMENTAL}" = "true" ] \
+        && [ $((10#${NOW_HHMM%%:*} * 60 + 10#${NOW_HHMM##*:})) -ge "${TARGET_MINUTES}" ] \
+        && [ "${NOW_DATE}" != "${LAST_DAILY_RUN_DATE}" ]; then
         run_import
-        sleep 61
+        LAST_DAILY_RUN_DATE="${NOW_DATE}"
     fi
 
     # Duplicates cleanup on interval.
@@ -293,8 +300,8 @@ while true; do
     # import whatever new audio appeared.
     if [ "${WATCH_ENABLED}" = "true" ]; then
         if [ -d "${LIBRARY_PATH}" ]; then
-            EVENTS=$(inotifywait -q -r -e close_write -e moved_to \
-                --format '%w%f' -t "${WATCH_DEBOUNCE}" "${LIBRARY_PATH}" 2>/dev/null || true)
+            EVENTS=$(timeout "${WATCH_DEBOUNCE}" inotifywait -q -m -r -e close_write -e moved_to \
+                --format '%w%f' "${LIBRARY_PATH}" 2>/dev/null || true)
             if [ -n "${EVENTS}" ]; then
                 # Keep only audio files, import their parent directories.
                 AUDIO_EVENTS=$(printf '%s\n' "${EVENTS}" \
