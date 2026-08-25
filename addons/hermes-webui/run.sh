@@ -96,7 +96,7 @@ rsync -a /apptoo/ /app/
 mkdir -p /tmp/ha_bin
 printf '#!/bin/sh\necho hermeswebui\n' > /tmp/ha_bin/whoami
 chmod +x /tmp/ha_bin/whoami
-# Expose this container's own venv 
+# Expose this container's own venv
 export PATH="/tmp/ha_bin:/root/.local/bin:/home/hermeswebui/.local/bin:/app/venv/bin:${PATH}"
 
 # Install hermes-agent editable from the shared agent checkout so the WebUI
