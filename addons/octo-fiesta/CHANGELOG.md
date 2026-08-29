@@ -2,6 +2,16 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-410e862 — 2026-08-29
+
+- [refactor(squidwtf): remove Amazon Music and Deemix backends](https://github.com/V1ck3s/octo-fiesta/commit/0e7d5416000be1e49638bab361cd5d283328be61)
+- [feat: default to Deezer and deprecate SquidWTF provider](https://github.com/V1ck3s/octo-fiesta/commit/c5a90ab781e83a9dfe78a4e806744c5f9cbde96a)
+- [fix(squidwtf): reject Tidal preview clips instead of saving them as full tracks](https://github.com/V1ck3s/octo-fiesta/commit/410e8628222121f3c17f4f4a591bec2e452489b2)
+
+[Compare ac35be3...410e862](https://github.com/V1ck3s/octo-fiesta/compare/ac35be3...410e862)
+
+---
+
 ## dev-ac35be3 — 2026-08-18
 
 - [feat(squidwtf): Amazon Music backend via amz.squid.wtf](https://github.com/V1ck3s/octo-fiesta/commit/6afc3c7c6297d7943be9fb18a48d3a1f6c014d02)
