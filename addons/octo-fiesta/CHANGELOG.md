@@ -2,6 +2,14 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-798eaee — 2026-08-31
+
+- [feat(tidal): add native Tidal provider](https://github.com/V1ck3s/octo-fiesta/commit/798eaeeb88fa399587a6faaa2fe9fcf43fa1d401)
+
+[Compare 410e862...798eaee](https://github.com/V1ck3s/octo-fiesta/compare/410e862...798eaee)
+
+---
+
 ## dev-410e862 — 2026-08-29
 
 - [refactor(squidwtf): remove Amazon Music and Deemix backends](https://github.com/V1ck3s/octo-fiesta/commit/0e7d5416000be1e49638bab361cd5d283328be61)
