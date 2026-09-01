@@ -2,6 +2,19 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-51b1104 — 2026-09-01
+
+- [fix(ci): version dev images from the newest tag instead of git describe](https://github.com/V1ck3s/octo-fiesta/commit/5f5cae75f0a927c024a3732c8a1570580116d302)
+- [fix(qobuz): paginate playlist track fetching](https://github.com/V1ck3s/octo-fiesta/commit/57c1e260779538ac052182ed12cff9119f9a67ab)
+- [fix(subsonic): merge owned albums into external artist discography](https://github.com/V1ck3s/octo-fiesta/commit/6296cb1cf5cc9bd324e0a66da9ee43e4e8d86882)
+- [fix(subsonic): merge external albums for xml clients on getArtist](https://github.com/V1ck3s/octo-fiesta/commit/63032b9d93974641c8a6a56e7b1ddcdad5c28a56)
+- [fix(subsonic): merge external songs for xml clients on getAlbum](https://github.com/V1ck3s/octo-fiesta/commit/d186c6f9983a251eb8e9f4fb83296d7742f952d2)
+- [fix(subsonic): stop merging homonym artist albums on getAlbum](https://github.com/V1ck3s/octo-fiesta/commit/51b11043753a63a788f4017c70de4ae79179db59)
+
+[Compare 798eaee...51b1104](https://github.com/V1ck3s/octo-fiesta/compare/798eaee...51b1104)
+
+---
+
 ## dev-798eaee — 2026-08-31
 
 - [feat(tidal): add native Tidal provider](https://github.com/V1ck3s/octo-fiesta/commit/798eaeeb88fa399587a6faaa2fe9fcf43fa1d401)
