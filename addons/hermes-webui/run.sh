@@ -115,10 +115,6 @@ else
   bashio::log.warning "Agent checkout not found — installing hermes-agent from PyPI (isolated mode)"
 fi
 
-# Pin the venv interpreter. Hermes's DaemonThreadPoolExecutor is incompatible
-# with CPython >= 3.14 stdlib internals (breaks every tool call), and uv's
-# default Python has drifted to 3.14 — so an unpinned `uv venv` in the init
-# recreates the venv on a broken interpreter after every container rebuild.
 # 3.11 matches the Hermes Agent addon's runtime (already in the uv cache).
 export UV_PYTHON="3.11"
 
