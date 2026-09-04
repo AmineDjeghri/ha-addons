@@ -115,5 +115,8 @@ else
   bashio::log.warning "Agent checkout not found — installing hermes-agent from PyPI (isolated mode)"
 fi
 
+# 3.11 matches the Hermes Agent addon's runtime (already in the uv cache).
+export UV_PYTHON="3.11"
+
 bashio::log.info "Starting Hermes WebUI on port 8787..."
 exec /hermeswebui_init.bash
