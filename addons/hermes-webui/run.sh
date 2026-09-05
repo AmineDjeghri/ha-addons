@@ -55,6 +55,11 @@ if [ -n "$hermes_home" ] && [ "$hermes_home" != "null" ]; then
     # Share git config (includes credential helper set up by `gh auth setup-git`)
     [ -f "$HERMES_AGENT_HOME/.gitconfig" ] && ln -sfn "$HERMES_AGENT_HOME/.gitconfig" /root/.gitconfig
 
+    # Expose the agent's addon config dir at /config — the same view the agent
+    # addon has — so shared /config-based paths (skills.external_dirs, skill
+    # docs, claude binary) resolve identically from this container.
+    [ ! -e /config ] && [ -d "$HERMES_AGENT_HOME" ] && ln -sfn "$HERMES_AGENT_HOME" /config
+
     WORKSPACE_DIR="$HERMES_AGENT_HOME/workspace"
     mkdir -p "$WORKSPACE_DIR"
     chmod 777 "$WORKSPACE_DIR"
