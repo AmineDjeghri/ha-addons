@@ -54,6 +54,7 @@ flowchart TD
         W_APP["/app — webui app (rsync from /apptoo)"]
         W_VENV["/app/venv — CPython 3.12<br/>hermes-agent[all] (PyPI) + webui deps<br/>.deps_installed fast-restart marker"]
         W_SRC["/home/hermeswebui/.hermes/hermes-agent<br/>symlink → shared agent source"]
+        W_ALIAS["/config — symlink to the agent addon dir<br/>(same canonical view the agent has)"]
         W_TMP["/tmp/hermes-agent-build<br/>first boot only · rsync staging (then removed)"]
         WEBUI_SRV["python server.py — WebUI :8787"]
         W_APP --- W_VENV
@@ -66,6 +67,7 @@ flowchart TD
     A_HOME -- "/config/.hermes" --> SHARED
     W_HOME -- "/addon_configs/…/.hermes" --> SHARED
     W_SRC -- "symlink → .hermes/hermes-agent" --> SHARED
+    W_ALIAS -- "symlink → the same agent addon dir" --> SHARED
 
     subgraph LEGEND["📖 Concepts at a glance"]
         L1["📁 .hermes = HERMES_HOME — agent data<br/>config.yaml · .env · SOUL.md · memories/ · skills/<br/>sessions/ · logs/ · cron/ · state.db · auth.json"]
@@ -89,6 +91,11 @@ flowchart TD
 > points**: `/config/.hermes` in the agent addon, `/addon_configs/<slug>_hermes_agent/.hermes`
 > in the WebUI. The shared venv + uv runtime are built for the agent's path. Always run
 > `hermes` (updates, CLI) from the **agent addon**, not from the WebUI container.
+>
+> On every start, `run.sh` also symlinks `/config` to the agent's addon-config dir (the
+> same view the agent addon has), so shared `/config/...`-based paths — e.g.
+> `skills.external_dirs` in `config.yaml`, skill docs, the claude binary — resolve
+> identically in **both** containers.
 
 #### Why two virtual environments?
 
@@ -127,7 +134,7 @@ directly in this container (`hermes doctor`, `hermes config get`, `hermes mcp`,
 
 | Host path | Agent addon | WebUI addon | Contents |
 |---|---|---|---|
-| `addon_configs/<slug>_hermes_agent/.hermes` | `/config/.hermes` | `…/.hermes` via `HERMES_HOME` | `config.yaml`, `.env`, `SOUL.md`, `memories/`, `skills/`, `sessions/`, `logs/`, `state.db`, `cron/`, `plugins/`, `hermes-agent/` |
+| `addon_configs/<slug>_hermes_agent/.hermes` | `/config/.hermes` | `…/.hermes` via `HERMES_HOME` (also `/config/.hermes` symlink alias) | `config.yaml`, `.env`, `SOUL.md`, `memories/`, `skills/`, `sessions/`, `logs/`, `state.db`, `cron/`, `plugins/`, `hermes-agent/` |
 | `…/.hermes/hermes-agent` | `/config/.hermes/hermes-agent` | symlink `/home/hermeswebui/.hermes/hermes-agent` | git checkout + `venv/` + `.hermes-runtime/` |
 | `…/workspace` | `/config/workspace` | `HERMES_WEBUI_DEFAULT_WORKSPACE` | working files, cloned repos (e.g. this one) |
 | `…/.config` | `/config/.config` | symlink `/root/.config` (`XDG_CONFIG_HOME`) | `gh` auth, npm/pip tool config |
@@ -153,6 +160,7 @@ In shared mode, the webui container mirrors the hermes_agent's environment on ev
 | **Local data** (`.local/`)    | symlink + `XDG_DATA_HOME`                       | uv-installed packages, local binaries, app data      |
 | **Git config** (`.gitconfig`) | symlink                                         | User config, credential helper (`gh auth setup-git`) |
 | **Workspace** (`workspace/`)  | auto-created + `HERMES_WEBUI_DEFAULT_WORKSPACE` | Where you want to work (for example cloned repos)    |
+| **Agent dir** (`/config`)    | symlink                                         | Canonical agent-path alias — same view the agent addon has |
 
 > **Note:** These symlinks and env vars are set at container startup. If the hermes_agent hasn't booted yet (dirs don't exist), they are silently skipped and created on the next restart.
 
