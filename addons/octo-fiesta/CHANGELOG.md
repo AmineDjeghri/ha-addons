@@ -2,6 +2,14 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-c4d0f57 — 2026-09-05
+
+- [fix(subsonic): run quality upgrade in background instead of blocking playback](https://github.com/V1ck3s/octo-fiesta/commit/c4d0f5734d1868b8f3f4c031566b705480c32efd)
+
+[Compare 0314a42...c4d0f57](https://github.com/V1ck3s/octo-fiesta/compare/0314a42...c4d0f57)
+
+---
+
 ## dev-0314a42 — 2026-09-04
 
 - [fix(subsonic): upgrade quality on play for library songs](https://github.com/V1ck3s/octo-fiesta/commit/0314a427b6861b6ab8126ce9ce979fd5ed57e878)

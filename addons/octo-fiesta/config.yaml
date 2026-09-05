@@ -1,6 +1,6 @@
 name: Octo-Fiesta
 description: Subsonic proxy with multi-provider music streaming integration
-version: "dev-0314a42"
+version: "dev-c4d0f57"
 slug: octo-fiesta
 url: "https://github.com/aminedjeghri/ha-addons/tree/main/addons/octo-fiesta"
 arch:
