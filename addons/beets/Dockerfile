@@ -22,7 +22,7 @@ RUN apk add --no-cache \
 
 # Single source of truth for the pinned Beets release — updated by the
 # bump-beets job in .github/workflows/upstream-bump.yml.
-ENV BEETS_VERSION=2.13.1
+ENV BEETS_VERSION=2.14.0
 
 # Install Beets pinned to the upstream release, with the plugins used here.
 # Chroma (AcoustID fingerprinting) uses fpcalc from the chromaprint package.
