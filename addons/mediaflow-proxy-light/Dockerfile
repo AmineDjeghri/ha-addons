@@ -9,17 +9,10 @@ ARG MEDIAFLOW_VERSION=1.1.2
 # Injected by the HA builder (amd64, aarch64, ...); used to pick the release asset.
 ARG BUILD_ARCH
 
-# Install bashio for reading HA addon options. The Debian base already ships bash,
-# but curl/ca-certificates/jq are needed by bashio and the addon bootstrap.
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends curl ca-certificates bash jq \
-    && mkdir -p /tmp/bashio \
-    && curl -L -s https://github.com/hassio-addons/bashio/archive/v0.16.2.tar.gz | tar -xzf - --strip 1 -C /tmp/bashio \
-    && mv /tmp/bashio/lib /usr/lib/bashio \
-    && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/*
-
+# HA Debian base images already ship bashio, curl, jq and ca-certificates —
+# no install step needed (octo-fiesta only installs bashio because its base is
+# a foreign upstream .NET image that lacks it).
+#
 # The upstream Docker image is distroless (no shell), so it cannot be the addon
 # base — instead we fetch the prebuilt release binary onto HA's Debian base. It is
 # a glibc-dynamic build, so Alpine/musl bases will not run it. This is a GitHub
