@@ -82,13 +82,6 @@ jobs:
             --build-arg BUILD_ARCH=amd64 \
             -t mediaflow-proxy-light-test .
 
-      - name: Write CI options file
-        working-directory: addons/mediaflow-proxy-light
-        run: | # pragma: allowlist secret
-          cat > ci-options.json <<'JSON'
-          {"api_password":"ci-test-password","log_level":"info"}
-          JSON
-
       - name: Smoke test
         working-directory: addons/mediaflow-proxy-light
         run: | # pragma: allowlist secret
@@ -99,11 +92,56 @@ jobs:
           dd if=/dev/urandom of=/tmp/mfp-ci-upstream.bin bs=1M count=8 2>/dev/null
           python3 -m http.server 19999 --bind 0.0.0.0 --directory /tmp >/tmp/mfp-http.log 2>&1 &
           HTTP_PID=$!
-          trap 'kill $HTTP_PID >/dev/null 2>&1 || true; docker rm -f mfp-smoke >/dev/null 2>&1 || true' EXIT
+
+          # Fake supervisor API: bashio v0.16.2 resolves options ONLY through
+          # GET /addons/self/options/config (it ignores /data/options.json).
+          # Response must use the real supervisor envelope {"data": ..., "result": "ok"}.
+          cat > /tmp/fake_supervisor.py <<'PY'
+          import json
+          from http.server import BaseHTTPRequestHandler, HTTPServer
+          OPTIONS = {
+              "api_password": "ci-test-password",
+              "log_level": "info",
+              "workers": 0,
+              "connect_timeout": 30,
+              "follow_redirects": True,
+              "buffer_size": 262144,
+              "proxy_url": "",
+              "all_proxy": False,
+              "hls_prebuffer_segments": 5,
+              "hls_segment_cache_ttl": 300,
+              "hls_inactivity_timeout": 60,
+              "mpd_live_playlist_depth": 8,
+              "mpd_live_init_cache_ttl": 60,
+              "mpd_remux_to_ts": False,
+              "drm_key_cache_ttl": 3600,
+              "epg_cache_ttl": 3600,
+              "acestream_host": "localhost",
+              "acestream_port": 6878,
+          }
+          class H(BaseHTTPRequestHandler):
+              def do_GET(self):
+                  if self.path == "/addons/self/options/config":
+                      body = json.dumps({"data": OPTIONS, "result": "ok"}).encode()
+                      self.send_response(200)
+                      self.send_header("Content-Type", "application/json")
+                      self.end_headers()
+                      self.wfile.write(body)
+                  else:
+                      self.send_response(404)
+                      self.end_headers()
+              def log_message(self, *a):
+                  pass
+          HTTPServer(("0.0.0.0", 19998), H).serve_forever()
+          PY
+          python3 /tmp/fake_supervisor.py >/tmp/fake-sup.log 2>&1 &
+          SUP_PID=$!
+          trap 'kill $HTTP_PID $SUP_PID >/dev/null 2>&1 || true; docker rm -f mfp-smoke >/dev/null 2>&1 || true' EXIT
 
           docker run -d --name mfp-smoke \
             --add-host host.docker.internal:host-gateway \
-            -v "$PWD/ci-options.json:/data/options.json" \
+            -e SUPERVISOR_API=http://host.docker.internal:19998 \
+            -e SUPERVISOR_TOKEN=ci-test \
             -p 18888:8888 \
             mediaflow-proxy-light-test
 
