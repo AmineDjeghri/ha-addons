@@ -10,7 +10,8 @@ file natively.
 
 A **multi-add-on** Home Assistant repository. Each add-on is fully self-contained under
 `addons/<slug>/` (`config.yaml`, `Dockerfile`, `build.json` when image-based, `run.sh`,
-`README.md`). Current add-ons: `beets`, `hermes-webui`, `octo-fiesta`, `personal-app`.
+`README.md`). Current add-ons: `beets`, `hermes-webui`, `mediaflow-proxy-light`,
+`octo-fiesta`, `personal-app`.
 
 ## Conventions (all add-ons except where personal-app says otherwise)
 
@@ -32,6 +33,11 @@ A **multi-add-on** Home Assistant repository. Each add-on is fully self-containe
   automated checks**. Manual verification is the only gate: pre-commit hooks locally,
   `bash -n` on shell, YAML validity, careful diff review. Never tell the user "CI will
   verify this" for a non-personal-app PR.
+- **Exception: `mediaflow-proxy-light`** has its own workflow
+  (`mediaflow-proxy-light.yml`) — on PRs/pushes touching `addons/mediaflow-proxy-light/**`
+  it runs pre-commit + a real `docker build` with a smoke test (health, auth 401/200,
+  streaming through the proxy). That add-on's PRs DO get automated checks; everything else
+  still relies on manual verification.
 - Release workflows also only fire for personal-app; add-on-only changes must not be framed
   as releases.
 
@@ -47,6 +53,12 @@ A **multi-add-on** Home Assistant repository. Each add-on is fully self-containe
   around uninstall/reinstall.
 - **Pinned release** (hermes-webui): `config.yaml version:` pins an upstream app release;
   `run.sh` changes bake into the image only at **rebuild** (not plain restart).
+- **Release-tracked binary** (mediaflow-proxy-light): `config.yaml version:` mirrors the
+  upstream GitHub release tag (no `v`); the Dockerfile pins the same version as
+  `ARG MEDIAFLOW_VERSION` (the binary is downloaded from the release assets at build time —
+  the upstream image is distroless and unusable as an addon base). `upstream-bump.yml`
+  (nightly) owns both files. Add-on-code fixes ship via **manual reinstall** — never
+  suffix-patch the version (same rule as PyPI-tracked).
 
 ## Persistence & containers
 

@@ -1,0 +1,148 @@
+name: "👷 MediaFlow Proxy Light — Validate & Build"
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "addons/mediaflow-proxy-light/**"
+      - ".github/workflows/mediaflow-proxy-light.yml"
+      - ".github/workflows/upstream-bump.yml"
+  pull_request:
+    branches: ["**"]
+    paths:
+      - "addons/mediaflow-proxy-light/**"
+      - ".github/workflows/mediaflow-proxy-light.yml"
+      - ".github/workflows/upstream-bump.yml"
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: config.yaml options/schema key parity
+        run: |
+          python - <<'PY'
+          import sys
+          import yaml
+
+          with open("addons/mediaflow-proxy-light/config.yaml") as f:
+              cfg = yaml.safe_load(f)
+
+          options = set(cfg["options"])
+          schema = set(cfg["schema"])
+          if options != schema:
+              print("options - schema:", options - schema)
+              print("schema - options:", schema - options)
+              sys.exit(1)
+          print(f"OK — {len(options)} keys match between options and schema")
+          PY
+
+      - name: bash syntax check run.sh
+        run: bash -n addons/mediaflow-proxy-light/run.sh
+
+      - name: pre-commit (addon files only)
+        continue-on-error: false
+        run: |
+          pip install pre-commit
+          pre-commit run --files \
+            addons/mediaflow-proxy-light/config.yaml \
+            addons/mediaflow-proxy-light/Dockerfile \
+            addons/mediaflow-proxy-light/run.sh \
+            addons/mediaflow-proxy-light/README.md \
+            addons/mediaflow-proxy-light/CHANGELOG.md \
+            addons/mediaflow-proxy-light/build.json \
+            .github/workflows/mediaflow-proxy-light.yml
+
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Build addon image
+        working-directory: addons/mediaflow-proxy-light
+        run: |
+          docker build \
+            --build-arg BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:latest \
+            --build-arg BUILD_ARCH=amd64 \
+            -t mediaflow-proxy-light-test .
+
+      - name: Write CI options file
+        working-directory: addons/mediaflow-proxy-light
+        run: | # pragma: allowlist secret
+          cat > ci-options.json <<'JSON'
+          {"api_password":"ci-test-password","log_level":"info"}
+          JSON
+
+      - name: Smoke test
+        working-directory: addons/mediaflow-proxy-light
+        run: | # pragma: allowlist secret
+          set -euo pipefail
+          trap 'docker rm -f mfp-smoke >/dev/null 2>&1 || true' EXIT
+
+          # Upstream served from the runner itself, reachable via host-gateway
+          dd if=/dev/urandom of=/tmp/mfp-ci-upstream.bin bs=1M count=8 2>/dev/null
+          python3 -m http.server 19999 --bind 0.0.0.0 --directory /tmp >/tmp/mfp-http.log 2>&1 &
+          HTTP_PID=$!
+          trap 'kill $HTTP_PID >/dev/null 2>&1 || true; docker rm -f mfp-smoke >/dev/null 2>&1 || true' EXIT
+
+          docker run -d --name mfp-smoke \
+            --add-host host.docker.internal:host-gateway \
+            -v "$PWD/ci-options.json:/data/options.json" \
+            -p 18888:8888 \
+            mediaflow-proxy-light-test
+
+          echo "Waiting for /health ..."
+          ok=""
+          for _ in $(seq 1 60); do
+            if [ "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18888/health)" = "200" ]; then
+              ok=1
+              break
+            fi
+            sleep 1
+          done
+          if [ -z "$ok" ]; then
+            echo "health check never returned 200"
+            docker logs mfp-smoke || true
+            exit 1
+          fi
+          echo "health OK"
+
+          echo "Authenticated /proxy/ip ..."
+          body="$(curl -sf 'http://127.0.0.1:18888/proxy/ip?api_password=ci-test-password')" # pragma: allowlist secret
+          echo "body: $body"
+          if [ -z "$body" ]; then
+            echo "expected non-empty body from /proxy/ip"
+            exit 1
+          fi
+
+          echo "Unauthenticated /proxy/ip must be 401 ..."
+          code="$(curl -s -o /dev/null -w '%{http_code}' 'http://127.0.0.1:18888/proxy/ip')"
+          if [ "$code" != "401" ]; then
+            echo "expected 401 without password, got $code"
+            exit 1
+          fi
+
+          echo "Streaming 8 MiB through the proxy ..."
+          got="$(curl -s -o /dev/null -w '%{size_download}' \
+            'http://127.0.0.1:18888/proxy/stream?d=http://host.docker.internal:19999/mfp-ci-upstream.bin&api_password=ci-test-password')" # pragma: allowlist secret
+          echo "bytes proxied: $got"
+          if [ "$got" != "8388608" ]; then
+            echo "expected 8388608 bytes, got $got"
+            exit 1
+          fi
+          echo "smoke test passed"
