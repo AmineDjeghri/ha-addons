@@ -178,3 +178,65 @@ jobs:
           git add -A
           git commit -m "chore: bump beets ${OLD} → ${NEW}"
           git push
+
+  bump-mediaflow-proxy-light:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Get latest MediaFlow Proxy Light release
+        id: upstream
+        run: |
+          # GitHub tags for this project have NO v prefix — use tag_name as-is
+          TAG=$(curl -sL \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/mhdzumair/MediaFlow-Proxy-Light/releases/latest \
+            | jq -r '.tag_name // empty')
+          echo "latest=$TAG" >> $GITHUB_OUTPUT
+          echo "Latest upstream: $TAG"
+
+      - name: Get current pinned version
+        id: current
+        run: |
+          CURRENT=$(grep -oP '^version: "\K[^"]+' addons/mediaflow-proxy-light/config.yaml | head -1)
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          echo "Current pinned: $CURRENT"
+
+      - name: Bump versions
+        if: steps.upstream.outputs.latest != '' && steps.upstream.outputs.latest != steps.current.outputs.current
+        run: |
+          NEW=${{ steps.upstream.outputs.latest }}
+          OLD=${{ steps.current.outputs.current }}
+          echo "Bumping $OLD → $NEW"
+
+          # Update config.yaml version and the Dockerfile ARG pin
+          sed -i "s|^version: \"${OLD}\"|version: \"${NEW}\"|" addons/mediaflow-proxy-light/config.yaml
+          sed -i "s|ARG MEDIAFLOW_VERSION=${OLD}|ARG MEDIAFLOW_VERSION=${NEW}|" addons/mediaflow-proxy-light/Dockerfile
+
+          # Changelog section from the upstream GitHub release notes
+          BODY=$(curl -sL -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/mhdzumair/MediaFlow-Proxy-Light/releases/tags/${NEW}" \
+            | jq -r '.body // "Release notes not available."')
+          NEW_DATE=$(date +%F)
+          {
+            echo "# Changelog"
+            echo ""
+            echo "For full upstream release notes see the [official MediaFlow Proxy Light releases](https://github.com/mhdzumair/MediaFlow-Proxy-Light/releases)."
+            echo ""
+            echo "## ${NEW} — ${NEW_DATE}"
+            echo ""
+            echo "${BODY}"
+            echo ""
+            echo "---"
+            echo ""
+            # Previous sections (max 9): lines after the first '## ' heading
+            awk '/^## /{count++} count>=1 && count<=9{print}' addons/mediaflow-proxy-light/CHANGELOG.md
+          } > /tmp/changelog.tmp && mv /tmp/changelog.tmp addons/mediaflow-proxy-light/CHANGELOG.md
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Bump mediaflow-proxy-light ${OLD} → ${NEW}"
+          git push

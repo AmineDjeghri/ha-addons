@@ -1,0 +1,52 @@
+name: MediaFlow Proxy Light
+description: Rust streaming-media proxy for HTTP(S)/HLS/MPEG-DASH with EPG, Xtream and extractors
+version: "1.1.2"
+slug: mediaflow-proxy-light
+url: "https://github.com/aminedjeghri/ha-addons/tree/main/addons/mediaflow-proxy-light"
+arch:
+  - amd64
+  - aarch64
+init: false
+ports:
+  8888/tcp: 8888
+ports_description:
+  8888/tcp: HTTP proxy and web interface
+webui: "http://[HOST]:[PORT:8888]"
+options:
+  api_password: "" # pragma: allowlist secret
+  log_level: "info"
+  workers: 0
+  connect_timeout: 30
+  follow_redirects: true
+  buffer_size: 262144
+  proxy_url: ""
+  all_proxy: false
+  hls_prebuffer_segments: 5
+  hls_segment_cache_ttl: 300
+  hls_inactivity_timeout: 60
+  mpd_live_playlist_depth: 8
+  mpd_live_init_cache_ttl: 60
+  mpd_remux_to_ts: false
+  drm_key_cache_ttl: 3600
+  epg_cache_ttl: 3600
+  acestream_host: "localhost"
+  acestream_port: 6878
+schema:
+  api_password: password? # pragma: allowlist secret
+  log_level: list(debug|info|warn|error)
+  workers: int?
+  connect_timeout: int
+  follow_redirects: bool
+  buffer_size: int
+  proxy_url: str?
+  all_proxy: bool
+  hls_prebuffer_segments: int
+  hls_segment_cache_ttl: int
+  hls_inactivity_timeout: int
+  mpd_live_playlist_depth: int
+  mpd_live_init_cache_ttl: int
+  mpd_remux_to_ts: bool
+  drm_key_cache_ttl: int
+  epg_cache_ttl: int
+  acestream_host: str
+  acestream_port: int
