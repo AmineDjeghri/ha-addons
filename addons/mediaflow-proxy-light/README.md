@@ -49,7 +49,7 @@ Set a strong `api_password` — for most endpoints it is the only gate. Measured
 |---|---|
 | `/proxy/*` (stream, hls, mpd, epg, acestream, telegram, forward), `/metrics`, `/base64/*`, `/extractor/*` | `401` — fail-closed, even when no password is configured at all |
 | `/`, `/index.html`, `/speedtest.html`, `/health`, static assets | reachable (public) |
-| `/playlist/builder` | **reachable — and it performs the fetch** (see Security) |
+| `/playlist/builder` | **reachable — and it performs the fetch** (see below) |
 | `POST /generate_url` | reachable (mints plain URLs; `_token_` URLs are only usable with the real password) |
 | Xtream Codes routes (`/player_api.php`, `/xmltv.php`, `/get.php`, `/<u>/<p>/<id>.<ext>`) | not gated by `api_password`; they validate the XC credential blob (`{base64_upstream}:{username}[:{api_password}]`) |
 
@@ -69,66 +69,34 @@ All examples assume the addon runs on `YOUR_HA_HOST:8888`.
 - **URL builder / generator:** `/generate_url`, `/base64/*`, `/playlist/builder`
 - **Health check (no auth):** `http://YOUR_HA_HOST:8888/health` → `200`
 
-### Securing your instance
+### Keeping it on the LAN (recommended)
 
-Never port-forward `8888` — the addon publishes it directly on your LAN IP (there is no
-ingress-only mode).
+Never port-forward `8888` — the addon publishes its port directly on your LAN IP and has no
+ingress-only mode, so exposure would have to be a deliberate act. Don't:
 
-Expose it with the **Cloudflare add-on** in Home Assistant (the community "Cloudflared"
-add-on) rather than running `cloudflared` commands yourself: add a host entry to the add-on's
-configuration and let it own the tunnel —
+- **Expose the self-hosted [AIOStreams](../aiostreams) addon instead.** AIOStreams reaches
+  this proxy over the LAN and serves Stremio/Nuvio clients through its **own built-in
+  proxy**, so only AIOStreams needs a public URL — MediaFlow stays LAN-only. The debrid API
+  calls and the stream fetches still originate from the same home IP, which is the whole
+  point of running the proxy.
+- **Still set a strong `api_password`**: it is the gate for the `/proxy/*` family, and it
+  keeps anything else on your network (or a stray browser page) from using the proxy.
+- If you ever *do* expose it directly, treat the **whole hostname** as the perimeter — the
+  API password does not cover the UI, `/playlist/builder` or `/generate_url`.
 
-```yaml
-additional_hosts:
-  - hostname: mediaflow.yourdomain.com
-    service: http://homeassistant.local:8888
-```
-
-Access rules are configured in the **Cloudflare Zero Trust dashboard** (Access →
-Applications) against that hostname. Split the application **by path** — the two audiences
-differ:
-
-- **Machine paths (service-token rule)** — `/proxy/*`, `/extractor/*`, `/base64/*`,
-  `/generate_url`, `/metrics`, **`/playlist/builder`**, and the Xtream Codes routes
-  (`/player_api.php`, `/xmltv.php`, `/get.php`, short-stream URLs). Clients send the
-  `CF-Access-Client-Id` / `CF-Access-Client-Secret` request headers. Create **one service
-  token per client** — that is the only way to revoke one user without breaking the others.
-- **Web UI (email-OTP rule)** — `/`, `/index.html`, `/speedtest.html`, static assets.
-
-Two edge rules that matter:
-
-- **`/playlist/builder` must be inside the token rule — or blocked.** `api_password` does not
-  protect it: it performs a server-side fetch of any URL passed in `?url=` with no
-  authentication (verified). Internet-exposed, that is an open fetch and internal-port
-  scanner pointed at your LAN.
-- **Consider blocking `/proxy/forward`** with a WAF rule unless you need debrid IP binding —
-  it is a transparent relay for any HTTP method and body.
-
-Also: WAF rate-limit the hostname; exclude query strings from Cloudflare Logpush (the API
-password travels in URLs); prefer upstream's `/generate_url` **signed, expiring, IP-bound**
-URLs over embedding the master password. If a client cannot send headers, the API password is
-its only gate — keep it long and random, and rotate it on any leak.
-
-> **Why not a service token everywhere?** A service token is a single long-lived shared
-> secret with no user identity and no expiry — if it leaks you must rotate it manually
-> everywhere it is used. It is a machine credential, not a replacement for per-user auth:
-> browsers cannot attach it without exposing it in the page, and with the add-on approach
-> there is no local token-injecting forwarder, so header-less clients must fall back to the
-> API password.
-
-### Verified behaviours to be aware of
+### Worth knowing (verified against the 1.1.2 binary)
 
 - **No private-IP guard on the stream paths.** `/proxy/stream`, `/proxy/hls`, `/proxy/mpd`
   and `/proxy/epg` will fetch loopback and RFC-1918 addresses (verified `200` from
   `127.0.0.1`); only `/proxy/forward` enforces the documented `403` SSRF guard. Anyone
-  holding the password (or a leaked URL) can reach unauthenticated LAN services. Redirects
-  are also followed into private ranges — set `follow_redirects: false` if you don't need
-  them.
+  holding the password (or a leaked URL) can therefore reach unauthenticated services on your
+  LAN. Redirects are also followed into private ranges — set `follow_redirects: false` if you
+  don't need them.
 - **CORS reflects any `Origin`** (`Access-Control-Allow-Origin` + `Allow-Credentials: true`),
-  so a web page you visit can read responses from a reachable instance. Another reason to
-  keep the whole hostname behind Access.
-- **Which is why the edge must cover every path, not just `/proxy/*`** — the API password
-  alone does not protect the UI, `/playlist/builder` or `/generate_url`.
+  so a web page open on your network can read responses from a reachable instance.
+- **`/playlist/builder` and `/generate_url` are not password-gated** — `/playlist/builder`
+  performs a server-side fetch of any URL you hand it. One more reason to keep the addon on
+  the LAN, as above.
 
 ### Resources
 
