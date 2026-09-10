@@ -23,11 +23,18 @@ documentation: <https://docs.aiostreams.viren070.me>.
 | `auth_required` | `true`    | Require one of the `auth` accounts to log in. Locked read-only in the dashboard because it is set here.                                                 |
 | `log_level`     | `info`    | One of `error`, `warn`, `info`, `http`, `verbose`, `debug`, `silly`.                                                                                   |
 
+**`base_url`** is the public URL the addon is reached at: it is embedded in the manifest and in
+every stream link a client holds, so it must be the hostname the addon is actually reachable on and
+changing it later means reinstalling the manifest in every client. Create that hostname **first**, in
+the **Cloudflared** add-on: add `hostname: aiostreams.example.com` with
+`service: http://homeassistant.local:3000` to `additional_hosts`, then save and restart it — the
+add-on creates the tunnel rule and the proxied DNS record itself, so there is nothing to add in the
+Cloudflare dashboard. Until this add-on is running, that hostname answers Cloudflare's `502`.
+
 ## First run
 
-1. Expose the addon over **HTTPS** — e.g. point the **Cloudflare** add-on at
-   `http://homeassistant.local:3000` and set `base_url` to the resulting public `https://…`
-   hostname. Stremio refuses non-HTTPS addons that are not on localhost.
+1. Create the public hostname for the addon first and set `base_url` to it — see the `base_url`
+   note above. Stremio refuses non-HTTPS addons that are not on localhost.
 2. Generate `secret_key` once with `openssl rand -hex 32` and keep it permanently — changing
    it later makes every stored credential unreadable.
 3. Start the addon, open the Web UI (`/stremio/configure`), build your configuration, then
