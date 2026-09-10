@@ -106,9 +106,10 @@ jobs:
             aiostreams-test
 
           echo "Waiting for /api/v1/status ..."
+          base=http://127.0.0.1:18889
           ok=""
           for _ in $(seq 1 90); do
-            if [ "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18889/api/v1/status)" = "200" ]; then
+            if [ "$(curl -s -o /dev/null -w '%{http_code}' "$base/api/v1/status")" = "200" ]; then
               ok=1
               break
             fi
@@ -121,19 +122,58 @@ jobs:
           fi
           echo "status OK"
 
-          echo "Checking /stremio/configure ..."
-          code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18889/stremio/configure)"
-          if [ "$code" != "200" ]; then
-            echo "expected 200 from /stremio/configure, got $code"
+          # auth_required=true, so an HTML navigation without a session must be
+          # redirected to the login page (upstream: requireSession -> 302
+          # /login?next=<original>), NOT served with 200.
+          echo "Checking the auth gate on /stremio/configure ..."
+          code_loc="$(curl -s -o /dev/null -H 'Accept: text/html' \
+            -w '%{http_code} %{redirect_url}' "$base/stremio/configure")"
+          code="${code_loc%% *}"
+          location="${code_loc#* }"
+          if [ "$code" != "302" ]; then
+            echo "expected 302 from an unauthenticated /stremio/configure, got $code ($location)"
             docker logs aiostreams-smoke
             exit 1
           fi
-          echo "configure page OK"
+          case "$location" in
+            */login?next=*) ;;
+            *)
+              echo "expected the redirect to point at /login?next=..., got $location"
+              docker logs aiostreams-smoke
+              exit 1
+              ;;
+          esac
+          echo "auth gate OK — $base/stremio/configure -> $location"
 
-          echo "Checking /data/db.sqlite persistence ..."
-          docker cp aiostreams-smoke:/data/db.sqlite /tmp/db.sqlite
-          if [ ! -s /tmp/db.sqlite ]; then
-            echo "expected a non-empty /data/db.sqlite (bootstrap must wire DATABASE_URI into /data)"
+          echo "Logging in with the configured account ..."
+          login_code="$(curl -s -c /tmp/aiostreams-cookies.txt -o /tmp/aiostreams-login.json \
+            -H 'Content-Type: application/json' \
+            -d '{"username":"ci","password":"CiTestPassword123"}' \
+            -w '%{http_code}' "$base/api/v1/auth/login")"
+          if [ "$login_code" != "200" ]; then
+            echo "expected 200 from POST /api/v1/auth/login, got $login_code"
+            head -c 300 /tmp/aiostreams-login.json || true
+            echo
+            docker logs aiostreams-smoke
+            exit 1
+          fi
+
+          code="$(curl -s -b /tmp/aiostreams-cookies.txt -H 'Accept: text/html' \
+            -o /dev/null -w '%{http_code}' "$base/stremio/configure")"
+          if [ "$code" != "200" ]; then
+            echo "expected 200 from /stremio/configure with a session cookie, got $code"
+            docker logs aiostreams-smoke
+            exit 1
+          fi
+          echo "configure page OK (authenticated)"
+
+          echo "Checking /data persistence ..."
+          rm -rf /tmp/aiostreams-data
+          docker cp aiostreams-smoke:/data/. /tmp/aiostreams-data
+          ls -la /tmp/aiostreams-data
+          if [ ! -s /tmp/aiostreams-data/db.sqlite ]; then
+            echo "expected a non-empty /data/db.sqlite (bootstrap wires DATABASE_URI=sqlite:///data/db.sqlite)"
+            docker logs aiostreams-smoke
             exit 1
           fi
           echo "persistence OK"
