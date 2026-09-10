@@ -1,0 +1,141 @@
+name: "👷 AIOStreams — Validate & Build"
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "addons/aiostreams/**"
+      - ".github/workflows/aiostreams.yml"
+      - ".github/workflows/upstream-bump.yml"
+  pull_request:
+    branches: ["**"]
+    paths:
+      - "addons/aiostreams/**"
+      - ".github/workflows/aiostreams.yml"
+      - ".github/workflows/upstream-bump.yml"
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+
+      - name: config.yaml options/schema key parity
+        run: |
+          python -m pip install --quiet pyyaml
+          python - <<'PY'
+          import sys
+          import yaml
+
+          with open("addons/aiostreams/config.yaml") as f:
+              cfg = yaml.safe_load(f)
+
+          options = set(cfg["options"])
+          schema = set(cfg["schema"])
+          if options != schema:
+              print("options - schema:", options - schema)
+              print("schema - options:", schema - options)
+              sys.exit(1)
+          print(f"OK — {len(options)} keys match between options and schema")
+          PY
+
+      - name: bootstrap.js syntax check
+        run: node --check addons/aiostreams/bootstrap.js
+
+      - name: pre-commit (addon files only)
+        continue-on-error: false
+        run: |
+          pip install pre-commit
+          pre-commit run --files \
+            addons/aiostreams/config.yaml \
+            addons/aiostreams/Dockerfile \
+            addons/aiostreams/bootstrap.js \
+            addons/aiostreams/README.md \
+            addons/aiostreams/CHANGELOG.md \
+            addons/aiostreams/build.json \
+            .github/workflows/aiostreams.yml
+
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Build addon image
+        working-directory: addons/aiostreams
+        run: |
+          docker build \
+            --build-arg BUILD_FROM=ghcr.io/viren070/aiostreams:nightly \
+            -t aiostreams-test .
+
+      - name: Smoke test
+        working-directory: addons/aiostreams
+        run: | # pragma: allowlist secret
+          set -euo pipefail
+          trap 'docker rm -f aiostreams-smoke >/dev/null 2>&1 || true' EXIT
+
+          # 64-char hex test key kept on its own shell line so detect-secrets can
+          # be silenced with an inline pragma (JSON below cannot carry a comment).
+          SECRET_KEY="0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"  # pragma: allowlist secret
+          cat > /tmp/aiostreams-options.json <<JSON
+          {
+            "base_url": "http://localhost:18889",
+            "secret_key": "${SECRET_KEY}",
+            "auth": "ci:CiTestPassword123",
+            "auth_required": true,
+            "log_level": "info"
+          }
+          JSON
+
+          docker run -d --name aiostreams-smoke \
+            -v /tmp/aiostreams-options.json:/data/options.json \
+            -p 18889:3000 \
+            aiostreams-test
+
+          echo "Waiting for /api/v1/status ..."
+          ok=""
+          for _ in $(seq 1 90); do
+            if [ "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18889/api/v1/status)" = "200" ]; then
+              ok=1
+              break
+            fi
+            sleep 2
+          done
+          if [ -z "$ok" ]; then
+            echo "status endpoint never returned 200"
+            docker logs aiostreams-smoke
+            exit 1
+          fi
+          echo "status OK"
+
+          echo "Checking /stremio/configure ..."
+          code="$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:18889/stremio/configure)"
+          if [ "$code" != "200" ]; then
+            echo "expected 200 from /stremio/configure, got $code"
+            docker logs aiostreams-smoke
+            exit 1
+          fi
+          echo "configure page OK"
+
+          echo "Checking /data/db.sqlite persistence ..."
+          docker cp aiostreams-smoke:/data/db.sqlite /tmp/db.sqlite
+          if [ ! -s /tmp/db.sqlite ]; then
+            echo "expected a non-empty /data/db.sqlite (bootstrap must wire DATABASE_URI into /data)"
+            exit 1
+          fi
+          echo "persistence OK"
+
+          echo "smoke test passed"

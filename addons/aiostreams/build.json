@@ -1,0 +1,6 @@
+{
+  "build_from": {
+    "aarch64": "ghcr.io/viren070/aiostreams:nightly",
+    "amd64": "ghcr.io/viren070/aiostreams:nightly"
+  }
+}

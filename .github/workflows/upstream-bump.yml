@@ -240,3 +240,73 @@ jobs:
           git add -A
           git commit -m "Bump mediaflow-proxy-light ${OLD} → ${NEW}"
           git push
+
+  bump-aiostreams:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Get latest upstream main commit
+        id: upstream
+        run: |
+          SHA=$(curl -sL \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/Viren070/AIOStreams/commits/main \
+            | jq -r '.sha // empty')
+          SHA7="${SHA:0:7}"
+          echo "sha=$SHA" >> $GITHUB_OUTPUT
+          echo "sha7=$SHA7" >> $GITHUB_OUTPUT
+          echo "Latest upstream main: $SHA7"
+
+      - name: Get current pinned version
+        id: current
+        run: |
+          CURRENT=$(grep -oP '^version: "\K[^"]+' addons/aiostreams/config.yaml | head -1)
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          echo "Current pinned: $CURRENT"
+
+      - name: Bump versions
+        if: steps.upstream.outputs.sha7 != '' && format('nightly-{0}', steps.upstream.outputs.sha7) != steps.current.outputs.current
+        run: |
+          NEW="nightly-${{ steps.upstream.outputs.sha7 }}"
+          OLD="${{ steps.current.outputs.current }}"
+          OLD_SHA7="${OLD#nightly-}"
+          NEW_SHA7="${{ steps.upstream.outputs.sha7 }}"
+          echo "Bumping $OLD → $NEW"
+
+          # Update config.yaml version (build.json stays pinned to :nightly)
+          sed -i "s|version: \"${OLD}\"|version: \"${NEW}\"|g" addons/aiostreams/config.yaml
+
+          # Generate changelog section from commits since last nightly bump
+          COMMITS=$(curl -sL \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/Viren070/AIOStreams/compare/${OLD_SHA7}...${{ steps.upstream.outputs.sha }}" \
+            | jq -r '.commits[] | "- [" + (.commit.message | split("\n")[0]) + "](" + .html_url + ")"' \
+            | head -20)
+
+          NEW_DATE=$(date +%F)
+          # Prepend section; keep header + new section + previous nightly sections (max 9 old)
+          {
+            echo "# Changelog"
+            echo ""
+            echo "For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases)."
+            echo ""
+            echo "## ${NEW} — ${NEW_DATE}"
+            echo ""
+            echo "${COMMITS}"
+            echo ""
+            echo "[Compare ${OLD_SHA7}...${NEW_SHA7}](https://github.com/Viren070/AIOStreams/compare/${OLD_SHA7}...${NEW_SHA7})"
+            echo ""
+            echo "---"
+            echo ""
+            # Previous nightly sections (max 9): lines after the first '## ' heading
+            awk '/^## /{count++} count>=1 && count<=9{print}' addons/aiostreams/CHANGELOG.md
+          } > /tmp/changelog.tmp && mv /tmp/changelog.tmp addons/aiostreams/CHANGELOG.md
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Bump aiostreams ${OLD} → ${NEW}"
+          git push
