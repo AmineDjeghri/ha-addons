@@ -142,6 +142,41 @@ Measured on the prebuilt release binary (amd64):
 Upstream's [benchmarks](https://github.com/mhdzumair/MediaFlow-Proxy-Light#benchmarks) report
 7.5–8.2× less memory than the original Python proxy, making a 512 MB VPS viable.
 
+#### Bandwidth & concurrency
+
+The addon is a relay — every stream flows `source → addon → player` — so the only real
+constraint is the **upload bandwidth of the machine running it**. The proxy itself is
+negligible: ~18 MB RSS and ~0% CPU idle, ~25% of one core under 6 concurrent streams (rated
+for ~100 concurrent connections at ≈200 MB RSS upstream).
+
+**Per stream (typical):**
+
+| Quality | Bitrate |
+|---|---|
+| 720p | ~3–5 Mbps |
+| 1080p | ~8–12 Mbps |
+| 4K (streaming) | ~20–30 Mbps |
+| 4K remux (full bitrate) | ~60–100 Mbps |
+
+**Total upload needed, by concurrent viewers:**
+
+| Concurrent viewers | 720p | 1080p | 4K |
+|---|---|---|---|
+| 2 | ~6–10 Mbps | ~16–24 Mbps | ~40–60 Mbps |
+| 3 | ~9–15 Mbps | ~24–36 Mbps | ~60–90 Mbps |
+| 4 | ~12–20 Mbps | ~32–48 Mbps | ~80–120 Mbps |
+
+So **2–4 viewers at 1080p** fits any fibre line with room to spare; a single 4K remux can
+saturate a 100 Mbps upload, and 4× 4K needs a fast symmetric line. Watch real throughput on
+`GET /metrics` (requires `api_password`) or your router.
+
+Two non-proxy limits to keep in mind for a shared setup:
+
+- **Debrid concurrent-stream limits** — one account shared by 4 viewers can hit the
+  provider's own simultaneous-stream cap regardless of proxy headroom.
+- **One shared identity** — every viewer leaves through the proxy's public IP (that's what
+  fixes multi-IP issues), so provider activity and limits apply to the account as a whole.
+
 ## Notes
 
 - **Transcode and Redis are compile-time opt-in features** — they are *not* compiled into the
