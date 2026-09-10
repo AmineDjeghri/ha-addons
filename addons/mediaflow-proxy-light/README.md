@@ -1,8 +1,8 @@
 # MediaFlow Proxy Light Home Assistant Addon
 
 HA Addon for [MediaFlow Proxy Light](https://github.com/mhdzumair/MediaFlow-Proxy-Light) — a
-fast Rust streaming-media proxy for HTTP(S), HLS and MPEG-DASH streams, with EPG, Xtream,
-and extractor support. It is a lighter rewrite of the original Python MediaFlow Proxy.
+fast Rust streaming-media proxy for HTTP(S), HLS and MPEG-DASH streams, with EPG, Xtream
+and extractor support.
 
 ## Installation
 1. Add this addon repository to Home Assistant (`https://github.com/aminedjeghri/ha-addons`)
@@ -15,7 +15,7 @@ and extractor support. It is a lighter rewrite of the original Python MediaFlow 
 
 | Option                   | Default     | Description                                                             | Upstream env var                |
 |--------------------------|-------------|-----------------------------------------------------------------------|---------------------------------|
-| `api_password`           | *(unset)*   | Password required by every proxy endpoint. **Must be set** (see below). | `APP__AUTH__API_PASSWORD`       |
+| `api_password`           | *(unset)*   | Password required by every proxy endpoint. **Must be set**.             | `APP__AUTH__API_PASSWORD`       |
 | `log_level`              | `info`      | Log verbosity: `debug`, `info`, `warn`, `error`.                        | `RUST_LOG` / `APP__LOG_LEVEL`   |
 | `workers`                | `0`         | HTTP worker threads. `0` = upstream CPU-core default (not exported).    | `APP__SERVER__WORKERS`          |
 | `connect_timeout`        | `30`        | Upstream connection timeout (seconds).                                  | `APP__PROXY__CONNECT_TIMEOUT`   |
@@ -34,18 +34,11 @@ and extractor support. It is a lighter rewrite of the original Python MediaFlow 
 | `acestream_host`         | `localhost` | AceStream engine host.                                                  | `APP__ACESTREAM__HOST`          |
 | `acestream_port`         | `6878`      | AceStream engine port.                                                  | `APP__ACESTREAM__PORT`          |
 
+`api_password` is required and is the gate for the `/proxy/*` family, so set a strong one.
 The addon always exports `APP__SERVER__HOST=0.0.0.0` and `APP__SERVER__PORT=8888` so the
-proxy is reachable from Home Assistant (upstream defaults to binding `127.0.0.1`).
-
-For the full config surface see the upstream
+proxy is reachable from Home Assistant (upstream binds `127.0.0.1`); every option above maps
+to an `APP__<SECTION>__<KEY>` env var. Full surface: upstream
 [`config-example.toml`](https://github.com/mhdzumair/MediaFlow-Proxy-Light/blob/main/config-example.toml).
-Every option maps to an `APP__<SECTION>__<KEY>` environment variable (env > TOML > defaults).
-
-### `api_password` is required
-
-Upstream treats authentication as mandatory: **without `api_password` set, every proxy
-endpoint returns `401`**. Only `GET /health` and the web UI at `/` are reachable
-unauthenticated. Set a strong value in the addon options before relying on the proxy.
 
 ## Usage
 
@@ -61,53 +54,56 @@ All examples assume the addon runs on `YOUR_HA_HOST:8888`.
 - **URL builder / generator:** `/generate_url`, `/base64/*`, `/playlist/builder`
 - **Health check (no auth):** `http://YOUR_HA_HOST:8888/health` → `200`
 
-### Securing your instance
+### Keeping it on the LAN (recommended)
 
-The proxy only listens on your LAN — **never port-forward `8888`**. Recommended exposure:
-a **Cloudflare Tunnel** (map a hostname to `http://homeassistant.local:8888`) with
-**Cloudflare Access** in front, and a strong `api_password` as the second gate
-(unset ⇒ every `/proxy/*` and `/metrics` request returns `401`).
-
-Access rules should be split **by path**, because who calls each path differs:
-
-- **Stream / API paths** — `/proxy/*`, `/player_api.php`, `/xmltv.php`, `/get.php`,
-  `/generate_url`, `/base64/*`, `/extractor/*` — use a **service-token** rule
-  (`CF-Access-Client-Id` / `CF-Access-Client-Secret` request headers). Stremio-style add-ons
-  that only accept a base URL + password still work: run
-  `cloudflared access tcp --hostname mediaflow.yourdomain.com --url http://localhost:PORT`
-  next to the add-on and point it at `localhost:PORT` — cloudflared attaches the token
-  headers automatically. A leaked stream URL then bounces at the edge instead of reaching
-  the proxy.
-- **Web UI** (`/` and friends) — use an **email-OTP** rule for yourself in the browser.
-
-Add a WAF rate-limit rule on the hostname. For clients that support it, prefer upstream's
-`/generate_url` **signed, expiring URLs** over embedding the master password in stream URLs.
-
-> **Why not a service token everywhere?** A service token is a single long-lived shared
-> secret with no user identity and no expiry — if it leaks you must rotate it manually
-> everywhere it is used, and it grants full access to every client that holds it. It is a
-> machine credential, not a replacement for per-user auth: browsers cannot attach it without
-> exposing it in the page, and the local `cloudflared access tcp` forwarder means anyone who
-> compromises the add-on host bypasses the edge rule entirely.
+Never port-forward `8888`. **Expose the self-hosted [AIOStreams](../aiostreams) addon
+instead** — it reaches this proxy over the LAN and serves Stremio/Nuvio clients through its
+own built-in proxy, so only AIOStreams needs a public URL and the debrid calls still leave
+from your home IP. Keep a strong `api_password` anyway. If you ever do expose the addon
+directly, treat the **whole hostname** as the perimeter — the password does not cover the UI,
+`/playlist/builder` or `/generate_url`.
 
 ### Resources
 
-Measured on the prebuilt release binary (amd64):
+Measured on the prebuilt release binary (amd64): ~18 MB RSS and ~0% CPU idle, holding at
+~16–18 MB and ~25% of one core under 6 concurrent 200 MB streams; ~90–130 MB compressed
+image; stateless (no `/data`). Upstream's
+[benchmarks](https://github.com/mhdzumair/MediaFlow-Proxy-Light#benchmarks) report 7.5–8.2×
+less memory than the original Python proxy.
 
-- Idle: ~18 MB RSS, ~0% CPU.
-- Under 6 concurrent 200 MB streams: RSS stays roughly flat at ~16–18 MB, ~25% of one core.
-- Image: ~90–130 MB compressed (estimate).
-- Stateless — the addon uses no `/data` and nothing is persisted.
+#### Bandwidth & concurrency
 
-Upstream's [benchmarks](https://github.com/mhdzumair/MediaFlow-Proxy-Light#benchmarks) report
-7.5–8.2× less memory than the original Python proxy, making a 512 MB VPS viable.
+This addon is a relay — every stream flows `source → addon → player` — so the only real
+constraint is the **upload bandwidth of the machine running it**; the proxy itself is
+negligible (~18 MB RSS, ~25% of one core under load).
+
+| Quality | Bitrate |
+|---|---|
+| 720p | ~3–5 Mbps |
+| 1080p | ~8–12 Mbps |
+| 4K (streaming) | ~20–30 Mbps |
+| 4K remux (full bitrate) | ~60–100 Mbps |
+
+**Total upload needed, by concurrent viewers:**
+
+| Concurrent viewers | 720p | 1080p | 4K |
+|---|---|---|---|
+| 2 | ~6–10 Mbps | ~16–24 Mbps | ~40–60 Mbps |
+| 3 | ~9–15 Mbps | ~24–36 Mbps | ~60–90 Mbps |
+| 4 | ~12–20 Mbps | ~32–48 Mbps | ~80–120 Mbps |
+
+2–4 viewers at 1080p fits any fibre line; one 4K remux can saturate a 100 Mbps upload. A
+single debrid account shared by all viewers is also subject to the provider's own
+concurrent-stream limit. Watch real throughput on `GET /metrics`.
 
 ## Notes
 
-- **Transcode endpoints are disabled** — the image ships no `ffmpeg`, matching upstream's
-  distroless image. The `[transcode]` config is not exposed.
-- **Redis** (external infra) and **Telegram** (a compile-time feature) options are not exposed.
+- **Transcoding and Redis are compile-time opt-in features** and are *not* in the prebuilt
+  release binaries this addon ships — installing `ffmpeg` would not enable transcoding, so
+  neither is exposed. Telegram streaming needs its own API credentials and an MTProto
+  session (not exposed); Acestream works through the `acestream_host` / `acestream_port`
+  options, but no engine is bundled.
 - Only `amd64` and `aarch64` are supported — upstream publishes no `armv7` build.
-- The addon version follows upstream releases and is auto-bumped daily by the repo's
-  `upstream-bump` workflow. The new binary is fetched at image build time, so the update
-  applies when you press **Update** (rebuild) in the HA UI — a plain restart is not enough.
+- The version follows upstream releases and is auto-bumped daily by `upstream-bump`. The
+  binary is fetched at image build time, so an update needs **Update** (rebuild) in the HA
+  UI — a plain restart is not enough.
