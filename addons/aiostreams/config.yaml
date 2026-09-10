@@ -13,15 +13,9 @@ ports_description:
   3000/tcp: Web UI and Stremio addon API
 webui: "http://[HOST]:[PORT:3000]/stremio/configure"
 watchdog: "http://[HOST]:[PORT:3000]/api/v1/status"
-# base_url and secret_key are REQUIRED.
-#   base_url    — the public HTTPS URL this instance is reachable at (Stremio
-#                 refuses non-HTTPS addons that are not on localhost).
-#   secret_key  — a 64-char hex string (generate with `openssl rand -hex 32`).
-#                 It encrypts stored credentials and must NEVER change after the
-#                 first start, or every saved credential becomes unreadable.
 options:
   base_url: ""
-  secret_key: "" # pragma: allowlist secret
+  secret_key: ""
   auth: ""
   auth_required: true
   log_level: "info"
