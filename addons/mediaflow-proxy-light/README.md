@@ -41,11 +41,19 @@ For the full config surface see the upstream
 [`config-example.toml`](https://github.com/mhdzumair/MediaFlow-Proxy-Light/blob/main/config-example.toml).
 Every option maps to an `APP__<SECTION>__<KEY>` environment variable (env > TOML > defaults).
 
-### `api_password` is required
+### Authentication model (verified against the 1.1.2 binary)
 
-Upstream treats authentication as mandatory: **without `api_password` set, every proxy
-endpoint returns `401`**. Only `GET /health` and the web UI at `/` are reachable
-unauthenticated. Set a strong value in the addon options before relying on the proxy.
+Set a strong `api_password` — for most endpoints it is the only gate. Measured behaviour:
+
+| Endpoint family | Behaviour without `api_password` |
+|---|---|
+| `/proxy/*` (stream, hls, mpd, epg, acestream, telegram, forward), `/metrics`, `/base64/*`, `/extractor/*` | `401` — fail-closed, even when no password is configured at all |
+| `/`, `/index.html`, `/speedtest.html`, `/health`, static assets | reachable (public) |
+| `/playlist/builder` | **reachable — and it performs the fetch** (see Security) |
+| `POST /generate_url` | reachable (mints plain URLs; `_token_` URLs are only usable with the real password) |
+| Xtream Codes routes (`/player_api.php`, `/xmltv.php`, `/get.php`, `/<u>/<p>/<id>.<ext>`) | not gated by `api_password`; they validate the XC credential blob (`{base64_upstream}:{username}[:{api_password}]`) |
+
+An empty password locks the `/proxy/*` family but does **not** make the addon inert.
 
 ## Usage
 
@@ -63,32 +71,64 @@ All examples assume the addon runs on `YOUR_HA_HOST:8888`.
 
 ### Securing your instance
 
-The proxy only listens on your LAN — **never port-forward `8888`**. Recommended exposure:
-a **Cloudflare Tunnel** (map a hostname to `http://homeassistant.local:8888`) with
-**Cloudflare Access** in front, and a strong `api_password` as the second gate
-(unset ⇒ every `/proxy/*` and `/metrics` request returns `401`).
+Never port-forward `8888` — the addon publishes it directly on your LAN IP (there is no
+ingress-only mode).
 
-Access rules should be split **by path**, because who calls each path differs:
+Expose it with the **Cloudflare add-on** in Home Assistant (the community "Cloudflared"
+add-on) rather than running `cloudflared` commands yourself: add a host entry to the add-on's
+configuration and let it own the tunnel —
 
-- **Stream / API paths** — `/proxy/*`, `/player_api.php`, `/xmltv.php`, `/get.php`,
-  `/generate_url`, `/base64/*`, `/extractor/*` — use a **service-token** rule
-  (`CF-Access-Client-Id` / `CF-Access-Client-Secret` request headers). Stremio-style add-ons
-  that only accept a base URL + password still work: run
-  `cloudflared access tcp --hostname mediaflow.yourdomain.com --url http://localhost:PORT`
-  next to the add-on and point it at `localhost:PORT` — cloudflared attaches the token
-  headers automatically. A leaked stream URL then bounces at the edge instead of reaching
-  the proxy.
-- **Web UI** (`/` and friends) — use an **email-OTP** rule for yourself in the browser.
+```yaml
+additional_hosts:
+  - hostname: mediaflow.yourdomain.com
+    service: http://homeassistant.local:8888
+```
 
-Add a WAF rate-limit rule on the hostname. For clients that support it, prefer upstream's
-`/generate_url` **signed, expiring URLs** over embedding the master password in stream URLs.
+Access rules are configured in the **Cloudflare Zero Trust dashboard** (Access →
+Applications) against that hostname. Split the application **by path** — the two audiences
+differ:
+
+- **Machine paths (service-token rule)** — `/proxy/*`, `/extractor/*`, `/base64/*`,
+  `/generate_url`, `/metrics`, **`/playlist/builder`**, and the Xtream Codes routes
+  (`/player_api.php`, `/xmltv.php`, `/get.php`, short-stream URLs). Clients send the
+  `CF-Access-Client-Id` / `CF-Access-Client-Secret` request headers. Create **one service
+  token per client** — that is the only way to revoke one user without breaking the others.
+- **Web UI (email-OTP rule)** — `/`, `/index.html`, `/speedtest.html`, static assets.
+
+Two edge rules that matter:
+
+- **`/playlist/builder` must be inside the token rule — or blocked.** `api_password` does not
+  protect it: it performs a server-side fetch of any URL passed in `?url=` with no
+  authentication (verified). Internet-exposed, that is an open fetch and internal-port
+  scanner pointed at your LAN.
+- **Consider blocking `/proxy/forward`** with a WAF rule unless you need debrid IP binding —
+  it is a transparent relay for any HTTP method and body.
+
+Also: WAF rate-limit the hostname; exclude query strings from Cloudflare Logpush (the API
+password travels in URLs); prefer upstream's `/generate_url` **signed, expiring, IP-bound**
+URLs over embedding the master password. If a client cannot send headers, the API password is
+its only gate — keep it long and random, and rotate it on any leak.
 
 > **Why not a service token everywhere?** A service token is a single long-lived shared
 > secret with no user identity and no expiry — if it leaks you must rotate it manually
-> everywhere it is used, and it grants full access to every client that holds it. It is a
-> machine credential, not a replacement for per-user auth: browsers cannot attach it without
-> exposing it in the page, and the local `cloudflared access tcp` forwarder means anyone who
-> compromises the add-on host bypasses the edge rule entirely.
+> everywhere it is used. It is a machine credential, not a replacement for per-user auth:
+> browsers cannot attach it without exposing it in the page, and with the add-on approach
+> there is no local token-injecting forwarder, so header-less clients must fall back to the
+> API password.
+
+### Verified behaviours to be aware of
+
+- **No private-IP guard on the stream paths.** `/proxy/stream`, `/proxy/hls`, `/proxy/mpd`
+  and `/proxy/epg` will fetch loopback and RFC-1918 addresses (verified `200` from
+  `127.0.0.1`); only `/proxy/forward` enforces the documented `403` SSRF guard. Anyone
+  holding the password (or a leaked URL) can reach unauthenticated LAN services. Redirects
+  are also followed into private ranges — set `follow_redirects: false` if you don't need
+  them.
+- **CORS reflects any `Origin`** (`Access-Control-Allow-Origin` + `Allow-Credentials: true`),
+  so a web page you visit can read responses from a reachable instance. Another reason to
+  keep the whole hostname behind Access.
+- **Which is why the edge must cover every path, not just `/proxy/*`** — the API password
+  alone does not protect the UI, `/playlist/builder` or `/generate_url`.
 
 ### Resources
 
@@ -104,9 +144,13 @@ Upstream's [benchmarks](https://github.com/mhdzumair/MediaFlow-Proxy-Light#bench
 
 ## Notes
 
-- **Transcode endpoints are disabled** — the image ships no `ffmpeg`, matching upstream's
-  distroless image. The `[transcode]` config is not exposed.
-- **Redis** (external infra) and **Telegram** (a compile-time feature) options are not exposed.
+- **Transcode and Redis are compile-time opt-in features** — they are *not* compiled into the
+  prebuilt release binaries this addon ships (upstream `docs/reference/limitations.md`:
+  `--features "redis,transcode"` requires building from source). Installing `ffmpeg` into the
+  image would **not** enable transcoding, so neither is exposed.
+- **Telegram** streaming needs its own API credentials and an MTProto session — not exposed.
+  **Acestream** works via the exposed `acestream_host` / `acestream_port` options, but the
+  addon does not bundle an Acestream engine.
 - Only `amd64` and `aarch64` are supported — upstream publishes no `armv7` build.
 - The addon version follows upstream releases and is auto-bumped daily by the repo's
   `upstream-bump` workflow. The new binary is fetched at image build time, so the update
