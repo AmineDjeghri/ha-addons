@@ -107,3 +107,20 @@ concurrent-stream limit. Watch real throughput on `GET /metrics`.
 - The version follows upstream releases and is auto-bumped daily by `upstream-bump`. The
   binary is fetched at image build time, so an update needs **Update** (rebuild) in the HA
   UI — a plain restart is not enough.
+
+## Exposure & blocked URLs
+
+**LAN-only — do not publish.** This add-on is intentionally not in the Cloudflared tunnel;
+AIOStreams reaches it over the LAN (see [Keeping it on the LAN](#keeping-it-on-the-lan-recommended)).
+
+If it is ever published anyway, this is the order that matters:
+
+| Path | State without a password | Why it must be blocked first |
+|---|---|---|
+| `/playlist/builder?url=<any>` | `200` **with the fetched body** | Unauthenticated fetch primitive that doubles as a LAN port/host scanner |
+| `/proxy/forward` | `401` | Transparent any-method full relay |
+| `/proxy/*`, `/base64/*`, `/extractor/*`, `/metrics` | `401` | SSRF by design once the password leaks |
+| `/`, `/health` | `200` by design | Enumerable, unprotected |
+
+The `api_password` covers `/proxy/*`, not the UI/builder paths — the whole hostname is the
+perimeter. `/generate_url` is not served by this build (`404`).
