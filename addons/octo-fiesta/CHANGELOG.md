@@ -2,6 +2,19 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-a1db7fa — 2026-09-12
+
+- [feat(subsonic): merge provider catalogue into getTopSongs](https://github.com/V1ck3s/octo-fiesta/commit/76ba52db1fb5db9ec8cfa0e744528fc4f4532413)
+- [fix(subsonic): drop irrelevant provider playlists from search3](https://github.com/V1ck3s/octo-fiesta/commit/8caceb7fb6c2a038a59036efac55b38743e1ebe3)
+- [feat(subsonic): merge provider catalogue into getTopSongs](https://github.com/V1ck3s/octo-fiesta/commit/723693b007e027acc6deb8e2863d36295d7cda1a)
+- [refactor(subsonic): reuse the artist credit helper in getTopSongs](https://github.com/V1ck3s/octo-fiesta/commit/d2172c99fe8e3c4b8dadd4bbd8ea83956da81763)
+- [fix(subsonic): drop irrelevant provider playlists from search3](https://github.com/V1ck3s/octo-fiesta/commit/cee7e80fbbc72040e5440bcd99846c6538fac947)
+- [refactor(subsonic): fold playlist query normalization into the shared helper](https://github.com/V1ck3s/octo-fiesta/commit/a1db7fae18794e3283fbe77ffbf0cd1cd06502ad)
+
+[Compare c4d0f57...a1db7fa](https://github.com/V1ck3s/octo-fiesta/compare/c4d0f57...a1db7fa)
+
+---
+
 ## dev-c4d0f57 — 2026-09-05
 
 - [fix(subsonic): run quality upgrade in background instead of blocking playback](https://github.com/V1ck3s/octo-fiesta/commit/c4d0f5734d1868b8f3f4c031566b705480c32efd)
