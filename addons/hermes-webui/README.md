@@ -183,3 +183,21 @@ http://YOUR_HA_IP:8787
 
 - Only `amd64` and `aarch64` architectures are supported (no `armv7`).
 - On first start, the onboarding wizard will guide you through provider/model setup.
+
+## Exposure & blocked URLs
+
+Expose it only **behind Cloudflare Access** (email OTP or an IdP) — never on a hostname that
+resolves straight to the add-on. Set the `password` option as a second layer. Never add this
+hostname to a rule that bypasses Access.
+
+There is no path here that is safe to publish, so nothing is "allowed" — the whole hostname
+is credential-grade:
+
+| Path | Why |
+|---|---|
+| `/api/*` (chat, sessions, settings, cron, skills, profiles, memory) | Runs the Hermes agent **in-process** → arbitrary tool execution as the container user |
+| `/`, static assets, SSE | UI shell for the paths above |
+
+`map: all_addon_configs:rw` means a compromise here reads **every** add-on's configuration,
+including the Cloudflared tunnel config and other add-ons' secrets. If you ever remove the
+Access application, stop the add-on first.

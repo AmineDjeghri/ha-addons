@@ -73,3 +73,23 @@ This addon tracks the upstream **`nightly`** channel:
   protected.
 - You are responsible for complying with the terms of service and the laws that apply to the
   content sources you configure AIOStreams to aggregate.
+
+## Exposure & blocked URLs
+
+This add-on is meant to be published through the Cloudflared tunnel, on its own hostname.
+That is deliberate: Stremio/Nuvio-class clients are
+header-less and cannot answer a Cloudflare Access challenge, so the app's own login is the
+gate. **Keep `auth` set and `auth_required: true`** — an empty `auth` leaves the whole
+dashboard (and your debrid credentials) open.
+
+Block at the Cloudflare edge — a WAF custom rule scoped to this add-on's tunnel hostname:
+
+| Path | Why |
+|---|---|
+| `/api/v1/status` | ~293 KB unauthenticated dump of server settings/flags. Only the HA watchdog needs it, and that reads it over the LAN. |
+| `/builtins/*` | Internal engine routes. Already `403` without the internal key — block anyway. |
+| `/metrics` | Not served (`404`) today; block pre-emptively if a future build adds it. |
+
+Everything else stays reachable: `/api/v1/*` is account-gated, and
+`/stremio/<uuid>/<encryptedPassword>/…` embeds the credential **in the URL** — treat an
+installed manifest URL as a bearer secret. Rate-limit the hostname.

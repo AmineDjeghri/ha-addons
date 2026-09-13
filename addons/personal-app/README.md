@@ -66,3 +66,17 @@ You can then access:
 
 ## 3. Contributing
 Check the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information.
+
+## 4. Exposure & blocked URLs
+
+**LAN-only — do not publish.** This add-on has **no authentication anywhere**, so every path
+is a must-never-be-public:
+
+| Path | Why |
+|---|---|
+| `:8080/`, `/media/*`, `/static/*`, `/_nicegui/*` | Unauthenticated UI + websocket; the page exposes host metrics |
+| `:8000/docs`, `:8000/openapi.json`, `:8000/api/*` | FastAPI docs and API are open, and CORS is `*` **with credentials**. Port 8000 is not published to the host, but any co-resident add-on container can reach it |
+| `/robots.txt` | `Disallow:` (empty) — explicitly invites crawlers |
+
+`SESSION_SECRET` also falls back to `change_this_secret` when unset — set it if you ever
+expose this beyond a trusted network.

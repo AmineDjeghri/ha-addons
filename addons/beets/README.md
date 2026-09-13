@@ -143,3 +143,11 @@ docker exec -it "$(docker ps -q -f name=beets)" sh -c \
 
 - Logs: addon **Log** tab + `/data/beets/import.log` (auto-rotated at startup when over 10 MB — one `.1` backup is kept).
 - `import.incremental: yes` and `duplicate_action: skip` are deliberately safe defaults for a headless environment.
+
+## Exposure & blocked URLs
+
+Nothing to expose and nothing to block: this add-on has **no HTTP server and no published
+port** — `config.yaml` declares no `ports:` entry. It runs with `map: media:rw` only and talks
+outbound (Navidrome `startScan`, MusicBrainz, AcoustID). Keep it that way; adding a `ports:`
+entry here would publish a shell-less file-tagging service with write access to your music
+library.
