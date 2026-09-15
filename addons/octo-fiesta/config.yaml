@@ -12,7 +12,6 @@ ports:
 ports_description:
   8080/tcp: Web interface
 map:
-  - config:rw
   - media:rw
 webui: "http://[HOST]:[PORT:5274]"
 options:
