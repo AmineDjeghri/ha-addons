@@ -37,7 +37,9 @@ Use the same credentials as your Navidrome server.
 ## Exposure & blocked URLs
 
 **LAN-only — do not publish.** This add-on authenticates with your Navidrome user
-credentials, so a leaked Subsonic credential is usable access to both services.
+credentials, so a leaked Subsonic credential is usable access to both services. It holds
+`map: media:rw` only — external playlists land in `/media/music/playlists`, and it has **no
+access to Home Assistant's config directory** (no `secrets.yaml`, no `.storage`).
 
 | Path | State without credentials (LAN) | Why it must never be public |
 |---|---|---|
