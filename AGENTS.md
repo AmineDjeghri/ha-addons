@@ -46,9 +46,10 @@ A **multi-add-on** Home Assistant repository. Each add-on is fully self-containe
 
 ## Versioning — by add-on type (do not guess)
 
-- All five `upstream-bump.yml` jobs share one `concurrency` group (`upstream-bump-push`) and
-  run `git pull --rebase` before `git push`, so a bump commit can never be discarded by a
-  concurrent job's push race.
+- The five `upstream-bump.yml` jobs run as a `needs:` chain (each `if: always()` so one
+  add-on's failure doesn't skip the rest) and rebase-and-retry (`git pull --rebase` before
+  `git push`, up to 5 attempts) before pushing, so a bump commit can never be discarded by a
+  concurrent push.
 
 - **Image-pinned** (octo-fiesta): `build.json` pins the upstream image and
   `upstream-bump.yml` (nightly) owns both `build.json` and `config.yaml version:`.
