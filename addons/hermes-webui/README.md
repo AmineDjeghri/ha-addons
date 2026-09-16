@@ -133,7 +133,7 @@ directly in this container (`hermes doctor`, `hermes config get`, `hermes mcp`,
 
 #### Where files live on the HA host
 
-| Host path (older HA: `/addon_configs/…`) | Agent addon | WebUI addon | Contents |
+| Host path | Agent addon | WebUI addon | Contents |
 |---|---|---|---|
 | `app_configs/<slug>_hermes_agent/.hermes` | `/config/.hermes` | `…/.hermes` via `HERMES_HOME` (also `/config/.hermes` symlink alias) | `config.yaml`, `.env`, `SOUL.md`, `memories/`, `skills/`, `sessions/`, `logs/`, `state.db`, `cron/`, `plugins/`, `hermes-agent/` |
 | `…/.hermes/hermes-agent` | `/config/.hermes/hermes-agent` | symlink `/home/hermeswebui/.hermes/hermes-agent` | git checkout + `venv/` + `.hermes-runtime/` |
