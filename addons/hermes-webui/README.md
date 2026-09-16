@@ -29,7 +29,8 @@ Both addons run as **separate Docker containers** but access the **same director
 ### Architecture
 
 Two **separate Docker containers** share the **same directories** on the HA host
-(`/app_configs/<slug>_hermes_agent/`) via volume mounts — no duplication, no syncing.
+(`/app_configs/<slug>_hermes_agent/`; older HA releases expose the same tree as
+`/addon_configs/…`) via volume mounts — no duplication, no syncing.
 The WebUI mirrors the agent's environment on every start (see [Shared environment](#shared-environment)).
 
 ```mermaid
