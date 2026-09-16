@@ -74,23 +74,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Bump octo-fiesta ${OLD} → ${NEW}"
-
-          # main can advance under us (sibling bump jobs, semantic-release in main-release.yml,
-          # a merge): rebase onto it before every attempt and retry instead of losing the bump.
-          pushed=0
-          for attempt in 1 2 3 4 5; do
-            if git pull --rebase --autostash origin main && git push; then
-              echo "Pushed ${NEW} on attempt ${attempt}."
-              pushed=1
-              break
-            fi
-            echo "Push attempt ${attempt} rejected (main moved?) — retrying in 5s."
-            sleep 5
-          done
-          if [ "$pushed" != 1 ]; then
-            echo "::error::Could not push ${OLD} → ${NEW} after 5 attempts."
-            exit 1
-          fi
+          git push
 
   bump-hermes-webui:
     # Serialized so each job's checkout and push see the previous job's commit;
@@ -139,23 +123,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Bump hermes-webui ${OLD} → ${NEW}"
-
-          # main can advance under us (sibling bump jobs, semantic-release in main-release.yml,
-          # a merge): rebase onto it before every attempt and retry instead of losing the bump.
-          pushed=0
-          for attempt in 1 2 3 4 5; do
-            if git pull --rebase --autostash origin main && git push; then
-              echo "Pushed ${NEW} on attempt ${attempt}."
-              pushed=1
-              break
-            fi
-            echo "Push attempt ${attempt} rejected (main moved?) — retrying in 5s."
-            sleep 5
-          done
-          if [ "$pushed" != 1 ]; then
-            echo "::error::Could not push ${OLD} → ${NEW} after 5 attempts."
-            exit 1
-          fi
+          git push
 
   bump-beets:
     needs: bump-hermes-webui
@@ -215,23 +183,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "chore: bump beets ${OLD} → ${NEW}"
-
-          # main can advance under us (sibling bump jobs, semantic-release in main-release.yml,
-          # a merge): rebase onto it before every attempt and retry instead of losing the bump.
-          pushed=0
-          for attempt in 1 2 3 4 5; do
-            if git pull --rebase --autostash origin main && git push; then
-              echo "Pushed ${NEW} on attempt ${attempt}."
-              pushed=1
-              break
-            fi
-            echo "Push attempt ${attempt} rejected (main moved?) — retrying in 5s."
-            sleep 5
-          done
-          if [ "$pushed" != 1 ]; then
-            echo "::error::Could not push ${OLD} → ${NEW} after 5 attempts."
-            exit 1
-          fi
+          git push
 
   bump-mediaflow-proxy-light:
     needs: bump-beets
@@ -295,23 +247,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Bump mediaflow-proxy-light ${OLD} → ${NEW}"
-
-          # main can advance under us (sibling bump jobs, semantic-release in main-release.yml,
-          # a merge): rebase onto it before every attempt and retry instead of losing the bump.
-          pushed=0
-          for attempt in 1 2 3 4 5; do
-            if git pull --rebase --autostash origin main && git push; then
-              echo "Pushed ${NEW} on attempt ${attempt}."
-              pushed=1
-              break
-            fi
-            echo "Push attempt ${attempt} rejected (main moved?) — retrying in 5s."
-            sleep 5
-          done
-          if [ "$pushed" != 1 ]; then
-            echo "::error::Could not push ${OLD} → ${NEW} after 5 attempts."
-            exit 1
-          fi
+          git push
 
   bump-aiostreams:
     needs: bump-mediaflow-proxy-light
@@ -383,20 +319,4 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Bump aiostreams ${OLD} → ${NEW}"
-
-          # main can advance under us (sibling bump jobs, semantic-release in main-release.yml,
-          # a merge): rebase onto it before every attempt and retry instead of losing the bump.
-          pushed=0
-          for attempt in 1 2 3 4 5; do
-            if git pull --rebase --autostash origin main && git push; then
-              echo "Pushed ${NEW} on attempt ${attempt}."
-              pushed=1
-              break
-            fi
-            echo "Push attempt ${attempt} rejected (main moved?) — retrying in 5s."
-            sleep 5
-          done
-          if [ "$pushed" != 1 ]; then
-            echo "::error::Could not push ${OLD} → ${NEW} after 5 attempts."
-            exit 1
-          fi
+          git push
