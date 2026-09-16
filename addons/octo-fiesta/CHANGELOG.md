@@ -2,6 +2,14 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-afa6259 — 2026-09-16
+
+- [feat: add artist letter to path template](https://github.com/V1ck3s/octo-fiesta/commit/afa6259a1bbf2d34202b054e3da4f0797eca937d)
+
+[Compare a1db7fa...afa6259](https://github.com/V1ck3s/octo-fiesta/compare/a1db7fa...afa6259)
+
+---
+
 ## dev-a1db7fa — 2026-09-12
 
 - [feat(subsonic): merge provider catalogue into getTopSongs](https://github.com/V1ck3s/octo-fiesta/commit/76ba52db1fb5db9ec8cfa0e744528fc4f4532413)
