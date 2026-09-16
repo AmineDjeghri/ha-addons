@@ -22,9 +22,14 @@ export HERMES_WEBUI_PORT="8787"
 # HERMES_HOME: use configured path, or auto-discover *_hermes_agent addon, or fall back to isolated
 hermes_home=$(bashio::config 'hermes_home')
 if [ -z "$hermes_home" ] || [ "$hermes_home" = "null" ]; then
-    # Auto-discover: find .hermes inside any *_hermes_agent addon config dir
-    hermes_home=$(find /addon_configs -maxdepth 2 -type d -name ".hermes" 2>/dev/null \
-        | grep -i "_hermes_agent/" | head -1)
+    # Auto-discover: find .hermes inside any *_hermes_agent app config dir.
+    # HA renamed the tree to /app_configs (older releases: /addon_configs) — try both.
+    for root in /app_configs /addon_configs; do
+        [ -d "$root" ] || continue
+        hermes_home=$(find "$root" -maxdepth 2 -type d -name ".hermes" 2>/dev/null \
+            | grep -i "_hermes_agent/" | head -1)
+        if [ -n "$hermes_home" ]; then break; fi
+    done
     if [ -n "$hermes_home" ]; then
         bashio::log.info "Auto-discovered Hermes Agent data at: ${hermes_home}"
     fi
@@ -90,7 +95,7 @@ export_if_set HERMES_WEBUI_AGENT_CACHE_MAX     agent_cache_max
 export_if_set HERMES_WEBUI_SESSIONS_MAX        sessions_max
 
 # The init script's root phase rsyncs /apptoo→/app then drops to hermeswebui
-# (UID 1024). In HA, /addon_configs is root-owned (0700) and that user can't
+# (UID 1024). In HA, /app_configs (formerly /addon_configs) is root-owned (0700) and that user can't
 # write to it. To keep the server running as root we:
 #   1. Do the rsync ourselves (bypassing the root phase)
 #   2. Spoof whoami → "hermeswebui" so the root-phase check is skipped

@@ -22,14 +22,14 @@ This addon is recommended to be used with the [Hermes Agent HA addon](https://gi
 
 ### Shared mode (recommended)
 
-If you are running the [Hermes Agent HA addon](https://github.com/WolframRavenwolf/hermes-ha-addon), this addon auto-discovers it and mounts its config directory. For example: `/addon_configs/0a6523c6_hermes_agent/`. The WebUI will share the same config, API keys, profiles, memory, and skills as the agent — no separate setup needed.
+If you are running the [Hermes Agent HA addon](https://github.com/WolframRavenwolf/hermes-ha-addon), this addon auto-discovers it and mounts its config directory. For example: `/app_configs/0a6523c6_hermes_agent/` (older HA releases expose the same tree as `/addon_configs/…`; `run.sh` probes both). The WebUI will share the same config, API keys, profiles, memory, and skills as the agent — no separate setup needed.
 
 Both addons run as **separate Docker containers** but access the **same directories** from the HA host filesystem via volume mounts. There is no duplication and no syncing needed.
 
 ### Architecture
 
 Two **separate Docker containers** share the **same directories** on the HA host
-(`/addon_configs/<slug>_hermes_agent/`) via volume mounts — no duplication, no syncing.
+(`/app_configs/<slug>_hermes_agent/`) via volume mounts — no duplication, no syncing.
 The WebUI mirrors the agent's environment on every start (see [Shared environment](#shared-environment)).
 
 ```mermaid
@@ -37,7 +37,7 @@ flowchart TD
     HA["🖥️ Home Assistant OS / Supervisor"]
     BROWSER["🌐 Browser"] --> WEBUI_SRV
     TG["✈️ Telegram"] --> AGENT_PROC
-    SHARED[("📁 addon_configs/…_hermes_agent<br/>.hermes · workspace · .config · .local · .gitconfig")]
+    SHARED[("📁 app_configs/…_hermes_agent<br/>.hermes · workspace · .config · .local · .gitconfig")]
 
     subgraph AGENT["🐳 Hermes Agent addon<br/>(WolframRavenwolf/hermes-ha-addon)"]
         A_HOME["/config — private addon-config mount"]
@@ -50,7 +50,7 @@ flowchart TD
     end
 
     subgraph WEBUI["🐳 Hermes WebUI addon (this addon)"]
-        W_HOME["/addon_configs/…_hermes_agent<br/>(auto-discovered HERMES_HOME)"]
+        W_HOME["/app_configs/…_hermes_agent<br/>(auto-discovered HERMES_HOME)"]
         W_APP["/app — webui app (rsync from /apptoo)"]
         W_VENV["/app/venv — CPython 3.12<br/>hermes-agent[all] (PyPI) + webui deps<br/>.deps_installed fast-restart marker"]
         W_SRC["/home/hermeswebui/.hermes/hermes-agent<br/>symlink → shared agent source"]
@@ -63,9 +63,9 @@ flowchart TD
     end
 
     HA -- "bind mount (rw)" --> A_HOME
-    HA -- "bind mounts (rw) /addon_configs + /data" --> W_HOME
+    HA -- "bind mounts (rw) /app_configs + /data" --> W_HOME
     A_HOME -- "/config/.hermes" --> SHARED
-    W_HOME -- "/addon_configs/…/.hermes" --> SHARED
+    W_HOME -- "/app_configs/…/.hermes" --> SHARED
     W_SRC -- "symlink → .hermes/hermes-agent" --> SHARED
     W_ALIAS -- "symlink → the same agent addon dir" --> SHARED
 
@@ -88,7 +88,7 @@ flowchart TD
 | Path resolution | venv symlinks are absolute → `/config/.hermes/…` (resolves in the agent container) | the shared venv's symlinks point at `/config/.hermes/…`, which **does not exist** here — so the WebUI never uses the agent's venv |
 
 > The two containers reach the *same* `.hermes` directory through **different mount
-> points**: `/config/.hermes` in the agent addon, `/addon_configs/<slug>_hermes_agent/.hermes`
+> points**: `/config/.hermes` in the agent addon, `/app_configs/<slug>_hermes_agent/.hermes`
 > in the WebUI. The shared venv + uv runtime are built for the agent's path. Always run
 > `hermes` (updates, CLI) from the **agent addon**, not from the WebUI container.
 >
@@ -134,7 +134,7 @@ directly in this container (`hermes doctor`, `hermes config get`, `hermes mcp`,
 
 | Host path | Agent addon | WebUI addon | Contents |
 |---|---|---|---|
-| `addon_configs/<slug>_hermes_agent/.hermes` | `/config/.hermes` | `…/.hermes` via `HERMES_HOME` (also `/config/.hermes` symlink alias) | `config.yaml`, `.env`, `SOUL.md`, `memories/`, `skills/`, `sessions/`, `logs/`, `state.db`, `cron/`, `plugins/`, `hermes-agent/` |
+| `app_configs/<slug>_hermes_agent/.hermes` | `/config/.hermes` | `…/.hermes` via `HERMES_HOME` (also `/config/.hermes` symlink alias) | `config.yaml`, `.env`, `SOUL.md`, `memories/`, `skills/`, `sessions/`, `logs/`, `state.db`, `cron/`, `plugins/`, `hermes-agent/` |
 | `…/.hermes/hermes-agent` | `/config/.hermes/hermes-agent` | symlink `/home/hermeswebui/.hermes/hermes-agent` | git checkout + `venv/` + `.hermes-runtime/` |
 | `…/workspace` | `/config/workspace` | `HERMES_WEBUI_DEFAULT_WORKSPACE` | working files, cloned repos (e.g. this one) |
 | `…/.config` | `/config/.config` | symlink `/root/.config` (`XDG_CONFIG_HOME`) | `gh` auth, npm/pip tool config |
