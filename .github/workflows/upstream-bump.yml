@@ -8,6 +8,9 @@ on:
 jobs:
   bump-octo-fiesta:
     runs-on: ubuntu-latest
+    concurrency:
+      group: upstream-bump-push
+      cancel-in-progress: false
     permissions:
       contents: write
     steps:
@@ -74,10 +77,14 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Bump octo-fiesta ${OLD} → ${NEW}"
+          git pull --rebase --autostash origin main
           git push
 
   bump-hermes-webui:
     runs-on: ubuntu-latest
+    concurrency:
+      group: upstream-bump-push
+      cancel-in-progress: false
     permissions:
       contents: write
     steps:
@@ -119,10 +126,14 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Bump hermes-webui ${OLD} → ${NEW}"
+          git pull --rebase --autostash origin main
           git push
 
   bump-beets:
     runs-on: ubuntu-latest
+    concurrency:
+      group: upstream-bump-push
+      cancel-in-progress: false
     permissions:
       contents: write
     steps:
@@ -177,10 +188,14 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "chore: bump beets ${OLD} → ${NEW}"
+          git pull --rebase --autostash origin main
           git push
 
   bump-mediaflow-proxy-light:
     runs-on: ubuntu-latest
+    concurrency:
+      group: upstream-bump-push
+      cancel-in-progress: false
     permissions:
       contents: write
     steps:
@@ -239,10 +254,14 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Bump mediaflow-proxy-light ${OLD} → ${NEW}"
+          git pull --rebase --autostash origin main
           git push
 
   bump-aiostreams:
     runs-on: ubuntu-latest
+    concurrency:
+      group: upstream-bump-push
+      cancel-in-progress: false
     permissions:
       contents: write
     steps:
@@ -309,4 +328,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Bump aiostreams ${OLD} → ${NEW}"
+          git pull --rebase --autostash origin main
           git push

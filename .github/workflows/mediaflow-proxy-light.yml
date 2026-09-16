@@ -1,14 +1,13 @@
 name: "👷 MediaFlow Proxy Light — Validate & Build"
 
 on:
-  push:
-    branches: ["**"]
+  push: # only main: PRs are validated via pull_request; branch pushes (renovate rebases) used to trigger this for unrelated diffs
+    branches: [main]
     paths:
       - "addons/mediaflow-proxy-light/**"
       - ".github/workflows/mediaflow-proxy-light.yml"
       - ".github/workflows/upstream-bump.yml"
   pull_request:
-    branches: ["**"]
     paths:
       - "addons/mediaflow-proxy-light/**"
       - ".github/workflows/mediaflow-proxy-light.yml"

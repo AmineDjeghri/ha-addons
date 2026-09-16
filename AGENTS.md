@@ -28,21 +28,27 @@ A **multi-add-on** Home Assistant repository. Each add-on is fully self-containe
 
 ## CI reality — know what is NOT checked
 
-- CI (`ci.yml` / `quality-and-tests.yml`) triggers **only on `addons/personal-app/**`**.
-  PRs touching any other add-on (beets, hermes-webui, octo-fiesta, workflows) run **zero
-  automated checks**. Manual verification is the only gate: pre-commit hooks locally,
-  `bash -n` on shell, YAML validity, careful diff review. Never tell the user "CI will
-  verify this" for a non-personal-app PR.
+- CI (`ci.yml` / `quality-and-tests.yml`) triggers **only on PRs touching
+  `addons/personal-app/**`** — no push trigger (pushes to feature branches used to double
+  every check; PRs are the only gate now). PRs touching any other add-on (beets, hermes-webui,
+  octo-fiesta, workflows) run **zero automated checks**. Manual verification is the only gate:
+  pre-commit hooks locally, `bash -n` on shell, YAML validity, careful diff review. Never tell
+  the user "CI will verify this" for a non-personal-app PR.
 - **Exception: `mediaflow-proxy-light` and `aiostreams`** each have their own workflow
-  (`mediaflow-proxy-light.yml`, `aiostreams.yml`) — on PRs/pushes touching their add-on
-  folder they run pre-commit + a real `docker build` with a smoke test (mediaflow: health,
-  auth 401/200, streaming through the proxy; aiostreams: options bootstrap, `/api/v1/status`,
-  configure page, SQLite persistence in `/data`). Those add-ons' PRs DO get automated checks;
-  everything else still relies on manual verification.
+  (`mediaflow-proxy-light.yml`, `aiostreams.yml`) — they run pre-commit + a real `docker build`
+  with a smoke test (mediaflow: health, auth 401/200, streaming through the proxy; aiostreams:
+  options bootstrap, `/api/v1/status`, configure page, SQLite persistence in `/data`) on PRs
+  touching their add-on folder, and on pushes to `main` only (not arbitrary branch pushes —
+  Renovate's rebase force-pushes used to trigger these for unrelated diffs). Those add-ons'
+  PRs DO get automated checks; everything else still relies on manual verification.
 - Release workflows also only fire for personal-app; add-on-only changes must not be framed
   as releases.
 
 ## Versioning — by add-on type (do not guess)
+
+- All five `upstream-bump.yml` jobs share one `concurrency` group (`upstream-bump-push`) and
+  run `git pull --rebase` before `git push`, so a bump commit can never be discarded by a
+  concurrent job's push race.
 
 - **Image-pinned** (octo-fiesta): `build.json` pins the upstream image and
   `upstream-bump.yml` (nightly) owns both `build.json` and `config.yaml version:`.

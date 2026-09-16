@@ -1,21 +1,12 @@
 # =============================================================================
 # CI — Quality Checks
 # =============================================================================
-# Validates code quality on every push and PR.
-# Runs on feature branches, but skips main and dev (handled by release workflows).
+# Validates code quality on PRs touching addons/personal-app/**.
+# Pushes to main/dev are handled by the release workflows, not this one.
 # =============================================================================
 name: "👷 CI — Validate"
 on:
-  push:
-    branches:
-      - "**"
-      - "!main" # handled by main-release.yml
-      - "!dev" # handled by dev-release.yml
-    paths:
-      - "addons/personal-app/**"
-      - ".github/workflows/ci.yml"
-      - ".github/workflows/quality-and-tests.yml"
-      - ".github/actions/**"
+  # no push trigger: feature branches are validated via pull_request (this doubled every check)
   pull_request:
     types: [opened, edited, synchronize]
     branches:
