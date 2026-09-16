@@ -77,6 +77,10 @@ jobs:
           git push
 
   bump-hermes-webui:
+    # Serialized so each job's checkout and push see the previous job's commit;
+    # if: always() keeps one add-on's failure from skipping the remaining bumps.
+    needs: bump-octo-fiesta
+    if: always()
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -122,6 +126,8 @@ jobs:
           git push
 
   bump-beets:
+    needs: bump-hermes-webui
+    if: always()
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -180,6 +186,8 @@ jobs:
           git push
 
   bump-mediaflow-proxy-light:
+    needs: bump-beets
+    if: always()
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -242,6 +250,8 @@ jobs:
           git push
 
   bump-aiostreams:
+    needs: bump-mediaflow-proxy-light
+    if: always()
     runs-on: ubuntu-latest
     permissions:
       contents: write

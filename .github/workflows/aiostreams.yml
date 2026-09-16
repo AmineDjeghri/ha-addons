@@ -1,14 +1,13 @@
 name: "👷 AIOStreams — Validate & Build"
 
 on:
-  push:
-    branches: ["**"]
+  push: # only main: PRs are validated via pull_request; branch pushes (renovate rebases) used to trigger this for unrelated diffs
+    branches: [main]
     paths:
       - "addons/aiostreams/**"
       - ".github/workflows/aiostreams.yml"
       - ".github/workflows/upstream-bump.yml"
   pull_request:
-    branches: ["**"]
     paths:
       - "addons/aiostreams/**"
       - ".github/workflows/aiostreams.yml"
