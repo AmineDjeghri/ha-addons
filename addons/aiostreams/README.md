@@ -55,6 +55,25 @@ add-on on the LAN (unexposed). Only AIOStreams is then reachable from the intern
 debrid API calls and stream fetches all leave from the same public IP — which is what debrid
 services expect.
 
+### MediaFlow: LAN playback vs. away-from-home
+
+The proxy **URL** is used by this add-on itself, but the **player** fetches the stream URL it
+was handed — so a LAN address plays on the home Wi-Fi and fails over cellular, where
+`192.168.x.x` is unroutable.
+
+- **URL** — an address this add-on can reach: the HA host's LAN address, e.g.
+  `http://<ha-host-ip>:8888`.
+- **Public IP** — the proxy's public IP (the MediaFlow add-on logs `Detected public IP: …` at
+  startup). Required whenever **URL** is a private address: without it AIOStreams skips the
+  lookup, gets nothing back, and the request dies with
+  `Failed to get Proxy public IP after 3 attempts`.
+- **Public URL** — an address players can reach (a tunnel hostname for the MediaFlow add-on).
+  Required for playback away from home; leave empty while every client is on the LAN.
+- **Credentials** — the MediaFlow add-on's `api_password`; every `/proxy/*` endpoint answers
+  `401` without it.
+- If the proxy must stay unexposed, use the **built-in proxy** instead: its stream URLs point at
+  this add-on's own public URL, so away-from-home playback works without publishing MediaFlow.
+
 ## Updates
 
 This addon tracks the upstream **`nightly`** channel:
