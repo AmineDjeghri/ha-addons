@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-79d64bb — 2026-09-19
+
+- [fix(filters): stop forcing the digital-release info stream for single stale results (#1328)](https://github.com/Viren070/AIOStreams/commit/0c9f895c3844abe8fc4acca3aceb7eced97c8fd2)
+- [feat(release-blocklist): add a master enable/disable toggle (#1330)](https://github.com/Viren070/AIOStreams/commit/3d7c536157829ba949658679c2e22fcc29f6b6ec)
+- [feat(jellyfin): list playing sessions in /Sessions](https://github.com/Viren070/AIOStreams/commit/eb3a18284909ad552bc81fbb0e03d62371e614b7)
+- [fix(jellyfin): take the playback runtime from the played source](https://github.com/Viren070/AIOStreams/commit/6a7ed9cc2091ac35085088039e04b5a8a309aa62)
+- [feat(jellyfin): choose trackers per user](https://github.com/Viren070/AIOStreams/commit/b960e8d0eb1b1edfa6fd00504fb3ea5d995e9c3d)
+- [fix(languages): resolve Bokmål and Nynorsk codes to Norwegian](https://github.com/Viren070/AIOStreams/commit/c8c81f987e925b48df05e7760a8316260e261d7d)
+- [feat(linked-accounts): make the per-user link limit configurable](https://github.com/Viren070/AIOStreams/commit/cf80bb0c156aacd63509cadfa056765a7260cdf6)
+- [feat(presets/bitmagnet): expose search mode option](https://github.com/Viren070/AIOStreams/commit/b1c145a5ce2e02e1601c54dafbec78fc980bee78)
+- [fix(usenet): verify file contents at import](https://github.com/Viren070/AIOStreams/commit/e4d14281ee61d6e7dae754bf5bab9f15694700a6)
+- [fix(debrid/torbox): align timeoutMs with stremthru (#1281)](https://github.com/Viren070/AIOStreams/commit/0ddf328bb63d21805832cc2f4deec3b347838925)
+- [perf(builtins): skip .torrent download for pre-validated bad matches (#1259)](https://github.com/Viren070/AIOStreams/commit/479f809dbfdea79e28d8576c7d75e622ff3b879e)
+- [fix(seanime-extensions/plugin): use ctx.fetch to prevent VM panics](https://github.com/Viren070/AIOStreams/commit/208e84067a54bb9204f247d6468d7653b75016c0)
+- [fix(seanime-extensions/plugin): show results when not logged in to AniList](https://github.com/Viren070/AIOStreams/commit/743aa813fabf8b6c1e873d0e1be68996717519dc)
+- [fix(seanime-extensions/plugin): load on Android and iOS servers](https://github.com/Viren070/AIOStreams/commit/99a5f479395238ddf52a8f99ed571660de944fee)
+- [chore(seanime-extensions): release 0.10.2 (#1331)](https://github.com/Viren070/AIOStreams/commit/4fe9e2a8eb13092183a6cf9139ddc679b6a272e2)
+- [fix(core/sync): make the vouched URL list the refresh set](https://github.com/Viren070/AIOStreams/commit/a6554f22eaace70e32dd304d4c3241e418642337)
+- [feat(variants): add an insert instruction for list positions](https://github.com/Viren070/AIOStreams/commit/022b0e1488799a3758c2b10b6b630837b257cd21)
+- [feat(variants): let [*] walk an object's values](https://github.com/Viren070/AIOStreams/commit/5afa43cd58fadca8cdfb0397ee01ab25dee7b43e)
+- [fix(presets/gdrive): fix logo](https://github.com/Viren070/AIOStreams/commit/376d7163abcbeb24719a5a1a9188ae1d74f59a3c)
+- [feat(presets): add penguplay preset](https://github.com/Viren070/AIOStreams/commit/ff01f94a0730443848938f967409700833e2ec2d)
+
+[Compare 2001105...79d64bb](https://github.com/Viren070/AIOStreams/compare/2001105...79d64bb)
+
+---
+
 ## nightly-2001105 — 2026-09-17
 
 - [chore(build): scope the root and server tsconfig to their sources](https://github.com/Viren070/AIOStreams/commit/5d0b5d66dd2c6507845d2bc526ae433081bfeb71)
