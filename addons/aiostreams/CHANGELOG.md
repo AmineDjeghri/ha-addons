@@ -2,6 +2,23 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-ce27dc1 — 2026-09-20
+
+- [fix(anime-database): preserve IMDb identity for episode mappings (#1301)](https://github.com/Viren070/AIOStreams/commit/e2224d9aa1bcf22bb9e839e1b096017db2a6d656)
+- [feat(frontend): show max versions in primer](https://github.com/Viren070/AIOStreams/commit/a470d94163341e19d0ca39291bafa31db173c918)
+- [feat(jellyfin/segments): support movie end credits from IntroDB](https://github.com/Viren070/AIOStreams/commit/5ef9d5160017aa4ccbf8d84aa774616593d3667c)
+- [feat(jellyfin/segments): resolve IMDb ids for TMDB-keyed movies](https://github.com/Viren070/AIOStreams/commit/b107a108d78dc4f813d942541559f35b86fee312)
+- [fix(templates): detect placeholders in any field and type inputs by field](https://github.com/Viren070/AIOStreams/commit/f62d7eebda245dcff2dd9d4a91ab9181cdca8239)
+- [fix(anime): scope imdb hints and fix episode mapping](https://github.com/Viren070/AIOStreams/commit/cdaee68dbf5f6bb3bc384dfceff1134d6747411f)
+- [feat(jellyfin): add api keys](https://github.com/Viren070/AIOStreams/commit/5a95a5fbfd4669f3d220b6d4c9a12f87363b26df)
+- [feat(jellyfin): enrich external subtitle tracks](https://github.com/Viren070/AIOStreams/commit/0f5ad0d580933b511aca73f8ad30a5c20681ac76)
+- [fix: loosen trailer type schema](https://github.com/Viren070/AIOStreams/commit/443649612d91e58efcfb2d96acd602f9725e6664)
+- [fix(jellyfin): don't paginate on search](https://github.com/Viren070/AIOStreams/commit/ce27dc1745f59654148f2f197685b812d761ed78)
+
+[Compare 79d64bb...ce27dc1](https://github.com/Viren070/AIOStreams/compare/79d64bb...ce27dc1)
+
+---
+
 ## nightly-79d64bb — 2026-09-19
 
 - [fix(filters): stop forcing the digital-release info stream for single stale results (#1328)](https://github.com/Viren070/AIOStreams/commit/0c9f895c3844abe8fc4acca3aceb7eced97c8fd2)
