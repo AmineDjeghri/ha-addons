@@ -2,6 +2,17 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-3f2d5c4 — 2026-09-21
+
+- [feat: upgrade remaining album tracks during a quality upgrade](https://github.com/V1ck3s/octo-fiesta/commit/8c7b10285fe572c91bcd2b28655a26291266f1d1)
+- [fix(subsonic): forward upstream response headers on relayed requests](https://github.com/V1ck3s/octo-fiesta/commit/edb647d37bcb289a5028da69a6462c494e64917e)
+- [feat(tidal): log in as the public web client with PKCE](https://github.com/V1ck3s/octo-fiesta/commit/8dea9c6e65be9b62ddf4fbe679703f102dce0928)
+- [fix(tidal): warn on lossy fallback and rank the upgrade target](https://github.com/V1ck3s/octo-fiesta/commit/3f2d5c4ae458826ebe54c7d8fa8329c021f06f7a)
+
+[Compare afa6259...3f2d5c4](https://github.com/V1ck3s/octo-fiesta/compare/afa6259...3f2d5c4)
+
+---
+
 ## dev-afa6259 — 2026-09-16
 
 - [feat: add artist letter to path template](https://github.com/V1ck3s/octo-fiesta/commit/afa6259a1bbf2d34202b054e3da4f0797eca937d)
