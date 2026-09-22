@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-66f4330 — 2026-09-22
+
+- [feat(formatter): add user lists and field references](https://github.com/Viren070/AIOStreams/commit/b9bc591752803abc46a7c257e0903e7ac2bd16de)
+- [feat(formatter): raise template limit and budget the cache](https://github.com/Viren070/AIOStreams/commit/3c3363b67bc66d7c4ef69f3863a2445e17885b42)
+- [docs(env): regenerate webstreamr default url](https://github.com/Viren070/AIOStreams/commit/5742e1cf6a04c1aa7d47402847c5af8de25945fe)
+- [fix(variants): bound the instructions one request can run](https://github.com/Viren070/AIOStreams/commit/9f477fa91a2331cb81e890c07071d6901392953e)
+- [feat(jellyfin): show addon notices, errors and statistics as versions](https://github.com/Viren070/AIOStreams/commit/c998327e8889290f2a9fd9e8957f49d3909b0ede)
+- [docs(guides/seanime): add tenji note and Default episode source step for plugin](https://github.com/Viren070/AIOStreams/commit/69f4054ac63e3d7b5740d3550d4192ff0893434a)
+- [feat(schemas): add native epg fields](https://github.com/Viren070/AIOStreams/commit/e6daf4a8c99360bb0249b86cf9d484b973c3e827)
+- [feat(jellyfin): play entries that have nothing to open](https://github.com/Viren070/AIOStreams/commit/4aba386bcc775e8c28a6e6ebaa1800d13bc9e10a)
+- [fix(parser): detect hls urls with a query string](https://github.com/Viren070/AIOStreams/commit/b74283ff549ce39af73cf4a2be3d960f28f93309)
+- [feat(jellyfin): mark channel sources live](https://github.com/Viren070/AIOStreams/commit/58a7929774fa1273095ff442b3b604a16609fbf0)
+- [fix(jellyfin): keep live playback out of watch state](https://github.com/Viren070/AIOStreams/commit/1d429667ed27e02c8889af3be9d30885d9567494)
+- [feat(core): tell whether a meta can be fetched](https://github.com/Viren070/AIOStreams/commit/057b3b1eb1e7dfc75fa9fc7fb316bfa1633c0de6)
+- [feat(jellyfin): decide playable entries before a sweep lands](https://github.com/Viren070/AIOStreams/commit/1ad2f1f0f158e2a109721bc47d08f03a245e6a4f)
+- [perf(db): raise the config key cache ttl to 24h](https://github.com/Viren070/AIOStreams/commit/743da3d06a8976747d1c48e4ddbeaedee29152f2)
+- [perf(parser): cache title lists by identity and prune title matches](https://github.com/Viren070/AIOStreams/commit/3f88925ccbdf6d41a794fa23e43ff790dad26904)
+- [perf(config): skip save-time variant validation on read paths](https://github.com/Viren070/AIOStreams/commit/fc55a2c79fecaf061aae4d3cc98ed72f13e5ed7b)
+- [perf(builtins/library): time-slice the library scan](https://github.com/Viren070/AIOStreams/commit/9713fd0825e8fc6652bffcd956ad0f6ae8c5bd32)
+- [fix(streams): stop suppressing statistics across an await](https://github.com/Viren070/AIOStreams/commit/3e2eac03d220c89d5804f972b00173fc9725c523)
+- [perf(streams): time-slice the filterer passes](https://github.com/Viren070/AIOStreams/commit/797eae0299143af480a412385aafdda859ee792e)
+- [perf(parser): cache the title regex and pattern entries](https://github.com/Viren070/AIOStreams/commit/1c281843068dc2b20274ec4070869c926879bf41)
+
+[Compare ce27dc1...66f4330](https://github.com/Viren070/AIOStreams/compare/ce27dc1...66f4330)
+
+---
+
 ## nightly-ce27dc1 — 2026-09-20
 
 - [fix(anime-database): preserve IMDb identity for episode mappings (#1301)](https://github.com/Viren070/AIOStreams/commit/e2224d9aa1bcf22bb9e839e1b096017db2a6d656)
