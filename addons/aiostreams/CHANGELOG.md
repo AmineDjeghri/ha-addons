@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-37be686 — 2026-09-23
+
+- [feat(formatter): add ::unique list modifier](https://github.com/Viren070/AIOStreams/commit/051a342a00b44d056aac72a755b6ef4bab42f5a7)
+- [feat(formatter): apply ::replace to lists](https://github.com/Viren070/AIOStreams/commit/57dbc556424c21a7146cbee525924a69366293d0)
+- [fix(core): revive DOMException from the lock cache](https://github.com/Viren070/AIOStreams/commit/105d9de813f528df841529851dbbbec8d72f45e9)
+- [fix(jellyfin): play and sign in from the Android app](https://github.com/Viren070/AIOStreams/commit/e1aff12779a79c6f2c466eb0cf4a01ca2e14dc79)
+- [fix(jellyfin): anchor next up on the last episode watched](https://github.com/Viren070/AIOStreams/commit/12a1735464eb8ec88289f0c312ed117793974a3c)
+- [fix(jellyfin): keep episode ratings their own](https://github.com/Viren070/AIOStreams/commit/f11ab35fa218f878e9709d4fddfa994e4cf64167)
+- [fix(jellyfin): read seasonPosters keyed by season](https://github.com/Viren070/AIOStreams/commit/99b62d5a8b5fb7ad3c660aba0df26b4e2db915fa)
+- [feat(jellyfin): person details and filmography from TMDB](https://github.com/Viren070/AIOStreams/commit/85af525c57012d42142d964c64046a4f9fcb98e1)
+- [feat(jellyfin): recommend similar titles from TMDB](https://github.com/Viren070/AIOStreams/commit/798cdbe630542d251529128b1347f30fd146282c)
+- [feat(core): list and clear watch history](https://github.com/Viren070/AIOStreams/commit/d16ec82ba9b83fb32ba7e9944b5856719e0ad733)
+- [feat(jellyfin): PINs for users](https://github.com/Viren070/AIOStreams/commit/90f1a24c87754c6e7a5765189d26a90a60370cf9)
+- [fix(frontend): stop clipboard copies hanging in embedded browsers](https://github.com/Viren070/AIOStreams/commit/df0a3fe5e7c923a0169e742b0cf1def76ad7c50e)
+- [feat(jellyfin): add a web app at /web](https://github.com/Viren070/AIOStreams/commit/5c116c49ffc3e697fa596f89c0d2cffd14e68f90)
+- [docs(jellyfin): document PINs](https://github.com/Viren070/AIOStreams/commit/ff5bc4b2b18b27296bb0a2065caa27d9a2e2ee7e)
+- [fix(frontend): keep loaded configs' values when status arrives late](https://github.com/Viren070/AIOStreams/commit/9fd6c671ad150df8c09275e9e9de9dfb7418915f)
+- [docs(changelog): update post for v2.35](https://github.com/Viren070/AIOStreams/commit/3a956130b9a1d4e3c9e47d70aa08b209ade26176)
+- [fix(metadata): update default user agent for skyhook](https://github.com/Viren070/AIOStreams/commit/a82a8c0c48ca3e90b84bd307d522f2a5eaeb178b)
+- [fix(anime): match releases numbered in tvdb's season](https://github.com/Viren070/AIOStreams/commit/5d319f5b588124b28c969e5c2058c34f9092951f)
+- [fix(remuxdb): update lookup endpoint to match RemuxDB's current API (#1353)](https://github.com/Viren070/AIOStreams/commit/a8a124e174ebeb44167b1d01de3ffb2c4d3355bb)
+- [fix(watch-state): pick one row per series before limiting recent series](https://github.com/Viren070/AIOStreams/commit/b17c8293cb12c084edfa70c4c5a144e417fd69be)
+
+[Compare 66f4330...37be686](https://github.com/Viren070/AIOStreams/compare/66f4330...37be686)
+
+---
+
 ## nightly-66f4330 — 2026-09-22
 
 - [feat(formatter): add user lists and field references](https://github.com/Viren070/AIOStreams/commit/b9bc591752803abc46a7c257e0903e7ac2bd16de)
