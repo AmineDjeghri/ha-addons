@@ -110,10 +110,37 @@ concurrent-stream limit. Watch real throughput on `GET /metrics`.
 
 ## Exposure & blocked URLs
 
-**LAN-only — do not publish.** This add-on is intentionally not in the Cloudflared tunnel;
-AIOStreams reaches it over the LAN (see [Keeping it on the LAN](#keeping-it-on-the-lan-recommended)).
+**Preferred: LAN-only.** AIOStreams reaches it over the LAN (see
+[Keeping it on the LAN](#keeping-it-on-the-lan-recommended)) and clients play through it. If you
+do publish it — e.g. to use MediaFlow as the proxy and play away from home — point a tunnel
+hostname at it and apply these edge rules.
 
-If it is ever published anyway, this is the order that matters:
+**Publish recipe (Cloudflare).** Paste the expressions below, replacing `<proxy-hostname>` with
+the hostname you assigned this add-on in the Cloudflared add-on's `additional_hosts` — they match
+that literal string, so a leftover placeholder silently matches nothing:
+
+- **WAF custom rule** (Security → WAF → Custom rules), action **Block** — allow only the paths a
+  player needs, which closes `/playlist/builder`, `/`, `/health`, `/metrics`, `/generate_url*`,
+  `/extractor/*`, `/base64/*`, `/proxy/forward`, `/proxy/epg` and friends:
+
+  ```
+  (http.host eq "<proxy-hostname>" and not starts_with(http.request.uri.path, "/proxy/stream") and not starts_with(http.request.uri.path, "/proxy/hls/") and not starts_with(http.request.uri.path, "/proxy/mpd/"))
+  ```
+
+- **Cache rule** (Caching → Cache Rules), action **Bypass cache** for the same hostname —
+  Cloudflare's default cache list includes media extensions, so a full-file request could
+  otherwise be stored at the edge.
+- **No Cloudflare Access / Managed Challenge / Bot Fight Mode** on this hostname: players are
+  header-less and cannot answer a challenge. The `api_password` is the gate.
+- Optional rate-limiting rule, generously set: Cloudflare free plans include exactly **one**, and
+  this is where it earns its place — **600 requests / 1 minute per client IP**, action **Block**.
+  HLS playback is many segment requests, but the counter is per IP, so each viewer gets their own
+  bucket (raise it if you see playback hiccups on a shared household IP).
+
+Verify from outside the LAN: `/health` and `/` must return Cloudflare's "Sorry, you have been
+blocked" page, while `/proxy/stream` must still reach the add-on and answer its own `401`.
+
+Without those rules, this is the order that matters:
 
 | Path | State without a password | Why it must be blocked first |
 |---|---|---|
@@ -123,4 +150,4 @@ If it is ever published anyway, this is the order that matters:
 | `/`, `/health` | `200` by design | Enumerable, unprotected |
 
 The `api_password` covers `/proxy/*`, not the UI/builder paths — the whole hostname is the
-perimeter. `/generate_url` is not served by this build (`404`).
+perimeter. `/generate_url` is POST-only (a `GET` returns `404`).

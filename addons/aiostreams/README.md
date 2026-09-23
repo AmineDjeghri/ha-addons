@@ -101,13 +101,26 @@ header-less and cannot answer a Cloudflare Access challenge, so the app's own lo
 gate. **Keep `auth` set and `auth_required: true`** — an empty `auth` leaves the whole
 dashboard (and your debrid credentials) open.
 
-Block at the Cloudflare edge — a WAF custom rule scoped to this add-on's tunnel hostname:
+Block them with one WAF custom rule (Security → WAF → Custom rules), action **Block**, scoped to
+this add-on's tunnel hostname — paste the expression below but **replace `<addon-hostname>` with
+the hostname you assigned this add-on in the Cloudflared add-on's `additional_hosts`**. The rule
+matches that literal string, so a leftover placeholder silently matches nothing and blocks nothing:
 
-| Path | Why |
-|---|---|
-| `/api/v1/status` | ~293 KB unauthenticated dump of server settings/flags. Only the HA watchdog needs it, and that reads it over the LAN. |
-| `/builtins/*` | Internal engine routes. Already `403` without the internal key — block anyway. |
-| `/metrics` | Not served (`404`) today; block pre-emptively if a future build adds it. |
+```
+(http.host eq "<addon-hostname>" and (http.request.uri.path eq "/api/v1/status" or starts_with(http.request.uri.path, "/builtins/") or http.request.uri.path eq "/metrics"))
+```
+
+Never put Cloudflare Access or a Managed/JS Challenge on this hostname — clients are header-less.
+Add a **Bypass cache** Cache Rule for it too (Caching → Cache Rules). Rate limiting is optional
+here: this add-on already rate-limits logins and Stremio catalog requests itself, and free plans
+include only one such rule, which the proxy hostname needs more.
+
+Why those three: `/api/v1/status` is a ~293 KB unauthenticated dump of server settings and flags
+(the HA watchdog reads it over the LAN, which never passes through Cloudflare), `/builtins/*` are
+internal engine routes already `403` without the internal key, and `/metrics` isn't served today.
+
+Verify from outside the LAN: the blocked paths must return Cloudflare's "Sorry, you have been
+blocked" page — if they still return app content, the rule's hostname doesn't match the real one.
 
 Everything else stays reachable: `/api/v1/*` is account-gated, and
 `/stremio/<uuid>/<encryptedPassword>/…` embeds the credential **in the URL** — treat an
