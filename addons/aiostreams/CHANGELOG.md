@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-1442fc5 — 2026-09-24
+
+- [fix(usenet): look up by-id hashes outside the tree projection](https://github.com/Viren070/AIOStreams/commit/2235d536dd6edb8d53c5b883bbb8f7ce2b5002e8)
+- [fix(frontend): size the version picker art by width](https://github.com/Viren070/AIOStreams/commit/04166b8abce48124d7d5b6b9245b0a65909d34af)
+- [fix(frontend): render the season pill check as a right icon](https://github.com/Viren070/AIOStreams/commit/55ae08e9dd28c0ba8152a520242c70ea789adccf)
+- [feat(jellyfin): pass external notice links to clients](https://github.com/Viren070/AIOStreams/commit/f3fc09c2ff56bd90e967a938bb8c8febe451e893)
+- [feat(frontend): show notice titles, kinds and links in the version picker](https://github.com/Viren070/AIOStreams/commit/98772f647a63368b800e11d80eed8d249076a72d)
+- [fix(jellyfin): fall back to the cast photo on person items](https://github.com/Viren070/AIOStreams/commit/ed9000218137dd9462dacf39b0d89881690d9792)
+- [feat(jellyfin): require the password on picker addresses and aliases](https://github.com/Viren070/AIOStreams/commit/8c990f0ae0f55203956208d6f2c50f8019d06088)
+- [fix(api): refuse encrypted passwords on the jellyfin routes](https://github.com/Viren070/AIOStreams/commit/f1b78df3246cd1c64e9f7ac5c783e0214f568cdc)
+- [refactor(jellyfin): remove the variant path mounts](https://github.com/Viren070/AIOStreams/commit/c0e45ed0102f7f9db00278350bd4afa2e35f3422)
+- [feat(frontend): sign in with the password on jellyfin picker addresses](https://github.com/Viren070/AIOStreams/commit/95e656d339b99013e585eb870769b09ebe7672eb)
+- [refactor(jellyfin): remove the web landing page](https://github.com/Viren070/AIOStreams/commit/e99461e225f92584d689c4de5ed0e02ec477a0da)
+- [feat(docs): add a gallery component](https://github.com/Viren070/AIOStreams/commit/917f7527026c02346ff987308493160beeac18cf)
+- [docs(changelog): add web app screenshots to v2.35](https://github.com/Viren070/AIOStreams/commit/f42ebe3ea50e978388f377283c4fbf78896b794f)
+- [docs(jellyfin): document the web app and password-only sign-in](https://github.com/Viren070/AIOStreams/commit/ea0b6c367e3bf8326d2223599b74a2b076c3c847)
+- [fix(frontend): anchor popped sign-in views to the screen](https://github.com/Viren070/AIOStreams/commit/22575a170f5b62425de2e8ca26c1e555b6597ff0)
+- [feat: remember config sign-ins by default](https://github.com/Viren070/AIOStreams/commit/1e405f4f8170c2e04b7a1c13c286136e85c15803)
+- [feat(jellyfin): serve the web app with its own PWA manifest](https://github.com/Viren070/AIOStreams/commit/b508b2eb411a8558d7545bea5bae31f02b141d65)
+- [feat(jellyfin): draw the web app edge to edge](https://github.com/Viren070/AIOStreams/commit/7a1853b4eed1955a13db5498042353ce469c35e5)
+- [fix(frontend): blur the focused field on bottom nav taps](https://github.com/Viren070/AIOStreams/commit/28b0242624a92192cb604c5a2323aee883c2f6c3)
+- [fix(frontend): mark the web app search box as a search input](https://github.com/Viren070/AIOStreams/commit/510a2b094c5c7daefcc8990824a26bbacecc1013)
+
+[Compare 37be686...1442fc5](https://github.com/Viren070/AIOStreams/compare/37be686...1442fc5)
+
+---
+
 ## nightly-37be686 — 2026-09-23
 
 - [feat(formatter): add ::unique list modifier](https://github.com/Viren070/AIOStreams/commit/051a342a00b44d056aac72a755b6ef4bab42f5a7)
