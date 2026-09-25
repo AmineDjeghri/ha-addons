@@ -2,6 +2,18 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-ff64174 — 2026-09-25
+
+- [feat(jellyfin): send undropped when a play picks a dropped show back up](https://github.com/Viren070/AIOStreams/commit/8ecd5773919a25937a6e57585574371b92ca2328)
+- [feat(jellyfin): sign in with a PIN alone on the picker address](https://github.com/Viren070/AIOStreams/commit/53df9160eb7ce60cfce33e081107b87cfbd520cc)
+- [docs(changelog): update post for v2.35](https://github.com/Viren070/AIOStreams/commit/a14cb02e9ee6f7a5e293f74510eef8475f84d484)
+- [chore(presets/newznab): add more known newznab indexer presets (#1358)](https://github.com/Viren070/AIOStreams/commit/32a92bfa91ae79fe671c9232688afd98417e58c6)
+- [fix(remuxdb): log lookup failures loudly instead of silently at debug (#1356)](https://github.com/Viren070/AIOStreams/commit/ff641743970304c4aacfb4b444fdbf9f0cd54c64)
+
+[Compare 1442fc5...ff64174](https://github.com/Viren070/AIOStreams/compare/1442fc5...ff64174)
+
+---
+
 ## nightly-1442fc5 — 2026-09-24
 
 - [fix(usenet): look up by-id hashes outside the tree projection](https://github.com/Viren070/AIOStreams/commit/2235d536dd6edb8d53c5b883bbb8f7ce2b5002e8)
