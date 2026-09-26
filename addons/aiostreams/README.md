@@ -55,6 +55,25 @@ add-on on the LAN (unexposed). Only AIOStreams is then reachable from the intern
 debrid API calls and stream fetches all leave from the same public IP — which is what debrid
 services expect.
 
+### MediaFlow: LAN playback vs. away-from-home
+
+The proxy **URL** is used by this add-on itself, but the **player** fetches the stream URL it
+was handed — so a LAN address plays on the home Wi-Fi and fails over cellular, where
+`192.168.x.x` is unroutable.
+
+- **URL** — an address this add-on can reach: the HA host's LAN address, e.g.
+  `http://<ha-host-ip>:8888`.
+- **Public IP** — the proxy's public IP (the MediaFlow add-on logs `Detected public IP: …` at
+  startup). Required whenever **URL** is a private address: without it AIOStreams skips the
+  lookup, gets nothing back, and the request dies with
+  `Failed to get Proxy public IP after 3 attempts`.
+- **Public URL** — an address players can reach (a tunnel hostname for the MediaFlow add-on).
+  Required for playback away from home; leave empty while every client is on the LAN.
+- **Credentials** — the MediaFlow add-on's `api_password`; every `/proxy/*` endpoint answers
+  `401` without it.
+- If the proxy must stay unexposed, use the **built-in proxy** instead: its stream URLs point at
+  this add-on's own public URL, so away-from-home playback works without publishing MediaFlow.
+
 ## Updates
 
 This addon tracks the upstream **`nightly`** channel:
@@ -82,13 +101,26 @@ header-less and cannot answer a Cloudflare Access challenge, so the app's own lo
 gate. **Keep `auth` set and `auth_required: true`** — an empty `auth` leaves the whole
 dashboard (and your debrid credentials) open.
 
-Block at the Cloudflare edge — a WAF custom rule scoped to this add-on's tunnel hostname:
+Block them with one WAF custom rule (Security → WAF → Custom rules), action **Block**, scoped to
+this add-on's tunnel hostname — paste the expression below but **replace `<addon-hostname>` with
+the hostname you assigned this add-on in the Cloudflared add-on's `additional_hosts`**. The rule
+matches that literal string, so a leftover placeholder silently matches nothing and blocks nothing:
 
-| Path | Why |
-|---|---|
-| `/api/v1/status` | ~293 KB unauthenticated dump of server settings/flags. Only the HA watchdog needs it, and that reads it over the LAN. |
-| `/builtins/*` | Internal engine routes. Already `403` without the internal key — block anyway. |
-| `/metrics` | Not served (`404`) today; block pre-emptively if a future build adds it. |
+```
+(http.host eq "<addon-hostname>" and (http.request.uri.path eq "/api/v1/status" or starts_with(http.request.uri.path, "/builtins/") or http.request.uri.path eq "/metrics"))
+```
+
+Never put Cloudflare Access or a Managed/JS Challenge on this hostname — clients are header-less.
+Add a **Bypass cache** Cache Rule for it too (Caching → Cache Rules). Rate limiting is optional
+here: this add-on already rate-limits logins and Stremio catalog requests itself, and free plans
+include only one such rule, which the proxy hostname needs more.
+
+Why those three: `/api/v1/status` is a ~293 KB unauthenticated dump of server settings and flags
+(the HA watchdog reads it over the LAN, which never passes through Cloudflare), `/builtins/*` are
+internal engine routes already `403` without the internal key, and `/metrics` isn't served today.
+
+Verify from outside the LAN: the blocked paths must return Cloudflare's "Sorry, you have been
+blocked" page — if they still return app content, the rule's hostname doesn't match the real one.
 
 Everything else stays reachable: `/api/v1/*` is account-gated, and
 `/stremio/<uuid>/<encryptedPassword>/…` embeds the credential **in the URL** — treat an
