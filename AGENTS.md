@@ -89,8 +89,10 @@ A **multi-add-on** Home Assistant repository. Each add-on is fully self-containe
 ## File conventions
 
 - `.gitattributes` ships `* text=auto` + `eol=lf` for shell/workflows — write new files as LF.
-  Some legacy blobs are CRLF: prefer line-range edits (`patch`) over rewrites on those, or the
-  whole file diffs.
+  Every tracked blob is LF as of the renormalize pass, so whole-file rewrites are safe; if a
+  CRLF blob is ever reintroduced it shows a permanent phantom `M` that `git checkout`/`restore`
+  can never clear (the worktree already matches the blob) — the fix is `git add --renormalize`,
+  not a checkout. `git diff --ignore-cr-at-eol` coming back empty proves it is pure EOL noise.
 - detect-secrets flags option **keywords** in `config.yaml` schemas (e.g. `*_password: str?`)
   even with empty defaults — inline `# pragma: allowlist secret` on the flagged schema line.
 
