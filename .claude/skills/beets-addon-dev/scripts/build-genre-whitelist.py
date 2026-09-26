@@ -1,7 +1,7 @@
 """Build the beets genre-whitelist supplement (genres-extra.txt).
 
-Merged at addon startup with beets' bundled genres.txt (see home-assistant-addon-dev
-skill, references/beets-genre-whitelist.md). Re-run whenever:
+Merged at add-on startup with beets' bundled genres.txt (see references/genre-tagging.md
+in this skill). Re-run whenever:
 - the Spotify/EveryNoise catalog changes, or
 - the user's library gains new raw last.fm tags worth admitting.
 
@@ -9,7 +9,7 @@ Usage:
     python3 build-genre-whitelist.py [-t TAGS_FILE] [-o OUTPUT]
 
   TAGS_FILE : file with the library's unique raw last.fm tags, one per line,
-              lowercase (extract via docker exec + awk, see the reference doc).
+              lowercase (mine them from the add-on's own import log).
               Optional — without it, only Spotify + regional tiers are built.
   OUTPUT    : default genres-extra.txt in the current directory.
 

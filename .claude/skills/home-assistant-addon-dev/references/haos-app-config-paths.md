@@ -16,9 +16,10 @@
 ## Rules
 
 - In anything a *container* reads (agent config, app options), use the container-native path
-  (`/config/...`), never the host form. Intent is spelled out in the user's own add-on: its run.sh
-  symlinks `/config` to the agent app's directory precisely so `/config`-based paths resolve
-  identically in both containers.
+  (`/config/...`), never the host form. `addons/hermes-webui` is the worked example in this repo:
+  its `run.sh` symlinks `/config` to its sibling add-on's config directory at boot precisely so
+  `/config`-based paths resolve identically in both containers (see the `hermes-webui-addon-dev`
+  skill).
 - Discovery code must probe BOTH names, oldest last, and log which one matched:
   `for root in /app_configs /addon_configs; do [ -d "$root" ] || continue; … ; if [ -n "$found" ]; then break; fi; done`
   A silent fallback to a fresh empty directory is the worst outcome — it looks like data loss.
