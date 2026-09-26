@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-00fb93a — 2026-09-26
+
+- [fix(core): make trailer source and type optional](https://github.com/Viren070/AIOStreams/commit/19d7c1294fc2fec70755a4e5864485eb67793ab5)
+- [refactor(ui): move the component kit into packages/ui](https://github.com/Viren070/AIOStreams/commit/74d1f313f0c0f0b4c033f1b9aed76b7a28a3080c)
+- [refactor(jellyfin-web): move the web app into its own package](https://github.com/Viren070/AIOStreams/commit/e95334705b8c98b9772ddca7a131df49a3ea1600)
+- [fix(jellyfin-web): define NEXT_PUBLIC_PLATFORM for the ui kit](https://github.com/Viren070/AIOStreams/commit/95a39f079391d804ab71654d6f9365513ff6834e)
+- [fix(jellyfin-web): drop the scroll lock's scrollbar margin](https://github.com/Viren070/AIOStreams/commit/f6465ae79500df1a22dee16057dccf1d0d07b4bb)
+- [feat(jellyfin-web): add the desktop app as a playback host](https://github.com/Viren070/AIOStreams/commit/5561530cf612657967daef7d1c5a2fe094ebb696)
+- [feat(desktop): add a Windows shell with mpv under WebView2](https://github.com/Viren070/AIOStreams/commit/d084d8984416a4c16b270b1b4e5799382006c637)
+- [feat(desktop): add the app icon](https://github.com/Viren070/AIOStreams/commit/5794e4429d55686928e0e2ab167be267b4dc61aa)
+- [feat(jellyfin-web): add a standalone build that picks its server](https://github.com/Viren070/AIOStreams/commit/c0ab405fab73f41417ec87494d0ad6c8b57b5711)
+- [feat(desktop): serve the standalone web app](https://github.com/Viren070/AIOStreams/commit/bde9066a2cf2a4ed8fa31956cdbc458eccd33a51)
+- [feat(jellyfin): store users' playback preferences](https://github.com/Viren070/AIOStreams/commit/24db694d7ae4cb6f25abaaef1a17dd45bf83d126)
+- [feat(ui): add a colour input](https://github.com/Viren070/AIOStreams/commit/4cffffe8d4f4f006627c82e3ee6591edc29d95d4)
+- [feat(jellyfin-web): add a settings page](https://github.com/Viren070/AIOStreams/commit/feb8517d45ba5c8de841e7c5a03d9297cd8c174a)
+- [feat(desktop): let the page set playback options and read versions](https://github.com/Viren070/AIOStreams/commit/991e738aa2f4e0c843fb1d42ef1fd619e85f7ee4)
+- [feat(jellyfin): send each version's binge group](https://github.com/Viren070/AIOStreams/commit/59d9a90bf1647999e088610bb17e9ad33bf23eba)
+- [feat(jellyfin-web): offer the next episode near the end](https://github.com/Viren070/AIOStreams/commit/75342eb5b749fff7ef44c5183368c51608e5c029)
+- [feat(jellyfin): give the web app each version's own id in PlaybackInfo](https://github.com/Viren070/AIOStreams/commit/42b67228e53a62f8746467de270394a4d659440a)
+- [feat(jellyfin-web): sync subtitles and switch versions in the player](https://github.com/Viren070/AIOStreams/commit/2c75b60a6d809e96fb012d275f8858ce4cde5c1a)
+- [feat(core): add a cached autoplay attribute](https://github.com/Viren070/AIOStreams/commit/ae02dcdf231d99581b5d0da3cb468345a653ea3c)
+- [refactor(jellyfin-web): pick the next version by binge group alone](https://github.com/Viren070/AIOStreams/commit/20864c117a197eacd85262a37b0043fa038a283b)
+
+[Compare ff64174...00fb93a](https://github.com/Viren070/AIOStreams/compare/ff64174...00fb93a)
+
+---
+
 ## nightly-ff64174 — 2026-09-25
 
 - [feat(jellyfin): send undropped when a play picks a dropped show back up](https://github.com/Viren070/AIOStreams/commit/8ecd5773919a25937a6e57585574371b92ca2328)
