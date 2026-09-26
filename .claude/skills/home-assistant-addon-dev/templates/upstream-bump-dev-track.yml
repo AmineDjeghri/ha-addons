@@ -1,0 +1,141 @@
+# upstream-bump.yml — retargeted to track upstream :dev tag (octo-fiesta)
+#
+# Validated 2026-08-18 (pyyaml parse OK, both jobs present) while preparing PR #15
+# for ha-addons. The `bump-octo-fiesta` job follows upstream dev-branch
+# HEAD SHA (`dev-<sha7>` version) and regenerates CHANGELOG.md per bump; the
+# `bump-hermes-webui` job is UNCHANGED from the original release-tag scheme.
+#
+# Copy into `.github/workflows/upstream-bump.yml` when retargeting an image-based
+# addon from release tags to a floating `:dev` tag. See
+# `references/upstream-version-tracking.md` for the full rationale (traps: nightly
+# revert, version stagnation), supervisor version-comparison facts, and GHCR probing.
+#
+
+name: Upstream Version Bump
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # Daily at 06:00 UTC
+  workflow_dispatch:      # Manual trigger too
+
+jobs:
+  bump-octo-fiesta:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Get latest upstream dev commit
+        id: upstream
+        run: |
+          SHA=$(curl -sL \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/V1ck3s/octo-fiesta/commits/dev \
+            | jq -r '.sha // empty')
+          SHA7="${SHA:0:7}"
+          echo "sha=$SHA" >> $GITHUB_OUTPUT
+          echo "sha7=$SHA7" >> $GITHUB_OUTPUT
+          echo "Latest upstream dev: $SHA7"
+
+      - name: Get current pinned version
+        id: current
+        run: |
+          CURRENT=$(grep -oP '^version: "\K[^"]+' addons/octo-fiesta/config.yaml | head -1)
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          echo "Current pinned: $CURRENT"
+
+      - name: Bump versions
+        if: steps.upstream.outputs.sha7 != '' && format('dev-{0}', steps.upstream.outputs.sha7) != steps.current.outputs.current
+        run: |
+          NEW="dev-${{ steps.upstream.outputs.sha7 }}"
+          OLD="${{ steps.current.outputs.current }}"
+          OLD_SHA7="${OLD#dev-}"
+          NEW_SHA7="${{ steps.upstream.outputs.sha7 }}"
+          echo "Bumping $OLD → $NEW"
+
+          # Update config.yaml version (build.json stays pinned to :dev)
+          sed -i "s|version: \"${OLD}\"|version: \"${NEW}\"|g" addons/octo-fiesta/config.yaml
+
+          # Generate changelog section from commits since last dev bump
+          COMMITS=$(curl -sL \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/V1ck3s/octo-fiesta/compare/${OLD_SHA7}...${{ steps.upstream.outputs.sha }}" \
+            | jq -r '.commits[] | "- [" + (.commit.message | split("\n")[0]) + "](" + .html_url + ")"' \
+            | head -20)
+
+          NEW_DATE=$(date +%F)
+          # Prepend section; keep header + new section + previous dev sections (max 9 old)
+          {
+            echo "# Changelog"
+            echo ""
+            echo "For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases)."
+            echo ""
+            echo "## ${NEW} — ${NEW_DATE}"
+            echo ""
+            echo "${COMMITS}"
+            echo ""
+            echo "[Compare ${OLD_SHA7}...${NEW_SHA7}](https://github.com/V1ck3s/octo-fiesta/compare/${OLD_SHA7}...${NEW_SHA7})"
+            echo ""
+            echo "---"
+            echo ""
+            # Previous dev sections (max 9): lines after the first '## ' heading
+            awk '/^## /{count++} count>=1 && count<=9{print}' addons/octo-fiesta/CHANGELOG.md
+          } > /tmp/changelog.tmp && mv /tmp/changelog.tmp addons/octo-fiesta/CHANGELOG.md
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Bump octo-fiesta ${OLD} → ${NEW}"
+          git push
+
+  bump-hermes-webui:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Get latest upstream release
+        id: upstream
+        run: |
+          # GitHub releases use v-prefixed tags; GHCR images are published without the v prefix
+          TAG=$(curl -sL \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/nesquena/hermes-webui/releases/latest \
+            | jq -r '.tag_name // empty')
+          LATEST="${TAG#v}"   # strip leading v for GHCR compatibility
+          echo "latest=$LATEST" >> $GITHUB_OUTPUT
+          echo "Latest upstream (no-v): $LATEST"
+
+      - name: Get current pinned version
+        id: current
+        run: |
+          CURRENT=$(grep -oP 'hermes-webui:\K[^"]+' addons/hermes-webui/build.json | head -1)
+          echo "current=$CURRENT" >> $GITHUB_OUTPUT
+          echo "Current pinned: $CURRENT"
+
+      - name: Bump versions
+        if: steps.upstream.outputs.latest != '' && steps.upstream.outputs.latest != steps.current.outputs.current
+        run: |
+          NEW=${{ steps.upstream.outputs.latest }}
+          OLD=${{ steps.current.outputs.current }}
+          echo "Bumping $OLD → $NEW"
+
+          # Update build.json (all architectures) — tags on GHCR have no v prefix
+          sed -i "s|hermes-webui:${OLD}|hermes-webui:${NEW}|g" addons/hermes-webui/build.json
+
+          # Update config.yaml version
+          sed -i "s|version: \"${OLD}\"|version: \"${NEW}\"|g" addons/hermes-webui/config.yaml
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Bump hermes-webui ${OLD} → ${NEW}"
+          git push
+
+# Run notes ()
+# Notes from the actual run (2026-08-18, PR #15):
+# - Initial `config.yaml version` in the PR = the CURRENT upstream dev SHA7 (`dev-ac35be3`), NOT a placeholder — so the first nightly run is a no-op and the first user-visible update is v0.10 → dev-ac35be3 with the pre-seeded 33-commit changelog.
+# - Pre-seed `CHANGELOG.md` with the `compare/v0.10...<dev-sha>` commit list so the first update already shows "what's new".
+# - The `format('dev-{0}', ...)` in the `if:` is GitHub Actions expression syntax — build the expected new version string there to compare against the current one.

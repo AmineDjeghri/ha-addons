@@ -94,6 +94,20 @@ A **multi-add-on** Home Assistant repository. Each add-on is fully self-containe
 
 ## Skills
 
-Repo-specific agent skills (if ever needed) live in `.claude/skills/<name>/` here.
+Repo-specific agent skills live in `.claude/skills/<name>/` (Claude Code reads them natively);
+other agents read the git symlinks in `.agents/skills/` (never edit through a symlink — edit the
+canonical file). Currently:
+
+- `home-assistant-addon-dev` — add-on development workflow: version-tracking models per add-on
+  type, CI reality, packaging/persistence conventions, per-add-on references (beets, aiostreams,
+  hermes-webui, octo-fiesta, mediaflow-proxy-light)
+- `hermes-addon-troubleshooting` — diagnosing the agent/webui add-on pair when it won't restart
+  or its tool calls fail
+
+These files are **public**: never write real host names, LAN IPs, add-on slugs, chat ids or the
+owner's name/email/numeric GitHub ID into them — use the placeholder style the content already
+uses (`<repo>_<slug>`, `<hash>_<addon>`, `<lan-ip>`, `user@example.com`) and re-scan before
+committing.
+
 General/shared skills come from the personal-os-setup chezmoi source (2-track governance in
 that repo's AGENTS.md) — never vendor a Track-2 plugin's skills into this repo.
