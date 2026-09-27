@@ -121,6 +121,8 @@ internal engine routes already `403` without the internal key, and `/metrics` is
 
 Verify from outside the LAN: the blocked paths must return Cloudflare's "Sorry, you have been
 blocked" page — if they still return app content, the rule's hostname doesn't match the real one.
+The tunnel is not a filter over the host's *own* addresses: see
+[Host exposure: the raw IPv6 path](../../README.md#host-exposure-the-raw-ipv6-path).
 
 Everything else stays reachable: `/api/v1/*` is account-gated, and
 `/stremio/<uuid>/<encryptedPassword>/…` embeds the credential **in the URL** — treat an

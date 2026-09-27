@@ -117,7 +117,9 @@ hostname at it and apply these edge rules.
 
 **Publish recipe (Cloudflare).** Paste the expressions below, replacing `<proxy-hostname>` with
 the hostname you assigned this add-on in the Cloudflared add-on's `additional_hosts` — they match
-that literal string, so a leftover placeholder silently matches nothing:
+that literal string, so a leftover placeholder silently matches nothing. Note the tunnel is not a
+filter over the host's *own* addresses: see
+[Host exposure: the raw IPv6 path](../../README.md#host-exposure-the-raw-ipv6-path).
 
 - **WAF custom rule** (Security → WAF → Custom rules), action **Block** — allow only the paths a
   player needs, which closes `/playlist/builder`, `/`, `/health`, `/metrics`, `/generate_url*`,
