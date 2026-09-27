@@ -50,9 +50,11 @@ A **multi-add-on** Home Assistant repository. Each add-on is fully self-containe
   add-on's failure doesn't skip the rest), so only one job pushes to `main` at a time and a
   bump can no longer be discarded by a concurrent push.
 
-- **Image-pinned** (octo-fiesta): `build.json` pins the upstream image and
-  `upstream-bump.yml` (nightly) owns both `build.json` and `config.yaml version:`.
-  Never hand-edit them — the next nightly run reverts or re-bumps.
+- **Dev-branch-tracked image** (octo-fiesta): `build.json` pins the upstream `:dev` image
+  **permanently** (the bump job never touches it) and `config.yaml version:` is derived from the
+  upstream **`dev` branch commit SHA** (`dev-<sha7>`), so every upstream push surfaces as an HA
+  update. `upstream-bump.yml` owns `config.yaml` only — never hand-edit either file, and never
+  "sync" `build.json` back to a release tag (that silently reverts the channel).
 - **PyPI-tracked** (beets): `config.yaml version:` mirrors the upstream package version and
   `upstream-bump.yml` bumps it. Add-on-code fixes are delivered by **manual reinstall** —
   never add a patch suffix to the version (user's explicit rule; a suffix makes HA offer an
@@ -87,13 +89,40 @@ A **multi-add-on** Home Assistant repository. Each add-on is fully self-containe
 ## File conventions
 
 - `.gitattributes` ships `* text=auto` + `eol=lf` for shell/workflows — write new files as LF.
-  Some legacy blobs are CRLF: prefer line-range edits (`patch`) over rewrites on those, or the
-  whole file diffs.
+  Every tracked blob is LF as of the renormalize pass, so whole-file rewrites are safe; if a
+  CRLF blob is ever reintroduced it shows a permanent phantom `M` that `git checkout`/`restore`
+  can never clear (the worktree already matches the blob) — the fix is `git add --renormalize`,
+  not a checkout. `git diff --ignore-cr-at-eol` coming back empty proves it is pure EOL noise.
 - detect-secrets flags option **keywords** in `config.yaml` schemas (e.g. `*_password: str?`)
   even with empty defaults — inline `# pragma: allowlist secret` on the flagged schema line.
 
 ## Skills
 
-Repo-specific agent skills (if ever needed) live in `.claude/skills/<name>/` here.
-General/shared skills come from the personal-os-setup chezmoi source (2-track governance in
-that repo's AGENTS.md) — never vendor a Track-2 plugin's skills into this repo.
+Repo-specific agent skills live in `.claude/skills/<name>/` (Claude Code reads them natively);
+other agents read the git symlinks in `.agents/skills/` (never edit through a symlink — edit the
+canonical file). Currently:
+
+- `home-assistant-addon-dev` — generic add-on packaging: mount taxonomy, versioning-tracking
+  patterns, CI build-gate shape, exposure-review method. Links to `AGENTS.md` for the rules
+  (versioning-by-type, CI scope) rather than restating them.
+- `beets-addon-dev`, `aiostreams-addon-dev`, `hermes-webui-addon-dev`, `octo-fiesta-addon-dev` —
+  one skill per add-on that has genuinely add-on-specific depth (domain logic, upstream quirks,
+  architecture). Keep new deep-dive content in the relevant add-on's own skill, not in
+  `home-assistant-addon-dev` — it stays generic on purpose so it doesn't grow unbounded as add-ons
+  are added.
+
+Skills are **write-only-what's-reusable**: a one-off incident, a specific PR number, or a dated
+"user said X" narrative does not belong in a skill — state the generalized rule instead. Keep
+files scannable; when a skill file is hard to skim, that's a sign it needs trimming, not that it
+needs a longer table of contents.
+
+These files are **public**: never write real host names, LAN IPs, add-on slugs, chat ids or the
+owner's name/email/numeric GitHub ID into them — use the placeholder style the content already
+uses (`<repo>_<slug>`, `<hash>_<addon>`, `<lan-ip>`, `user@example.com`) and re-scan before
+committing. Findings about a specific live deployment (which hostnames are exposed, sizing numbers
+for a real install) are answers for whoever asked, not skill content.
+
+General/shared skills (Hermes Agent internals, Claude Code delegation mechanics, generic git/PR
+hygiene) come from the personal-os-setup chezmoi source (2-track governance in that repo's
+AGENTS.md) — never vendor a Track-2 plugin's skills into this repo, and don't grow a
+ha-addons-repo skill to cover something that isn't specific to this repo's own add-ons.

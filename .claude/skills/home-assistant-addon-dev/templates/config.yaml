@@ -1,0 +1,22 @@
+name: Addon Name
+description: Short description of the addon
+version: "v0.1"
+slug: addon-slug
+url: "https://github.com/username/repo/tree/main/addons/addon-slug"
+arch:
+  - amd64
+  - armv7
+  - aarch64
+init: false
+ports:
+  8000/tcp: 8000
+ports_description:
+  8000/tcp: API Port
+map:
+  - config:rw
+  - data:rw
+webui: "http://[HOST]:[PORT:8000]/docs"
+options:
+  option_name: "Default Value"
+schema:
+  option_name: str
