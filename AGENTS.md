@@ -100,7 +100,9 @@ A **multi-add-on** Home Assistant repository. Each add-on is fully self-containe
 
 Repo-specific agent skills live in `.claude/skills/<name>/` (Claude Code reads them natively);
 other agents read the git symlinks in `.agents/skills/` (never edit through a symlink — edit the
-canonical file). Currently:
+canonical file). Every skill in this repo carries `metadata.hermes.origin: repo:ha-addons` in its
+frontmatter (plus `exposure: private` if it must never be published), so a reader can tell a repo
+skill from an agent-created one at a glance. Currently:
 
 - `home-assistant-addon-dev` — generic add-on packaging: mount taxonomy, versioning-tracking
   patterns, CI build-gate shape, exposure-review method. Links to `AGENTS.md` for the rules

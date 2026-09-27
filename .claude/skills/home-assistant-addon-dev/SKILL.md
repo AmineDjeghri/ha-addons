@@ -1,6 +1,9 @@
 ---
 name: home-assistant-addon-dev
 description: Workflow for developing, packaging, and deploying Home Assistant add-ons in this repo — architecture principles, versioning patterns, and where to find per-add-on deep dives.
+metadata:
+  hermes:
+    origin: repo:ha-addons
 ---
 
 # Home Assistant Add-on Development

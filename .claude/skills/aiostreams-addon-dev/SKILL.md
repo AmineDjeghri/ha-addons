@@ -1,6 +1,9 @@
 ---
 name: aiostreams-addon-dev
 description: Develop and deploy addons/aiostreams — the AIOStreams (Stremio/Nuvio) aggregator add-on, a distroless-image, bootstrap-based add-on with a nightly upstream channel.
+metadata:
+  hermes:
+    origin: repo:ha-addons
 ---
 
 # AIOStreams Add-on
