@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-6fb4535 — 2026-09-27
+
+- [fix(desktop): start mpv on Linux under any locale](https://github.com/Viren070/AIOStreams/commit/94d506389c95f616ef67daeffb6ae3ebb1f74e81)
+- [fix(desktop): follow the mouse's back and forward buttons on Linux](https://github.com/Viren070/AIOStreams/commit/38afea547dc4582aeb8d367a7cba1027227124cb)
+- [fix(desktop): log the OpenGL context the Linux video draws with](https://github.com/Viren070/AIOStreams/commit/2fe90a2c90fc7521202450a0957fe6bf1f294437)
+- [perf(jellyfin-web): decode artwork off the main thread](https://github.com/Viren070/AIOStreams/commit/4889472996cbf941d8b2662ca30fa40fb3d2d9d7)
+- [fix(desktop): give the Linux window the app's own id](https://github.com/Viren070/AIOStreams/commit/c3d495cf7d24d0b5fa3f122ab9682d74a15e5f23)
+- [fix(desktop): redraw the Linux video area when playback stops](https://github.com/Viren070/AIOStreams/commit/89d8d69553495307a57df8240c2767efd574b41c)
+- [fix(jellyfin-web): scroll a new page before its first paint](https://github.com/Viren070/AIOStreams/commit/98548323de487bdafbdb1bee8329691fe3077d05)
+- [perf(desktop): make the page's mpv calls on a thread of their own](https://github.com/Viren070/AIOStreams/commit/2e5db88fa1e82aef436e4e991f55fa7b1ba0fcbf)
+- [perf(desktop): draw Linux video frames when due instead of in mpv's wait](https://github.com/Viren070/AIOStreams/commit/bb8539a93d5e771bb0428bdf7b9ae211f45da358)
+- [feat(desktop): turn on the render API's advanced control on Linux](https://github.com/Viren070/AIOStreams/commit/e4405d31422cb9d0f08967039e4d453b20dd808e)
+- [feat: show the server's build in About and diagnostics](https://github.com/Viren070/AIOStreams/commit/c08e49601204640b5c870cec8c18b6e250d79c71)
+- [feat(jellyfin-web): cap how wide hero and title backdrops get](https://github.com/Viren070/AIOStreams/commit/485b52bc75afa379a197d4355e81954ee11e036e)
+- [feat(desktop): put the app icon on a near-black tile](https://github.com/Viren070/AIOStreams/commit/ac900ae994d10e7a8c38a74b588d60295747adbe)
+- [feat(desktop): package the Linux app as a Flatpak](https://github.com/Viren070/AIOStreams/commit/0a1c8cd76fde502da604f63701b6660ed6180836)
+- [feat(desktop): fill the Flatpak's releases from the changelog](https://github.com/Viren070/AIOStreams/commit/7a2061517812652d4a049934274d13aefe31e29c)
+- [ci(desktop): build the Linux Flatpak for x64 and arm64](https://github.com/Viren070/AIOStreams/commit/66af518584a99dcd67f5f2f44ded4fde6dfb4b1e)
+- [fix(desktop): skip mpv's frames on macOS while the window can't show them](https://github.com/Viren070/AIOStreams/commit/cf497d6e77dd525f10cfc0c15ce0111d3c5d16eb)
+- [perf(desktop): stop macOS video draws waiting on the main thread](https://github.com/Viren070/AIOStreams/commit/d3b9f0a56859dbfdf1912dee8168e078619d698f)
+- [feat(desktop): turn on the render API's advanced control on macOS](https://github.com/Viren070/AIOStreams/commit/dc8730e3451d248a73d308eda5b89c78838e4c62)
+- [docs: list Linux as a desktop app platform](https://github.com/Viren070/AIOStreams/commit/f2b94c802f3c1b72405380262b87faa1236e8b8c)
+
+[Compare 00fb93a...6fb4535](https://github.com/Viren070/AIOStreams/compare/00fb93a...6fb4535)
+
+---
+
 ## nightly-00fb93a — 2026-09-26
 
 - [fix(core): make trailer source and type optional](https://github.com/Viren070/AIOStreams/commit/19d7c1294fc2fec70755a4e5864485eb67793ab5)
@@ -209,8 +236,3 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 
 ---
 
-## nightly-248d1c4 — 2026-09-09
-
-Initial add-on release, tracking the upstream `nightly` channel (upstream commit: "fix: coalesce concurrent addon resource requests via distributed lock (#1217)").
-
----
