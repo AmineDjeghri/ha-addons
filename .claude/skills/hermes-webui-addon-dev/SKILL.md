@@ -9,8 +9,8 @@ description: Develop and maintain addons/hermes-webui — the two-container Herm
 dashboard as a pinned-release add-on that pairs with a separately-installed Hermes Agent add-on.
 This skill covers the packaging/architecture concerns specific to that pairing. Debugging the
 Hermes Agent software itself — gateway restart deadlocks, CPython-version bugs, dashboard liveness
-false negatives, update-time OOM — is out of scope here; those are deployment-agnostic Hermes
-Agent failure modes, not add-on packaging, and live in the `hermes-addon-troubleshooting` skill.
+false negatives, update-time OOM — is out of scope here: those are deployment-agnostic Hermes
+Agent failure modes, not add-on packaging.
 
 ## Two containers, one shared directory
 
@@ -56,6 +56,29 @@ mount. Symlinks (not bind mounts) are the right tool for exposing a runtime-comp
 a fixed location the upstream image expects — HA bind mounts are static and declared at container
 creation, but a symlink target can be computed at boot (auto-discovered slug, shared vs. isolated
 mode) and updated idempotently on every restart.
+
+## The WebUI venv's Python must satisfy the agent's dependency markers
+
+`run.sh` pins `UV_PYTHON` for the WebUI container's venv; keep it on the interpreter the Agent add-on
+actually runs (3.14 today), never on what that add-on used to run — the pin is a *dependency*
+contract, not a cache optimisation:
+
+- hermes-agent's `[project].dependencies` is gated `python_version >= '3.14'` on **every** entry
+  (extras are unmarked; `[tool.uv]` overrides bypass markers). Installed from the shared checkout
+  under 3.11/3.12 it therefore resolves with **zero** base deps — `rich`, `openai`, `httpx`,
+  `pydantic` are simply absent.
+- The symptom is a chat-time `ImportError: AIAgent not available -- check that hermes-agent is on
+  sys.path`. The WebUI wraps `from run_agent import AIAgent` in `except ImportError: return None` and
+  re-raises that generic message, so the real `ModuleNotFoundError` reaches no log — and the
+  diagnostic block's `sys.path` (checkout + `editable.hermes_agent-…` path hook) is actually correct,
+  so don't go hunting a broken editable install.
+- Verify without installing anything: `uv pip compile pyproject.toml --python-version 3.11` (~8 lines,
+  no base deps) versus `--python-version 3.14` (~161 lines, `# via hermes-agent (pyproject.toml)`).
+  `git log -S"python_version >= '3.14'" -- pyproject.toml` dates the gating, and the agent's own
+  updates (`git reflog`) can land it minutes *after* the WebUI rebuilt its venv — which is why the
+  pairing works until the next WebUI container start.
+- `UV_PYTHON="3.14"` needs no download (the agent add-on already put that interpreter in the shared
+  uv store), and applying it needs a **rebuild** (see below), not a restart.
 
 ## When changes take effect
 
