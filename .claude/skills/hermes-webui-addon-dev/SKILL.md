@@ -8,9 +8,9 @@ description: Develop and maintain addons/hermes-webui — the two-container Herm
 `addons/hermes-webui/` packages the third-party [nesquena/hermes-webui](https://github.com/nesquena/hermes-webui)
 dashboard as a pinned-release add-on that pairs with a separately-installed Hermes Agent add-on.
 This skill covers the packaging/architecture concerns specific to that pairing. Debugging the
-Hermes Agent software itself (gateway internals, CLI internals, CPython-version issues) is out of
-scope here — that lives in whatever skill covers Hermes Agent operations generally, not add-on
-packaging.
+Hermes Agent software itself — gateway restart deadlocks, CPython-version bugs, dashboard liveness
+false negatives, update-time OOM — is out of scope here; those are deployment-agnostic Hermes
+Agent failure modes, not add-on packaging, and live in the `hermes-addon-troubleshooting` skill.
 
 ## Two containers, one shared directory
 

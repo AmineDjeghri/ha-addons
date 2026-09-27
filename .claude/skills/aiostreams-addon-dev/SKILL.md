@@ -68,3 +68,17 @@ Bandwidth is the real constraint, not the proxy: 1080p ≈ 8–12 Mbps/stream, 4
 Mbps/stream — a single 4K remux can saturate a 100 Mbps upload. The proxy itself stays flat under
 load (tens of MB RSS, well under one core) — don't spend hardening effort optimizing it before the
 upload link.
+
+## Config templates, variants, and sharing a setup
+
+AIOStreams has its own template/variant/parent-child config feature for sharing a configuration
+with other users — distinct from add-on packaging. Authoring/publishing a template, the metadata
+schema, and the sharing routes are in `references/config-templates.md` and
+`references/aiostreams-template-format.md`.
+
+## Linked Files
+
+- `references/config-templates.md` — authoring and publishing an AIOStreams config template:
+  de-personalizing a config export, making it service-agnostic, and the sharing routes.
+- `references/aiostreams-template-format.md` — the metadata/input/condition schema tables and JSON
+  skeleton in full.
