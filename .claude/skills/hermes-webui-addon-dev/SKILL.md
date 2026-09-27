@@ -45,6 +45,8 @@ one host directory plus the boot-time symlinks.
   from PyPI) with no git checkout of its own — running an update command there is a no-op for code
   even if it still touches shared state (backups, config-migration prompts). Running `update` from
   both sides is not "extra safety", it's redundant work against shared files.
+- **After an Agent-side update, restart the WebUI add-on too** (a plain restart, not a rebuild — its
+  image didn't change).
 
 ## Boot-time staging (why, not just what)
 
