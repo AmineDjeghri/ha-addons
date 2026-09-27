@@ -1,6 +1,9 @@
 ---
 name: octo-fiesta-addon-dev
 description: Develop and maintain addons/octo-fiesta — a dev-branch-tracked image add-on, its floating-tag pin plus SHA-derived version scheme, and keeping its config surface in sync with upstream.
+metadata:
+  hermes:
+    origin: repo:ha-addons
 ---
 
 # Octo-Fiesta Add-on

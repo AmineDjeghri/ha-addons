@@ -1,6 +1,9 @@
 ---
 name: hermes-webui-addon-dev
 description: Develop and maintain addons/hermes-webui — the two-container Hermes Agent + WebUI add-on pairing, its shared-data/separate-venv architecture, and update mechanics.
+metadata:
+  hermes:
+    origin: repo:ha-addons
 ---
 
 # Hermes WebUI Add-on

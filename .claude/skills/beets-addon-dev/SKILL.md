@@ -1,6 +1,9 @@
 ---
 name: beets-addon-dev
 description: Develop and tune addons/beets — the beets auto-tagger add-on for the Navidrome music library, including its genre-tagging behavior and options.
+metadata:
+  hermes:
+    origin: repo:ha-addons
 ---
 
 # Beets Add-on
