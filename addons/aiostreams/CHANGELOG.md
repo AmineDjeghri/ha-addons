@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-632d1d4 — 2026-09-28
+
+- [fix(jellyfin-web): show any server's placeholder sources as notices](https://github.com/Viren070/AIOStreams/commit/ff32b06d173c83b581827e322a5160054c584602)
+- [fix(jellyfin): take a show's episodes from SeasonId before the path id](https://github.com/Viren070/AIOStreams/commit/6e331296ffb2694c34996a0e374c8cc0e2704597)
+- [refactor(ui): move the donation modal into the shared kit](https://github.com/Viren070/AIOStreams/commit/5690d73c397e85d7d5fabe1f22b9f24e4c50778c)
+- [refactor(jellyfin-web): regroup settings by what they change](https://github.com/Viren070/AIOStreams/commit/845b5ad1416d047b3842838bda58fe8306706841)
+- [feat(jellyfin-web): add a donate button under the settings tabs](https://github.com/Viren070/AIOStreams/commit/81b4188e5ef69fcb98c1745aeef5376a8ca6dc12)
+- [feat(jellyfin-web): open the player full screen in landscape on phones](https://github.com/Viren070/AIOStreams/commit/a3d4b2820b4eb703e3606cf9d1eba1c9bee59409)
+- [feat(jellyfin-web): add back and forward buttons to the sidebar in apps](https://github.com/Viren070/AIOStreams/commit/43599da68639bd22b867d5124e48d2713f94a506)
+- [feat(jellyfin-web): keep the window buttons in full screen, with one to leave it](https://github.com/Viren070/AIOStreams/commit/7fa240f1096ebef0a9a7bab1e15bfb61624a1ec7)
+- [fix(jellyfin): round every tick value to a whole number](https://github.com/Viren070/AIOStreams/commit/bb64fb1f03366af59c37991807626e7edf19d5a0)
+- [feat(jellyfin-web): add a favourites page](https://github.com/Viren070/AIOStreams/commit/3c2dc76ce4aaa8fbe652e516a404d03c51c8c742)
+- [refactor(jellyfin-web): drop the watched and favourite filters from catalogs](https://github.com/Viren070/AIOStreams/commit/e454a974b49c5499a6e1230aa89d423932f25590)
+- [feat(desktop): show what plays as Discord rich presence](https://github.com/Viren070/AIOStreams/commit/36f5602591a16f14206c51634783b0e8b192ffed)
+- [feat(jellyfin-web): add a setting to share what plays on Discord](https://github.com/Viren070/AIOStreams/commit/8fdd332b945144a92ade5c670127fa50af3343c5)
+- [feat(jellyfin-web): add {position} and {returnUrl} to the external player link](https://github.com/Viren070/AIOStreams/commit/dfcdac9ae19042461c1037e4d7cffc4136375cad)
+- [feat(jellyfin-web): add {filename} and {subtitles} to the external player link](https://github.com/Viren070/AIOStreams/commit/1ca68bc18fcd2895e6967179dbbe24d935a67f8a)
+- [fix(jellyfin-web): slide pages in by top instead of a transform](https://github.com/Viren070/AIOStreams/commit/11b5ccc9c4baf8e268d318b960853bc76204c9c8)
+- [feat(jellyfin-web): add a setting to skip the version list, with hold to do the other](https://github.com/Viren070/AIOStreams/commit/225a12c42ea732c7f4333900f652f08c89d53a26)
+- [fix(jellyfin-web): count an Intro chapter as the intro only when none is named the opening](https://github.com/Viren070/AIOStreams/commit/95f0ee57b87bb2eb5ab811219096cd33287ad31e)
+- [feat(jellyfin): answer /Items episode queries with a premiere date range](https://github.com/Viren070/AIOStreams/commit/0d900265c913ba44396bdcf88bbc1c37a0264005)
+- [feat(jellyfin-web): add a calendar page](https://github.com/Viren070/AIOStreams/commit/1fc85947164c73ccc9bb51d39a266b086797e515)
+
+[Compare 6fb4535...632d1d4](https://github.com/Viren070/AIOStreams/compare/6fb4535...632d1d4)
+
+---
+
 ## nightly-6fb4535 — 2026-09-27
 
 - [fix(desktop): start mpv on Linux under any locale](https://github.com/Viren070/AIOStreams/commit/94d506389c95f616ef67daeffb6ae3ebb1f74e81)
@@ -220,18 +247,3 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 
 ---
 
-## nightly-db8afbe — 2026-09-16
-
-- [chore: release 2.34.1 (#1288)](https://github.com/Viren070/AIOStreams/commit/c1d044c23b48acff9e5f0ce672c786797177e767)
-- [fix(builtins): preserve zero seeder counts (#1320)](https://github.com/Viren070/AIOStreams/commit/23c774990216f3345d3caa8fa280851a4cdacdda)
-- [feat(failover): add only-same-release failover toggle (#1319)](https://github.com/Viren070/AIOStreams/commit/3483fdadb2b2c110d6b1e69161a3672fd463f5ab)
-- [chore: update header presets (#1318)](https://github.com/Viren070/AIOStreams/commit/b0b8aa314d10d870af8ffc5bc6c9d0d52017d516)
-- [fix(frontend): clarify digital release filter description scope (#1310)](https://github.com/Viren070/AIOStreams/commit/346e8e0dbb7b271c50b19d29d5519b5b2586b277)
-- [fix(builtins): compute torrent age from pubDate for torznab/prowlarr (#1306)](https://github.com/Viren070/AIOStreams/commit/f1daac30440f5ae37a9b82f5f458419e539e10ba)
-- [fix(builtins/easynews-search): preserve season and episode separators (#1284)](https://github.com/Viren070/AIOStreams/commit/3686c3d2a07936f09e8cc704b8eae40192e73320)
-- [feat(filters): add opt-in check to block results predating release/air date (#1312)](https://github.com/Viren070/AIOStreams/commit/50ad7ea1ba31a7eca9adcca3fd4e86e50ba172f4)
-- [fix(server): expose Content-Range and Accept-Ranges to browser players (#1277)](https://github.com/Viren070/AIOStreams/commit/db8afbe66ddefcf7cca8731497d4f7c605e785e2)
-
-[Compare 248d1c4...db8afbe](https://github.com/Viren070/AIOStreams/compare/248d1c4...db8afbe)
-
----
