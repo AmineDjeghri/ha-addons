@@ -2,6 +2,30 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-d029954 — 2026-09-30
+
+- [fix(ui): pan carousel rows with a trackpad or mouse wheel (#1394)](https://github.com/Viren070/AIOStreams/commit/736d6c4dae8ec3d6f429ee33c1b078ca349ca81f)
+- [fix(desktop): don't scale disc subtitles, keep styled ones in the crop](https://github.com/Viren070/AIOStreams/commit/907867d81bbd53b16b8bb9ebbf85905de2a124e7)
+- [feat(desktop): add an aiostreams:// link scheme](https://github.com/Viren070/AIOStreams/commit/8f243fc6bc1a3afd71d7f0e97ff0c9ae29105751)
+- [feat(jellyfin-web): open aiostreams:// links](https://github.com/Viren070/AIOStreams/commit/33caebd9126ce2d13ef3b0e10a91d8b5fb5efdfd)
+- [chore(desktop): update the web app (#1395)](https://github.com/Viren070/AIOStreams/commit/72c70fe37208b002e2de0b8d9df2efc2fedf877f)
+- [chore(desktop): release 0.8.0 (#1397)](https://github.com/Viren070/AIOStreams/commit/12f30f2b291c665e48971f5ca3a1f5c0573c46b0)
+- [chore: add dockerfile for jellyfin-web](https://github.com/Viren070/AIOStreams/commit/35656af2f339df90897fe2e9f170c21693d20b3b)
+- [fix(jellyfin-web): send None for featured catalogs that need a genre](https://github.com/Viren070/AIOStreams/commit/0470d74a519d9e99bd8c28ffef63b2c64a53ed3f)
+- [feat: flag libraries that need a genre](https://github.com/Viren070/AIOStreams/commit/a07907931dc0039729a5245f63381ca84fa55c2f)
+- [docs: update readme and 2.35 changelog](https://github.com/Viren070/AIOStreams/commit/6640e0fc592071569938a279a7238798f07785ce)
+- [feat(frontend): show the release a nightly is built on in What's new](https://github.com/Viren070/AIOStreams/commit/3dcc6030c520ab0be4b157b6c0e90e543ec61ba3)
+- [feat(frontend): announce new releases to nightly users by their base version](https://github.com/Viren070/AIOStreams/commit/0ab165c414fbe3c427a4439aa890e7f6a6deef32)
+- [feat(jellyfin): add a setting to stop marking unaired episodes](https://github.com/Viren070/AIOStreams/commit/1bfc82b90b2c1041ae656fb34de08b17427023f9)
+- [fix(watch-state): keep history for as long as a configuration is in use](https://github.com/Viren070/AIOStreams/commit/1a7f39fc3da2876b155718da6a8f495cb6aaac47)
+- [feat(core): replace per-feature private URL settings with ALLOW_PRIVATE_URLS](https://github.com/Viren070/AIOStreams/commit/c3853ca30a977dc062252dbc198232fd43b35273)
+- [feat(watch-state): make the resume and played thresholds configurable](https://github.com/Viren070/AIOStreams/commit/597e4630c4005588ea98fa8d821e05e71d6a6f76)
+- [fix(watch-state): match drops against every id a show is stored under](https://github.com/Viren070/AIOStreams/commit/d029954da44802fbb152ca5583aa2b468c45cdb0)
+
+[Compare 0eccbc7...d029954](https://github.com/Viren070/AIOStreams/compare/0eccbc7...d029954)
+
+---
+
 ## nightly-0eccbc7 — 2026-09-29
 
 - [feat(jellyfin-web): add a per-segment skip setting](https://github.com/Viren070/AIOStreams/commit/b66d07a016881a8a4a4fd208098195c7b4a3a5bc)
@@ -217,33 +241,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [fix(jellyfin): don't paginate on search](https://github.com/Viren070/AIOStreams/commit/ce27dc1745f59654148f2f197685b812d761ed78)
 
 [Compare 79d64bb...ce27dc1](https://github.com/Viren070/AIOStreams/compare/79d64bb...ce27dc1)
-
----
-
-## nightly-79d64bb — 2026-09-19
-
-- [fix(filters): stop forcing the digital-release info stream for single stale results (#1328)](https://github.com/Viren070/AIOStreams/commit/0c9f895c3844abe8fc4acca3aceb7eced97c8fd2)
-- [feat(release-blocklist): add a master enable/disable toggle (#1330)](https://github.com/Viren070/AIOStreams/commit/3d7c536157829ba949658679c2e22fcc29f6b6ec)
-- [feat(jellyfin): list playing sessions in /Sessions](https://github.com/Viren070/AIOStreams/commit/eb3a18284909ad552bc81fbb0e03d62371e614b7)
-- [fix(jellyfin): take the playback runtime from the played source](https://github.com/Viren070/AIOStreams/commit/6a7ed9cc2091ac35085088039e04b5a8a309aa62)
-- [feat(jellyfin): choose trackers per user](https://github.com/Viren070/AIOStreams/commit/b960e8d0eb1b1edfa6fd00504fb3ea5d995e9c3d)
-- [fix(languages): resolve Bokmål and Nynorsk codes to Norwegian](https://github.com/Viren070/AIOStreams/commit/c8c81f987e925b48df05e7760a8316260e261d7d)
-- [feat(linked-accounts): make the per-user link limit configurable](https://github.com/Viren070/AIOStreams/commit/cf80bb0c156aacd63509cadfa056765a7260cdf6)
-- [feat(presets/bitmagnet): expose search mode option](https://github.com/Viren070/AIOStreams/commit/b1c145a5ce2e02e1601c54dafbec78fc980bee78)
-- [fix(usenet): verify file contents at import](https://github.com/Viren070/AIOStreams/commit/e4d14281ee61d6e7dae754bf5bab9f15694700a6)
-- [fix(debrid/torbox): align timeoutMs with stremthru (#1281)](https://github.com/Viren070/AIOStreams/commit/0ddf328bb63d21805832cc2f4deec3b347838925)
-- [perf(builtins): skip .torrent download for pre-validated bad matches (#1259)](https://github.com/Viren070/AIOStreams/commit/479f809dbfdea79e28d8576c7d75e622ff3b879e)
-- [fix(seanime-extensions/plugin): use ctx.fetch to prevent VM panics](https://github.com/Viren070/AIOStreams/commit/208e84067a54bb9204f247d6468d7653b75016c0)
-- [fix(seanime-extensions/plugin): show results when not logged in to AniList](https://github.com/Viren070/AIOStreams/commit/743aa813fabf8b6c1e873d0e1be68996717519dc)
-- [fix(seanime-extensions/plugin): load on Android and iOS servers](https://github.com/Viren070/AIOStreams/commit/99a5f479395238ddf52a8f99ed571660de944fee)
-- [chore(seanime-extensions): release 0.10.2 (#1331)](https://github.com/Viren070/AIOStreams/commit/4fe9e2a8eb13092183a6cf9139ddc679b6a272e2)
-- [fix(core/sync): make the vouched URL list the refresh set](https://github.com/Viren070/AIOStreams/commit/a6554f22eaace70e32dd304d4c3241e418642337)
-- [feat(variants): add an insert instruction for list positions](https://github.com/Viren070/AIOStreams/commit/022b0e1488799a3758c2b10b6b630837b257cd21)
-- [feat(variants): let [*] walk an object's values](https://github.com/Viren070/AIOStreams/commit/5afa43cd58fadca8cdfb0397ee01ab25dee7b43e)
-- [fix(presets/gdrive): fix logo](https://github.com/Viren070/AIOStreams/commit/376d7163abcbeb24719a5a1a9188ae1d74f59a3c)
-- [feat(presets): add penguplay preset](https://github.com/Viren070/AIOStreams/commit/ff01f94a0730443848938f967409700833e2ec2d)
-
-[Compare 2001105...79d64bb](https://github.com/Viren070/AIOStreams/compare/2001105...79d64bb)
 
 ---
 
