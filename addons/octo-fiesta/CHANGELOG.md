@@ -2,6 +2,14 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-a8386e8 — 2026-10-01
+
+- [fix(subsonic): never drop a library scan request](https://github.com/V1ck3s/octo-fiesta/commit/a8386e82aee0e03bd80d7ecabae1efdc561d0832)
+
+[Compare 3f2d5c4...a8386e8](https://github.com/V1ck3s/octo-fiesta/compare/3f2d5c4...a8386e8)
+
+---
+
 ## dev-3f2d5c4 — 2026-09-21
 
 - [feat: upgrade remaining album tracks during a quality upgrade](https://github.com/V1ck3s/octo-fiesta/commit/8c7b10285fe572c91bcd2b28655a26291266f1d1)
