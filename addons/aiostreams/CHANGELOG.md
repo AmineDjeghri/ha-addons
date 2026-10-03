@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-70ffb17 — 2026-10-03
+
+- [fix(desktop): inhibit display sleep while a file plays on macOS and Linux](https://github.com/Viren070/AIOStreams/commit/d19594a6892f11110b1ea011176a469726a391f6)
+- [feat(watch-state): keep ratings and likes, and push and pull ratings](https://github.com/Viren070/AIOStreams/commit/f85758dee209d443471f3bfb54da754c39c3ae5f)
+- [feat(jellyfin-web): rate movies, shows and seasons from their page](https://github.com/Viren070/AIOStreams/commit/e222942403cd8aa82fc4ee92e2b5ea1d7853b76f)
+- [feat(frontend): add a None option to a user's trackers](https://github.com/Viren070/AIOStreams/commit/16aa99710f7237662245068bbe4283c8d58a7e4b)
+- [feat(desktop): drive the system's media controls from a shared now-playing state](https://github.com/Viren070/AIOStreams/commit/89f4671a7e376d2b688b3fa41dfbd31313b72902)
+- [feat(jellyfin-web): send now-playing to the desktop app and set the browser's media session](https://github.com/Viren070/AIOStreams/commit/f5c790f47b42b89b572ea62de19a7cb47c7e780d)
+- [fix(core/sync): remove the DNS pre-check on user sync URLs](https://github.com/Viren070/AIOStreams/commit/13fc300efa3cf348798283f9020e664827c5ea08)
+- [feat(frontend): ask for the configuration password in the profile card](https://github.com/Viren070/AIOStreams/commit/86c3ffb4cbdbdff76a347c1373f5d32908a94bc4)
+- [fix(jellyfin-web): size and place browser subtitle cues](https://github.com/Viren070/AIOStreams/commit/3021081760d01018a8d349f16aed2f299b685953)
+- [feat(jellyfin-web): add a subtitle height setting](https://github.com/Viren070/AIOStreams/commit/fad3c78cd2c658fa77f21bd1a4874acf101c134e)
+- [docs: add a custom CSS example that hides a catalog row's kind](https://github.com/Viren070/AIOStreams/commit/3ab898bfe1987ceb1547456e8892b1b0c484517b)
+- [feat(jellyfin-web): link the custom CSS guide from the theme settings](https://github.com/Viren070/AIOStreams/commit/db4b778731216c12dd144bba8325295f67111f71)
+- [feat(jellyfin-web): take the player's top volume from mpv's volume-max](https://github.com/Viren070/AIOStreams/commit/e99ce707dd77d4810904ab2b687e89ddf283a036)
+- [feat(jellyfin-web): link the source code and documentation from About](https://github.com/Viren070/AIOStreams/commit/f0bae05dc219d2922229c2163db28b64d948e4be)
+- [feat(jellyfin-web): replace the player's volume range with a bar that marks the boost](https://github.com/Viren070/AIOStreams/commit/6922932d41093a0b200f4f44dcabc4125ca87d18)
+- [chore(desktop): update the web app (#1398)](https://github.com/Viren070/AIOStreams/commit/85c2df2fc6c02fcf84460a9263ed2cc6c6a0a3f0)
+- [chore(desktop): release 0.9.0 (#1402)](https://github.com/Viren070/AIOStreams/commit/cd13e5f8abf4c2ea708a290787573dd97d9d1243)
+- [chore: release 2.35.5 (#1396)](https://github.com/Viren070/AIOStreams/commit/8377562395c9c02e2336296cd68f9069f275d42c)
+- [feat(jellyfin): link the configuration's own page when the address names it](https://github.com/Viren070/AIOStreams/commit/86731647ab1cd861813b5712865cb3c4cb943c18)
+- [feat(jellyfin-web): show a message for no libraries](https://github.com/Viren070/AIOStreams/commit/563126e324678d9a5c632252d52a49812ce315e5)
+
+[Compare d029954...70ffb17](https://github.com/Viren070/AIOStreams/compare/d029954...70ffb17)
+
+---
+
 ## nightly-d029954 — 2026-09-30
 
 - [fix(ui): pan carousel rows with a trackpad or mouse wheel (#1394)](https://github.com/Viren070/AIOStreams/commit/736d6c4dae8ec3d6f429ee33c1b078ca349ca81f)
@@ -224,23 +251,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [perf(parser): cache the title regex and pattern entries](https://github.com/Viren070/AIOStreams/commit/1c281843068dc2b20274ec4070869c926879bf41)
 
 [Compare ce27dc1...66f4330](https://github.com/Viren070/AIOStreams/compare/ce27dc1...66f4330)
-
----
-
-## nightly-ce27dc1 — 2026-09-20
-
-- [fix(anime-database): preserve IMDb identity for episode mappings (#1301)](https://github.com/Viren070/AIOStreams/commit/e2224d9aa1bcf22bb9e839e1b096017db2a6d656)
-- [feat(frontend): show max versions in primer](https://github.com/Viren070/AIOStreams/commit/a470d94163341e19d0ca39291bafa31db173c918)
-- [feat(jellyfin/segments): support movie end credits from IntroDB](https://github.com/Viren070/AIOStreams/commit/5ef9d5160017aa4ccbf8d84aa774616593d3667c)
-- [feat(jellyfin/segments): resolve IMDb ids for TMDB-keyed movies](https://github.com/Viren070/AIOStreams/commit/b107a108d78dc4f813d942541559f35b86fee312)
-- [fix(templates): detect placeholders in any field and type inputs by field](https://github.com/Viren070/AIOStreams/commit/f62d7eebda245dcff2dd9d4a91ab9181cdca8239)
-- [fix(anime): scope imdb hints and fix episode mapping](https://github.com/Viren070/AIOStreams/commit/cdaee68dbf5f6bb3bc384dfceff1134d6747411f)
-- [feat(jellyfin): add api keys](https://github.com/Viren070/AIOStreams/commit/5a95a5fbfd4669f3d220b6d4c9a12f87363b26df)
-- [feat(jellyfin): enrich external subtitle tracks](https://github.com/Viren070/AIOStreams/commit/0f5ad0d580933b511aca73f8ad30a5c20681ac76)
-- [fix: loosen trailer type schema](https://github.com/Viren070/AIOStreams/commit/443649612d91e58efcfb2d96acd602f9725e6664)
-- [fix(jellyfin): don't paginate on search](https://github.com/Viren070/AIOStreams/commit/ce27dc1745f59654148f2f197685b812d761ed78)
-
-[Compare 79d64bb...ce27dc1](https://github.com/Viren070/AIOStreams/compare/79d64bb...ce27dc1)
 
 ---
 
