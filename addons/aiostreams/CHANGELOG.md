@@ -2,6 +2,27 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-1dcfa76 — 2026-10-04
+
+- [fix(desktop): load a bundled vulkan-1.dll when Windows has none](https://github.com/Viren070/AIOStreams/commit/30ddeb0d8506179319bda82486ad8c2f9a672de9)
+- [fix(watch-state): fold an item's spellings in the history list and counts](https://github.com/Viren070/AIOStreams/commit/4f823797deb3f490482e551d793029567a272071)
+- [feat(watch-state): read a kind on pulled watchlist and rating entries](https://github.com/Viren070/AIOStreams/commit/95c77e52d90d71f6c6005b5245c0fde84aefe7a5)
+- [feat(watch-state): read airsAt on pulled next episodes](https://github.com/Viren070/AIOStreams/commit/9aee8832accce0cd26576b5cccf3736e8dfb06d4)
+- [fix(jellyfin-web): avoid GamepadList array methods and AbortSignal.timeout](https://github.com/Viren070/AIOStreams/commit/76ca25076df04330f7a2974a4dc0559f5cd94df6)
+- [fix(jellyfin-web): keep the artwork crop inside the image](https://github.com/Viren070/AIOStreams/commit/f8fae6ca9494622549a04643f33c493572c2a397)
+- [fix(jellyfin): page Next Up through up to 200 recent shows](https://github.com/Viren070/AIOStreams/commit/4f51dc11b085fa096fd8c962fe2be587e91b2fed)
+- [fix(jellyfin): decode HTML entities in overviews](https://github.com/Viren070/AIOStreams/commit/99028950d9a9b9dbad4c9c04d4def8369fae1ef4)
+- [chore(desktop): update the web app (#1422)](https://github.com/Viren070/AIOStreams/commit/4033c6482289f89c09d199a61931f748696738fd)
+- [chore(desktop): release 0.10.1 (#1424)](https://github.com/Viren070/AIOStreams/commit/5f446411d7ea383f6141e9f9074a3bce722b2fab)
+- [feat(jellyfin): add watchlisted shows and films to Upcoming](https://github.com/Viren070/AIOStreams/commit/7814d091bffccdf9230967d4074d114428f51f36)
+- [fix(jellyfin): size the pointer cache by max versions](https://github.com/Viren070/AIOStreams/commit/c086df84b56e6c111936c8e7bdbc0b3d8c96b6f3)
+- [feat(jellyfin): raise the max versions default to 25](https://github.com/Viren070/AIOStreams/commit/9f8ed87f92548a9516f1d4f60cc372088337fb53)
+- [chore: release 2.35.9 (#1423)](https://github.com/Viren070/AIOStreams/commit/1dcfa7665e7fa759b5604e39bf0f491e9aefaea5)
+
+[Compare 70ffb17...1dcfa76](https://github.com/Viren070/AIOStreams/compare/70ffb17...1dcfa76)
+
+---
+
 ## nightly-70ffb17 — 2026-10-03
 
 - [fix(desktop): inhibit display sleep while a file plays on macOS and Linux](https://github.com/Viren070/AIOStreams/commit/d19594a6892f11110b1ea011176a469726a391f6)
@@ -224,33 +245,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [fix(watch-state): pick one row per series before limiting recent series](https://github.com/Viren070/AIOStreams/commit/b17c8293cb12c084edfa70c4c5a144e417fd69be)
 
 [Compare 66f4330...37be686](https://github.com/Viren070/AIOStreams/compare/66f4330...37be686)
-
----
-
-## nightly-66f4330 — 2026-09-22
-
-- [feat(formatter): add user lists and field references](https://github.com/Viren070/AIOStreams/commit/b9bc591752803abc46a7c257e0903e7ac2bd16de)
-- [feat(formatter): raise template limit and budget the cache](https://github.com/Viren070/AIOStreams/commit/3c3363b67bc66d7c4ef69f3863a2445e17885b42)
-- [docs(env): regenerate webstreamr default url](https://github.com/Viren070/AIOStreams/commit/5742e1cf6a04c1aa7d47402847c5af8de25945fe)
-- [fix(variants): bound the instructions one request can run](https://github.com/Viren070/AIOStreams/commit/9f477fa91a2331cb81e890c07071d6901392953e)
-- [feat(jellyfin): show addon notices, errors and statistics as versions](https://github.com/Viren070/AIOStreams/commit/c998327e8889290f2a9fd9e8957f49d3909b0ede)
-- [docs(guides/seanime): add tenji note and Default episode source step for plugin](https://github.com/Viren070/AIOStreams/commit/69f4054ac63e3d7b5740d3550d4192ff0893434a)
-- [feat(schemas): add native epg fields](https://github.com/Viren070/AIOStreams/commit/e6daf4a8c99360bb0249b86cf9d484b973c3e827)
-- [feat(jellyfin): play entries that have nothing to open](https://github.com/Viren070/AIOStreams/commit/4aba386bcc775e8c28a6e6ebaa1800d13bc9e10a)
-- [fix(parser): detect hls urls with a query string](https://github.com/Viren070/AIOStreams/commit/b74283ff549ce39af73cf4a2be3d960f28f93309)
-- [feat(jellyfin): mark channel sources live](https://github.com/Viren070/AIOStreams/commit/58a7929774fa1273095ff442b3b604a16609fbf0)
-- [fix(jellyfin): keep live playback out of watch state](https://github.com/Viren070/AIOStreams/commit/1d429667ed27e02c8889af3be9d30885d9567494)
-- [feat(core): tell whether a meta can be fetched](https://github.com/Viren070/AIOStreams/commit/057b3b1eb1e7dfc75fa9fc7fb316bfa1633c0de6)
-- [feat(jellyfin): decide playable entries before a sweep lands](https://github.com/Viren070/AIOStreams/commit/1ad2f1f0f158e2a109721bc47d08f03a245e6a4f)
-- [perf(db): raise the config key cache ttl to 24h](https://github.com/Viren070/AIOStreams/commit/743da3d06a8976747d1c48e4ddbeaedee29152f2)
-- [perf(parser): cache title lists by identity and prune title matches](https://github.com/Viren070/AIOStreams/commit/3f88925ccbdf6d41a794fa23e43ff790dad26904)
-- [perf(config): skip save-time variant validation on read paths](https://github.com/Viren070/AIOStreams/commit/fc55a2c79fecaf061aae4d3cc98ed72f13e5ed7b)
-- [perf(builtins/library): time-slice the library scan](https://github.com/Viren070/AIOStreams/commit/9713fd0825e8fc6652bffcd956ad0f6ae8c5bd32)
-- [fix(streams): stop suppressing statistics across an await](https://github.com/Viren070/AIOStreams/commit/3e2eac03d220c89d5804f972b00173fc9725c523)
-- [perf(streams): time-slice the filterer passes](https://github.com/Viren070/AIOStreams/commit/797eae0299143af480a412385aafdda859ee792e)
-- [perf(parser): cache the title regex and pattern entries](https://github.com/Viren070/AIOStreams/commit/1c281843068dc2b20274ec4070869c926879bf41)
-
-[Compare ce27dc1...66f4330](https://github.com/Viren070/AIOStreams/compare/ce27dc1...66f4330)
 
 ---
 
