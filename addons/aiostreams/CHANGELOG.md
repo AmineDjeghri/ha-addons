@@ -2,6 +2,24 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-9db03c5 — 2026-10-05
+
+- [fix(watch-state): keep the played mark under a resume point](https://github.com/Viren070/AIOStreams/commit/a4cdbc078e38c4c200aad3f8ff8d52546e7d7b96)
+- [fix(jellyfin-web): clear only the position on remove from continue watching](https://github.com/Viren070/AIOStreams/commit/c66e99fef2d4c3d94907120a6d49355d2c6d5a54)
+- [feat(jellyfin): add watchlisted shows and films to the calendar](https://github.com/Viren070/AIOStreams/commit/f5abba05d5b503250989b321d4f12f0b5f933e3e)
+- [feat(jellyfin-web): list films on the calendar](https://github.com/Viren070/AIOStreams/commit/05863cbb4a5889a8054ef8e8b0a8f46c3524a807)
+- [feat(desktop): start the user's own mpv and drive it over its IPC](https://github.com/Viren070/AIOStreams/commit/2aa49ee6efc2b98dec94cc7737af1b25b50dcb5e)
+- [feat(jellyfin-web): replace the external player link with a player choice](https://github.com/Viren070/AIOStreams/commit/3578bd32e8c14cbc4b908e28b2a51ced4e2e05a6)
+- [feat(desktop): load subtitle files the page sends](https://github.com/Viren070/AIOStreams/commit/eb4fc05792fffff7dc65359e41844d5ec754b0ef)
+- [feat(jellyfin-web): add subtitle files by dropping or picking them](https://github.com/Viren070/AIOStreams/commit/76d711697a9687dab0fbf0be1daa575bd4063664)
+- [refactor(jellyfin-web): group playback and subtitle modules into folders](https://github.com/Viren070/AIOStreams/commit/4ccd8156b5a5c1ab4e3b7feb52683eb57e2e609a)
+- [fix(watch-state): treat a favourite under any spelling as the title's](https://github.com/Viren070/AIOStreams/commit/14336d0488c52b1a9c564e96df9b09c17cca111f)
+- [feat(jellyfin-web): add {scheme} to the player link](https://github.com/Viren070/AIOStreams/commit/9db03c542df26f7d04fde93965a04c2ace468835)
+
+[Compare 1dcfa76...9db03c5](https://github.com/Viren070/AIOStreams/compare/1dcfa76...9db03c5)
+
+---
+
 ## nightly-1dcfa76 — 2026-10-04
 
 - [fix(desktop): load a bundled vulkan-1.dll when Windows has none](https://github.com/Viren070/AIOStreams/commit/30ddeb0d8506179319bda82486ad8c2f9a672de9)
@@ -218,33 +236,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [fix(frontend): mark the web app search box as a search input](https://github.com/Viren070/AIOStreams/commit/510a2b094c5c7daefcc8990824a26bbacecc1013)
 
 [Compare 37be686...1442fc5](https://github.com/Viren070/AIOStreams/compare/37be686...1442fc5)
-
----
-
-## nightly-37be686 — 2026-09-23
-
-- [feat(formatter): add ::unique list modifier](https://github.com/Viren070/AIOStreams/commit/051a342a00b44d056aac72a755b6ef4bab42f5a7)
-- [feat(formatter): apply ::replace to lists](https://github.com/Viren070/AIOStreams/commit/57dbc556424c21a7146cbee525924a69366293d0)
-- [fix(core): revive DOMException from the lock cache](https://github.com/Viren070/AIOStreams/commit/105d9de813f528df841529851dbbbec8d72f45e9)
-- [fix(jellyfin): play and sign in from the Android app](https://github.com/Viren070/AIOStreams/commit/e1aff12779a79c6f2c466eb0cf4a01ca2e14dc79)
-- [fix(jellyfin): anchor next up on the last episode watched](https://github.com/Viren070/AIOStreams/commit/12a1735464eb8ec88289f0c312ed117793974a3c)
-- [fix(jellyfin): keep episode ratings their own](https://github.com/Viren070/AIOStreams/commit/f11ab35fa218f878e9709d4fddfa994e4cf64167)
-- [fix(jellyfin): read seasonPosters keyed by season](https://github.com/Viren070/AIOStreams/commit/99b62d5a8b5fb7ad3c660aba0df26b4e2db915fa)
-- [feat(jellyfin): person details and filmography from TMDB](https://github.com/Viren070/AIOStreams/commit/85af525c57012d42142d964c64046a4f9fcb98e1)
-- [feat(jellyfin): recommend similar titles from TMDB](https://github.com/Viren070/AIOStreams/commit/798cdbe630542d251529128b1347f30fd146282c)
-- [feat(core): list and clear watch history](https://github.com/Viren070/AIOStreams/commit/d16ec82ba9b83fb32ba7e9944b5856719e0ad733)
-- [feat(jellyfin): PINs for users](https://github.com/Viren070/AIOStreams/commit/90f1a24c87754c6e7a5765189d26a90a60370cf9)
-- [fix(frontend): stop clipboard copies hanging in embedded browsers](https://github.com/Viren070/AIOStreams/commit/df0a3fe5e7c923a0169e742b0cf1def76ad7c50e)
-- [feat(jellyfin): add a web app at /web](https://github.com/Viren070/AIOStreams/commit/5c116c49ffc3e697fa596f89c0d2cffd14e68f90)
-- [docs(jellyfin): document PINs](https://github.com/Viren070/AIOStreams/commit/ff5bc4b2b18b27296bb0a2065caa27d9a2e2ee7e)
-- [fix(frontend): keep loaded configs' values when status arrives late](https://github.com/Viren070/AIOStreams/commit/9fd6c671ad150df8c09275e9e9de9dfb7418915f)
-- [docs(changelog): update post for v2.35](https://github.com/Viren070/AIOStreams/commit/3a956130b9a1d4e3c9e47d70aa08b209ade26176)
-- [fix(metadata): update default user agent for skyhook](https://github.com/Viren070/AIOStreams/commit/a82a8c0c48ca3e90b84bd307d522f2a5eaeb178b)
-- [fix(anime): match releases numbered in tvdb's season](https://github.com/Viren070/AIOStreams/commit/5d319f5b588124b28c969e5c2058c34f9092951f)
-- [fix(remuxdb): update lookup endpoint to match RemuxDB's current API (#1353)](https://github.com/Viren070/AIOStreams/commit/a8a124e174ebeb44167b1d01de3ffb2c4d3355bb)
-- [fix(watch-state): pick one row per series before limiting recent series](https://github.com/Viren070/AIOStreams/commit/b17c8293cb12c084edfa70c4c5a144e417fd69be)
-
-[Compare 66f4330...37be686](https://github.com/Viren070/AIOStreams/compare/66f4330...37be686)
 
 ---
 
