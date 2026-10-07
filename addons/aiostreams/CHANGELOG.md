@@ -2,6 +2,32 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-b17de1e — 2026-10-07
+
+- [feat(media-info): add a tags list to audio tracks](https://github.com/Viren070/AIOStreams/commit/6ff91b8737c26da71ccbfbedaf615e223323e0aa)
+- [chore(config): raise jellyfin.maxVersions limit to 500](https://github.com/Viren070/AIOStreams/commit/03706968430fbcd1b2694da65831e42644bda6fc)
+- [feat(jellyfin-web): add Android players to the player choice](https://github.com/Viren070/AIOStreams/commit/26a30502ffd6287383286725882a5b998ee5af0e)
+- [feat(jellyfin-web): hand the Android app's player the episodes that follow](https://github.com/Viren070/AIOStreams/commit/25e6f6f0b7719a0500ff569de4a19da2f4d57de6)
+- [feat(jellyfin-web): refresh watch state on the server socket's pushes](https://github.com/Viren070/AIOStreams/commit/db189732477b3435cea49554ebc5ad91fc1565e4)
+- [feat(jellyfin-web): redesign server picker](https://github.com/Viren070/AIOStreams/commit/8c248623c0bd99e754865f97c2926167d4f998b1)
+- [fix(core): only type a stream as external when it has no url](https://github.com/Viren070/AIOStreams/commit/0f8a13de0c2cefff5954b81cd42c3aa84b520a16)
+- [fix(frontend): add no-referrer to the marketplace and reorder modal logos](https://github.com/Viren070/AIOStreams/commit/37ff00fe251fc50b87a36dfad7912caf229fbf6b)
+- [chore(presets): disable argentina tv and aio subtitle](https://github.com/Viren070/AIOStreams/commit/22c6c6f398afa61687768722bda07b6c905008af)
+- [fix(presets): replace the fkstream and nzbhydra logos](https://github.com/Viren070/AIOStreams/commit/063a46f760e029f998e3793c306a9b7316b07db4)
+- [feat(parser): read stream duration from behaviorHints.duration](https://github.com/Viren070/AIOStreams/commit/0b9b655353fce57333f81bfbcf239b1e05dcfe00)
+- [feat(parser): read more stream details from behaviorHints](https://github.com/Viren070/AIOStreams/commit/d56784ed024a8bb618a2c94f280f25a5616fc0b8)
+- [feat(remuxdb): enable contributing by default](https://github.com/Viren070/AIOStreams/commit/99b6dc3f907490ffa9e24eeb6c1f008609f1867c)
+- [docs(guides): add private trackers guide (#1438)](https://github.com/Viren070/AIOStreams/commit/d61b9e3735b133eeb683b18c3ef6c07c3e4b82da)
+- [chore(tv): update the web app (#1440)](https://github.com/Viren070/AIOStreams/commit/cebbc2343f8a71e3e90114d3efc56753c99bdf97)
+- [chore(desktop): update the web app (#1427)](https://github.com/Viren070/AIOStreams/commit/29be572e18bcd96886c7016030840789e182f536)
+- [chore(tv): release 0.2.0 (#1441)](https://github.com/Viren070/AIOStreams/commit/295490e99ab4b7da82566e21b9b64f2a6e33c8a1)
+- [chore(desktop): release 0.11.0 (#1431)](https://github.com/Viren070/AIOStreams/commit/e58b3e1574914d53040f1aab8f6f3b375b521e45)
+- [fix(presets): note TsukiHime's per-file audio/subtitle extraction (#1436)](https://github.com/Viren070/AIOStreams/commit/b17de1eabd7d98e6f4a65aa01229d215081ff38f)
+
+[Compare 147773c...b17de1e](https://github.com/Viren070/AIOStreams/compare/147773c...b17de1e)
+
+---
+
 ## nightly-147773c — 2026-10-06
 
 - [fix(watch-state): add the session start time to playback event ids](https://github.com/Viren070/AIOStreams/commit/ea9ddbd2e11adaab4d0400988a6df8452a912a87)
@@ -224,18 +250,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [refactor(jellyfin-web): pick the next version by binge group alone](https://github.com/Viren070/AIOStreams/commit/20864c117a197eacd85262a37b0043fa038a283b)
 
 [Compare ff64174...00fb93a](https://github.com/Viren070/AIOStreams/compare/ff64174...00fb93a)
-
----
-
-## nightly-ff64174 — 2026-09-25
-
-- [feat(jellyfin): send undropped when a play picks a dropped show back up](https://github.com/Viren070/AIOStreams/commit/8ecd5773919a25937a6e57585574371b92ca2328)
-- [feat(jellyfin): sign in with a PIN alone on the picker address](https://github.com/Viren070/AIOStreams/commit/53df9160eb7ce60cfce33e081107b87cfbd520cc)
-- [docs(changelog): update post for v2.35](https://github.com/Viren070/AIOStreams/commit/a14cb02e9ee6f7a5e293f74510eef8475f84d484)
-- [chore(presets/newznab): add more known newznab indexer presets (#1358)](https://github.com/Viren070/AIOStreams/commit/32a92bfa91ae79fe671c9232688afd98417e58c6)
-- [fix(remuxdb): log lookup failures loudly instead of silently at debug (#1356)](https://github.com/Viren070/AIOStreams/commit/ff641743970304c4aacfb4b444fdbf9f0cd54c64)
-
-[Compare 1442fc5...ff64174](https://github.com/Viren070/AIOStreams/compare/1442fc5...ff64174)
 
 ---
 
