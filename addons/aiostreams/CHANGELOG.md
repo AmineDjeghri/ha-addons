@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-a521900 — 2026-10-12
+
+- [feat(web): hear back from external players in the Android app](https://github.com/Viren070/AIOStreams/commit/73138d6a605428370dc36b7cbded8f3a803538d4)
+- [feat(android): hand Back to the page](https://github.com/Viren070/AIOStreams/commit/36ae5a0fe62464c7845e072c716acdcbf5fa922d)
+- [feat(web): take the Android app's Back](https://github.com/Viren070/AIOStreams/commit/fb93b47ee602c1b1b0a0fb1d8186f9e3f5f77564)
+- [feat(android): add an ExoPlayer engine](https://github.com/Viren070/AIOStreams/commit/764da86a4b82d5ace8caa42490a57122700f90bc)
+- [feat(web): choose the Android app's player engine](https://github.com/Viren070/AIOStreams/commit/0bef3a4f4686e78445c275b18063af8ec5906dc6)
+- [feat(web): say which picture fit the button picked](https://github.com/Viren070/AIOStreams/commit/3902c74a9f6a4d051a4cb5c2fc6936ce337904f7)
+- [refactor(android): rename the player modules to mpv and exoplayer](https://github.com/Viren070/AIOStreams/commit/42b0cd5adeb3a77d28873ce496663eaedaf2684f)
+- [fix(android): apply sub-ass-override to ASS in ExoPlayer](https://github.com/Viren070/AIOStreams/commit/2e4da694ac9bfd6c65c710a178bf56a9017aff34)
+- [fix(android): time embedded text subtitles by the video's frames](https://github.com/Viren070/AIOStreams/commit/3c4db7b4f8b622bbceae1ea3213bbdc241cefd11)
+- [feat(android): fall back to mpv when ExoPlayer can't decode a file](https://github.com/Viren070/AIOStreams/commit/e54d2b6093c3679d5e6cbfa17ba0f515d13e90bd)
+- [feat(web): add an Automatic player engine and make it the default](https://github.com/Viren070/AIOStreams/commit/2549a50f2a3433c295ad7cb0bc14c549afadb931)
+- [fix(android): replace the launcher PNG with an adaptive icon](https://github.com/Viren070/AIOStreams/commit/79ad343a79c7771065f59d252830a8733b614743)
+- [feat(android): read back to the subtitle lines a seek lands in](https://github.com/Viren070/AIOStreams/commit/7592d222a6dff1770e669ff32957d4cd5bb92381)
+- [fix(android): strip native libraries with the pinned NDK](https://github.com/Viren070/AIOStreams/commit/cf9634418baa68410d449a52d7c76233c7ea7457)
+- [feat(android): fetch libmpv from a pinned, hash-checked release](https://github.com/Viren070/AIOStreams/commit/983666a10d4268fe329670974cc387dff1669457)
+- [perf(web): ask the Android app's mpv for direct MediaCodec decoding](https://github.com/Viren070/AIOStreams/commit/2173c6232fc6f35c8483a81ea3976cdd119c63f8)
+- [chore(android): ignore the bin folders VS Code's Java tooling writes](https://github.com/Viren070/AIOStreams/commit/645c49443ad2148e87b9bbcee1d4842011c5d394)
+- [fix(android): write mpv's CA bundle from Android's certificate store](https://github.com/Viren070/AIOStreams/commit/1a3f43d0f0d30524d3619f1c3e9cbe5255c9d267)
+- [feat(android): add an Android TV launcher entry and banner](https://github.com/Viren070/AIOStreams/commit/9c945d104f1424fee1dcc51d60da2b2972c618c6)
+- [feat(android): tell the page it runs on a TV](https://github.com/Viren070/AIOStreams/commit/da3281cf7db564d238693223943738599797cd13)
+
+[Compare b17de1e...a521900](https://github.com/Viren070/AIOStreams/compare/b17de1e...a521900)
+
+---
+
 ## nightly-b17de1e — 2026-10-07
 
 - [feat(media-info): add a tags list to audio tracks](https://github.com/Viren070/AIOStreams/commit/6ff91b8737c26da71ccbfbedaf615e223323e0aa)
@@ -223,33 +250,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [docs: list Linux as a desktop app platform](https://github.com/Viren070/AIOStreams/commit/f2b94c802f3c1b72405380262b87faa1236e8b8c)
 
 [Compare 00fb93a...6fb4535](https://github.com/Viren070/AIOStreams/compare/00fb93a...6fb4535)
-
----
-
-## nightly-00fb93a — 2026-09-26
-
-- [fix(core): make trailer source and type optional](https://github.com/Viren070/AIOStreams/commit/19d7c1294fc2fec70755a4e5864485eb67793ab5)
-- [refactor(ui): move the component kit into packages/ui](https://github.com/Viren070/AIOStreams/commit/74d1f313f0c0f0b4c033f1b9aed76b7a28a3080c)
-- [refactor(jellyfin-web): move the web app into its own package](https://github.com/Viren070/AIOStreams/commit/e95334705b8c98b9772ddca7a131df49a3ea1600)
-- [fix(jellyfin-web): define NEXT_PUBLIC_PLATFORM for the ui kit](https://github.com/Viren070/AIOStreams/commit/95a39f079391d804ab71654d6f9365513ff6834e)
-- [fix(jellyfin-web): drop the scroll lock's scrollbar margin](https://github.com/Viren070/AIOStreams/commit/f6465ae79500df1a22dee16057dccf1d0d07b4bb)
-- [feat(jellyfin-web): add the desktop app as a playback host](https://github.com/Viren070/AIOStreams/commit/5561530cf612657967daef7d1c5a2fe094ebb696)
-- [feat(desktop): add a Windows shell with mpv under WebView2](https://github.com/Viren070/AIOStreams/commit/d084d8984416a4c16b270b1b4e5799382006c637)
-- [feat(desktop): add the app icon](https://github.com/Viren070/AIOStreams/commit/5794e4429d55686928e0e2ab167be267b4dc61aa)
-- [feat(jellyfin-web): add a standalone build that picks its server](https://github.com/Viren070/AIOStreams/commit/c0ab405fab73f41417ec87494d0ad6c8b57b5711)
-- [feat(desktop): serve the standalone web app](https://github.com/Viren070/AIOStreams/commit/bde9066a2cf2a4ed8fa31956cdbc458eccd33a51)
-- [feat(jellyfin): store users' playback preferences](https://github.com/Viren070/AIOStreams/commit/24db694d7ae4cb6f25abaaef1a17dd45bf83d126)
-- [feat(ui): add a colour input](https://github.com/Viren070/AIOStreams/commit/4cffffe8d4f4f006627c82e3ee6591edc29d95d4)
-- [feat(jellyfin-web): add a settings page](https://github.com/Viren070/AIOStreams/commit/feb8517d45ba5c8de841e7c5a03d9297cd8c174a)
-- [feat(desktop): let the page set playback options and read versions](https://github.com/Viren070/AIOStreams/commit/991e738aa2f4e0c843fb1d42ef1fd619e85f7ee4)
-- [feat(jellyfin): send each version's binge group](https://github.com/Viren070/AIOStreams/commit/59d9a90bf1647999e088610bb17e9ad33bf23eba)
-- [feat(jellyfin-web): offer the next episode near the end](https://github.com/Viren070/AIOStreams/commit/75342eb5b749fff7ef44c5183368c51608e5c029)
-- [feat(jellyfin): give the web app each version's own id in PlaybackInfo](https://github.com/Viren070/AIOStreams/commit/42b67228e53a62f8746467de270394a4d659440a)
-- [feat(jellyfin-web): sync subtitles and switch versions in the player](https://github.com/Viren070/AIOStreams/commit/2c75b60a6d809e96fb012d275f8858ce4cde5c1a)
-- [feat(core): add a cached autoplay attribute](https://github.com/Viren070/AIOStreams/commit/ae02dcdf231d99581b5d0da3cb468345a653ea3c)
-- [refactor(jellyfin-web): pick the next version by binge group alone](https://github.com/Viren070/AIOStreams/commit/20864c117a197eacd85262a37b0043fa038a283b)
-
-[Compare ff64174...00fb93a](https://github.com/Viren070/AIOStreams/compare/ff64174...00fb93a)
 
 ---
 
