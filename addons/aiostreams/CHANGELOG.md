@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-bd1de5b — 2026-10-13
+
+- [fix(web): stack keyed glides on layers again, easing held repeats in and out](https://github.com/Viren070/AIOStreams/commit/3bd164477a3c0dafa8cbc11a5f4749a72cb2cafa)
+- [feat(android): pass surround audio through by what the output reports](https://github.com/Viren070/AIOStreams/commit/6cc6828e1afeb49773bf7244445d241e8340085a)
+- [feat(web): add a Dolby Vision switch that plays the HDR10 picture instead](https://github.com/Viren070/AIOStreams/commit/e27353e9883eb8ff5ef62fa11e821bfbe30c489b)
+- [feat(jellyfin): rank subtitle tracks by type](https://github.com/Viren070/AIOStreams/commit/d37af67e46ce9b8180250a19ce92bf4c61863e6f)
+- [feat(jellyfin): read named trailers and video links](https://github.com/Viren070/AIOStreams/commit/52c949084f74f39ee3d98e8bec63d984f327bc31)
+- [feat(web): add a trailer player and a sheet of named trailers](https://github.com/Viren070/AIOStreams/commit/b1c84c17ab15cdd371e0dc1a29dacc3a0fee4714)
+- [fix(web): fill the player controls' focus with an inset shadow](https://github.com/Viren070/AIOStreams/commit/78e1d2771e34aea8f820b029d40fff6ff52de91f)
+- [feat(jellyfin): answer search hints from LumiereDB or Cinemeta](https://github.com/Viren070/AIOStreams/commit/03ef41737acbbf2a8a9641ca352c6d291c38614c)
+- [feat(web): suggest titles from search hints while typing](https://github.com/Viren070/AIOStreams/commit/9f36d38c4ceb92309834c647ec979ddab9748367)
+- [docs: update changelog and app/protocol docs](https://github.com/Viren070/AIOStreams/commit/0b9bdad366f6b48f0d224569a667277ace630d1c)
+- [feat(web): reuse the server's kept version list in the player](https://github.com/Viren070/AIOStreams/commit/edac5c2ef161ef88a03e8c6a994e7f6c30015e48)
+- [feat(web): list only the user's subtitle languages in the subtitle menu](https://github.com/Viren070/AIOStreams/commit/0afe74400f59c535f4ec9a871579cb5d4172543f)
+- [fix(desktop): read streams with FFmpeg's reader and reconnect options](https://github.com/Viren070/AIOStreams/commit/3c4fff3ddd770cbde3a95c67dc7220bc7962c4d8)
+- [fix(web): show an early end of file as a failure with a resume button](https://github.com/Viren070/AIOStreams/commit/a4a9dd7d4b19a8e2e8aecdf85b849e6ca1c4852f)
+- [feat(web): add data-ui hooks to the parts that had none](https://github.com/Viren070/AIOStreams/commit/755544587cc5c42dddb8559514fc75e4f9e37325)
+- [docs: list every web app CSS hook](https://github.com/Viren070/AIOStreams/commit/2a42d39bc46fbd48ecc0a3af77adbdaabf8093ab)
+- [fix(desktop): read streams with curl again](https://github.com/Viren070/AIOStreams/commit/d877bd10281ef95061fd3a633685d4b5beedbb2f)
+- [chore(desktop): update the web app (#1492)](https://github.com/Viren070/AIOStreams/commit/61c0515aec20cb853dd9d056fc633022578c2ea4)
+- [chore(android): update the web app (#1493)](https://github.com/Viren070/AIOStreams/commit/5143370f6b8b0c24be3603d538a0b2e89bbe921e)
+- [chore(smart-tv): update the web app (#1479)](https://github.com/Viren070/AIOStreams/commit/3fd07deb1dba590e38e28172c91ee42ccb64110e)
+
+[Compare a521900...bd1de5b](https://github.com/Viren070/AIOStreams/compare/a521900...bd1de5b)
+
+---
+
 ## nightly-a521900 — 2026-10-12
 
 - [feat(web): hear back from external players in the Android app](https://github.com/Viren070/AIOStreams/commit/73138d6a605428370dc36b7cbded8f3a803538d4)
@@ -223,33 +250,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [feat(jellyfin-web): add a calendar page](https://github.com/Viren070/AIOStreams/commit/1fc85947164c73ccc9bb51d39a266b086797e515)
 
 [Compare 6fb4535...632d1d4](https://github.com/Viren070/AIOStreams/compare/6fb4535...632d1d4)
-
----
-
-## nightly-6fb4535 — 2026-09-27
-
-- [fix(desktop): start mpv on Linux under any locale](https://github.com/Viren070/AIOStreams/commit/94d506389c95f616ef67daeffb6ae3ebb1f74e81)
-- [fix(desktop): follow the mouse's back and forward buttons on Linux](https://github.com/Viren070/AIOStreams/commit/38afea547dc4582aeb8d367a7cba1027227124cb)
-- [fix(desktop): log the OpenGL context the Linux video draws with](https://github.com/Viren070/AIOStreams/commit/2fe90a2c90fc7521202450a0957fe6bf1f294437)
-- [perf(jellyfin-web): decode artwork off the main thread](https://github.com/Viren070/AIOStreams/commit/4889472996cbf941d8b2662ca30fa40fb3d2d9d7)
-- [fix(desktop): give the Linux window the app's own id](https://github.com/Viren070/AIOStreams/commit/c3d495cf7d24d0b5fa3f122ab9682d74a15e5f23)
-- [fix(desktop): redraw the Linux video area when playback stops](https://github.com/Viren070/AIOStreams/commit/89d8d69553495307a57df8240c2767efd574b41c)
-- [fix(jellyfin-web): scroll a new page before its first paint](https://github.com/Viren070/AIOStreams/commit/98548323de487bdafbdb1bee8329691fe3077d05)
-- [perf(desktop): make the page's mpv calls on a thread of their own](https://github.com/Viren070/AIOStreams/commit/2e5db88fa1e82aef436e4e991f55fa7b1ba0fcbf)
-- [perf(desktop): draw Linux video frames when due instead of in mpv's wait](https://github.com/Viren070/AIOStreams/commit/bb8539a93d5e771bb0428bdf7b9ae211f45da358)
-- [feat(desktop): turn on the render API's advanced control on Linux](https://github.com/Viren070/AIOStreams/commit/e4405d31422cb9d0f08967039e4d453b20dd808e)
-- [feat: show the server's build in About and diagnostics](https://github.com/Viren070/AIOStreams/commit/c08e49601204640b5c870cec8c18b6e250d79c71)
-- [feat(jellyfin-web): cap how wide hero and title backdrops get](https://github.com/Viren070/AIOStreams/commit/485b52bc75afa379a197d4355e81954ee11e036e)
-- [feat(desktop): put the app icon on a near-black tile](https://github.com/Viren070/AIOStreams/commit/ac900ae994d10e7a8c38a74b588d60295747adbe)
-- [feat(desktop): package the Linux app as a Flatpak](https://github.com/Viren070/AIOStreams/commit/0a1c8cd76fde502da604f63701b6660ed6180836)
-- [feat(desktop): fill the Flatpak's releases from the changelog](https://github.com/Viren070/AIOStreams/commit/7a2061517812652d4a049934274d13aefe31e29c)
-- [ci(desktop): build the Linux Flatpak for x64 and arm64](https://github.com/Viren070/AIOStreams/commit/66af518584a99dcd67f5f2f44ded4fde6dfb4b1e)
-- [fix(desktop): skip mpv's frames on macOS while the window can't show them](https://github.com/Viren070/AIOStreams/commit/cf497d6e77dd525f10cfc0c15ce0111d3c5d16eb)
-- [perf(desktop): stop macOS video draws waiting on the main thread](https://github.com/Viren070/AIOStreams/commit/d3b9f0a56859dbfdf1912dee8168e078619d698f)
-- [feat(desktop): turn on the render API's advanced control on macOS](https://github.com/Viren070/AIOStreams/commit/dc8730e3451d248a73d308eda5b89c78838e4c62)
-- [docs: list Linux as a desktop app platform](https://github.com/Viren070/AIOStreams/commit/f2b94c802f3c1b72405380262b87faa1236e8b8c)
-
-[Compare 00fb93a...6fb4535](https://github.com/Viren070/AIOStreams/compare/00fb93a...6fb4535)
 
 ---
 
