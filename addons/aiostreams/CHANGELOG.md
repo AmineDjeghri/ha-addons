@@ -2,6 +2,24 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-38c060d — 2026-10-14
+
+- [feat(jellyfin): pick the default audio track by the user's audio types](https://github.com/Viren070/AIOStreams/commit/e0eb9f2e6a2809394375f06ed3ce4edb33067eb4)
+- [feat(web): re-pick the audio track by the user's audio types](https://github.com/Viren070/AIOStreams/commit/1fe555724b3c7b02a18982d8ae0b1ce62c2d9cc4)
+- [feat(android): report ExoPlayer's audio description tracks](https://github.com/Viren070/AIOStreams/commit/7cc4044c166a13747a5ec387db0ae36a09e227c8)
+- [feat(desktop): add audio filters for dialogue boost, night mode and AC-3 encoding](https://github.com/Viren070/AIOStreams/commit/31c16c95607aee1211dc92a98d974fba0a9cd935)
+- [feat(android): add dialogue boost, night mode, audio delay and AC-3 encoding](https://github.com/Viren070/AIOStreams/commit/1f86c384b7f7f1a8a5da6e08a396f55bf8e90b8c)
+- [feat(web): add sound and output settings for the apps](https://github.com/Viren070/AIOStreams/commit/976ba8bbc5b50c349b10cfece322b10baae0336a)
+- [feat(android): mix ExoPlayer's sound down to the channel setting](https://github.com/Viren070/AIOStreams/commit/d2d403ae83aaa9fdadd205ba4d6ad85e092d69df)
+- [feat(web): show the channel setting in the Android app](https://github.com/Viren070/AIOStreams/commit/4b0f6ac3022d8a15dc4c7a9f6b1cbd71caf9405c)
+- [fix(ui): measure a slider's thumb as the whole slider for key navigation](https://github.com/Viren070/AIOStreams/commit/78d8f105eba7e193376c132ca050f103348af5c3)
+- [feat(web): honour "play the version's default track first" when re-picking audio](https://github.com/Viren070/AIOStreams/commit/5d22997d466959454b37b22a157804b117810747)
+- [fix(jellyfin): play the session a client was given when its stream request names none](https://github.com/Viren070/AIOStreams/commit/38c060dc081e1ab63ca036f384562a6cba77390d)
+
+[Compare bd1de5b...38c060d](https://github.com/Viren070/AIOStreams/compare/bd1de5b...38c060d)
+
+---
+
 ## nightly-bd1de5b — 2026-10-13
 
 - [fix(web): stack keyed glides on layers again, easing held repeats in and out](https://github.com/Viren070/AIOStreams/commit/3bd164477a3c0dafa8cbc11a5f4749a72cb2cafa)
@@ -223,33 +241,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [chore: release 2.35.4 (#1390)](https://github.com/Viren070/AIOStreams/commit/0eccbc78c068ad074940b5f0b52af5eed046bbb3)
 
 [Compare 632d1d4...0eccbc7](https://github.com/Viren070/AIOStreams/compare/632d1d4...0eccbc7)
-
----
-
-## nightly-632d1d4 — 2026-09-28
-
-- [fix(jellyfin-web): show any server's placeholder sources as notices](https://github.com/Viren070/AIOStreams/commit/ff32b06d173c83b581827e322a5160054c584602)
-- [fix(jellyfin): take a show's episodes from SeasonId before the path id](https://github.com/Viren070/AIOStreams/commit/6e331296ffb2694c34996a0e374c8cc0e2704597)
-- [refactor(ui): move the donation modal into the shared kit](https://github.com/Viren070/AIOStreams/commit/5690d73c397e85d7d5fabe1f22b9f24e4c50778c)
-- [refactor(jellyfin-web): regroup settings by what they change](https://github.com/Viren070/AIOStreams/commit/845b5ad1416d047b3842838bda58fe8306706841)
-- [feat(jellyfin-web): add a donate button under the settings tabs](https://github.com/Viren070/AIOStreams/commit/81b4188e5ef69fcb98c1745aeef5376a8ca6dc12)
-- [feat(jellyfin-web): open the player full screen in landscape on phones](https://github.com/Viren070/AIOStreams/commit/a3d4b2820b4eb703e3606cf9d1eba1c9bee59409)
-- [feat(jellyfin-web): add back and forward buttons to the sidebar in apps](https://github.com/Viren070/AIOStreams/commit/43599da68639bd22b867d5124e48d2713f94a506)
-- [feat(jellyfin-web): keep the window buttons in full screen, with one to leave it](https://github.com/Viren070/AIOStreams/commit/7fa240f1096ebef0a9a7bab1e15bfb61624a1ec7)
-- [fix(jellyfin): round every tick value to a whole number](https://github.com/Viren070/AIOStreams/commit/bb64fb1f03366af59c37991807626e7edf19d5a0)
-- [feat(jellyfin-web): add a favourites page](https://github.com/Viren070/AIOStreams/commit/3c2dc76ce4aaa8fbe652e516a404d03c51c8c742)
-- [refactor(jellyfin-web): drop the watched and favourite filters from catalogs](https://github.com/Viren070/AIOStreams/commit/e454a974b49c5499a6e1230aa89d423932f25590)
-- [feat(desktop): show what plays as Discord rich presence](https://github.com/Viren070/AIOStreams/commit/36f5602591a16f14206c51634783b0e8b192ffed)
-- [feat(jellyfin-web): add a setting to share what plays on Discord](https://github.com/Viren070/AIOStreams/commit/8fdd332b945144a92ade5c670127fa50af3343c5)
-- [feat(jellyfin-web): add {position} and {returnUrl} to the external player link](https://github.com/Viren070/AIOStreams/commit/dfcdac9ae19042461c1037e4d7cffc4136375cad)
-- [feat(jellyfin-web): add {filename} and {subtitles} to the external player link](https://github.com/Viren070/AIOStreams/commit/1ca68bc18fcd2895e6967179dbbe24d935a67f8a)
-- [fix(jellyfin-web): slide pages in by top instead of a transform](https://github.com/Viren070/AIOStreams/commit/11b5ccc9c4baf8e268d318b960853bc76204c9c8)
-- [feat(jellyfin-web): add a setting to skip the version list, with hold to do the other](https://github.com/Viren070/AIOStreams/commit/225a12c42ea732c7f4333900f652f08c89d53a26)
-- [fix(jellyfin-web): count an Intro chapter as the intro only when none is named the opening](https://github.com/Viren070/AIOStreams/commit/95f0ee57b87bb2eb5ab811219096cd33287ad31e)
-- [feat(jellyfin): answer /Items episode queries with a premiere date range](https://github.com/Viren070/AIOStreams/commit/0d900265c913ba44396bdcf88bbc1c37a0264005)
-- [feat(jellyfin-web): add a calendar page](https://github.com/Viren070/AIOStreams/commit/1fc85947164c73ccc9bb51d39a266b086797e515)
-
-[Compare 6fb4535...632d1d4](https://github.com/Viren070/AIOStreams/compare/6fb4535...632d1d4)
 
 ---
 
