@@ -2,6 +2,14 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-e15c0c7 — 2026-10-16
+
+- [feat: allow a per-provider download path override](https://github.com/V1ck3s/octo-fiesta/commit/e15c0c72acb2168d1ec98ec90b7e6b31d50f6f14)
+
+[Compare 6841a2e...e15c0c7](https://github.com/V1ck3s/octo-fiesta/compare/6841a2e...e15c0c7)
+
+---
+
 ## dev-6841a2e — 2026-10-02
 
 - [fix(subsonic): keep external downloads alive when the client disconnects](https://github.com/V1ck3s/octo-fiesta/commit/6841a2ea9c227b212157d81acc4aafa5965419b2)
@@ -84,16 +92,6 @@ For full upstream release notes see the [official Octo-Fiesta releases](https://
 - [feat(tidal): add native Tidal provider](https://github.com/V1ck3s/octo-fiesta/commit/798eaeeb88fa399587a6faaa2fe9fcf43fa1d401)
 
 [Compare 410e862...798eaee](https://github.com/V1ck3s/octo-fiesta/compare/410e862...798eaee)
-
----
-
-## dev-410e862 — 2026-08-29
-
-- [refactor(squidwtf): remove Amazon Music and Deemix backends](https://github.com/V1ck3s/octo-fiesta/commit/0e7d5416000be1e49638bab361cd5d283328be61)
-- [feat: default to Deezer and deprecate SquidWTF provider](https://github.com/V1ck3s/octo-fiesta/commit/c5a90ab781e83a9dfe78a4e806744c5f9cbde96a)
-- [fix(squidwtf): reject Tidal preview clips instead of saving them as full tracks](https://github.com/V1ck3s/octo-fiesta/commit/410e8628222121f3c17f4f4a591bec2e452489b2)
-
-[Compare ac35be3...410e862](https://github.com/V1ck3s/octo-fiesta/compare/ac35be3...410e862)
 
 ---
 
