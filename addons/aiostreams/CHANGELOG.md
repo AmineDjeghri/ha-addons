@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-9609290 — 2026-10-17
+
+- [fix(android): parse ExoPlayer's file subtitles only as a shown track reaches them](https://github.com/Viren070/AIOStreams/commit/8ec4679efa1566319df8626072aecb44d717be00)
+- [fix(android): decode the sound the device can't with libmpv's FFmpeg](https://github.com/Viren070/AIOStreams/commit/b6b78f4115b8799913176109206a46683184a959)
+- [feat(frontend): rework addons menu](https://github.com/Viren070/AIOStreams/commit/644dda67bd96f406d08fcddcf619434402224298)
+- [feat(android): report ExoPlayer's audio output and memory in its stats](https://github.com/Viren070/AIOStreams/commit/80656922b60f344ab4ab0a4c12fdab5d25626696)
+- [feat(web): show the audio output and memory in ExoPlayer's stats](https://github.com/Viren070/AIOStreams/commit/27e7b2ef49648243fdea2b0a903b38247a8359ec)
+- [fix(jellyfin): raise the per-configuration maxVersions limit to 500 (#1517)](https://github.com/Viren070/AIOStreams/commit/5cde591e45b665c9f85185920b5b503b5abf449a)
+- [chore(android): update the web app (#1500)](https://github.com/Viren070/AIOStreams/commit/59ce8cad61f354c6b626871829184c54345c9d9c)
+- [chore(desktop): update the web app (#1506)](https://github.com/Viren070/AIOStreams/commit/69023d45cb7b41c149214fdbde9e4be9c2d06765)
+- [chore(desktop): release 0.15.0 (#1514)](https://github.com/Viren070/AIOStreams/commit/c6c1d2da6a88817a7169d2c54f6127c35c04789c)
+- [chore(android): release 0.5.0 (#1513)](https://github.com/Viren070/AIOStreams/commit/aaf4e4ecbf035bde5ba90e02c2ee8a3ddbdfc9e4)
+- [feat(android): report web fields to the keyboard as native fields on TV](https://github.com/Viren070/AIOStreams/commit/045c536a550295c668d3523b86f58df9d2102f75)
+- [fix(android): decode DTS with FFmpeg rather than the device's decoders](https://github.com/Viren070/AIOStreams/commit/59a0a02a0ac299200a90b7133e5351bc0d0eb699)
+- [chore: update dependencies and dockerfile image base](https://github.com/Viren070/AIOStreams/commit/c7ecd20c55ebad71c4d5e43c55133deaad2aa0df)
+- [fix(config): decrypt string and URL credentials set by the environment (#1528)](https://github.com/Viren070/AIOStreams/commit/795208e502155df7ec503cf0a7da49a54729f47b)
+- [chore: update to rsbuild2](https://github.com/Viren070/AIOStreams/commit/62b0b465919b180d32a47c2620fd6d5fe2f52555)
+- [feat(jellyfin): list versions that need headers or YouTube when PlaybackInfo asks](https://github.com/Viren070/AIOStreams/commit/92d0190159f031528bd8048d0d171759e90bc37a)
+- [feat(desktop): send a loadfile's headers as http-header-fields](https://github.com/Viren070/AIOStreams/commit/c1f365c07bd0c01eb479862f4e90a37afa566d72)
+- [feat(android): send a loadfile's headers from both engines](https://github.com/Viren070/AIOStreams/commit/307e63f204a91ad67ec8e6e8e71d86e0aa0904f8)
+- [feat(web): play versions that need headers or YouTube in the app's player](https://github.com/Viren070/AIOStreams/commit/17527e34c9156d7b6e303e93df29c1b30eeb97aa)
+- [refactor(web): add ask and bridgeStore to the app bridge](https://github.com/Viren070/AIOStreams/commit/23dbac9caec5fc6bf945ced768029f09f15121d3)
+
+[Compare 38c060d...9609290](https://github.com/Viren070/AIOStreams/compare/38c060d...9609290)
+
+---
+
 ## nightly-38c060d — 2026-10-14
 
 - [feat(jellyfin): pick the default audio track by the user's audio types](https://github.com/Viren070/AIOStreams/commit/e0eb9f2e6a2809394375f06ed3ce4edb33067eb4)
@@ -214,33 +241,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [fix(watch-state): match drops against every id a show is stored under](https://github.com/Viren070/AIOStreams/commit/d029954da44802fbb152ca5583aa2b468c45cdb0)
 
 [Compare 0eccbc7...d029954](https://github.com/Viren070/AIOStreams/compare/0eccbc7...d029954)
-
----
-
-## nightly-0eccbc7 — 2026-09-29
-
-- [feat(jellyfin-web): add a per-segment skip setting](https://github.com/Viren070/AIOStreams/commit/b66d07a016881a8a4a4fd208098195c7b4a3a5bc)
-- [feat: add a show on home modifier for catalogs that require a genre](https://github.com/Viren070/AIOStreams/commit/a78080578d3ea3b2df5989856aa7c528e6deb6c0)
-- [fix(jellyfin): apply variants before syncing and validating the config](https://github.com/Viren070/AIOStreams/commit/1764e37f17682e303123808a1e4c7e89e11e261e)
-- [feat(core): add per-addon catalog defaults](https://github.com/Viren070/AIOStreams/commit/063b018947f646cb8774c28a85fca64f813e3e4e)
-- [feat(frontend): rework the catalog editor](https://github.com/Viren070/AIOStreams/commit/1c6f2c0c466136d440d4dda007d6747e4e276947)
-- [fix(desktop): create the window hidden on Windows and show it after the web view](https://github.com/Viren070/AIOStreams/commit/2955154fa97209032bf945a6d7dc73ca905c1814)
-- [feat(jellyfin): send persona ids to trackers that declare watchState.viewers](https://github.com/Viren070/AIOStreams/commit/ffd98bd0897df74e2e7f392bab438c9e2732ac7a)
-- [fix(ui): declare the dark color scheme before the app loads](https://github.com/Viren070/AIOStreams/commit/ec93f125245d9d9da535f006413aa6a2f2d1f8de)
-- [chore: update header presets (#1383)](https://github.com/Viren070/AIOStreams/commit/a1f783c966f4e00bbf7a735dc8b13df92c13a6a1)
-- [chore(desktop): update the web app (#1385)](https://github.com/Viren070/AIOStreams/commit/22fc51fe02e21401a808a3e89517e21148bc32e7)
-- [chore(desktop): release 0.6.0 (#1387)](https://github.com/Viren070/AIOStreams/commit/669af42644b52bef2ef2c76bd38c2e7424428088)
-- [chore: release 2.35.3 (#1386)](https://github.com/Viren070/AIOStreams/commit/11979c12293b617a34009685312a75521086eba3)
-- [feat: adjust jellyfin wording/install options, update docs, readme](https://github.com/Viren070/AIOStreams/commit/d461cd76ef43c34f270d8a93a6f721f42071b528)
-- [feat(desktop): add Discord events for browsing and a connection status](https://github.com/Viren070/AIOStreams/commit/eb193b47ff45fe30604c3ed66b0829509ccc7cf5)
-- [docs(readme): update](https://github.com/Viren070/AIOStreams/commit/2213bff4462b8043e1feb3fc5d506a56cd4377f5)
-- [feat(builtins/nab): warn on missing infohash, fix hash-fallback bug (#1261)](https://github.com/Viren070/AIOStreams/commit/8b5aa22e397d9378216ecc1e0ccfd353fcd88e9e)
-- [fix(desktop): send the Discord logo by address](https://github.com/Viren070/AIOStreams/commit/39d447f390ce2db0f1d97cf56450477862a8351a)
-- [docs(env): add 'createConfig' permission to AIOSTREAMS_AUTH (#1392)](https://github.com/Viren070/AIOStreams/commit/f400920e88e8a78cbbc75bf2304c67d4139b058f)
-- [chore(desktop): release 0.7.0 (#1389)](https://github.com/Viren070/AIOStreams/commit/3c23fd472055b62da7d6137333eaad079c842146)
-- [chore: release 2.35.4 (#1390)](https://github.com/Viren070/AIOStreams/commit/0eccbc78c068ad074940b5f0b52af5eed046bbb3)
-
-[Compare 632d1d4...0eccbc7](https://github.com/Viren070/AIOStreams/compare/632d1d4...0eccbc7)
 
 ---
 
