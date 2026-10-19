@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-6ca32ed — 2026-10-19
+
+- [fix(jellyfin): keep separate users off the account's switch list](https://github.com/Viren070/AIOStreams/commit/68a0f69b30abcc206b3030c2134fe762989aa876)
+- [refactor(web): drop the picker's dimming of separate users](https://github.com/Viren070/AIOStreams/commit/3051739bf1cbbdb3937f3ff9df9ef5e38c828e95)
+- [docs: list a separate user only to itself](https://github.com/Viren070/AIOStreams/commit/2dc71a976e0bde5d8487fe8ec6cf2ba038a942e0)
+- [fix(web): start on Home after switching users or signing out](https://github.com/Viren070/AIOStreams/commit/b5814996c628cb5b61846c6fb0a3da80ae8e6ec5)
+- [feat(web): keep the app language per user](https://github.com/Viren070/AIOStreams/commit/7e32f7daf378845a472fa925a39f0874077eee6e)
+- [fix(web): return focus to a card after a dialog its menu opened](https://github.com/Viren070/AIOStreams/commit/ae8e7e58a70aa3db70ef56e7e738bd38bb1bd588)
+- [fix(web): draw card focus rings outside the picture](https://github.com/Viren070/AIOStreams/commit/e3646bc1b31bfc904779d074e86ad56ff1ae53c9)
+- [feat(core): keep reports from the apps and pass them on to the developer](https://github.com/Viren070/AIOStreams/commit/2c760fdece71ec5d8c6e72419f60d1c2ecf549a4)
+- [feat(server): take app reports and prune them](https://github.com/Viren070/AIOStreams/commit/2b047996a077d6a7991d6b1a7de26d1fe61bde54)
+- [feat(android): record how the last run ended](https://github.com/Viren070/AIOStreams/commit/54ef5e0d44a8031aaeb6835a3e85ed59ce5ad70c)
+- [feat(web): send a report from troubleshooting or after a crash](https://github.com/Viren070/AIOStreams/commit/661daef90ff0b939586cc6cc8579c1a157b3aa8b)
+- [feat(frontend): read app reports in the dashboard](https://github.com/Viren070/AIOStreams/commit/8c3257de696dc6250244f195522ccde3d7100ae0)
+- [docs: add app reports](https://github.com/Viren070/AIOStreams/commit/f243869ac37f4fe11765ae0123b8b14c998c83e5)
+- [fix(desktop): default GSK_RENDERER to OpenGL on Linux](https://github.com/Viren070/AIOStreams/commit/d9f7856680769708dbef4dfa9c8d655ea6484424)
+- [fix(jellyfin): return only the named version from PlaybackInfo](https://github.com/Viren070/AIOStreams/commit/f18557cf0842f9f80c8985e3cbe8e70d26905345)
+- [fix: send hash of host for reports](https://github.com/Viren070/AIOStreams/commit/0705e0febf4ef49283898a6ae379fafd56d14108)
+- [feat(android): cache the playing stream in native memory for ExoPlayer](https://github.com/Viren070/AIOStreams/commit/ae6fa0ef6b9f22abdcaeb0b425d30686488a12ce)
+- [feat(android): skip unreferenced frames and early Opus and Vorbis audio on seeks](https://github.com/Viren070/AIOStreams/commit/8fc59bdaaad30b11c072d26a307f480894661b1d)
+- [feat(web): cover the player until its first frame](https://github.com/Viren070/AIOStreams/commit/364c9746998c4ff3755127aa06d0dd6a4a76ce0a)
+- [feat(web): add a cache size setting](https://github.com/Viren070/AIOStreams/commit/b3d6f92cdac443387f0a2cc6694d170c76bbc534)
+
+[Compare 9609290...6ca32ed](https://github.com/Viren070/AIOStreams/compare/9609290...6ca32ed)
+
+---
+
 ## nightly-9609290 — 2026-10-17
 
 - [fix(android): parse ExoPlayer's file subtitles only as a shown track reaches them](https://github.com/Viren070/AIOStreams/commit/8ec4679efa1566319df8626072aecb44d717be00)
@@ -217,30 +244,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [feat(jellyfin-web): show a message for no libraries](https://github.com/Viren070/AIOStreams/commit/563126e324678d9a5c632252d52a49812ce315e5)
 
 [Compare d029954...70ffb17](https://github.com/Viren070/AIOStreams/compare/d029954...70ffb17)
-
----
-
-## nightly-d029954 — 2026-09-30
-
-- [fix(ui): pan carousel rows with a trackpad or mouse wheel (#1394)](https://github.com/Viren070/AIOStreams/commit/736d6c4dae8ec3d6f429ee33c1b078ca349ca81f)
-- [fix(desktop): don't scale disc subtitles, keep styled ones in the crop](https://github.com/Viren070/AIOStreams/commit/907867d81bbd53b16b8bb9ebbf85905de2a124e7)
-- [feat(desktop): add an aiostreams:// link scheme](https://github.com/Viren070/AIOStreams/commit/8f243fc6bc1a3afd71d7f0e97ff0c9ae29105751)
-- [feat(jellyfin-web): open aiostreams:// links](https://github.com/Viren070/AIOStreams/commit/33caebd9126ce2d13ef3b0e10a91d8b5fb5efdfd)
-- [chore(desktop): update the web app (#1395)](https://github.com/Viren070/AIOStreams/commit/72c70fe37208b002e2de0b8d9df2efc2fedf877f)
-- [chore(desktop): release 0.8.0 (#1397)](https://github.com/Viren070/AIOStreams/commit/12f30f2b291c665e48971f5ca3a1f5c0573c46b0)
-- [chore: add dockerfile for jellyfin-web](https://github.com/Viren070/AIOStreams/commit/35656af2f339df90897fe2e9f170c21693d20b3b)
-- [fix(jellyfin-web): send None for featured catalogs that need a genre](https://github.com/Viren070/AIOStreams/commit/0470d74a519d9e99bd8c28ffef63b2c64a53ed3f)
-- [feat: flag libraries that need a genre](https://github.com/Viren070/AIOStreams/commit/a07907931dc0039729a5245f63381ca84fa55c2f)
-- [docs: update readme and 2.35 changelog](https://github.com/Viren070/AIOStreams/commit/6640e0fc592071569938a279a7238798f07785ce)
-- [feat(frontend): show the release a nightly is built on in What's new](https://github.com/Viren070/AIOStreams/commit/3dcc6030c520ab0be4b157b6c0e90e543ec61ba3)
-- [feat(frontend): announce new releases to nightly users by their base version](https://github.com/Viren070/AIOStreams/commit/0ab165c414fbe3c427a4439aa890e7f6a6deef32)
-- [feat(jellyfin): add a setting to stop marking unaired episodes](https://github.com/Viren070/AIOStreams/commit/1bfc82b90b2c1041ae656fb34de08b17427023f9)
-- [fix(watch-state): keep history for as long as a configuration is in use](https://github.com/Viren070/AIOStreams/commit/1a7f39fc3da2876b155718da6a8f495cb6aaac47)
-- [feat(core): replace per-feature private URL settings with ALLOW_PRIVATE_URLS](https://github.com/Viren070/AIOStreams/commit/c3853ca30a977dc062252dbc198232fd43b35273)
-- [feat(watch-state): make the resume and played thresholds configurable](https://github.com/Viren070/AIOStreams/commit/597e4630c4005588ea98fa8d821e05e71d6a6f76)
-- [fix(watch-state): match drops against every id a show is stored under](https://github.com/Viren070/AIOStreams/commit/d029954da44802fbb152ca5583aa2b468c45cdb0)
-
-[Compare 0eccbc7...d029954](https://github.com/Viren070/AIOStreams/compare/0eccbc7...d029954)
 
 ---
 
