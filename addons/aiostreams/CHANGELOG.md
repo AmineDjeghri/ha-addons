@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-454e8b4 — 2026-10-22
+
+- [docs: add v2.37 changelog](https://github.com/Viren070/AIOStreams/commit/3bb0b7494c2af4a25278068a6e5470992b531285)
+- [feat(desktop): report a file's own subtitle lines to the page](https://github.com/Viren070/AIOStreams/commit/348c3dfaf455f3831af4992dddac3cf459bc4673)
+- [feat(android): report a file's own subtitle lines to the page](https://github.com/Viren070/AIOStreams/commit/6c1abd7cc727fde90287daa7f534fe860ab884cc)
+- [feat(web): line added subtitles up with the file's own subtitles](https://github.com/Viren070/AIOStreams/commit/f016dd6cefc8015cade74def057940d9eb9c3e12)
+- [docs(apps): describe automatic subtitle sync](https://github.com/Viren070/AIOStreams/commit/b441f45d362a1b5ca0cf5271618f02b60b10c3bd)
+- [feat(native): add container indexes and seek thumbnails in Rust](https://github.com/Viren070/AIOStreams/commit/e2bca29b433934c3b5f02e5d6e9d511e43e9ce59)
+- [feat(android): build packages/native into a natives module with cargo-ndk](https://github.com/Viren070/AIOStreams/commit/3494f9daba7b80f827733c96102455c9595cf55a)
+- [ci(android): install Rust, its Android targets and cargo-ndk](https://github.com/Viren070/AIOStreams/commit/e9ad0b00188b6e3bb1fe107a06d4a2f85f91ff78)
+- [perf(native): convert thumbnails straight to JPEG YCbCr](https://github.com/Viren070/AIOStreams/commit/2fe4fe1d7cfd04859dffa74c01c0b935639d779d)
+- [perf(native): fetch the next thumbnail's keyframe while one renders](https://github.com/Viren070/AIOStreams/commit/41d2eccfcdef127526c39f2d141ac69eb244d5cc)
+- [perf(native): size keyframe reads from recent keyframe sizes](https://github.com/Viren070/AIOStreams/commit/ea1c4cadbe40f30571c33a8dddaf81efd51a1ee3)
+- [feat(native): read subtitle timelines from a Matroska file's index](https://github.com/Viren070/AIOStreams/commit/f7bc3b2b335827c8ed6eb8967d75f76bbc77a93a)
+- [feat(desktop): send the reference subtitle's lines from the file's index](https://github.com/Viren070/AIOStreams/commit/cb248ee1145c684e5eceb88a7373ca30160e53a7)
+- [ci(desktop): build on packages/native/container changes](https://github.com/Viren070/AIOStreams/commit/fb79ef65577c5e476385a0034479ad4928de46e2)
+- [feat(android): send the reference subtitle's lines from the file's index](https://github.com/Viren070/AIOStreams/commit/8f911ea44a4411111cd4fde9b9ef2bd85c0fc5f0)
+- [refactor(native): load libavcodec at runtime for thumbnails](https://github.com/Viren070/AIOStreams/commit/6214d89b67356fde1926423e7690e7f7c1d29d09)
+- [perf(native): fetch several keyframes at once for thumbnails](https://github.com/Viren070/AIOStreams/commit/4a67d314ed9ef185752e5f570613e67e64f1d0ec)
+- [feat(native): add thumbnails that open their file in the background](https://github.com/Viren070/AIOStreams/commit/87c1ecefeb5c4e483827192d4b9a4d1c6d5dc592)
+- [feat(native): add thumbnail JNI exports for Android](https://github.com/Viren070/AIOStreams/commit/39eb4acca632329e5a03d8607102f612ee096add)
+- [feat(desktop): make seek-bar thumbnails for player-thumbnail requests](https://github.com/Viren070/AIOStreams/commit/1f20a1989f66acf1f38af0efbc7dc6b66c2ad6b2)
+
+[Compare 6ca32ed...454e8b4](https://github.com/Viren070/AIOStreams/compare/6ca32ed...454e8b4)
+
+---
+
 ## nightly-6ca32ed — 2026-10-19
 
 - [fix(jellyfin): keep separate users off the account's switch list](https://github.com/Viren070/AIOStreams/commit/68a0f69b30abcc206b3030c2134fe762989aa876)
@@ -217,33 +244,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [chore: release 2.35.9 (#1423)](https://github.com/Viren070/AIOStreams/commit/1dcfa7665e7fa759b5604e39bf0f491e9aefaea5)
 
 [Compare 70ffb17...1dcfa76](https://github.com/Viren070/AIOStreams/compare/70ffb17...1dcfa76)
-
----
-
-## nightly-70ffb17 — 2026-10-03
-
-- [fix(desktop): inhibit display sleep while a file plays on macOS and Linux](https://github.com/Viren070/AIOStreams/commit/d19594a6892f11110b1ea011176a469726a391f6)
-- [feat(watch-state): keep ratings and likes, and push and pull ratings](https://github.com/Viren070/AIOStreams/commit/f85758dee209d443471f3bfb54da754c39c3ae5f)
-- [feat(jellyfin-web): rate movies, shows and seasons from their page](https://github.com/Viren070/AIOStreams/commit/e222942403cd8aa82fc4ee92e2b5ea1d7853b76f)
-- [feat(frontend): add a None option to a user's trackers](https://github.com/Viren070/AIOStreams/commit/16aa99710f7237662245068bbe4283c8d58a7e4b)
-- [feat(desktop): drive the system's media controls from a shared now-playing state](https://github.com/Viren070/AIOStreams/commit/89f4671a7e376d2b688b3fa41dfbd31313b72902)
-- [feat(jellyfin-web): send now-playing to the desktop app and set the browser's media session](https://github.com/Viren070/AIOStreams/commit/f5c790f47b42b89b572ea62de19a7cb47c7e780d)
-- [fix(core/sync): remove the DNS pre-check on user sync URLs](https://github.com/Viren070/AIOStreams/commit/13fc300efa3cf348798283f9020e664827c5ea08)
-- [feat(frontend): ask for the configuration password in the profile card](https://github.com/Viren070/AIOStreams/commit/86c3ffb4cbdbdff76a347c1373f5d32908a94bc4)
-- [fix(jellyfin-web): size and place browser subtitle cues](https://github.com/Viren070/AIOStreams/commit/3021081760d01018a8d349f16aed2f299b685953)
-- [feat(jellyfin-web): add a subtitle height setting](https://github.com/Viren070/AIOStreams/commit/fad3c78cd2c658fa77f21bd1a4874acf101c134e)
-- [docs: add a custom CSS example that hides a catalog row's kind](https://github.com/Viren070/AIOStreams/commit/3ab898bfe1987ceb1547456e8892b1b0c484517b)
-- [feat(jellyfin-web): link the custom CSS guide from the theme settings](https://github.com/Viren070/AIOStreams/commit/db4b778731216c12dd144bba8325295f67111f71)
-- [feat(jellyfin-web): take the player's top volume from mpv's volume-max](https://github.com/Viren070/AIOStreams/commit/e99ce707dd77d4810904ab2b687e89ddf283a036)
-- [feat(jellyfin-web): link the source code and documentation from About](https://github.com/Viren070/AIOStreams/commit/f0bae05dc219d2922229c2163db28b64d948e4be)
-- [feat(jellyfin-web): replace the player's volume range with a bar that marks the boost](https://github.com/Viren070/AIOStreams/commit/6922932d41093a0b200f4f44dcabc4125ca87d18)
-- [chore(desktop): update the web app (#1398)](https://github.com/Viren070/AIOStreams/commit/85c2df2fc6c02fcf84460a9263ed2cc6c6a0a3f0)
-- [chore(desktop): release 0.9.0 (#1402)](https://github.com/Viren070/AIOStreams/commit/cd13e5f8abf4c2ea708a290787573dd97d9d1243)
-- [chore: release 2.35.5 (#1396)](https://github.com/Viren070/AIOStreams/commit/8377562395c9c02e2336296cd68f9069f275d42c)
-- [feat(jellyfin): link the configuration's own page when the address names it](https://github.com/Viren070/AIOStreams/commit/86731647ab1cd861813b5712865cb3c4cb943c18)
-- [feat(jellyfin-web): show a message for no libraries](https://github.com/Viren070/AIOStreams/commit/563126e324678d9a5c632252d52a49812ce315e5)
-
-[Compare d029954...70ffb17](https://github.com/Viren070/AIOStreams/compare/d029954...70ffb17)
 
 ---
 
