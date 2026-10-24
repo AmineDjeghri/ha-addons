@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-ed8b085 — 2026-10-24
+
+- [feat(core): add storage, ids and items for Jellyfin playlists](https://github.com/Viren070/AIOStreams/commit/948cfe74ed5b29c138d30b8ae36b19e162ad41e1)
+- [feat(jellyfin): add the /Playlists routes and list playlists as items](https://github.com/Viren070/AIOStreams/commit/6b38420e6218eb665273f7493adf3a442f5b2526)
+- [feat(web): add playlists](https://github.com/Viren070/AIOStreams/commit/a9bec92aa4148da2af8a8f13060e71c855e0917f)
+- [docs: describe playlists](https://github.com/Viren070/AIOStreams/commit/c4896f687085e80c1e3e631c63c10f16367936ee)
+- [docs: update changelog](https://github.com/Viren070/AIOStreams/commit/2e9a4bee5f7418a4c5d9a3a992d48e00b58b4763)
+- [fix(jellyfin): air an undated episode no earlier than the ones before it](https://github.com/Viren070/AIOStreams/commit/48a77e7955f400a63d7bd51d84889ccdd966df23)
+- [fix(jellyfin): leave subtitles marked no-store out of the cache](https://github.com/Viren070/AIOStreams/commit/762360a301ef18b22469b28ba009c42653920be6)
+- [fix(web): reword the audio help for remembering picks per show](https://github.com/Viren070/AIOStreams/commit/3d4bcb67a5181aaf492102d1ae168895b63df1f6)
+- [fix(web): give the About page's Credits title its own context](https://github.com/Viren070/AIOStreams/commit/a58e39d08b09e8901d65eb102c6cef8931a7d2d0)
+- [fix(web): remember the subtitle type picked for a show](https://github.com/Viren070/AIOStreams/commit/657980e0f7f9d17ad6c5f80a25df732fd1368300)
+- [fix(web): hold a skip's seek-bar picture for a second](https://github.com/Viren070/AIOStreams/commit/451a15598e4c388c37a1db5d53b027d6d8c1500b)
+- [feat(web): show the seek-bar picture for arrow-key seeks only on TVs](https://github.com/Viren070/AIOStreams/commit/d4d00bf777d7b059cb583ddcf9a0da9b1495b8a6)
+- [fix(web): close the open player menu when another opens](https://github.com/Viren070/AIOStreams/commit/22d5d3c9f10980acb7e322bb9aca3f0caf469e73)
+- [feat(android): choose the storage downloads go to](https://github.com/Viren070/AIOStreams/commit/9ababea0f9c58fca25d4aab1c109605839d43b6d)
+- [feat(web): offer the Android app's download folder choice](https://github.com/Viren070/AIOStreams/commit/e14f65cff35e377861876be34f99866a10b639a9)
+- [fix(web): return nothing from the calendar agenda's scroll](https://github.com/Viren070/AIOStreams/commit/3b54f0fbef47cffd248d45b5a4e970ff045fcd2a)
+- [fix(server): cap the length of party and SyncPlay queues](https://github.com/Viren070/AIOStreams/commit/d5b47a97a2205a9372bfd5421a2d22206b371a90)
+- [fix(web): read buffered ranges from one snapshot](https://github.com/Viren070/AIOStreams/commit/10f9382bb64a3d2d7e06bbbb87ac7eda8d0ac79d)
+- [feat(web): take a party's next titles from its queue](https://github.com/Viren070/AIOStreams/commit/b9af14508f4a95d14a3c7cfba0fd3541f8c44541)
+- [feat(desktop): replace a loaded server subtitle when it is added again](https://github.com/Viren070/AIOStreams/commit/fbdcb1fc38c443274be2ed491135b19e67a1ab04)
+
+[Compare 89312b5...ed8b085](https://github.com/Viren070/AIOStreams/compare/89312b5...ed8b085)
+
+---
+
 ## nightly-89312b5 — 2026-10-23
 
 - [feat(web): show cover immediately on auto play first](https://github.com/Viren070/AIOStreams/commit/6a93d189ece07cfb48f4c187677824a3891ce751)
@@ -226,24 +253,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [fix(core): drop "Usenet" from the built-in usenet service's known names](https://github.com/Viren070/AIOStreams/commit/28fa990d0f33eaa5c18ebb1e648d6fb2ca121812)
 
 [Compare 9db03c5...147773c](https://github.com/Viren070/AIOStreams/compare/9db03c5...147773c)
-
----
-
-## nightly-9db03c5 — 2026-10-05
-
-- [fix(watch-state): keep the played mark under a resume point](https://github.com/Viren070/AIOStreams/commit/a4cdbc078e38c4c200aad3f8ff8d52546e7d7b96)
-- [fix(jellyfin-web): clear only the position on remove from continue watching](https://github.com/Viren070/AIOStreams/commit/c66e99fef2d4c3d94907120a6d49355d2c6d5a54)
-- [feat(jellyfin): add watchlisted shows and films to the calendar](https://github.com/Viren070/AIOStreams/commit/f5abba05d5b503250989b321d4f12f0b5f933e3e)
-- [feat(jellyfin-web): list films on the calendar](https://github.com/Viren070/AIOStreams/commit/05863cbb4a5889a8054ef8e8b0a8f46c3524a807)
-- [feat(desktop): start the user's own mpv and drive it over its IPC](https://github.com/Viren070/AIOStreams/commit/2aa49ee6efc2b98dec94cc7737af1b25b50dcb5e)
-- [feat(jellyfin-web): replace the external player link with a player choice](https://github.com/Viren070/AIOStreams/commit/3578bd32e8c14cbc4b908e28b2a51ced4e2e05a6)
-- [feat(desktop): load subtitle files the page sends](https://github.com/Viren070/AIOStreams/commit/eb4fc05792fffff7dc65359e41844d5ec754b0ef)
-- [feat(jellyfin-web): add subtitle files by dropping or picking them](https://github.com/Viren070/AIOStreams/commit/76d711697a9687dab0fbf0be1daa575bd4063664)
-- [refactor(jellyfin-web): group playback and subtitle modules into folders](https://github.com/Viren070/AIOStreams/commit/4ccd8156b5a5c1ab4e3b7feb52683eb57e2e609a)
-- [fix(watch-state): treat a favourite under any spelling as the title's](https://github.com/Viren070/AIOStreams/commit/14336d0488c52b1a9c564e96df9b09c17cca111f)
-- [feat(jellyfin-web): add {scheme} to the player link](https://github.com/Viren070/AIOStreams/commit/9db03c542df26f7d04fde93965a04c2ace468835)
-
-[Compare 1dcfa76...9db03c5](https://github.com/Viren070/AIOStreams/compare/1dcfa76...9db03c5)
 
 ---
 
