@@ -1,6 +1,8 @@
 # Beets
 
-[Beets](https://beets.readthedocs.io/) is a music library manager and auto-tagger. This addon keeps your music library tagged automatically — it watches the library folder, imports and tags new music with metadata from MusicBrainz (plus cover art, genres and audio fingerprints), cleans duplicates, and can trigger a Navidrome rescan when done.
+[Beets](https://beets.readthedocs.io/) is a music library manager and auto-tagger. This addon keeps your music library tagged automatically — it watches the library folder, imports and tags new music with metadata from MusicBrainz (plus cover art and audio fingerprints), cleans duplicates, and can trigger a Navidrome rescan when done.
+
+Genres are **not** written by this addon: genre is owned by the music pipeline, so the add-on never overwrites a genre tag it did not create.
 
 It is designed to complement **Octo-Fiesta**: tracks downloaded into `/media/music` are tagged within minutes, without cronjobs on the host.
 
@@ -25,11 +27,6 @@ It is designed to complement **Octo-Fiesta**: tracks downloaded into `/media/mus
 | `timid` | `false` | Confirm matches before applying — only effective with `quiet` off (not recommended headless) |
 | `incremental` | `true` | Skip albums already in the library |
 | `duplicate_action` | `skip` | Duplicates during import: `add`, `remove` or `skip` |
-| `genre_source` | `track` | Genre lookup scope: `album` (one set per album), `artist` (per artist) or `track` (per-song genres) |
-| `genre_mode` | `combine` | Genre handling: `keep` = keep existing (Tidal) genres, `overwrite` = replace with Last.fm, `combine` = merge existing + Last.fm |
-| `genre_whitelist` | `true` | `lastgenre` whitelist filtering: `true` = only "real" genres pass, `false` = keep every tag. When on, the whitelist is the merged file: beets' bundled list + a bundled supplement (Spotify/EveryNoise catalog + regional descriptors like `north african`, `chaabi`) + `genre_whitelist_extra` |
-| `genre_count` | `12` | Maximum number of genres per track/album |
-| `genre_whitelist_extra` | *(empty)* | Extra genres appended to the default whitelist (e.g. `dance`) — used only when the whitelist is enabled |
 | `duplicates_enabled` | `true` | Periodically check for duplicate tracks and report them (nothing is deleted) |
 | `duplicates_interval_hours` | `12` | Interval for the duplicates check |
 | `navidrome_url` | *(empty)* | e.g. `homeassistant.local:4533` — empty disables the rescan trigger |
@@ -55,11 +52,10 @@ On startup the addon generates `/data/beets/config.yaml` from the options above 
 | `import.duplicate_action` | `duplicate_action` option | Duplicate handling during import |
 | `import.resume` | `skip` | Never prompt to resume an interrupted import (no TTY in the addon) |
 | `artist_credit` | `yes` | Keep MusicBrainz display names (e.g. *Angèle*) |
-| `plugins` | `fetchart lastgenre embedart titlecase chroma duplicates ftintitle musicbrainz` | Cover art, genres, embedded art, title casing, fingerprints, duplicate reports, featured artists, MusicBrainz extras |
+| `plugins` | `fetchart embedart titlecase chroma duplicates ftintitle musicbrainz` | Cover art, embedded art, title casing, fingerprints, duplicate reports, featured artists, MusicBrainz extras |
 | `match` | strong 0.05, custom distance weights (no penalty for source/media/country/missing or unmatched tracks), preferred countries `XW/US/GB\|UK/FR` + CD/Digital Media, ignore track length | Favours FR/US/GB editions; Tidal rips with bonus tracks don't get penalized into as-is |
 | `import` | `threaded: no` — serialized lookups | MusicBrainz rate-limits by IP (~1 req/s); parallel requests cause 503 bursts on big imports |
 | `titlecase` | all-caps kept, fields title+album, preserve list incl. French articles (Le/La/Les) | Title casing without mangling abbreviations or French titles |
-| `lastgenre` | `source` = `genre_source` option, `count` = `genre_count`, separator `"; "`, `force`/`keep_existing` from `genre_mode`, `whitelist` = merged genres.txt + `genres-extra.txt` + `genre_whitelist_extra` | Genres per track/album; keep/overwrite/combine with existing genres; merged whitelist (beets + Spotify/regional supplement + extras) |
 | `fetchart` | minwidth 500, sources coverart/itunes/filesystem, `fetch_for_asis` | Higher-res art, also for `asis` imports |
 | `embedart` | auto, only if empty | Embed art only when missing |
 | `ftintitle` | auto, drop from artist, keep in artist field | `Song (feat. X)` in titles |
@@ -105,7 +101,7 @@ docker cp "$(docker ps -q -f name=beets)":/data/beets /tmp/beets-backup
 # Restore the backup after reinstalling
 docker cp /tmp/beets-backup "$(docker ps -q -f name=beets)":/data/beets
 
-# Albums imported today, with their genres
+# Albums imported today, with their current genre tags
 docker exec "$(docker ps -q -f name=beets)" /usr/local/bin/beet -c /data/beets/config.yaml ls -a added:today -f '$albumartist - $album ($year) | $genres'
 
 # Library statistics
@@ -113,9 +109,6 @@ docker exec "$(docker ps -q -f name=beets)" /usr/local/bin/beet -c /data/beets/c
 
 # Duplicate report (report only — nothing is deleted)
 docker exec "$(docker ps -q -f name=beets)" /usr/local/bin/beet -c /data/beets/config.yaml duplicates -k title -k albumartist
-
-# Re-apply genres library-wide (after changing genre options)
-docker exec "$(docker ps -q -f name=beets)" /usr/local/bin/beet -c /data/beets/config.yaml lastgenre -A
 
 # Backfill missing cover art
 docker exec "$(docker ps -q -f name=beets)" /usr/local/bin/beet -c /data/beets/config.yaml fetchart

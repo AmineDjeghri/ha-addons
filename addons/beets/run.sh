@@ -13,9 +13,9 @@ CONFIG_FILE="${DATA_DIR}/config.yaml"
 LOG_FILE="${DATA_DIR}/import.log"
 LOCK_FILE="${DATA_DIR}/import.lock"
 
-# /data/beets must exist before anything writes into it (the whitelist merge
-# below, config, lock, logs). A fresh /data (first boot, reinstall) has no
-# beets directory yet — without this, the cp below fails and set -e aborts.
+# /data/beets must exist before anything writes into it (config, lock, logs).
+# A fresh /data (first boot, reinstall) has no beets directory yet — without
+# this, the writes below fail and set -e aborts.
 mkdir -p "${DATA_DIR}"
 
 # ---- Options -------------------------------------------------------------
@@ -31,34 +31,6 @@ QUIET_FALLBACK=$(bashio::config 'quiet_fallback')
 TIMID=$(bashio::config 'timid')
 INCREMENTAL=$(bashio::config 'incremental')
 DUPLICATE_ACTION=$(bashio::config 'duplicate_action')
-GENRE_SOURCE=$(bashio::config 'genre_source')
-GENRE_MODE=$(bashio::config 'genre_mode')
-GENRE_WHITELIST=$(bashio::config 'genre_whitelist')
-GENRE_COUNT=$(bashio::config 'genre_count')
-GENRE_WHITELIST_EXTRA=$(bashio::config 'genre_whitelist_extra')
-# keep = preserve existing (Tidal) genres; overwrite = replace with Last.fm;
-# combine = merge existing + Last.fm (force + keep_existing).
-case "${GENRE_MODE}" in
-    overwrite) LASTGENRE_FORCE=yes; LASTGENRE_KEEP=no ;;
-    combine)   LASTGENRE_FORCE=yes; LASTGENRE_KEEP=yes ;;
-    *)         LASTGENRE_FORCE=no;  LASTGENRE_KEEP=no ;;
-esac
-# When the whitelist is enabled, build a merged whitelist file: beets' bundled
-# genres.txt + the bundled supplement (/genres-extra.txt — Spotify/EveryNoise
-# catalog + regional descriptors) + user extras (case-insensitive).
-# When disabled, no filtering happens (every tag is kept).
-if [ "${GENRE_WHITELIST}" = "true" ]; then
-    WL_SRC="$(find /root/.local -type f -path '*/beetsplug/lastgenre/genres.txt' 2>/dev/null | head -1)"
-    if [ -n "${WL_SRC}" ]; then
-        cp "${WL_SRC}" /data/beets/genres-extra.txt
-        cat /genres-extra.txt >> /data/beets/genres-extra.txt
-        for extra in ${GENRE_WHITELIST_EXTRA}; do
-            echo "${extra}" | tr '[:upper:]' '[:lower:]' >> /data/beets/genres-extra.txt
-        done
-        sort -u -o /data/beets/genres-extra.txt /data/beets/genres-extra.txt
-        GENRE_WHITELIST=/data/beets/genres-extra.txt
-    fi
-fi
 DUPLICATES_ENABLED=$(bashio::config 'duplicates_enabled')
 DUPLICATES_INTERVAL=$(bashio::config 'duplicates_interval_hours')
 NAVIDROME_URL=$(bashio::config 'navidrome_url')
@@ -111,7 +83,7 @@ match:
     countries: [XW, US, GB|UK, FR]
     media: [CD, Digital Media|File]
   ignored: track_length
-plugins: fetchart lastgenre embedart titlecase chroma duplicates ftintitle musicbrainz
+plugins: fetchart embedart titlecase chroma duplicates ftintitle musicbrainz
 fetchart:
   minwidth: 500
   enforce_ratio: yes
@@ -167,14 +139,6 @@ titlecase:
     - "Le"
     - "La"
     - "Les"
-lastgenre:
-  source: ${GENRE_SOURCE}
-  count: ${GENRE_COUNT}
-  prefer_specific: no
-  separator: "; "
-  force: ${LASTGENRE_FORCE}
-  keep_existing: ${LASTGENRE_KEEP}
-  whitelist: ${GENRE_WHITELIST}
 ftintitle:
   auto: yes
   drop: yes
@@ -226,8 +190,7 @@ run_import() {
     (
         flock -n 9 || { log "Import skipped: another import is running"; exit 0; }
         log "Importing: ${args[*]}"
-        # -vv + filter: full progress including genre resolutions
-        # ("Resolved (…): [genres]") without the noise — event traces,
+        # -vv + filter: full progress without the noise — event traces,
         # chroma fingerprint UUID dumps, ftintitle no-ops, MusicBrainz
         # request UUIDs. awk (not grep -v) keeps pipefail safe on empty
         # output.

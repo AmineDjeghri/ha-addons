@@ -35,13 +35,9 @@ RUN apk add --no-cache --virtual .beets-build build-base \
     && uv tool install --python 3.14 \
            --default-index https://pypi.org/simple \
            --index-strategy unsafe-best-match \
-           "beets[fetchart,lastgenre,embedart,titlecase,chroma]==${BEETS_VERSION}" \
+           "beets[fetchart,embedart,titlecase,chroma]==${BEETS_VERSION}" \
     && apk del .beets-build \
     && ln -s /root/.local/bin/beet /usr/local/bin/beet
-
-# Genre whitelist supplement (Spotify/EveryNoise catalog + regional descriptors):
-# merged with beets' bundled genres.txt at startup when genre_whitelist is enabled.
-COPY genres-extra.txt /genres-extra.txt
 
 COPY run.sh /run.sh
 RUN chmod a+x /run.sh
