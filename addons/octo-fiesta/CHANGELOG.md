@@ -2,6 +2,15 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-b2ee721 — 2026-10-25
+
+- [perf(deezer): decrypt track chunks in place](https://github.com/V1ck3s/octo-fiesta/commit/309db76c748c1b1d657464a655a20e19b98d487c)
+- [fix(deezer): survive API quota errors during downloads](https://github.com/V1ck3s/octo-fiesta/commit/b2ee721792fe1519ad3acd53c02cd3e537928669)
+
+[Compare e15c0c7...b2ee721](https://github.com/V1ck3s/octo-fiesta/compare/e15c0c7...b2ee721)
+
+---
+
 ## dev-e15c0c7 — 2026-10-16
 
 - [feat: allow a per-provider download path override](https://github.com/V1ck3s/octo-fiesta/commit/e15c0c72acb2168d1ec98ec90b7e6b31d50f6f14)
@@ -84,14 +93,6 @@ For full upstream release notes see the [official Octo-Fiesta releases](https://
 - [fix(subsonic): stop merging homonym artist albums on getAlbum](https://github.com/V1ck3s/octo-fiesta/commit/51b11043753a63a788f4017c70de4ae79179db59)
 
 [Compare 798eaee...51b1104](https://github.com/V1ck3s/octo-fiesta/compare/798eaee...51b1104)
-
----
-
-## dev-798eaee — 2026-08-31
-
-- [feat(tidal): add native Tidal provider](https://github.com/V1ck3s/octo-fiesta/commit/798eaeeb88fa399587a6faaa2fe9fcf43fa1d401)
-
-[Compare 410e862...798eaee](https://github.com/V1ck3s/octo-fiesta/compare/410e862...798eaee)
 
 ---
 
