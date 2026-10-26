@@ -90,7 +90,7 @@ fetchart:
   sources:
     - coverart
     - itunes
-    - filesystem=*
+    - filesystem
   fetch_for_asis: yes
 embedart:
   auto: yes
