@@ -2,6 +2,14 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-f582363 — 2026-10-26
+
+- [fix: report mp3/128 instead of "Remote"/0 for undownloaded external songs](https://github.com/V1ck3s/octo-fiesta/commit/f58236314169f22b2edad42214941df74cf538c1)
+
+[Compare b2ee721...f582363](https://github.com/V1ck3s/octo-fiesta/compare/b2ee721...f582363)
+
+---
+
 ## dev-b2ee721 — 2026-10-25
 
 - [perf(deezer): decrypt track chunks in place](https://github.com/V1ck3s/octo-fiesta/commit/309db76c748c1b1d657464a655a20e19b98d487c)
@@ -80,19 +88,6 @@ For full upstream release notes see the [official Octo-Fiesta releases](https://
 - [fix(subsonic): upgrade quality on play for library songs](https://github.com/V1ck3s/octo-fiesta/commit/0314a427b6861b6ab8126ce9ce979fd5ed57e878)
 
 [Compare 51b1104...0314a42](https://github.com/V1ck3s/octo-fiesta/compare/51b1104...0314a42)
-
----
-
-## dev-51b1104 — 2026-09-01
-
-- [fix(ci): version dev images from the newest tag instead of git describe](https://github.com/V1ck3s/octo-fiesta/commit/5f5cae75f0a927c024a3732c8a1570580116d302)
-- [fix(qobuz): paginate playlist track fetching](https://github.com/V1ck3s/octo-fiesta/commit/57c1e260779538ac052182ed12cff9119f9a67ab)
-- [fix(subsonic): merge owned albums into external artist discography](https://github.com/V1ck3s/octo-fiesta/commit/6296cb1cf5cc9bd324e0a66da9ee43e4e8d86882)
-- [fix(subsonic): merge external albums for xml clients on getArtist](https://github.com/V1ck3s/octo-fiesta/commit/63032b9d93974641c8a6a56e7b1ddcdad5c28a56)
-- [fix(subsonic): merge external songs for xml clients on getAlbum](https://github.com/V1ck3s/octo-fiesta/commit/d186c6f9983a251eb8e9f4fb83296d7742f952d2)
-- [fix(subsonic): stop merging homonym artist albums on getAlbum](https://github.com/V1ck3s/octo-fiesta/commit/51b11043753a63a788f4017c70de4ae79179db59)
-
-[Compare 798eaee...51b1104](https://github.com/V1ck3s/octo-fiesta/compare/798eaee...51b1104)
 
 ---
 
