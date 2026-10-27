@@ -2,6 +2,15 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-609cd1d — 2026-10-27
+
+- [fix: do not advertise unsupported playbackReport for external songs](https://github.com/V1ck3s/octo-fiesta/commit/e8ade4eca98e5637829f001eee81881d7614ec36)
+- [docs: add NaviBeat to compatible clients](https://github.com/V1ck3s/octo-fiesta/commit/609cd1d6fe203b297c1d48c6b0bb4e73f2d7b66a)
+
+[Compare f582363...609cd1d](https://github.com/V1ck3s/octo-fiesta/compare/f582363...609cd1d)
+
+---
+
 ## dev-f582363 — 2026-10-26
 
 - [fix: report mp3/128 instead of "Remote"/0 for undownloaded external songs](https://github.com/V1ck3s/octo-fiesta/commit/f58236314169f22b2edad42214941df74cf538c1)
@@ -80,14 +89,6 @@ For full upstream release notes see the [official Octo-Fiesta releases](https://
 - [fix(subsonic): run quality upgrade in background instead of blocking playback](https://github.com/V1ck3s/octo-fiesta/commit/c4d0f5734d1868b8f3f4c031566b705480c32efd)
 
 [Compare 0314a42...c4d0f57](https://github.com/V1ck3s/octo-fiesta/compare/0314a42...c4d0f57)
-
----
-
-## dev-0314a42 — 2026-09-04
-
-- [fix(subsonic): upgrade quality on play for library songs](https://github.com/V1ck3s/octo-fiesta/commit/0314a427b6861b6ab8126ce9ce979fd5ed57e878)
-
-[Compare 51b1104...0314a42](https://github.com/V1ck3s/octo-fiesta/compare/51b1104...0314a42)
 
 ---
 
