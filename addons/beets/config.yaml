@@ -23,11 +23,6 @@ options:
   timid: false
   incremental: true
   duplicate_action: "skip"
-  genre_source: "track"
-  genre_mode: "combine"
-  genre_whitelist: true
-  genre_count: 12
-  genre_whitelist_extra: []
   duplicates_enabled: true
   duplicates_interval_hours: 12
   navidrome_url: ""
@@ -47,12 +42,6 @@ schema:
   timid: bool
   incremental: bool
   duplicate_action: list(add|remove|skip)
-  genre_source: list(album|artist|track)
-  genre_mode: list(keep|overwrite|combine)
-  genre_whitelist: bool
-  genre_count: int
-  genre_whitelist_extra:
-    - str
   duplicates_enabled: bool
   duplicates_interval_hours: int
   navidrome_url: str?
