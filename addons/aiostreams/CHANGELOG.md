@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-f959e42 — 2026-10-29
+
+- [fix(media-info): round probe durations to whole milliseconds](https://github.com/Viren070/AIOStreams/commit/738d09f3ec8768a7df7755e9c669637cd8e25be9)
+- [fix(watch-state): round positions and durations before storing them](https://github.com/Viren070/AIOStreams/commit/a1c1ba63377c7cafd983d80214d311686d45db3e)
+- [fix(jellyfin): read the socket token from auth headers too](https://github.com/Viren070/AIOStreams/commit/efaa2daab291e89d8bc9f22f1954a13523b3db05)
+- [fix(media-info): upsert a batch in key order](https://github.com/Viren070/AIOStreams/commit/42913c6dbc1edad26cc1c18390505a9aa6654f4b)
+- [fix(media-info): only relist a hidden row when its record changes](https://github.com/Viren070/AIOStreams/commit/611458d203ed569254d73f19f184c3004dc04caf)
+- [fix(jellyfin): upsert id mappings in key order, skipping fresh ones](https://github.com/Viren070/AIOStreams/commit/e597638d04dee4e33dd6ab3fb169bae10290baca)
+- [perf(web): size artwork for the pixels the page is drawn at](https://github.com/Viren070/AIOStreams/commit/f0e9c7fce4d4237106639deeb1b41cdf3a6238c9)
+- [fix(web): let React listen for transition and animation ends](https://github.com/Viren070/AIOStreams/commit/8192eebd1260ac4de2c16587b0d4c249edefcab7)
+- [feat(web): scrub with a TV remote through a row of pictures](https://github.com/Viren070/AIOStreams/commit/2862314d811632853612e9b6d8d50c911334643e)
+- [feat(native): render thumbnails 480 pixels wide](https://github.com/Viren070/AIOStreams/commit/25ed24bb44a8119b44683e8569e01e5fbd6a6b26)
+- [perf(core): index FULL_LANGUAGE_MAPPING by code and name](https://github.com/Viren070/AIOStreams/commit/0bb34e840f2f4e98757e8dc047d4b83f261bf1f4)
+- [perf(core): skip parseLockResult's reviver without a flattened error](https://github.com/Viren070/AIOStreams/commit/aa3ee398fa6e1622357cfbd192ab7e8420f0eb23)
+- [perf(core): skip re-parsing a SEL result that's just the input streams](https://github.com/Viren070/AIOStreams/commit/7d039dd80b61335d9356ae5059286a40c7369845)
+- [fix(web): size TV artwork from the screen and layout widths](https://github.com/Viren070/AIOStreams/commit/0a92ccefe00fee1effc6cb20e62daa64b0681f4c)
+- [feat(web): hide languages under half translated](https://github.com/Viren070/AIOStreams/commit/7e7d3adfc0dc67feaa8b1a66a9a851e9aad01107)
+- [docs: say when the apps offer a language](https://github.com/Viren070/AIOStreams/commit/08682175b062f4c1a1de9480548f7a3cf8e5e15c)
+- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/21a69a5395b4b799c352a775cf347db85eb9479c)
+- [chore(l10n): add Dutch translation](https://github.com/Viren070/AIOStreams/commit/3c9d0b6ebfa811392dc9e1a0ec3bbc8eb17ef172)
+- [chore(l10n): add Dutch translation](https://github.com/Viren070/AIOStreams/commit/a926c54ace39c15833a06965a8c133ce52ebeb1a)
+- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/3343269fa76aafecfa2bb677c39f47fd39352862)
+
+[Compare ed8b085...f959e42](https://github.com/Viren070/AIOStreams/compare/ed8b085...f959e42)
+
+---
+
 ## nightly-ed8b085 — 2026-10-24
 
 - [feat(core): add storage, ids and items for Jellyfin playlists](https://github.com/Viren070/AIOStreams/commit/948cfe74ed5b29c138d30b8ae36b19e162ad41e1)
@@ -226,33 +253,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [fix(presets): note TsukiHime's per-file audio/subtitle extraction (#1436)](https://github.com/Viren070/AIOStreams/commit/b17de1eabd7d98e6f4a65aa01229d215081ff38f)
 
 [Compare 147773c...b17de1e](https://github.com/Viren070/AIOStreams/compare/147773c...b17de1e)
-
----
-
-## nightly-147773c — 2026-10-06
-
-- [fix(watch-state): add the session start time to playback event ids](https://github.com/Viren070/AIOStreams/commit/ea9ddbd2e11adaab4d0400988a6df8452a912a87)
-- [fix(jellyfin-web): replace the player controls with the error screen](https://github.com/Viren070/AIOStreams/commit/c34b7b1fe27f31300c12539faac5731720214eea)
-- [feat(desktop): add mpv's first http error to mpv-ended](https://github.com/Viren070/AIOStreams/commit/701eed82974c70802a2462b7f229fbd0a54a2bf5)
-- [feat(jellyfin-web): describe desktop playback failures from mpv's http error](https://github.com/Viren070/AIOStreams/commit/21f24bfd4fb0b2a0edfc79474c9219afc02b3cf6)
-- [fix(remuxdb): put the season and episode in the versions id](https://github.com/Viren070/AIOStreams/commit/bc78e3657ce06684adacd71a1db34559eebba5da)
-- [fix(cache): drop a buffered sql write on delete](https://github.com/Viren070/AIOStreams/commit/c2e6bdd3e0803979f5daf30ca6e9efc12b2aad51)
-- [fix(usenet): hash proxied NZB URLs by the URL behind our proxy](https://github.com/Viren070/AIOStreams/commit/9ac363f4ac9d7d56f3ee4017a084bff3f71c5fcc)
-- [fix(dedupe): copy probed tracks from a duplicate that lists them](https://github.com/Viren070/AIOStreams/commit/aeb4f2fb91f72ff1620a34118552ac58edb1dc43)
-- [feat(db): add the media info tables](https://github.com/Viren070/AIOStreams/commit/ac93a93822ad0523de32b4883d43ebe7a804806a)
-- [feat(media-info): probe played files with ffprobe](https://github.com/Viren070/AIOStreams/commit/d0f43a3a1b3b7bf1e7bf011f57798b4ef7640ed9)
-- [feat(presets): parse the torrent file and title where addons name them](https://github.com/Viren070/AIOStreams/commit/4a27d2b5bdaaaafc90ffc4f5c09c9236d27e78dd)
-- [feat(proxy): name a trusted stream's release in its proxy token](https://github.com/Viren070/AIOStreams/commit/c3cedcfe5b0f6b6227a15e92808b32f39952c586)
-- [feat(media-info): fill stream details from stored probes](https://github.com/Viren070/AIOStreams/commit/5c8b38dbc11fa7cbf349932d254bdda75dc022a2)
-- [feat(media-info): store what StremThru and RemuxDB report](https://github.com/Viren070/AIOStreams/commit/64aaffd98efe3aaa1c2ae5e229a99404d29ed28b)
-- [feat(media-info): serve stored media info to other instances](https://github.com/Viren070/AIOStreams/commit/57d0156030ed25642b4233ab513ed5899fabbefa)
-- [feat(remuxdb): contribute stored probes](https://github.com/Viren070/AIOStreams/commit/253cea295619f1460adb5c29407ae64da0e9c856)
-- [feat(jellyfin): fill a version's tracks from stored probes on play](https://github.com/Viren070/AIOStreams/commit/ba7835290f747bb9f3a39a2d395af0b3b2fb8720)
-- [feat(dashboard): add a media info page](https://github.com/Viren070/AIOStreams/commit/b94647c26d9207823ff11b03de2832ad812608f6)
-- [feat(docker): ship a minimal ffprobe](https://github.com/Viren070/AIOStreams/commit/472def37da5a9ee55f66f27b2cabe9badf0d9cad)
-- [fix(core): drop "Usenet" from the built-in usenet service's known names](https://github.com/Viren070/AIOStreams/commit/28fa990d0f33eaa5c18ebb1e648d6fb2ca121812)
-
-[Compare 9db03c5...147773c](https://github.com/Viren070/AIOStreams/compare/9db03c5...147773c)
 
 ---
 
