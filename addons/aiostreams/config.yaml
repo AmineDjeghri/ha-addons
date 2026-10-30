@@ -1,6 +1,6 @@
 name: AIOStreams
 description: Self-hosted Stremio addon aggregator unifying debrid, usenet and torrent services behind one manifest
-version: "nightly-f959e42"
+version: "nightly-3474c94"
 slug: aiostreams
 url: "https://github.com/aminedjeghri/ha-addons/tree/main/addons/aiostreams"
 arch:

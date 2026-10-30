@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-3474c94 — 2026-10-30
+
+- [docs: rewrite the introduction and home page around the addon and the apps](https://github.com/Viren070/AIOStreams/commit/a8958c662aeec32104a5910a63fac0597501c815)
+- [docs: replace the TorBox Search FAQ with where it went](https://github.com/Viren070/AIOStreams/commit/bb3218309360d7648ca10e58239468684b40e071)
+- [chore(frontend): update the About page's default description](https://github.com/Viren070/AIOStreams/commit/dfa2ac3ea733bc39eb18a227068aed3555156f91)
+- [docs: rewrite the README around the addon and the apps](https://github.com/Viren070/AIOStreams/commit/6cf6bdee5aa7c423a4a21216c61e3f7b75405928)
+- [docs: describe the formatter's live preview](https://github.com/Viren070/AIOStreams/commit/acfbb14c7af8950cd8ba2662c0e3d9505045d932)
+- [docs: update the setup guide for the new setup wizard and the app](https://github.com/Viren070/AIOStreams/commit/864cbf445dc91d4e527e270199fe22c764618d40)
+- [docs: rewrite the FAQ and troubleshooting pages](https://github.com/Viren070/AIOStreams/commit/6b1fc245893b9004c18dc8c0a3ba858ea96c1bfa)
+- [docs: add updating and keeping an instance private to the deployment guide](https://github.com/Viren070/AIOStreams/commit/b0c2edd0b75b107ff481a88cba35d9c2f1bdcecf)
+- [chore: update the default addon description](https://github.com/Viren070/AIOStreams/commit/7d502368824e6722a888ad54e3530e20d28240ec)
+- [build(android): update libs for subtitles that slide every frame](https://github.com/Viren070/AIOStreams/commit/0673be8deb6e2388530994236baf3a6041647ed2)
+- [build(desktop): update libs for subtitles that slide every frame](https://github.com/Viren070/AIOStreams/commit/ee82aa43a9b17efef4b69f18f034705ae6c44498)
+- [fix(android): read every object of a PGS display set](https://github.com/Viren070/AIOStreams/commit/a6151ed8e1add0d07b5d7d3abace2fc731c7fde6)
+- [fix(android): reset libass's frame time for each file](https://github.com/Viren070/AIOStreams/commit/1a06f52e87907a7eefcb58df82597d89abda049c)
+- [feat(android): draw ExoPlayer's text subtitles with libass](https://github.com/Viren070/AIOStreams/commit/544a3d70df0a33548dbf37fa5afe8123a9e05146)
+- [feat(android): move ExoPlayer's subtitles without restyling them](https://github.com/Viren070/AIOStreams/commit/0ef3ac7e6e54f8528d579d6300b5297c3b0bbe95)
+- [feat(android): set mpv's sub-pos unrounded](https://github.com/Viren070/AIOStreams/commit/6cee1b919f5462156a17b7f571720476420b8b92)
+- [feat(android): prefer the fastest refresh rate while the page's controls show](https://github.com/Viren070/AIOStreams/commit/aac2d5fec19b47a086d128510223f9a6fb03cb36)
+- [feat(desktop): set mpv's sub-pos unrounded](https://github.com/Viren070/AIOStreams/commit/95d0521d4b3d3bb54b463a7b1b45c4f3b6638145)
+- [feat(web): ease the subtitle height every frame](https://github.com/Viren070/AIOStreams/commit/e7f665d0ed1e8680f6cb83b8266ea06849aae3ef)
+- [feat(web): slide the subtitle the page draws above the controls](https://github.com/Viren070/AIOStreams/commit/086f39dc9a1b2cdb4e183c2f5c9545d11844a70f)
+
+[Compare f959e42...3474c94](https://github.com/Viren070/AIOStreams/compare/f959e42...3474c94)
+
+---
+
 ## nightly-f959e42 — 2026-10-29
 
 - [fix(media-info): round probe durations to whole milliseconds](https://github.com/Viren070/AIOStreams/commit/738d09f3ec8768a7df7755e9c669637cd8e25be9)
@@ -227,32 +254,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [feat(android): tell the page it runs on a TV](https://github.com/Viren070/AIOStreams/commit/da3281cf7db564d238693223943738599797cd13)
 
 [Compare b17de1e...a521900](https://github.com/Viren070/AIOStreams/compare/b17de1e...a521900)
-
----
-
-## nightly-b17de1e — 2026-10-07
-
-- [feat(media-info): add a tags list to audio tracks](https://github.com/Viren070/AIOStreams/commit/6ff91b8737c26da71ccbfbedaf615e223323e0aa)
-- [chore(config): raise jellyfin.maxVersions limit to 500](https://github.com/Viren070/AIOStreams/commit/03706968430fbcd1b2694da65831e42644bda6fc)
-- [feat(jellyfin-web): add Android players to the player choice](https://github.com/Viren070/AIOStreams/commit/26a30502ffd6287383286725882a5b998ee5af0e)
-- [feat(jellyfin-web): hand the Android app's player the episodes that follow](https://github.com/Viren070/AIOStreams/commit/25e6f6f0b7719a0500ff569de4a19da2f4d57de6)
-- [feat(jellyfin-web): refresh watch state on the server socket's pushes](https://github.com/Viren070/AIOStreams/commit/db189732477b3435cea49554ebc5ad91fc1565e4)
-- [feat(jellyfin-web): redesign server picker](https://github.com/Viren070/AIOStreams/commit/8c248623c0bd99e754865f97c2926167d4f998b1)
-- [fix(core): only type a stream as external when it has no url](https://github.com/Viren070/AIOStreams/commit/0f8a13de0c2cefff5954b81cd42c3aa84b520a16)
-- [fix(frontend): add no-referrer to the marketplace and reorder modal logos](https://github.com/Viren070/AIOStreams/commit/37ff00fe251fc50b87a36dfad7912caf229fbf6b)
-- [chore(presets): disable argentina tv and aio subtitle](https://github.com/Viren070/AIOStreams/commit/22c6c6f398afa61687768722bda07b6c905008af)
-- [fix(presets): replace the fkstream and nzbhydra logos](https://github.com/Viren070/AIOStreams/commit/063a46f760e029f998e3793c306a9b7316b07db4)
-- [feat(parser): read stream duration from behaviorHints.duration](https://github.com/Viren070/AIOStreams/commit/0b9b655353fce57333f81bfbcf239b1e05dcfe00)
-- [feat(parser): read more stream details from behaviorHints](https://github.com/Viren070/AIOStreams/commit/d56784ed024a8bb618a2c94f280f25a5616fc0b8)
-- [feat(remuxdb): enable contributing by default](https://github.com/Viren070/AIOStreams/commit/99b6dc3f907490ffa9e24eeb6c1f008609f1867c)
-- [docs(guides): add private trackers guide (#1438)](https://github.com/Viren070/AIOStreams/commit/d61b9e3735b133eeb683b18c3ef6c07c3e4b82da)
-- [chore(tv): update the web app (#1440)](https://github.com/Viren070/AIOStreams/commit/cebbc2343f8a71e3e90114d3efc56753c99bdf97)
-- [chore(desktop): update the web app (#1427)](https://github.com/Viren070/AIOStreams/commit/29be572e18bcd96886c7016030840789e182f536)
-- [chore(tv): release 0.2.0 (#1441)](https://github.com/Viren070/AIOStreams/commit/295490e99ab4b7da82566e21b9b64f2a6e33c8a1)
-- [chore(desktop): release 0.11.0 (#1431)](https://github.com/Viren070/AIOStreams/commit/e58b3e1574914d53040f1aab8f6f3b375b521e45)
-- [fix(presets): note TsukiHime's per-file audio/subtitle extraction (#1436)](https://github.com/Viren070/AIOStreams/commit/b17de1eabd7d98e6f4a65aa01229d215081ff38f)
-
-[Compare 147773c...b17de1e](https://github.com/Viren070/AIOStreams/compare/147773c...b17de1e)
 
 ---
 
