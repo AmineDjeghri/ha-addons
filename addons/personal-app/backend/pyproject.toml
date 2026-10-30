@@ -8,8 +8,8 @@ dependencies = [
   # software engineering & api
   "fastapi[standard]",
 
-  "pydantic==2.13.4",
-  "pydantic-settings==2.15.0",
+  "pydantic==2.14.1",
+  "pydantic-settings==2.16.1",
   "loguru==0.7.3",
   "requests==2.34.2",
   "psutil>=6.0.0",
