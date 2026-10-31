@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-c358754 — 2026-10-31
+
+- [feat(watch-state): default the minimum resume percentage to 0](https://github.com/Viren070/AIOStreams/commit/c723b85d2f21fd3ebcb73c29f123dcf4feaa392c)
+- [fix(watch-state): skip a buffered tick once the title was played after it arrived](https://github.com/Viren070/AIOStreams/commit/a11746de77e752219e4ab5e36a576bd7f1839c09)
+- [fix(jellyfin): date progress reports on arrival and drop ones after their stop](https://github.com/Viren070/AIOStreams/commit/e6c58c36668268830879b76e38e02e3bf8ea1522)
+- [fix(jellyfin): send UserDataChanged to sockets on every replica](https://github.com/Viren070/AIOStreams/commit/47e767b2669aa35a38e63880c9cd1803921a3f80)
+- [docs: list the player's chapter sheet hooks](https://github.com/Viren070/AIOStreams/commit/65b4202cd8d3668b269de7a9b94b516d287b9e26)
+- [fix(core): read and send archive parts as [url, bytes] pairs](https://github.com/Viren070/AIOStreams/commit/e2292d18ee318c9af0371b2eaaf903b2bfefed49)
+- [feat(web): show the player's chapters in a sheet with pictures](https://github.com/Viren070/AIOStreams/commit/3a7d2f2ef017ddaf5b01dc116396d83588f8c312)
+- [fix(core): send no playback events to a pull-only watch-state addon](https://github.com/Viren070/AIOStreams/commit/71c71b995a54f523dd0db343afb01be597d3fac2)
+- [docs: add an addon development guide](https://github.com/Viren070/AIOStreams/commit/011fe521d5c689b825c21cbe2345415530806ec7)
+- [chore(docs): update next version](https://github.com/Viren070/AIOStreams/commit/a925e61b8b29013e97dca37bc10bbb9fcf576a37)
+- [chore(core): switch to @aiostreams/release-parser](https://github.com/Viren070/AIOStreams/commit/72e73e0b90c6e9496ab24a91fee3b8862a321802)
+- [chore: point eslint-plugin-import references at its current lockfile entry](https://github.com/Viren070/AIOStreams/commit/ea63043ee42f6cc956286dc9483ab3d989140818)
+- [chore(l10n): update German translation](https://github.com/Viren070/AIOStreams/commit/43437abfdefc0a38c6820143d80fe6ae893e5950)
+- [chore(l10n): update Polish translation](https://github.com/Viren070/AIOStreams/commit/ef5e53a001b717098100f8e72f70b286a5316af0)
+- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/1dccb259fffcb7f1be7d32d0d03e4127eed82e4b)
+- [chore(l10n): update Spanish translation](https://github.com/Viren070/AIOStreams/commit/7c5df0e99f164e88dcd56b4d4484fd0df6ffdebc)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/2bc2671f4c4a6cff5ae91668cfcc46d8155a87c3)
+- [chore(l10n): update Malay translation](https://github.com/Viren070/AIOStreams/commit/2a8379b1e659c3f0051725a43f5ffac7afeb0100)
+- [chore(l10n): update translation files](https://github.com/Viren070/AIOStreams/commit/5d336990cfac9efd71c01813bf5aa03557882d5c)
+- [Merge pull request #1690 from Viren070/weblate-aiostreams-web-app](https://github.com/Viren070/AIOStreams/commit/c358754b0ae4758d034badf8618de6fdb7fa9333)
+
+[Compare 3474c94...c358754](https://github.com/Viren070/AIOStreams/compare/3474c94...c358754)
+
+---
+
 ## nightly-3474c94 — 2026-10-30
 
 - [docs: rewrite the introduction and home page around the addon and the apps](https://github.com/Viren070/AIOStreams/commit/a8958c662aeec32104a5910a63fac0597501c815)
@@ -227,33 +254,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [chore(smart-tv): update the web app (#1479)](https://github.com/Viren070/AIOStreams/commit/3fd07deb1dba590e38e28172c91ee42ccb64110e)
 
 [Compare a521900...bd1de5b](https://github.com/Viren070/AIOStreams/compare/a521900...bd1de5b)
-
----
-
-## nightly-a521900 — 2026-10-12
-
-- [feat(web): hear back from external players in the Android app](https://github.com/Viren070/AIOStreams/commit/73138d6a605428370dc36b7cbded8f3a803538d4)
-- [feat(android): hand Back to the page](https://github.com/Viren070/AIOStreams/commit/36ae5a0fe62464c7845e072c716acdcbf5fa922d)
-- [feat(web): take the Android app's Back](https://github.com/Viren070/AIOStreams/commit/fb93b47ee602c1b1b0a0fb1d8186f9e3f5f77564)
-- [feat(android): add an ExoPlayer engine](https://github.com/Viren070/AIOStreams/commit/764da86a4b82d5ace8caa42490a57122700f90bc)
-- [feat(web): choose the Android app's player engine](https://github.com/Viren070/AIOStreams/commit/0bef3a4f4686e78445c275b18063af8ec5906dc6)
-- [feat(web): say which picture fit the button picked](https://github.com/Viren070/AIOStreams/commit/3902c74a9f6a4d051a4cb5c2fc6936ce337904f7)
-- [refactor(android): rename the player modules to mpv and exoplayer](https://github.com/Viren070/AIOStreams/commit/42b0cd5adeb3a77d28873ce496663eaedaf2684f)
-- [fix(android): apply sub-ass-override to ASS in ExoPlayer](https://github.com/Viren070/AIOStreams/commit/2e4da694ac9bfd6c65c710a178bf56a9017aff34)
-- [fix(android): time embedded text subtitles by the video's frames](https://github.com/Viren070/AIOStreams/commit/3c4db7b4f8b622bbceae1ea3213bbdc241cefd11)
-- [feat(android): fall back to mpv when ExoPlayer can't decode a file](https://github.com/Viren070/AIOStreams/commit/e54d2b6093c3679d5e6cbfa17ba0f515d13e90bd)
-- [feat(web): add an Automatic player engine and make it the default](https://github.com/Viren070/AIOStreams/commit/2549a50f2a3433c295ad7cb0bc14c549afadb931)
-- [fix(android): replace the launcher PNG with an adaptive icon](https://github.com/Viren070/AIOStreams/commit/79ad343a79c7771065f59d252830a8733b614743)
-- [feat(android): read back to the subtitle lines a seek lands in](https://github.com/Viren070/AIOStreams/commit/7592d222a6dff1770e669ff32957d4cd5bb92381)
-- [fix(android): strip native libraries with the pinned NDK](https://github.com/Viren070/AIOStreams/commit/cf9634418baa68410d449a52d7c76233c7ea7457)
-- [feat(android): fetch libmpv from a pinned, hash-checked release](https://github.com/Viren070/AIOStreams/commit/983666a10d4268fe329670974cc387dff1669457)
-- [perf(web): ask the Android app's mpv for direct MediaCodec decoding](https://github.com/Viren070/AIOStreams/commit/2173c6232fc6f35c8483a81ea3976cdd119c63f8)
-- [chore(android): ignore the bin folders VS Code's Java tooling writes](https://github.com/Viren070/AIOStreams/commit/645c49443ad2148e87b9bbcee1d4842011c5d394)
-- [fix(android): write mpv's CA bundle from Android's certificate store](https://github.com/Viren070/AIOStreams/commit/1a3f43d0f0d30524d3619f1c3e9cbe5255c9d267)
-- [feat(android): add an Android TV launcher entry and banner](https://github.com/Viren070/AIOStreams/commit/9c945d104f1424fee1dcc51d60da2b2972c618c6)
-- [feat(android): tell the page it runs on a TV](https://github.com/Viren070/AIOStreams/commit/da3281cf7db564d238693223943738599797cd13)
-
-[Compare b17de1e...a521900](https://github.com/Viren070/AIOStreams/compare/b17de1e...a521900)
 
 ---
 
