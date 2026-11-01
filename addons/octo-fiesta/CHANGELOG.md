@@ -2,6 +2,15 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-3ef19f6 — 2026-11-01
+
+- [docs: add NaviBeat to desktop and Android clients](https://github.com/V1ck3s/octo-fiesta/commit/2fd8c84fa8e81790ae4557aaa5bdf38f98b93a02)
+- [docs: add Navis to compatible clients](https://github.com/V1ck3s/octo-fiesta/commit/3ef19f6cd716e212ae65943169499ccbdcdc8a1a)
+
+[Compare 609cd1d...3ef19f6](https://github.com/V1ck3s/octo-fiesta/compare/609cd1d...3ef19f6)
+
+---
+
 ## dev-609cd1d — 2026-10-27
 
 - [fix: do not advertise unsupported playbackReport for external songs](https://github.com/V1ck3s/octo-fiesta/commit/e8ade4eca98e5637829f001eee81881d7614ec36)
@@ -81,14 +90,6 @@ For full upstream release notes see the [official Octo-Fiesta releases](https://
 - [refactor(subsonic): fold playlist query normalization into the shared helper](https://github.com/V1ck3s/octo-fiesta/commit/a1db7fae18794e3283fbe77ffbf0cd1cd06502ad)
 
 [Compare c4d0f57...a1db7fa](https://github.com/V1ck3s/octo-fiesta/compare/c4d0f57...a1db7fa)
-
----
-
-## dev-c4d0f57 — 2026-09-05
-
-- [fix(subsonic): run quality upgrade in background instead of blocking playback](https://github.com/V1ck3s/octo-fiesta/commit/c4d0f5734d1868b8f3f4c031566b705480c32efd)
-
-[Compare 0314a42...c4d0f57](https://github.com/V1ck3s/octo-fiesta/compare/0314a42...c4d0f57)
 
 ---
 
