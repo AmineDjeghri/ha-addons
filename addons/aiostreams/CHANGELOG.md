@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-0b56aa1 — 2026-11-02
+
+- [fix(web): send planned skips to the Android app only](https://github.com/Viren070/AIOStreams/commit/f8da8c88103606828ee2341b2d33f8550c4bbb2d)
+- [fix(android): hide the video SurfaceView itself once the player closes](https://github.com/Viren070/AIOStreams/commit/2764a8aefb0bd58a4f51daf61ef7bcf0f91636f1)
+- [fix(android): shape and mix down 5.1.4 and 7.1.4 sound](https://github.com/Viren070/AIOStreams/commit/42a7f1b96ad5aad4e8f6cc1b9c72db2916c38f53)
+- [fix(web): start keys on a tab list's selected tab when nothing is focused](https://github.com/Viren070/AIOStreams/commit/dc2b5f4ee07111f469446ac891c5a4965c1fb410)
+- [fix(ui): patch Radix Select's onPlaced to a stable callback](https://github.com/Viren070/AIOStreams/commit/233ba8f37ee30b11d7d427e094e795cf3116ba72)
+- [fix(desktop): keep the macOS main loop running until the player closes](https://github.com/Viren070/AIOStreams/commit/3f4a5da2f603e1fb08d58a324a406f674bb70170)
+- [feat(web): put a server subtitle's title on a line of its own](https://github.com/Viren070/AIOStreams/commit/e2d778bea9b2ba3335bf84de2e84b6f471d51dbe)
+- [fix(web): keep the skip flash in place while skips add up](https://github.com/Viren070/AIOStreams/commit/6bc1f6ca7cdc4dc7ec2ead7616e9fc3cc97dba65)
+- [feat(web): show the time in the player's top bar](https://github.com/Viren070/AIOStreams/commit/d98ca3676f19ac7bd49ed2507d663cda58284e82)
+- [feat(web): play or pause with Select while the player's controls are hidden](https://github.com/Viren070/AIOStreams/commit/cfe54b81859389f6b74e90ac56c65a5df80ee5af)
+- [docs: list the player clock and subtitle title hooks](https://github.com/Viren070/AIOStreams/commit/8ea281dc9faec6fd69ccb74ebd6d1ab1fcacc92f)
+- [feat(web): add a setting for how long the hero stays on each title](https://github.com/Viren070/AIOStreams/commit/bbf8b5cc90d93502b4b300b670e276a86e5152df)
+- [feat(server): mark and explain a title no addon has details for](https://github.com/Viren070/AIOStreams/commit/a34df0c06bff6e8fbafae23cafd581a435b6ed47)
+- [feat(web): give shows Play and More info in the rotating hero](https://github.com/Viren070/AIOStreams/commit/bb5e92a6b5ea88c4fe272bcdbbcb1965494af705)
+- [feat(web): ask for a metadata addon on a title without details](https://github.com/Viren070/AIOStreams/commit/d042e8a1151191024c0a977f07be6801904fdbba)
+- [docs: describe titles without details](https://github.com/Viren070/AIOStreams/commit/d6312f2439615fcc09d762951e2a9425f5e9edfb)
+- [feat(desktop): leave a target-peak set in mpv.conf alone on macOS](https://github.com/Viren070/AIOStreams/commit/f9b4fbf6378f7c26f9d29ba7534022d664f4d282)
+- [feat(web): put a title's actions in a labelled row and a More sheet on touch screens](https://github.com/Viren070/AIOStreams/commit/d70929b8141c43552c92edca5532084efdd0e781)
+- [docs: list the touch screen title actions and how to show more of them](https://github.com/Viren070/AIOStreams/commit/df2f92c233488438fbe77d4dac4875a8c47a28c3)
+- [feat(web): bigger icons in the bottom bar without names](https://github.com/Viren070/AIOStreams/commit/95d151a322add2f4392795832ed309209a15ccad)
+
+[Compare c358754...0b56aa1](https://github.com/Viren070/AIOStreams/compare/c358754...0b56aa1)
+
+---
+
 ## nightly-c358754 — 2026-10-31
 
 - [feat(watch-state): default the minimum resume percentage to 0](https://github.com/Viren070/AIOStreams/commit/c723b85d2f21fd3ebcb73c29f123dcf4feaa392c)
@@ -227,33 +254,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [fix(jellyfin): play the session a client was given when its stream request names none](https://github.com/Viren070/AIOStreams/commit/38c060dc081e1ab63ca036f384562a6cba77390d)
 
 [Compare bd1de5b...38c060d](https://github.com/Viren070/AIOStreams/compare/bd1de5b...38c060d)
-
----
-
-## nightly-bd1de5b — 2026-10-13
-
-- [fix(web): stack keyed glides on layers again, easing held repeats in and out](https://github.com/Viren070/AIOStreams/commit/3bd164477a3c0dafa8cbc11a5f4749a72cb2cafa)
-- [feat(android): pass surround audio through by what the output reports](https://github.com/Viren070/AIOStreams/commit/6cc6828e1afeb49773bf7244445d241e8340085a)
-- [feat(web): add a Dolby Vision switch that plays the HDR10 picture instead](https://github.com/Viren070/AIOStreams/commit/e27353e9883eb8ff5ef62fa11e821bfbe30c489b)
-- [feat(jellyfin): rank subtitle tracks by type](https://github.com/Viren070/AIOStreams/commit/d37af67e46ce9b8180250a19ce92bf4c61863e6f)
-- [feat(jellyfin): read named trailers and video links](https://github.com/Viren070/AIOStreams/commit/52c949084f74f39ee3d98e8bec63d984f327bc31)
-- [feat(web): add a trailer player and a sheet of named trailers](https://github.com/Viren070/AIOStreams/commit/b1c84c17ab15cdd371e0dc1a29dacc3a0fee4714)
-- [fix(web): fill the player controls' focus with an inset shadow](https://github.com/Viren070/AIOStreams/commit/78e1d2771e34aea8f820b029d40fff6ff52de91f)
-- [feat(jellyfin): answer search hints from LumiereDB or Cinemeta](https://github.com/Viren070/AIOStreams/commit/03ef41737acbbf2a8a9641ca352c6d291c38614c)
-- [feat(web): suggest titles from search hints while typing](https://github.com/Viren070/AIOStreams/commit/9f36d38c4ceb92309834c647ec979ddab9748367)
-- [docs: update changelog and app/protocol docs](https://github.com/Viren070/AIOStreams/commit/0b9bdad366f6b48f0d224569a667277ace630d1c)
-- [feat(web): reuse the server's kept version list in the player](https://github.com/Viren070/AIOStreams/commit/edac5c2ef161ef88a03e8c6a994e7f6c30015e48)
-- [feat(web): list only the user's subtitle languages in the subtitle menu](https://github.com/Viren070/AIOStreams/commit/0afe74400f59c535f4ec9a871579cb5d4172543f)
-- [fix(desktop): read streams with FFmpeg's reader and reconnect options](https://github.com/Viren070/AIOStreams/commit/3c4fff3ddd770cbde3a95c67dc7220bc7962c4d8)
-- [fix(web): show an early end of file as a failure with a resume button](https://github.com/Viren070/AIOStreams/commit/a4a9dd7d4b19a8e2e8aecdf85b849e6ca1c4852f)
-- [feat(web): add data-ui hooks to the parts that had none](https://github.com/Viren070/AIOStreams/commit/755544587cc5c42dddb8559514fc75e4f9e37325)
-- [docs: list every web app CSS hook](https://github.com/Viren070/AIOStreams/commit/2a42d39bc46fbd48ecc0a3af77adbdaabf8093ab)
-- [fix(desktop): read streams with curl again](https://github.com/Viren070/AIOStreams/commit/d877bd10281ef95061fd3a633685d4b5beedbb2f)
-- [chore(desktop): update the web app (#1492)](https://github.com/Viren070/AIOStreams/commit/61c0515aec20cb853dd9d056fc633022578c2ea4)
-- [chore(android): update the web app (#1493)](https://github.com/Viren070/AIOStreams/commit/5143370f6b8b0c24be3603d538a0b2e89bbe921e)
-- [chore(smart-tv): update the web app (#1479)](https://github.com/Viren070/AIOStreams/commit/3fd07deb1dba590e38e28172c91ee42ccb64110e)
-
-[Compare a521900...bd1de5b](https://github.com/Viren070/AIOStreams/compare/a521900...bd1de5b)
 
 ---
 
