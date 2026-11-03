@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-259e769 — 2026-11-03
+
+- [chore: update header presets (#1487)](https://github.com/Viren070/AIOStreams/commit/b921d2634bfe27271eaca3374fd784939ff3b935)
+- [chore(l10n): update Polish translation](https://github.com/Viren070/AIOStreams/commit/e460fb18994173761a153da39c2c5736063abe52)
+- [chore(l10n): update Spanish translation](https://github.com/Viren070/AIOStreams/commit/3cdb5de3aa06731890dac9d96b873fb7ebb00ef3)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/38a753e4ef4fe5e676919835e11ae9ee14ca9aa9)
+- [chore(l10n): update Malay translation](https://github.com/Viren070/AIOStreams/commit/56f25befff62dc749409c6c69c91c859e2bdfc91)
+- [chore(l10n): update Spanish translation](https://github.com/Viren070/AIOStreams/commit/1913f1e1cb69a2a16fdcc5b6ceea055d3b828cbe)
+- [chore(l10n): update Turkish translation](https://github.com/Viren070/AIOStreams/commit/d02085b7aa38922785355b527d05e4dbc964c9d5)
+- [chore(l10n): update Malay translation](https://github.com/Viren070/AIOStreams/commit/31e2c677dacb760a41d3deb971ed27cc0194d034)
+- [chore(l10n): update translation files](https://github.com/Viren070/AIOStreams/commit/06e980234367b58bf31c06b8bf81eb9f19926932)
+- [chore(l10n): update Polish translation](https://github.com/Viren070/AIOStreams/commit/52632c59fb9e8d7932d14aa514b7c670494fb98d)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/3acfdfd19a7f5d4eb06d25fe856bb6633adbaf4a)
+- [chore(l10n): add Swedish translation](https://github.com/Viren070/AIOStreams/commit/5d930babb0a4aa7405b9861fa6f0af4c74e4fc45)
+- [chore(l10n): add Swedish translation](https://github.com/Viren070/AIOStreams/commit/707a8166b354e59746009cb58e4b9613bec26558)
+- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/f9891ea4922991f94ef18cbfa62c881363a6a241)
+- [chore(l10n): update Spanish translation](https://github.com/Viren070/AIOStreams/commit/aa0183505e6f058238c5a2ab589ddf702d6022d2)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/d93bfcfa3d15fc20e1050762203ff511ac7edcb9)
+- [chore(l10n): update Swedish translation](https://github.com/Viren070/AIOStreams/commit/ade6d691c747f6327cc005338f935823525e056c)
+- [chore(l10n): update Swedish translation](https://github.com/Viren070/AIOStreams/commit/c0d4458fec64386518ecff9755eb038266908a57)
+- [Merge pull request #1693 from Viren070/weblate-aiostreams-web-app](https://github.com/Viren070/AIOStreams/commit/387c4dcd4c548b12df5de33d373c45b89bbe31f4)
+- [fix(android): leave the passthrough formats to ExoPlayer's own output check](https://github.com/Viren070/AIOStreams/commit/a4952505d6431d0311ccb951964360f3a1665c1a)
+
+[Compare 0b56aa1...259e769](https://github.com/Viren070/AIOStreams/compare/0b56aa1...259e769)
+
+---
+
 ## nightly-0b56aa1 — 2026-11-02
 
 - [fix(web): send planned skips to the Android app only](https://github.com/Viren070/AIOStreams/commit/f8da8c88103606828ee2341b2d33f8550c4bbb2d)
@@ -236,24 +263,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [refactor(web): add ask and bridgeStore to the app bridge](https://github.com/Viren070/AIOStreams/commit/23dbac9caec5fc6bf945ced768029f09f15121d3)
 
 [Compare 38c060d...9609290](https://github.com/Viren070/AIOStreams/compare/38c060d...9609290)
-
----
-
-## nightly-38c060d — 2026-10-14
-
-- [feat(jellyfin): pick the default audio track by the user's audio types](https://github.com/Viren070/AIOStreams/commit/e0eb9f2e6a2809394375f06ed3ce4edb33067eb4)
-- [feat(web): re-pick the audio track by the user's audio types](https://github.com/Viren070/AIOStreams/commit/1fe555724b3c7b02a18982d8ae0b1ce62c2d9cc4)
-- [feat(android): report ExoPlayer's audio description tracks](https://github.com/Viren070/AIOStreams/commit/7cc4044c166a13747a5ec387db0ae36a09e227c8)
-- [feat(desktop): add audio filters for dialogue boost, night mode and AC-3 encoding](https://github.com/Viren070/AIOStreams/commit/31c16c95607aee1211dc92a98d974fba0a9cd935)
-- [feat(android): add dialogue boost, night mode, audio delay and AC-3 encoding](https://github.com/Viren070/AIOStreams/commit/1f86c384b7f7f1a8a5da6e08a396f55bf8e90b8c)
-- [feat(web): add sound and output settings for the apps](https://github.com/Viren070/AIOStreams/commit/976ba8bbc5b50c349b10cfece322b10baae0336a)
-- [feat(android): mix ExoPlayer's sound down to the channel setting](https://github.com/Viren070/AIOStreams/commit/d2d403ae83aaa9fdadd205ba4d6ad85e092d69df)
-- [feat(web): show the channel setting in the Android app](https://github.com/Viren070/AIOStreams/commit/4b0f6ac3022d8a15dc4c7a9f6b1cbd71caf9405c)
-- [fix(ui): measure a slider's thumb as the whole slider for key navigation](https://github.com/Viren070/AIOStreams/commit/78d8f105eba7e193376c132ca050f103348af5c3)
-- [feat(web): honour "play the version's default track first" when re-picking audio](https://github.com/Viren070/AIOStreams/commit/5d22997d466959454b37b22a157804b117810747)
-- [fix(jellyfin): play the session a client was given when its stream request names none](https://github.com/Viren070/AIOStreams/commit/38c060dc081e1ab63ca036f384562a6cba77390d)
-
-[Compare bd1de5b...38c060d](https://github.com/Viren070/AIOStreams/compare/bd1de5b...38c060d)
 
 ---
 
