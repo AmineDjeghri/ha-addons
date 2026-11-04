@@ -2,6 +2,21 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-49cc6fa — 2026-11-04
+
+- [fix(android): pick the audio output again for a speed change only around passthrough](https://github.com/Viren070/AIOStreams/commit/dfaf8fa9306541327867eb82aeb36813943331fd)
+- [fix(android): tell runs with the same pid apart in the doing note](https://github.com/Viren070/AIOStreams/commit/852805f9fb61124af919e30f370c1d8af70b3dfd)
+- [feat(web): put the window buttons in the player's top bar](https://github.com/Viren070/AIOStreams/commit/790f107bee188eefcc7a394b19e0f70ecdf5d512)
+- [docs: add the player's window buttons hooks](https://github.com/Viren070/AIOStreams/commit/27a3a4b5896e28681307332c78f71f59aceba3c7)
+- [feat(web): add a mini player that plays on over the pages](https://github.com/Viren070/AIOStreams/commit/087fc4883f108ae12286daa1a7c90ad5aba9de56)
+- [feat(android): show the video small through a hole in the page for the mini player](https://github.com/Viren070/AIOStreams/commit/56bb1ec03a6787b7f9ca69f020bc657a6d495042)
+- [feat(desktop): lift the video over the page for the mini player](https://github.com/Viren070/AIOStreams/commit/e4faf227ea19674405a360011b9957eccaf44d78)
+- [docs: add the mini player hooks](https://github.com/Viren070/AIOStreams/commit/49cc6fa39af54a5bdb244d897cdf6008a7ebb594)
+
+[Compare 259e769...49cc6fa](https://github.com/Viren070/AIOStreams/compare/259e769...49cc6fa)
+
+---
+
 ## nightly-259e769 — 2026-11-03
 
 - [chore: update header presets (#1487)](https://github.com/Viren070/AIOStreams/commit/b921d2634bfe27271eaca3374fd784939ff3b935)
@@ -236,33 +251,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [feat(web): add a cache size setting](https://github.com/Viren070/AIOStreams/commit/b3d6f92cdac443387f0a2cc6694d170c76bbc534)
 
 [Compare 9609290...6ca32ed](https://github.com/Viren070/AIOStreams/compare/9609290...6ca32ed)
-
----
-
-## nightly-9609290 — 2026-10-17
-
-- [fix(android): parse ExoPlayer's file subtitles only as a shown track reaches them](https://github.com/Viren070/AIOStreams/commit/8ec4679efa1566319df8626072aecb44d717be00)
-- [fix(android): decode the sound the device can't with libmpv's FFmpeg](https://github.com/Viren070/AIOStreams/commit/b6b78f4115b8799913176109206a46683184a959)
-- [feat(frontend): rework addons menu](https://github.com/Viren070/AIOStreams/commit/644dda67bd96f406d08fcddcf619434402224298)
-- [feat(android): report ExoPlayer's audio output and memory in its stats](https://github.com/Viren070/AIOStreams/commit/80656922b60f344ab4ab0a4c12fdab5d25626696)
-- [feat(web): show the audio output and memory in ExoPlayer's stats](https://github.com/Viren070/AIOStreams/commit/27e7b2ef49648243fdea2b0a903b38247a8359ec)
-- [fix(jellyfin): raise the per-configuration maxVersions limit to 500 (#1517)](https://github.com/Viren070/AIOStreams/commit/5cde591e45b665c9f85185920b5b503b5abf449a)
-- [chore(android): update the web app (#1500)](https://github.com/Viren070/AIOStreams/commit/59ce8cad61f354c6b626871829184c54345c9d9c)
-- [chore(desktop): update the web app (#1506)](https://github.com/Viren070/AIOStreams/commit/69023d45cb7b41c149214fdbde9e4be9c2d06765)
-- [chore(desktop): release 0.15.0 (#1514)](https://github.com/Viren070/AIOStreams/commit/c6c1d2da6a88817a7169d2c54f6127c35c04789c)
-- [chore(android): release 0.5.0 (#1513)](https://github.com/Viren070/AIOStreams/commit/aaf4e4ecbf035bde5ba90e02c2ee8a3ddbdfc9e4)
-- [feat(android): report web fields to the keyboard as native fields on TV](https://github.com/Viren070/AIOStreams/commit/045c536a550295c668d3523b86f58df9d2102f75)
-- [fix(android): decode DTS with FFmpeg rather than the device's decoders](https://github.com/Viren070/AIOStreams/commit/59a0a02a0ac299200a90b7133e5351bc0d0eb699)
-- [chore: update dependencies and dockerfile image base](https://github.com/Viren070/AIOStreams/commit/c7ecd20c55ebad71c4d5e43c55133deaad2aa0df)
-- [fix(config): decrypt string and URL credentials set by the environment (#1528)](https://github.com/Viren070/AIOStreams/commit/795208e502155df7ec503cf0a7da49a54729f47b)
-- [chore: update to rsbuild2](https://github.com/Viren070/AIOStreams/commit/62b0b465919b180d32a47c2620fd6d5fe2f52555)
-- [feat(jellyfin): list versions that need headers or YouTube when PlaybackInfo asks](https://github.com/Viren070/AIOStreams/commit/92d0190159f031528bd8048d0d171759e90bc37a)
-- [feat(desktop): send a loadfile's headers as http-header-fields](https://github.com/Viren070/AIOStreams/commit/c1f365c07bd0c01eb479862f4e90a37afa566d72)
-- [feat(android): send a loadfile's headers from both engines](https://github.com/Viren070/AIOStreams/commit/307e63f204a91ad67ec8e6e8e71d86e0aa0904f8)
-- [feat(web): play versions that need headers or YouTube in the app's player](https://github.com/Viren070/AIOStreams/commit/17527e34c9156d7b6e303e93df29c1b30eeb97aa)
-- [refactor(web): add ask and bridgeStore to the app bridge](https://github.com/Viren070/AIOStreams/commit/23dbac9caec5fc6bf945ced768029f09f15121d3)
-
-[Compare 38c060d...9609290](https://github.com/Viren070/AIOStreams/compare/38c060d...9609290)
 
 ---
 
