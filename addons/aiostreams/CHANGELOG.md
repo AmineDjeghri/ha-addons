@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-46f8593 — 2026-11-05
+
+- [fix(android): keep the refresh rate when no mode matches the screen's size](https://github.com/Viren070/AIOStreams/commit/674bdc213c37b79464a0e611c625726dfe41d5b1)
+- [chore(android): update the web app (#1716)](https://github.com/Viren070/AIOStreams/commit/090cf99cafd09359d77699f2b11ca0bda9472467)
+- [chore(l10n): update translation files](https://github.com/Viren070/AIOStreams/commit/15db3668673f01a74912a9e1b5f6e30b20b5209e)
+- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/73bc7599e35fa60aa32d15a5b522ee939cff7e14)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/c5ee3b0e992e294cfdca8f6fbcfe5f4e001588d8)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/9ef49fcfe80082aafad3092a268cfbdfbf0733fe)
+- [chore(l10n): update Spanish translation](https://github.com/Viren070/AIOStreams/commit/99ef922dbe123ff3ae3bf5f74e3811f4695a9cb4)
+- [chore(l10n): update French translation](https://github.com/Viren070/AIOStreams/commit/bba83765bf6d3c5da17e55d453931683795569c2)
+- [chore(l10n): update Malay translation](https://github.com/Viren070/AIOStreams/commit/7771f46d0a5f8f59bd9a4e5f11d54927acfa8c4d)
+- [chore(l10n): update German translation](https://github.com/Viren070/AIOStreams/commit/0d70fb2f56c88cdd45903c21fcffd08b50ff39d8)
+- [chore(l10n): update Polish translation](https://github.com/Viren070/AIOStreams/commit/55519ebf8d6dbb94a1548e56634019969c0b7fd2)
+- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/f6896b3f2656d41ec9191a169a73658c578090de)
+- [chore(l10n): update Spanish translation](https://github.com/Viren070/AIOStreams/commit/1961fb4aec7ceb6eebc3817963fcba31b3cd42e4)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/a7440b01ffff1236d1b2b7a16bc91d695b11cd7e)
+- [chore(l10n): update translation files](https://github.com/Viren070/AIOStreams/commit/4d34494bc0ddedb648525785f8d106eb0e49d096)
+- [chore(l10n): update German translation](https://github.com/Viren070/AIOStreams/commit/170ada0991d4c894481e0e0699e5627eacc7cb7d)
+- [chore(l10n): update Polish translation](https://github.com/Viren070/AIOStreams/commit/9670fa16ed951b37c8a8c2ee371b77b9c1ff041b)
+- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/56cb5292bbac61b8aea9495e79b7584f1bc0f80e)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/2edae07c9ae6e208b5d3e4755b84ffc9f425652b)
+- [chore(l10n): update Malay translation](https://github.com/Viren070/AIOStreams/commit/bd80d1682be8f86bdc37397b3dc2968ed30e7856)
+
+[Compare 49cc6fa...46f8593](https://github.com/Viren070/AIOStreams/compare/49cc6fa...46f8593)
+
+---
+
 ## nightly-49cc6fa — 2026-11-04
 
 - [fix(android): pick the audio output again for a speed change only around passthrough](https://github.com/Viren070/AIOStreams/commit/dfaf8fa9306541327867eb82aeb36813943331fd)
@@ -224,33 +251,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [feat(desktop): make seek-bar thumbnails for player-thumbnail requests](https://github.com/Viren070/AIOStreams/commit/1f20a1989f66acf1f38af0efbc7dc6b66c2ad6b2)
 
 [Compare 6ca32ed...454e8b4](https://github.com/Viren070/AIOStreams/compare/6ca32ed...454e8b4)
-
----
-
-## nightly-6ca32ed — 2026-10-19
-
-- [fix(jellyfin): keep separate users off the account's switch list](https://github.com/Viren070/AIOStreams/commit/68a0f69b30abcc206b3030c2134fe762989aa876)
-- [refactor(web): drop the picker's dimming of separate users](https://github.com/Viren070/AIOStreams/commit/3051739bf1cbbdb3937f3ff9df9ef5e38c828e95)
-- [docs: list a separate user only to itself](https://github.com/Viren070/AIOStreams/commit/2dc71a976e0bde5d8487fe8ec6cf2ba038a942e0)
-- [fix(web): start on Home after switching users or signing out](https://github.com/Viren070/AIOStreams/commit/b5814996c628cb5b61846c6fb0a3da80ae8e6ec5)
-- [feat(web): keep the app language per user](https://github.com/Viren070/AIOStreams/commit/7e32f7daf378845a472fa925a39f0874077eee6e)
-- [fix(web): return focus to a card after a dialog its menu opened](https://github.com/Viren070/AIOStreams/commit/ae8e7e58a70aa3db70ef56e7e738bd38bb1bd588)
-- [fix(web): draw card focus rings outside the picture](https://github.com/Viren070/AIOStreams/commit/e3646bc1b31bfc904779d074e86ad56ff1ae53c9)
-- [feat(core): keep reports from the apps and pass them on to the developer](https://github.com/Viren070/AIOStreams/commit/2c760fdece71ec5d8c6e72419f60d1c2ecf549a4)
-- [feat(server): take app reports and prune them](https://github.com/Viren070/AIOStreams/commit/2b047996a077d6a7991d6b1a7de26d1fe61bde54)
-- [feat(android): record how the last run ended](https://github.com/Viren070/AIOStreams/commit/54ef5e0d44a8031aaeb6835a3e85ed59ce5ad70c)
-- [feat(web): send a report from troubleshooting or after a crash](https://github.com/Viren070/AIOStreams/commit/661daef90ff0b939586cc6cc8579c1a157b3aa8b)
-- [feat(frontend): read app reports in the dashboard](https://github.com/Viren070/AIOStreams/commit/8c3257de696dc6250244f195522ccde3d7100ae0)
-- [docs: add app reports](https://github.com/Viren070/AIOStreams/commit/f243869ac37f4fe11765ae0123b8b14c998c83e5)
-- [fix(desktop): default GSK_RENDERER to OpenGL on Linux](https://github.com/Viren070/AIOStreams/commit/d9f7856680769708dbef4dfa9c8d655ea6484424)
-- [fix(jellyfin): return only the named version from PlaybackInfo](https://github.com/Viren070/AIOStreams/commit/f18557cf0842f9f80c8985e3cbe8e70d26905345)
-- [fix: send hash of host for reports](https://github.com/Viren070/AIOStreams/commit/0705e0febf4ef49283898a6ae379fafd56d14108)
-- [feat(android): cache the playing stream in native memory for ExoPlayer](https://github.com/Viren070/AIOStreams/commit/ae6fa0ef6b9f22abdcaeb0b425d30686488a12ce)
-- [feat(android): skip unreferenced frames and early Opus and Vorbis audio on seeks](https://github.com/Viren070/AIOStreams/commit/8fc59bdaaad30b11c072d26a307f480894661b1d)
-- [feat(web): cover the player until its first frame](https://github.com/Viren070/AIOStreams/commit/364c9746998c4ff3755127aa06d0dd6a4a76ce0a)
-- [feat(web): add a cache size setting](https://github.com/Viren070/AIOStreams/commit/b3d6f92cdac443387f0a2cc6694d170c76bbc534)
-
-[Compare 9609290...6ca32ed](https://github.com/Viren070/AIOStreams/compare/9609290...6ca32ed)
 
 ---
 
