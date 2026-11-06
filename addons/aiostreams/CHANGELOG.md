@@ -2,6 +2,18 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-c4afd6e — 2026-11-06
+
+- [fix(knaben): dedupe hits, use upload date for age, include subcategories (#1656)](https://github.com/Viren070/AIOStreams/commit/10e0f56559fbd7180d3849f935fef39ca0c3f6c4)
+- [fix(therarbg,torrent-galaxy): normalise imdb ids, keep keywords first in URLs, share code (#1650)](https://github.com/Viren070/AIOStreams/commit/190899451e496518775b8c104548f1ee259cf44e)
+- [fix(presets/meteor): migrate to current config format and improve stream parsing (#1735)](https://github.com/Viren070/AIOStreams/commit/93c27f00a3dc96bf7819ccfd63b7f5cd82e5c310)
+- [fix(presets/meteor): skip "no results" placeholder stream (#1736)](https://github.com/Viren070/AIOStreams/commit/3fc896824201053336c791c9e7853e654d72e723)
+- [refactor(knaben): switch to v2 search api (#1737)](https://github.com/Viren070/AIOStreams/commit/c4afd6e48f39aab062a3fbc24fe0a936281b453c)
+
+[Compare 46f8593...c4afd6e](https://github.com/Viren070/AIOStreams/compare/46f8593...c4afd6e)
+
+---
+
 ## nightly-46f8593 — 2026-11-05
 
 - [fix(android): keep the refresh rate when no mode matches the screen's size](https://github.com/Viren070/AIOStreams/commit/674bdc213c37b79464a0e611c625726dfe41d5b1)
@@ -224,33 +236,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [chore(android): release 0.9.0](https://github.com/Viren070/AIOStreams/commit/89312b535f7e1eda9c81b1f0de3b62730bd7e22e)
 
 [Compare 454e8b4...89312b5](https://github.com/Viren070/AIOStreams/compare/454e8b4...89312b5)
-
----
-
-## nightly-454e8b4 — 2026-10-22
-
-- [docs: add v2.37 changelog](https://github.com/Viren070/AIOStreams/commit/3bb0b7494c2af4a25278068a6e5470992b531285)
-- [feat(desktop): report a file's own subtitle lines to the page](https://github.com/Viren070/AIOStreams/commit/348c3dfaf455f3831af4992dddac3cf459bc4673)
-- [feat(android): report a file's own subtitle lines to the page](https://github.com/Viren070/AIOStreams/commit/6c1abd7cc727fde90287daa7f534fe860ab884cc)
-- [feat(web): line added subtitles up with the file's own subtitles](https://github.com/Viren070/AIOStreams/commit/f016dd6cefc8015cade74def057940d9eb9c3e12)
-- [docs(apps): describe automatic subtitle sync](https://github.com/Viren070/AIOStreams/commit/b441f45d362a1b5ca0cf5271618f02b60b10c3bd)
-- [feat(native): add container indexes and seek thumbnails in Rust](https://github.com/Viren070/AIOStreams/commit/e2bca29b433934c3b5f02e5d6e9d511e43e9ce59)
-- [feat(android): build packages/native into a natives module with cargo-ndk](https://github.com/Viren070/AIOStreams/commit/3494f9daba7b80f827733c96102455c9595cf55a)
-- [ci(android): install Rust, its Android targets and cargo-ndk](https://github.com/Viren070/AIOStreams/commit/e9ad0b00188b6e3bb1fe107a06d4a2f85f91ff78)
-- [perf(native): convert thumbnails straight to JPEG YCbCr](https://github.com/Viren070/AIOStreams/commit/2fe4fe1d7cfd04859dffa74c01c0b935639d779d)
-- [perf(native): fetch the next thumbnail's keyframe while one renders](https://github.com/Viren070/AIOStreams/commit/41d2eccfcdef127526c39f2d141ac69eb244d5cc)
-- [perf(native): size keyframe reads from recent keyframe sizes](https://github.com/Viren070/AIOStreams/commit/ea1c4cadbe40f30571c33a8dddaf81efd51a1ee3)
-- [feat(native): read subtitle timelines from a Matroska file's index](https://github.com/Viren070/AIOStreams/commit/f7bc3b2b335827c8ed6eb8967d75f76bbc77a93a)
-- [feat(desktop): send the reference subtitle's lines from the file's index](https://github.com/Viren070/AIOStreams/commit/cb248ee1145c684e5eceb88a7373ca30160e53a7)
-- [ci(desktop): build on packages/native/container changes](https://github.com/Viren070/AIOStreams/commit/fb79ef65577c5e476385a0034479ad4928de46e2)
-- [feat(android): send the reference subtitle's lines from the file's index](https://github.com/Viren070/AIOStreams/commit/8f911ea44a4411111cd4fde9b9ef2bd85c0fc5f0)
-- [refactor(native): load libavcodec at runtime for thumbnails](https://github.com/Viren070/AIOStreams/commit/6214d89b67356fde1926423e7690e7f7c1d29d09)
-- [perf(native): fetch several keyframes at once for thumbnails](https://github.com/Viren070/AIOStreams/commit/4a67d314ed9ef185752e5f570613e67e64f1d0ec)
-- [feat(native): add thumbnails that open their file in the background](https://github.com/Viren070/AIOStreams/commit/87c1ecefeb5c4e483827192d4b9a4d1c6d5dc592)
-- [feat(native): add thumbnail JNI exports for Android](https://github.com/Viren070/AIOStreams/commit/39eb4acca632329e5a03d8607102f612ee096add)
-- [feat(desktop): make seek-bar thumbnails for player-thumbnail requests](https://github.com/Viren070/AIOStreams/commit/1f20a1989f66acf1f38af0efbc7dc6b66c2ad6b2)
-
-[Compare 6ca32ed...454e8b4](https://github.com/Viren070/AIOStreams/compare/6ca32ed...454e8b4)
 
 ---
 
