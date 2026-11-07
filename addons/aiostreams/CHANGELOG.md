@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-9cd6e24 — 2026-11-07
+
+- [fix(android): only count controllers with a stick or d-pad as gamepads](https://github.com/Viren070/AIOStreams/commit/31ccc515ce0e337b15f2da3a257b8f274a9239fb)
+- [perf(web): stop re-rendering the player page on unchanged state reports](https://github.com/Viren070/AIOStreams/commit/37ab20fc1618a8027e4deebe4394cc18b8ddc7ef)
+- [fix(android): also count button-only pads as gamepads](https://github.com/Viren070/AIOStreams/commit/77727c2cc2a2a87be520ca15c30688777b9cf302)
+- [fix(presets/meteor): skip "donate" placeholder stream](https://github.com/Viren070/AIOStreams/commit/859e30dc65fdd0be359fd56659471bc298669ff4)
+- [feat(posters): add custom poster URL service (#1739)](https://github.com/Viren070/AIOStreams/commit/dd620f5cdbbc1d85cf4d7b5bfa734d1250c8570a)
+- [fix(android): start passthrough audio before its buffer fills (#1742)](https://github.com/Viren070/AIOStreams/commit/14d9d63fad60bc8884f7b390aaff2f0320616799)
+- [feat(presets): add cinemeta preset (#1740)](https://github.com/Viren070/AIOStreams/commit/4c806af2775ca85414e7bf73dbf4ed28d28afc17)
+- [fix(torrent-galaxy): use torrentgalaxy.online as default domain (#1738)](https://github.com/Viren070/AIOStreams/commit/f651b791b8d19f7ea3295df503f396c660ccab83)
+- [fix(core): only set indexer/addon mediaInfoQuality when languages were returned (#1538)](https://github.com/Viren070/AIOStreams/commit/ed74a3bcafb881738cfd63aac1d93204ed92f0df)
+- [fix(android): start a download's video without waiting for its subtitles (#1720)](https://github.com/Viren070/AIOStreams/commit/0dd6e42f901a8c39d7200bcd09cf51ac43b6c563)
+- [feat(presets/newznab): add SearchNZB indexer (#1701)](https://github.com/Viren070/AIOStreams/commit/07b9861ac6baff4a0e31ba07e7e86f8032b127b5)
+- [fix(jellyfin): rebuild movie-kind watch rows as movies](https://github.com/Viren070/AIOStreams/commit/26a72b681b8a8c5741862d90c8968151e429be76)
+- [fix(web): reopen live sources that end, fail or stall](https://github.com/Viren070/AIOStreams/commit/efb11f31c17eb4a8a3e486ea065afd30730d2e50)
+- [feat(android): load live sources at their live edge](https://github.com/Viren070/AIOStreams/commit/6e56f20abc587103065257bd0cf984a9dd028819)
+- [feat(web): tell the app's player when a source is live](https://github.com/Viren070/AIOStreams/commit/049cd02ecc66502bfc51738c2e4b6384ec51e463)
+- [fix(jellyfin): tell live playback by its item when its version is unknown](https://github.com/Viren070/AIOStreams/commit/c0723d9ec866b407ba69956b91454737b91fcfef)
+- [feat(web): add a start page setting](https://github.com/Viren070/AIOStreams/commit/008eae29a51009af72fbb5e9452eb2de9eaf6150)
+- [feat(web): list every page in the bottom bar and its menu](https://github.com/Viren070/AIOStreams/commit/2c77b3e44e6f4968aa2f36ba1dcd4df104c5f503)
+- [docs: add the bottom bar's page hooks](https://github.com/Viren070/AIOStreams/commit/ad19e87edbd7aa5ee3935013964518251c5f481d)
+- [fix(web): drop a live playback's unsent stop](https://github.com/Viren070/AIOStreams/commit/b475694f0fad94efeb924c7d8bbaaec91797370c)
+
+[Compare c4afd6e...9cd6e24](https://github.com/Viren070/AIOStreams/compare/c4afd6e...9cd6e24)
+
+---
+
 ## nightly-c4afd6e — 2026-11-06
 
 - [fix(knaben): dedupe hits, use upload date for age, include subcategories (#1656)](https://github.com/Viren070/AIOStreams/commit/10e0f56559fbd7180d3849f935fef39ca0c3f6c4)
@@ -215,27 +242,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [feat(desktop): replace a loaded server subtitle when it is added again](https://github.com/Viren070/AIOStreams/commit/fbdcb1fc38c443274be2ed491135b19e67a1ab04)
 
 [Compare 89312b5...ed8b085](https://github.com/Viren070/AIOStreams/compare/89312b5...ed8b085)
-
----
-
-## nightly-89312b5 — 2026-10-23
-
-- [feat(web): show cover immediately on auto play first](https://github.com/Viren070/AIOStreams/commit/6a93d189ece07cfb48f4c187677824a3891ce751)
-- [fix(web): paint the page's scrollbar in the page colour](https://github.com/Viren070/AIOStreams/commit/930e8a0464625cd797f75a5761c84633372c8753)
-- [fix(android): evict past the next landing when the stream cache is full](https://github.com/Viren070/AIOStreams/commit/7af178c473c2ba5b3f05315144ae494435966e26)
-- [fix(web): send a segment already skipped as offered](https://github.com/Viren070/AIOStreams/commit/8263f0ac45b0e2efc6991712c582427d0867f7d4)
-- [fix(android): pad ExoPlayer text subtitles by mpv's bottom margin](https://github.com/Viren070/AIOStreams/commit/d0bda7269f58f8e4f54c7ef60e3fb4a109f7bbef)
-- [feat(web): allow a negative subtitle height](https://github.com/Viren070/AIOStreams/commit/3b2875f61dd2b477c9b552eae2c749b3dd4c3f62)
-- [chore(desktop): update the web app (#1613)](https://github.com/Viren070/AIOStreams/commit/6943c04a6326d5a4fa5c64f8c2bae98043683f19)
-- [chore(android): update the web app (#1611)](https://github.com/Viren070/AIOStreams/commit/136876dfdcd963f8780d8374a57f53a35401e97c)
-- [chore(l10n): update German translation](https://github.com/Viren070/AIOStreams/commit/07dfc4c4c1d11610a63eb575a393fe26bdff8ab0)
-- [chore(l10n): update Polish translation](https://github.com/Viren070/AIOStreams/commit/af7630507f5292a5bd13051cb323c8c51c9743b5)
-- [chore(l10n): update translation files](https://github.com/Viren070/AIOStreams/commit/71b1e46954b8937f23bc99aedd21e8c3363313e9)
-- [chore(l10n): update translation files](https://github.com/Viren070/AIOStreams/commit/3d2a1e512ae670a39f2f91cdf9790739867cc4fb)
-- [chore(desktop): release 0.19.0](https://github.com/Viren070/AIOStreams/commit/5df944b5c856d90ac572e4977b8edb594e4f5a88)
-- [chore(android): release 0.9.0](https://github.com/Viren070/AIOStreams/commit/89312b535f7e1eda9c81b1f0de3b62730bd7e22e)
-
-[Compare 454e8b4...89312b5](https://github.com/Viren070/AIOStreams/compare/454e8b4...89312b5)
 
 ---
 
