@@ -2,6 +2,26 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-bdd9cbc — 2026-11-08
+
+- [fix(web): let popovers hide the app's video only where they cover it](https://github.com/Viren070/AIOStreams/commit/5820c19ede25802cbc135b20787d875b9f75967b)
+- [fix(web): go up from the guide to the programme's buttons](https://github.com/Viren070/AIOStreams/commit/645059091b021bfc78b03f09011c26edccc46be1)
+- [feat(web): pick the group picker's last group again when the keys come back to it](https://github.com/Viren070/AIOStreams/commit/2f4564f505c694055a75750d75b697538ffbac5d)
+- [feat(web): start live TV without subtitles and keep track picks per channel](https://github.com/Viren070/AIOStreams/commit/7734333e3422f218e119463ac0066e091d130b48)
+- [fix(core): ask live catalogs that take a search for channel matches](https://github.com/Viren070/AIOStreams/commit/8203fc818b5681392581ac863c561e4acc657474)
+- [feat(android): write the app's log to a file that reports read](https://github.com/Viren070/AIOStreams/commit/67cdf5d0762db5f0050a897234e6411b2da5d124)
+- [feat(desktop): fold mpv's log lines by kind and mask logins in links](https://github.com/Viren070/AIOStreams/commit/a2b388fd5adc165667e5a6bbabc8ca96f75d7047)
+- [feat(web): log live recovery's reopens, give-ups and version switches to the app](https://github.com/Viren070/AIOStreams/commit/e1249ac3bdc0f501ced321827a5b680dbdb2bec3)
+- [fix(android): cap the ASS lines kept in the Java heap](https://github.com/Viren070/AIOStreams/commit/0c20dacdf04b76b08454fbe486dacf5af0380d53)
+- [fix(android): read the next engine's description once it has started](https://github.com/Viren070/AIOStreams/commit/970346d7e865f5e656263a6d73845c05915428ee)
+- [feat(jellyfin): skip the subtitle lookup when PlaybackInfo sends SkipSubtitles](https://github.com/Viren070/AIOStreams/commit/5d5f3f0a8d7edc324d75515c3ce6847378b2435b)
+- [feat(web): send SkipSubtitles on version list requests](https://github.com/Viren070/AIOStreams/commit/a51d1d287bd86bec320b9b5a0935ace148869d9b)
+- [docs: describe the SkipSubtitles PlaybackInfo field](https://github.com/Viren070/AIOStreams/commit/bdd9cbc5cd24e1a1190cb841b2493af04d28bb4c)
+
+[Compare 9cd6e24...bdd9cbc](https://github.com/Viren070/AIOStreams/compare/9cd6e24...bdd9cbc)
+
+---
+
 ## nightly-9cd6e24 — 2026-11-07
 
 - [fix(android): only count controllers with a stick or d-pad as gamepads](https://github.com/Viren070/AIOStreams/commit/31ccc515ce0e337b15f2da3a257b8f274a9239fb)
@@ -215,33 +235,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/3343269fa76aafecfa2bb677c39f47fd39352862)
 
 [Compare ed8b085...f959e42](https://github.com/Viren070/AIOStreams/compare/ed8b085...f959e42)
-
----
-
-## nightly-ed8b085 — 2026-10-24
-
-- [feat(core): add storage, ids and items for Jellyfin playlists](https://github.com/Viren070/AIOStreams/commit/948cfe74ed5b29c138d30b8ae36b19e162ad41e1)
-- [feat(jellyfin): add the /Playlists routes and list playlists as items](https://github.com/Viren070/AIOStreams/commit/6b38420e6218eb665273f7493adf3a442f5b2526)
-- [feat(web): add playlists](https://github.com/Viren070/AIOStreams/commit/a9bec92aa4148da2af8a8f13060e71c855e0917f)
-- [docs: describe playlists](https://github.com/Viren070/AIOStreams/commit/c4896f687085e80c1e3e631c63c10f16367936ee)
-- [docs: update changelog](https://github.com/Viren070/AIOStreams/commit/2e9a4bee5f7418a4c5d9a3a992d48e00b58b4763)
-- [fix(jellyfin): air an undated episode no earlier than the ones before it](https://github.com/Viren070/AIOStreams/commit/48a77e7955f400a63d7bd51d84889ccdd966df23)
-- [fix(jellyfin): leave subtitles marked no-store out of the cache](https://github.com/Viren070/AIOStreams/commit/762360a301ef18b22469b28ba009c42653920be6)
-- [fix(web): reword the audio help for remembering picks per show](https://github.com/Viren070/AIOStreams/commit/3d4bcb67a5181aaf492102d1ae168895b63df1f6)
-- [fix(web): give the About page's Credits title its own context](https://github.com/Viren070/AIOStreams/commit/a58e39d08b09e8901d65eb102c6cef8931a7d2d0)
-- [fix(web): remember the subtitle type picked for a show](https://github.com/Viren070/AIOStreams/commit/657980e0f7f9d17ad6c5f80a25df732fd1368300)
-- [fix(web): hold a skip's seek-bar picture for a second](https://github.com/Viren070/AIOStreams/commit/451a15598e4c388c37a1db5d53b027d6d8c1500b)
-- [feat(web): show the seek-bar picture for arrow-key seeks only on TVs](https://github.com/Viren070/AIOStreams/commit/d4d00bf777d7b059cb583ddcf9a0da9b1495b8a6)
-- [fix(web): close the open player menu when another opens](https://github.com/Viren070/AIOStreams/commit/22d5d3c9f10980acb7e322bb9aca3f0caf469e73)
-- [feat(android): choose the storage downloads go to](https://github.com/Viren070/AIOStreams/commit/9ababea0f9c58fca25d4aab1c109605839d43b6d)
-- [feat(web): offer the Android app's download folder choice](https://github.com/Viren070/AIOStreams/commit/e14f65cff35e377861876be34f99866a10b639a9)
-- [fix(web): return nothing from the calendar agenda's scroll](https://github.com/Viren070/AIOStreams/commit/3b54f0fbef47cffd248d45b5a4e970ff045fcd2a)
-- [fix(server): cap the length of party and SyncPlay queues](https://github.com/Viren070/AIOStreams/commit/d5b47a97a2205a9372bfd5421a2d22206b371a90)
-- [fix(web): read buffered ranges from one snapshot](https://github.com/Viren070/AIOStreams/commit/10f9382bb64a3d2d7e06bbbb87ac7eda8d0ac79d)
-- [feat(web): take a party's next titles from its queue](https://github.com/Viren070/AIOStreams/commit/b9af14508f4a95d14a3c7cfba0fd3541f8c44541)
-- [feat(desktop): replace a loaded server subtitle when it is added again](https://github.com/Viren070/AIOStreams/commit/fbdcb1fc38c443274be2ed491135b19e67a1ab04)
-
-[Compare 89312b5...ed8b085](https://github.com/Viren070/AIOStreams/compare/89312b5...ed8b085)
 
 ---
 
