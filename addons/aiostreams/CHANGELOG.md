@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-1d680ef — 2026-11-10
+
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/b684eca55710db3c53403a176038025a99c03aac)
+- [chore(l10n): update Norwegian Bokmål translation](https://github.com/Viren070/AIOStreams/commit/d1c7056ba468f26ea41a4a01625f18e44e0c1739)
+- [chore(l10n): update Norwegian Bokmål translation](https://github.com/Viren070/AIOStreams/commit/710ca66f3862a024259c407176770a88e879d969)
+- [chore(l10n): update Spanish translation](https://github.com/Viren070/AIOStreams/commit/dff1d198cd34aeebedc7d5dfa8b8c00826001ff5)
+- [chore(l10n): update translation files](https://github.com/Viren070/AIOStreams/commit/474f92e43e5541c76c24b25cee2134dff93bdc00)
+- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/3d548d4a1938793ea04cbd06b79bcacf017d6d01)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/4374695a9900e200de651497694554f4e2795955)
+- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/bcb8ff3621f5ebbf21c1cf9d9b272555dc4e8b57)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/215d3ae18d3cb465c048c44db3ca82d3c6d803d2)
+- [chore(l10n): update translation files](https://github.com/Viren070/AIOStreams/commit/89accbb6fafedcd10b581724d725e2570b975f72)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/ed9069d6d2a4734f7f3c7fabde61cc069c750177)
+- [chore(l10n): update Indonesian translation](https://github.com/Viren070/AIOStreams/commit/d7232a1735e91531db6332ee8bd41f4d769fdc95)
+- [chore(l10n): update Indonesian translation](https://github.com/Viren070/AIOStreams/commit/e741693ab69269f2f64322bc6b3ea664fc1ad2b9)
+- [chore(l10n): update Polish translation](https://github.com/Viren070/AIOStreams/commit/8bbb86503d7aea2dbe9daf5a581cfee98d7d4fd2)
+- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/e0eb5446b3e10af03aea8f4ff7ef73abe1feb14f)
+- [chore(l10n): update French translation](https://github.com/Viren070/AIOStreams/commit/1f6cdddf7c8df336815f946bf512ddacb603a402)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/af5c3a1f941f9de0b4d56eb04ac6a437cd82cd85)
+- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/d4a90f28cadab3e25266e08bae8c2c1c52ae26ac)
+- [chore(l10n): update German translation](https://github.com/Viren070/AIOStreams/commit/3cd3240b87cffcde3f8c87a454b88a9756db147d)
+- [chore(l10n): update Greek translation](https://github.com/Viren070/AIOStreams/commit/3720134fc04732aa5f446469ef83fd64cb694f40)
+
+[Compare bdd9cbc...1d680ef](https://github.com/Viren070/AIOStreams/compare/bdd9cbc...1d680ef)
+
+---
+
 ## nightly-bdd9cbc — 2026-11-08
 
 - [fix(web): let popovers hide the app's video only where they cover it](https://github.com/Viren070/AIOStreams/commit/5820c19ede25802cbc135b20787d875b9f75967b)
@@ -208,33 +235,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [feat(web): slide the subtitle the page draws above the controls](https://github.com/Viren070/AIOStreams/commit/086f39dc9a1b2cdb4e183c2f5c9545d11844a70f)
 
 [Compare f959e42...3474c94](https://github.com/Viren070/AIOStreams/compare/f959e42...3474c94)
-
----
-
-## nightly-f959e42 — 2026-10-29
-
-- [fix(media-info): round probe durations to whole milliseconds](https://github.com/Viren070/AIOStreams/commit/738d09f3ec8768a7df7755e9c669637cd8e25be9)
-- [fix(watch-state): round positions and durations before storing them](https://github.com/Viren070/AIOStreams/commit/a1c1ba63377c7cafd983d80214d311686d45db3e)
-- [fix(jellyfin): read the socket token from auth headers too](https://github.com/Viren070/AIOStreams/commit/efaa2daab291e89d8bc9f22f1954a13523b3db05)
-- [fix(media-info): upsert a batch in key order](https://github.com/Viren070/AIOStreams/commit/42913c6dbc1edad26cc1c18390505a9aa6654f4b)
-- [fix(media-info): only relist a hidden row when its record changes](https://github.com/Viren070/AIOStreams/commit/611458d203ed569254d73f19f184c3004dc04caf)
-- [fix(jellyfin): upsert id mappings in key order, skipping fresh ones](https://github.com/Viren070/AIOStreams/commit/e597638d04dee4e33dd6ab3fb169bae10290baca)
-- [perf(web): size artwork for the pixels the page is drawn at](https://github.com/Viren070/AIOStreams/commit/f0e9c7fce4d4237106639deeb1b41cdf3a6238c9)
-- [fix(web): let React listen for transition and animation ends](https://github.com/Viren070/AIOStreams/commit/8192eebd1260ac4de2c16587b0d4c249edefcab7)
-- [feat(web): scrub with a TV remote through a row of pictures](https://github.com/Viren070/AIOStreams/commit/2862314d811632853612e9b6d8d50c911334643e)
-- [feat(native): render thumbnails 480 pixels wide](https://github.com/Viren070/AIOStreams/commit/25ed24bb44a8119b44683e8569e01e5fbd6a6b26)
-- [perf(core): index FULL_LANGUAGE_MAPPING by code and name](https://github.com/Viren070/AIOStreams/commit/0bb34e840f2f4e98757e8dc047d4b83f261bf1f4)
-- [perf(core): skip parseLockResult's reviver without a flattened error](https://github.com/Viren070/AIOStreams/commit/aa3ee398fa6e1622357cfbd192ab7e8420f0eb23)
-- [perf(core): skip re-parsing a SEL result that's just the input streams](https://github.com/Viren070/AIOStreams/commit/7d039dd80b61335d9356ae5059286a40c7369845)
-- [fix(web): size TV artwork from the screen and layout widths](https://github.com/Viren070/AIOStreams/commit/0a92ccefe00fee1effc6cb20e62daa64b0681f4c)
-- [feat(web): hide languages under half translated](https://github.com/Viren070/AIOStreams/commit/7e7d3adfc0dc67feaa8b1a66a9a851e9aad01107)
-- [docs: say when the apps offer a language](https://github.com/Viren070/AIOStreams/commit/08682175b062f4c1a1de9480548f7a3cf8e5e15c)
-- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/21a69a5395b4b799c352a775cf347db85eb9479c)
-- [chore(l10n): add Dutch translation](https://github.com/Viren070/AIOStreams/commit/3c9d0b6ebfa811392dc9e1a0ec3bbc8eb17ef172)
-- [chore(l10n): add Dutch translation](https://github.com/Viren070/AIOStreams/commit/a926c54ace39c15833a06965a8c133ce52ebeb1a)
-- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/3343269fa76aafecfa2bb677c39f47fd39352862)
-
-[Compare ed8b085...f959e42](https://github.com/Viren070/AIOStreams/compare/ed8b085...f959e42)
 
 ---
 
