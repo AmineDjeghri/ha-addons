@@ -2,6 +2,14 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-7aab826 — 2026-11-12
+
+- [feat: match library tracks despite edition labels and featured artists](https://github.com/V1ck3s/octo-fiesta/commit/7aab826f13830dd8c5518c1a895666efd88394af)
+
+[Compare 3ef19f6...7aab826](https://github.com/V1ck3s/octo-fiesta/compare/3ef19f6...7aab826)
+
+---
+
 ## dev-3ef19f6 — 2026-11-01
 
 - [docs: add NaviBeat to desktop and Android clients](https://github.com/V1ck3s/octo-fiesta/commit/2fd8c84fa8e81790ae4557aaa5bdf38f98b93a02)
@@ -77,19 +85,6 @@ For full upstream release notes see the [official Octo-Fiesta releases](https://
 - [feat: add artist letter to path template](https://github.com/V1ck3s/octo-fiesta/commit/afa6259a1bbf2d34202b054e3da4f0797eca937d)
 
 [Compare a1db7fa...afa6259](https://github.com/V1ck3s/octo-fiesta/compare/a1db7fa...afa6259)
-
----
-
-## dev-a1db7fa — 2026-09-12
-
-- [feat(subsonic): merge provider catalogue into getTopSongs](https://github.com/V1ck3s/octo-fiesta/commit/76ba52db1fb5db9ec8cfa0e744528fc4f4532413)
-- [fix(subsonic): drop irrelevant provider playlists from search3](https://github.com/V1ck3s/octo-fiesta/commit/8caceb7fb6c2a038a59036efac55b38743e1ebe3)
-- [feat(subsonic): merge provider catalogue into getTopSongs](https://github.com/V1ck3s/octo-fiesta/commit/723693b007e027acc6deb8e2863d36295d7cda1a)
-- [refactor(subsonic): reuse the artist credit helper in getTopSongs](https://github.com/V1ck3s/octo-fiesta/commit/d2172c99fe8e3c4b8dadd4bbd8ea83956da81763)
-- [fix(subsonic): drop irrelevant provider playlists from search3](https://github.com/V1ck3s/octo-fiesta/commit/cee7e80fbbc72040e5440bcd99846c6538fac947)
-- [refactor(subsonic): fold playlist query normalization into the shared helper](https://github.com/V1ck3s/octo-fiesta/commit/a1db7fae18794e3283fbe77ffbf0cd1cd06502ad)
-
-[Compare c4d0f57...a1db7fa](https://github.com/V1ck3s/octo-fiesta/compare/c4d0f57...a1db7fa)
 
 ---
 
