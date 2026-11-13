@@ -3,7 +3,7 @@ name = "personal-app"
 version = "1.2.2"
 description = "This is the personal app. check the frontend and backend folders for more details."
 readme = "README.md"
-requires-python = ">=3.14, <3.15"
+requires-python = ">=3.15, <3.16"
 dependencies = [
 
 ]
