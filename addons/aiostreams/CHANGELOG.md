@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-8eb12ba — 2026-11-14
+
+- [feat(android): add an upscaling network and run ExoPlayer's video through it](https://github.com/Viren070/AIOStreams/commit/8efcbbcbaf10d2e630699bf6b252a5058565f3ef)
+- [feat(android): apply the upscaling network and the user's shaders in mpv](https://github.com/Viren070/AIOStreams/commit/cbe3b3ef4b70eb6592b125cf51f53c0dd2a0cafd)
+- [feat(web): add anime upscaling and mpv shaders to the Android app](https://github.com/Viren070/AIOStreams/commit/3c00dac5553628f575adb5e67aed847701ce5499)
+- [docs: describe anime upscaling and mpv shaders in the Android app](https://github.com/Viren070/AIOStreams/commit/b5a444fe6db5189ea704d9422a86f3180eaa5980)
+- [feat(desktop): apply the upscaling shader in mpv](https://github.com/Viren070/AIOStreams/commit/443c4e8d33ef7425c789c51596893ec6a987e399)
+- [feat(web): offer anime upscaling in the desktop app](https://github.com/Viren070/AIOStreams/commit/4b2359434baf9fef9c1726a0c73b7ccf1c1725ff)
+- [docs: describe anime upscaling in the desktop app](https://github.com/Viren070/AIOStreams/commit/9b4588977c9303ef1015057e85d85cd304ee29e3)
+- [feat(android): show the starting logo until the page draws its splash](https://github.com/Viren070/AIOStreams/commit/b9cb1336b2881154d863048cb57493276f837926)
+- [feat(web): add a launch splash to the standalone build](https://github.com/Viren070/AIOStreams/commit/f2da9cf639307a3b52394aabe273688d82c68589)
+- [fix(android): keep live links out of the stream cache](https://github.com/Viren070/AIOStreams/commit/fe4f916a3bcb7d90ae98f5f43adbfd34b7b7ec27)
+- [feat(core): look up a film's anime ids from the anime database](https://github.com/Viren070/AIOStreams/commit/4ac9da66518f697ab505543ba2d8177e540bdca6)
+- [feat(jellyfin): add anime ids to films fetched on their own](https://github.com/Viren070/AIOStreams/commit/de255a23262b009cc4cfc4c66c73b16efe4adefe)
+- [fix(web): blur unstarted episodes in the calendar](https://github.com/Viren070/AIOStreams/commit/edd0b428d694cd6ee8dd1c0904aa3c262a40bf18)
+- [fix(web): mark the card whose menu is open and leave it unblurred](https://github.com/Viren070/AIOStreams/commit/ca637312a902199608917f72a2b2fc910da5e7a6)
+- [fix(web): focus the item menu's first entry when keys open it](https://github.com/Viren070/AIOStreams/commit/3a4b481dee8ccf2095f8886bc701f0d0ded7d456)
+- [fix(web): clear now playing when leaving the trailers](https://github.com/Viren070/AIOStreams/commit/76f7af913b8f47c9840bb979bab059f052c0c33d)
+- [build(android): update libs for 32-bit unwind tables and Mbed TLS 3.6.7](https://github.com/Viren070/AIOStreams/commit/687faeda5c31221379a468640b1a8ccef0eeedfc)
+- [fix(web): start the back slide only when Back leaves the page](https://github.com/Viren070/AIOStreams/commit/2e25752505d8468a4b3a37fcfb5828f71206fb63)
+- [fix(android): read mpv's versions once and close it off the main thread](https://github.com/Viren070/AIOStreams/commit/9b04b526f0938bcb2662dd5bbec94a306ae103c3)
+- [docs: add a download page and show the app's features on the home page](https://github.com/Viren070/AIOStreams/commit/363ffa12d111b82772673c35014c03ec8cd0acd3)
+
+[Compare 1d680ef...8eb12ba](https://github.com/Viren070/AIOStreams/compare/1d680ef...8eb12ba)
+
+---
+
 ## nightly-1d680ef — 2026-11-10
 
 - [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/b684eca55710db3c53403a176038025a99c03aac)
@@ -208,33 +235,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [Merge pull request #1690 from Viren070/weblate-aiostreams-web-app](https://github.com/Viren070/AIOStreams/commit/c358754b0ae4758d034badf8618de6fdb7fa9333)
 
 [Compare 3474c94...c358754](https://github.com/Viren070/AIOStreams/compare/3474c94...c358754)
-
----
-
-## nightly-3474c94 — 2026-10-30
-
-- [docs: rewrite the introduction and home page around the addon and the apps](https://github.com/Viren070/AIOStreams/commit/a8958c662aeec32104a5910a63fac0597501c815)
-- [docs: replace the TorBox Search FAQ with where it went](https://github.com/Viren070/AIOStreams/commit/bb3218309360d7648ca10e58239468684b40e071)
-- [chore(frontend): update the About page's default description](https://github.com/Viren070/AIOStreams/commit/dfa2ac3ea733bc39eb18a227068aed3555156f91)
-- [docs: rewrite the README around the addon and the apps](https://github.com/Viren070/AIOStreams/commit/6cf6bdee5aa7c423a4a21216c61e3f7b75405928)
-- [docs: describe the formatter's live preview](https://github.com/Viren070/AIOStreams/commit/acfbb14c7af8950cd8ba2662c0e3d9505045d932)
-- [docs: update the setup guide for the new setup wizard and the app](https://github.com/Viren070/AIOStreams/commit/864cbf445dc91d4e527e270199fe22c764618d40)
-- [docs: rewrite the FAQ and troubleshooting pages](https://github.com/Viren070/AIOStreams/commit/6b1fc245893b9004c18dc8c0a3ba858ea96c1bfa)
-- [docs: add updating and keeping an instance private to the deployment guide](https://github.com/Viren070/AIOStreams/commit/b0c2edd0b75b107ff481a88cba35d9c2f1bdcecf)
-- [chore: update the default addon description](https://github.com/Viren070/AIOStreams/commit/7d502368824e6722a888ad54e3530e20d28240ec)
-- [build(android): update libs for subtitles that slide every frame](https://github.com/Viren070/AIOStreams/commit/0673be8deb6e2388530994236baf3a6041647ed2)
-- [build(desktop): update libs for subtitles that slide every frame](https://github.com/Viren070/AIOStreams/commit/ee82aa43a9b17efef4b69f18f034705ae6c44498)
-- [fix(android): read every object of a PGS display set](https://github.com/Viren070/AIOStreams/commit/a6151ed8e1add0d07b5d7d3abace2fc731c7fde6)
-- [fix(android): reset libass's frame time for each file](https://github.com/Viren070/AIOStreams/commit/1a06f52e87907a7eefcb58df82597d89abda049c)
-- [feat(android): draw ExoPlayer's text subtitles with libass](https://github.com/Viren070/AIOStreams/commit/544a3d70df0a33548dbf37fa5afe8123a9e05146)
-- [feat(android): move ExoPlayer's subtitles without restyling them](https://github.com/Viren070/AIOStreams/commit/0ef3ac7e6e54f8528d579d6300b5297c3b0bbe95)
-- [feat(android): set mpv's sub-pos unrounded](https://github.com/Viren070/AIOStreams/commit/6cee1b919f5462156a17b7f571720476420b8b92)
-- [feat(android): prefer the fastest refresh rate while the page's controls show](https://github.com/Viren070/AIOStreams/commit/aac2d5fec19b47a086d128510223f9a6fb03cb36)
-- [feat(desktop): set mpv's sub-pos unrounded](https://github.com/Viren070/AIOStreams/commit/95d0521d4b3d3bb54b463a7b1b45c4f3b6638145)
-- [feat(web): ease the subtitle height every frame](https://github.com/Viren070/AIOStreams/commit/e7f665d0ed1e8680f6cb83b8266ea06849aae3ef)
-- [feat(web): slide the subtitle the page draws above the controls](https://github.com/Viren070/AIOStreams/commit/086f39dc9a1b2cdb4e183c2f5c9545d11844a70f)
-
-[Compare f959e42...3474c94](https://github.com/Viren070/AIOStreams/compare/f959e42...3474c94)
 
 ---
 
