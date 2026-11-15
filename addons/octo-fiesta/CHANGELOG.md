@@ -2,6 +2,21 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-6b81d67 — 2026-11-15
+
+- [feat: advertise octoFiesta OpenSubsonic extension](https://github.com/V1ck3s/octo-fiesta/commit/6f7d5a90e52d8082386fd8534a0d6909e2494fff)
+- [fix: include required duration in album JSON](https://github.com/V1ck3s/octo-fiesta/commit/f179a1ae747e9f0cc61b6f879669f2ed60690346)
+- [fix: return empty album/artist info for external ids](https://github.com/V1ck3s/octo-fiesta/commit/0ec87dd485c1531c0965d042b268ca8110922830)
+- [feat: make mappings file path configurable](https://github.com/V1ck3s/octo-fiesta/commit/ee1ddedbaf349c8fdabf5ba86635c0bef49207b9)
+- [fix: honor album download mode in cache storage mode](https://github.com/V1ck3s/octo-fiesta/commit/18f03fdf55adaca606972f8e0b137bcad9f0af2f)
+- [feat: add Qobuz explicit support and richer download metadata](https://github.com/V1ck3s/octo-fiesta/commit/3e0e7ddfde8da44d68af6a4dfee44b6e91bf972c)
+- [feat: add configurable concurrent downloads](https://github.com/V1ck3s/octo-fiesta/commit/65e4c714ba738511bb087db5aa45fec60d59fa77)
+- [fix: distinguish unreachable Subsonic server from invalid credentials](https://github.com/V1ck3s/octo-fiesta/commit/6b81d6795fac5362fcd765127015dc5e84772f5f)
+
+[Compare 7aab826...6b81d67](https://github.com/V1ck3s/octo-fiesta/compare/7aab826...6b81d67)
+
+---
+
 ## dev-7aab826 — 2026-11-12
 
 - [feat: match library tracks despite edition labels and featured artists](https://github.com/V1ck3s/octo-fiesta/commit/7aab826f13830dd8c5518c1a895666efd88394af)
@@ -77,14 +92,6 @@ For full upstream release notes see the [official Octo-Fiesta releases](https://
 - [fix(tidal): warn on lossy fallback and rank the upgrade target](https://github.com/V1ck3s/octo-fiesta/commit/3f2d5c4ae458826ebe54c7d8fa8329c021f06f7a)
 
 [Compare afa6259...3f2d5c4](https://github.com/V1ck3s/octo-fiesta/compare/afa6259...3f2d5c4)
-
----
-
-## dev-afa6259 — 2026-09-16
-
-- [feat: add artist letter to path template](https://github.com/V1ck3s/octo-fiesta/commit/afa6259a1bbf2d34202b054e3da4f0797eca937d)
-
-[Compare a1db7fa...afa6259](https://github.com/V1ck3s/octo-fiesta/compare/a1db7fa...afa6259)
 
 ---
 
