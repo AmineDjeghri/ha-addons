@@ -2,6 +2,15 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-53be978 — 2026-11-16
+
+- [feat: resolve barcode searches to the album with that UPC](https://github.com/V1ck3s/octo-fiesta/commit/e00ad5321ed1e8418e6f0683917427ce40ce5d71)
+- [fix: get the playing track's cover to the client quickly](https://github.com/V1ck3s/octo-fiesta/commit/53be9787d9688290d7f21b462232fd57da6ab165)
+
+[Compare 6b81d67...53be978](https://github.com/V1ck3s/octo-fiesta/compare/6b81d67...53be978)
+
+---
+
 ## dev-6b81d67 — 2026-11-15
 
 - [feat: advertise octoFiesta OpenSubsonic extension](https://github.com/V1ck3s/octo-fiesta/commit/6f7d5a90e52d8082386fd8534a0d6909e2494fff)
@@ -81,17 +90,6 @@ For full upstream release notes see the [official Octo-Fiesta releases](https://
 - [fix(subsonic): never drop a library scan request](https://github.com/V1ck3s/octo-fiesta/commit/a8386e82aee0e03bd80d7ecabae1efdc561d0832)
 
 [Compare 3f2d5c4...a8386e8](https://github.com/V1ck3s/octo-fiesta/compare/3f2d5c4...a8386e8)
-
----
-
-## dev-3f2d5c4 — 2026-09-21
-
-- [feat: upgrade remaining album tracks during a quality upgrade](https://github.com/V1ck3s/octo-fiesta/commit/8c7b10285fe572c91bcd2b28655a26291266f1d1)
-- [fix(subsonic): forward upstream response headers on relayed requests](https://github.com/V1ck3s/octo-fiesta/commit/edb647d37bcb289a5028da69a6462c494e64917e)
-- [feat(tidal): log in as the public web client with PKCE](https://github.com/V1ck3s/octo-fiesta/commit/8dea9c6e65be9b62ddf4fbe679703f102dce0928)
-- [fix(tidal): warn on lossy fallback and rank the upgrade target](https://github.com/V1ck3s/octo-fiesta/commit/3f2d5c4ae458826ebe54c7d8fa8329c021f06f7a)
-
-[Compare afa6259...3f2d5c4](https://github.com/V1ck3s/octo-fiesta/compare/afa6259...3f2d5c4)
 
 ---
 
