@@ -2,6 +2,14 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-04ef59e — 2026-11-17
+
+- [feat: stream tracks while they download](https://github.com/V1ck3s/octo-fiesta/commit/04ef59ebb14845dad6d646640686f1e8409c0b51)
+
+[Compare 53be978...04ef59e](https://github.com/V1ck3s/octo-fiesta/compare/53be978...04ef59e)
+
+---
+
 ## dev-53be978 — 2026-11-16
 
 - [feat: resolve barcode searches to the album with that UPC](https://github.com/V1ck3s/octo-fiesta/commit/e00ad5321ed1e8418e6f0683917427ce40ce5d71)
@@ -82,14 +90,6 @@ For full upstream release notes see the [official Octo-Fiesta releases](https://
 - [fix(subsonic): keep external downloads alive when the client disconnects](https://github.com/V1ck3s/octo-fiesta/commit/6841a2ea9c227b212157d81acc4aafa5965419b2)
 
 [Compare a8386e8...6841a2e](https://github.com/V1ck3s/octo-fiesta/compare/a8386e8...6841a2e)
-
----
-
-## dev-a8386e8 — 2026-10-01
-
-- [fix(subsonic): never drop a library scan request](https://github.com/V1ck3s/octo-fiesta/commit/a8386e82aee0e03bd80d7ecabae1efdc561d0832)
-
-[Compare 3f2d5c4...a8386e8](https://github.com/V1ck3s/octo-fiesta/compare/3f2d5c4...a8386e8)
 
 ---
 
