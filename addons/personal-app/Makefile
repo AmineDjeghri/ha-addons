@@ -37,7 +37,7 @@ help: ## List commands grouped by test requirements
 	    name = $$1; group = 5; \
 	    if (name ~ /^test-(local|unit|component|app|tooling|coverage|report)$$/) group = 1; \
 	    else if (name ~ /^test-(all|integration)/) group = 2; \
-	    else if (name ~ /^(check-image$$|image-test$$|test-smoke-|test-hardware-)/) group = 3; \
+	    else if (name ~ /^(check-image$$|image-test$$|docker-build$$|test-smoke-|test-hardware-)/) group = 3; \
 	    else if (name ~ /^(check($$|-)|pre-commit($$|-)|lint$$|format|code-quality|docs-build$$)/) group = 4; \
 	    rows[group] = rows[group] sprintf("  %-34s %s\n", name, $$2) \
 	  } \

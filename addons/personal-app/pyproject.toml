@@ -23,18 +23,21 @@ index-strategy = "unsafe-best-match"
 dev = [
     "pytest==9.1.1",
     "pytest-asyncio==1.4.0",
+    "pytest-xdist==3.8.0",
+    "packaging==26.2",
     "pre-commit==4.6.2",
-    "ruff==0.16.3",
-    "python-semantic-release==10.6.1",
+    "ruff==0.17.5",
+    "python-semantic-release==10.7.0",
 ]
 
 docs = [
-    "mkdocs==1.6.1",
+    "properdocs==1.6.7",
     "mkdocs-material==9.7.7",
+    "markdown-callouts==0.4.0",
     "mkdocstrings==1.0.6",
     "mkdocs-mermaid2-plugin==1.2.3",
     "mkdocs-gen-files==0.6.1",
-    "mkdocstrings-python==2.0.7",
+    "mkdocstrings-python==2.0.9",
     "mkdocs-same-dir==0.1.5",
     "mkdocs-exclude==1.0.2",
     "mkdocs-literate-nav==0.6.3",
@@ -42,6 +45,7 @@ docs = [
 
 #### pytest configuration
 [tool.pytest.ini_options]
+testpaths = ["tests/unit"]
 asyncio_mode = "strict"
 asyncio_default_fixture_loop_scope = "function"
 
@@ -71,9 +75,14 @@ version_variables = [
 ]
 tag_format = "personal-app-v{version}"
 version_pattern = "personal-app-v(?P<version>\\d+\\.\\d+\\.\\d+(?:[-.]\\w+)?)"  # matches personal-app-v1.0.0, personal-app-v1.0.0-rc.1, etc.
-upload_to_vcs_release = false  # Semantic-release automatically creates GitHub releases. Publication is handled by main-release.yml and dev-release.yml
-commit_author = "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+upload_to_vcs_release = false  # semantic-release creates the tag; `make release-assets` attaches the wheels and sdists
+# `make release-version` sets GIT_COMMIT_AUTHOR to your git identity; CI falls back to the bot.
+commit_author = { env = "GIT_COMMIT_AUTHOR", default = "github-actions[bot] <github-actions[bot]@users.noreply.github.com>" }
 commit_message = "chore(release): personal-app-v{version} [skip ci]"
+
+build_command = """
+uv lock && git add uv.lock && make build-package
+"""
 
 [tool.semantic_release.branches.main]
 match = "main"

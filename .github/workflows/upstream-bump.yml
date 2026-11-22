@@ -113,8 +113,8 @@ jobs:
           OLD=${{ steps.current.outputs.current }}
           echo "Bumping $OLD → $NEW"
 
-          # Update build.json (all architectures) — tags on GHCR have no v prefix
-          sed -i "s|hermes-webui:${OLD}|hermes-webui:${NEW}|g" addons/hermes-webui/build.json
+          # Update build.json (all architectures) and the Dockerfile BUILD_FROM default — tags on GHCR have no v prefix
+          sed -i "s|hermes-webui:${OLD}|hermes-webui:${NEW}|g" addons/hermes-webui/build.json addons/hermes-webui/Dockerfile
 
           # Update config.yaml version
           sed -i "s|version: \"${OLD}\"|version: \"${NEW}\"|g" addons/hermes-webui/config.yaml

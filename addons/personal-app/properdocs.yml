@@ -2,10 +2,11 @@ site_name: personal-app
 site_description: Documentation
 site_author: Amine Djeghri
 docs_dir: .
-# site_url:
+# site_url: #TODO: Fill when deployment CI added
 #site_dir: public
-#repo_url:
-#edit_uri: blob/main/docs/
+repo_url: https://github.com/AmineDjeghri/ha-addons
+repo_name: ha-addons
+edit_uri: edit/main/addons/personal-app/
 
 
 theme:
@@ -54,7 +55,6 @@ plugins:
         - scripts/gen_example_pages.py
   - search
   - same-dir
-  - mermaid2
   - literate-nav:
       nav_file: SUMMARY.md
   - exclude:
@@ -64,18 +64,22 @@ plugins:
         - docker_data/**
         - dist/**
         - reports/**
+        - tests/unit/**
         - bin/**
         - docker/**
         - .idea/**
         - .github/**
         - .ruff_cache/**
-#        - .deepeval/**
-#        - .deepteam/**
-#        - .changelog/**
-#        - docs/examples/data/sample.*
+        - .deepeval/**
+        - .deepteam/**
+        - .changelog/**
+        - AGENTS.md
+        - CLAUDE.md
+        - docs/examples/data/sample.*
 
 markdown_extensions:
   - admonition
+  - github-callouts
   - attr_list
   - md_in_html
   - toc:
@@ -85,14 +89,25 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - tables
 
 nav:
-  - Home: README.md
-  - Examples: docs/examples/
+  - Home:
+      - Overview: README.md
+  - Developer guide:
+      - 1. Setup: docs/developer/1.setup.md
+      - 2. Project structure: docs/developer/2.project-structure.md
+      - 3. Conventions: docs/developer/3.conventions.md
+      - 4. Testing: docs/developer/4.testing.md
+      - Test map: tests/README.md
+      - 5. Release: docs/developer/5.release.md
   - API Reference: package/
   - Changelog: CHANGELOG.md
   - Contributing: CONTRIBUTING.md

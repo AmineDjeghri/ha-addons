@@ -96,6 +96,18 @@ files is in the root `AGENTS.md` — don't restate it here, link to it.
   save time: `homeassistant_api: true` (else 401 from `http://supervisor/core/api/*`),
   `hassio_api: true` + `hassio_role` (else 403 from the supervisor API, only `/info` works
   without it).
+- **Home Assistant 2026 build changes.** Since Supervisor 2026.04 `BUILD_FROM` is no longer passed
+  by default: give `ARG BUILD_FROM=<image>` a default (a multi-arch `ghcr.io/home-assistant/base`
+  or `base-debian`, or the same upstream image `build.json` names) or use a fixed `FROM`. A default
+  that duplicates a *version-pinned* image is a second pin: let the bump job rewrite both. A
+  separate `build.json`/`build.yaml` is deprecated (still read, with a warning); the replacement
+  is `FROM`, `ARG` and `LABEL` in the Dockerfile. `arch:` supports `amd64` and `aarch64`;
+  `armv7`, `armhf` and `i386` are deprecated. From Supervisor 2026.12 new installs drop the
+  `NET_RAW`, `MKNOD`, `AUDIT_WRITE` and `SETFCAP` capabilities unless listed under `privileged:`;
+  an add-on that does mDNS/SSDP discovery without `host_network: true` must be tested without the
+  multicast plugin (disabled for all installs from 2027.02). `init: false` stays correct on HA
+  base images. Check the contributors.home-assistant.io apps reference rather than memory: it
+  moved from developers.home-assistant.io.
 - **`map:` changes need a reinstall; `run.sh` changes need an image rebuild.** A plain restart
   applies neither.
 - **detect-secrets flags option *keywords*, not just values** — a schema line like

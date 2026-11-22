@@ -22,9 +22,9 @@ release-version: ## Build, version, CHANGELOG, commit, tag, push and GitHub rele
 		   git rev-parse -q --verify HEAD^2 >/dev/null 2>&1; then \
 			echo "Branch advanced beyond the tested commit; release from its own validated workflow" >&2; exit 1; \
 		fi; \
-		changes=$$(git diff --name-only "$$GITHUB_SHA" HEAD) || exit 1; \
+		changes=$$(git diff --relative --name-only "$$GITHUB_SHA" HEAD) || exit 1; \
 		for path in $$changes; do \
-			case "$$path" in CHANGELOG.md|uv.lock|pyproject.toml|backend/pyproject.toml|frontend/pyproject.toml) ;; \
+			case "$$path" in CHANGELOG.md|config.yaml|uv.lock|pyproject.toml|backend/pyproject.toml|frontend/pyproject.toml) ;; \
 			*) echo "Release retry contains unvalidated application changes" >&2; exit 1 ;; esac; \
 		done; \
 	fi; \
@@ -41,16 +41,17 @@ release-version: ## Build, version, CHANGELOG, commit, tag, push and GitHub rele
 	[ -n "$$GIT_COMMIT_AUTHOR" ] || GIT_COMMIT_AUTHOR="$$(git config user.name) <$$(git config user.email)>"; \
 	export GIT_COMMIT_AUTHOR; \
 	version=$$(PYTHONPATH=. $(UV) run --group dev semantic-release version --print) || exit 1; \
-	if [ -z "$$version" ] || git rev-parse -q --verify "refs/tags/v$$version" >/dev/null; then \
+	next=$$($(UV) run --no-sync python scripts/release_artifacts.py tag --version "$$version") || exit 1; \
+	if [ -z "$$version" ] || git rev-parse -q --verify "refs/tags/$$next" >/dev/null; then \
 		echo "No releasable commit since the last tag"; output false false "$$tag"; exit 0; \
 	fi; \
 	if [ "$$GITHUB_ACTIONS" != true ]; then \
-		printf 'Publish v%s (commit, tag, push and GitHub release)? Type yes: ' "$$version"; \
+		printf 'Publish %s (commit, tag, push and GitHub release)? Type yes: ' "$$next"; \
 		IFS= read -r confirmation && [ "$$confirmation" = yes ] || { echo "Release cancelled" >&2; exit 1; }; \
 	fi; \
 	PYTHONPATH=. GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=core.hooksPath GIT_CONFIG_VALUE_0=/dev/null \
 		$(UV) run --group dev semantic-release -v version || exit 1; \
-	echo "Released v$$version"; output true true "v$$version"
+	echo "Released $$next"; output true true "$$next"
 
 release-assets: ## Attach every package's wheel and sdist to the current GitHub release
 	@tag=$$($(UV) run --no-sync python scripts/release_artifacts.py tag) || exit 1; \
@@ -59,7 +60,7 @@ release-assets: ## Attach every package's wheel and sdist to the current GitHub 
 		echo "$$tag must point at HEAD before uploading its artifacts" >&2; exit 1; \
 	fi; \
 	if ! gh release view "$$tag" >/dev/null 2>&1; then \
-		case "$$tag" in *-*) pre="--prerelease" ;; *) pre="" ;; esac; \
+		case "$$tag" in *[0-9]-*) pre="--prerelease" ;; *) pre="" ;; esac; \
 		gh release create "$$tag" --verify-tag --title "$$tag" --generate-notes $$pre || exit 1; \
 	fi; \
 	gh release upload "$$tag" $$files --clobber

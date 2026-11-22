@@ -1,0 +1,17 @@
+# Secrets never enter an image
+**/.env
+**/.env.*
+!.env.example
+**/*.pem
+**/*.key
+# Local environments and build output
+.venv/
+dist/
+site/
+*.pyc
+__pycache__/
+*.log
+*.sqlite3
+# Not needed to build the add-on image
+tests/
+docs/

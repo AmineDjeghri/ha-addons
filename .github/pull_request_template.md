@@ -22,12 +22,10 @@
 
 - [ ] I have read and follow the [Contributing Guide](../CONTRIBUTING.md)
 - [ ] My **PR title** follows [conventional commits](../CONTRIBUTING.md#commit-convention) (`feat:`, `fix:`, etc.) — it becomes the squash commit message
-- [ ] I ran `make pre-commit` locally — no errors
-- [ ] I ran `make test` locally — all tests pass
+- [ ] I ran pre-commit on my changes (`pre-commit run --files …`) — no errors
+- [ ] For `personal-app`: I ran `make check` in `addons/personal-app/` — all checks pass
 - [ ] I have added or updated tests and documentation where needed
-- [ ] This PR targets the correct branch:
-  - `feature/*` or `bugfix/*` → **`dev`**
-  - `dev` → **`main`** (stable production release)
+- [ ] This PR branches from and targets **`main`** (there is no `dev` branch)
 
 ## 💬 Further Comments
 

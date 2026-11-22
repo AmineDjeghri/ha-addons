@@ -1,12 +1,12 @@
 # =============================================================================
 # CI — Quality Checks
 # =============================================================================
-# Validates code quality on PRs touching addons/personal-app/**.
-# Pushes to main/dev are handled by the release workflows, not this one.
+# Validates the personal-app add-on on pull requests that touch it.
+# There is no push trigger: feature branches are validated through their pull request (a push trigger
+# doubled every check). Pushes to main/dev are handled by release.yml.
 # =============================================================================
 name: "👷 CI — Validate"
 on:
-  # no push trigger: feature branches are validated via pull_request (this doubled every check)
   pull_request:
     types: [opened, edited, synchronize]
     branches:
@@ -15,18 +15,21 @@ on:
       - "addons/personal-app/**"
       - ".github/workflows/ci.yml"
       - ".github/workflows/quality-and-tests.yml"
+      - ".github/workflows/release.yml"
       - ".github/actions/**"
+      - ".pre-commit-config.yaml"
 concurrency:
   cancel-in-progress: true
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+permissions: {}
 jobs:
   validate-pr-title:
     name: "📝 Validate PR Title"
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Check Conventional Commits format
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
           script: |
             const title = context.payload.pull_request.title;
@@ -53,6 +56,7 @@ jobs:
               core.info(`✅ PR title is valid: "${title}"`);
             }
   quality-check-and-tests:
+    permissions:
+      contents: read
     name: "👷 Quality Check & Tests"
-    uses: ./.github/workflows/quality-and-tests.yml
-    secrets: inherit  # pragma: allowlist secret
+    uses: $/.github/workflows/quality-and-tests.yml

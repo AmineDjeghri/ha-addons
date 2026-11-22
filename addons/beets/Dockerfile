@@ -1,6 +1,7 @@
 # Home Assistant Addon — Beets
-# The Supervisor injects BUILD_FROM from build.json at build time.
-ARG BUILD_FROM
+# BUILD_FROM comes from build.json when the Supervisor passes it; since Supervisor 2026.04 it is no
+# longer passed by default, so the argument carries a default (a multi-arch equivalent of the build.json images).
+ARG BUILD_FROM=ghcr.io/home-assistant/base:latest
 FROM ${BUILD_FROM}
 
 ENV PYTHONUNBUFFERED=1
