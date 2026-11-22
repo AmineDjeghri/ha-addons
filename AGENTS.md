@@ -23,13 +23,20 @@ A **multi-add-on** Home Assistant repository. Each add-on is fully self-containe
   a phantom participant. Repo-local `.git/config` has carried the wrong email before; check it.
 - **Run pre-commit** on changed files before every commit (`pre-commit run --files …`).
   Auto-fixers may modify files and abort the commit — `git add` and recommit; that is normal.
-- **`personal-app` is special**: it owns its tooling (Makefile, pyproject, mkdocs, its own
-  CONTRIBUTING) and its own release pipeline. Read `addons/personal-app/` docs before touching it.
+- **`personal-app` is special**: it owns its tooling (Makefile, pyproject, properdocs, its own
+  `AGENTS.md` and CONTRIBUTING) and its own release pipeline, aligned with the python-package-template
+  and generative-ai-project-template. Read `addons/personal-app/AGENTS.md` before touching it.
+- **Renovate** (`.github/renovate.json5`) extends the shared preset in the `renovate-config` repo.
+  Add-on `Dockerfile`s are excluded from it: `upstream-bump.yml` owns those image pins.
+- **Home Assistant 2026 compatibility** (apply to every add-on): `ARG BUILD_FROM` carries a default
+  because the Supervisor stopped passing it by default in 2026.04; `build.json` and the `armv7` /
+  `armhf` / `i386` arch values are deprecated (still accepted, with a warning). Details in the
+  `home-assistant-addon-dev` skill.
 
 ## CI reality — know what is NOT checked
 
 - CI (`ci.yml` / `quality-and-tests.yml`) triggers **only on PRs touching
-  `addons/personal-app/**`** — no push trigger (pushes to feature branches used to double
+  `addons/personal-app/**`** (or the workflows, the shared action and `.pre-commit-config.yaml`) — no push trigger (pushes to feature branches used to double
   every check; PRs are the only gate now). PRs touching any other add-on (beets, hermes-webui,
   octo-fiesta, workflows) run **zero automated checks**. Manual verification is the only gate:
   pre-commit hooks locally, `bash -n` on shell, YAML validity, careful diff review. Never tell
@@ -41,8 +48,8 @@ A **multi-add-on** Home Assistant repository. Each add-on is fully self-containe
   touching their add-on folder, and on pushes to `main` only (not arbitrary branch pushes —
   Renovate's rebase force-pushes used to trigger these for unrelated diffs). Those add-ons'
   PRs DO get automated checks; everything else still relies on manual verification.
-- Release workflows also only fire for personal-app; add-on-only changes must not be framed
-  as releases.
+- The release workflow (`release.yml`) also only fires for personal-app and skips when personal-app
+  is unchanged since its last tag; add-on-only changes must not be framed as releases.
 
 ## Versioning — by add-on type (do not guess)
 

@@ -46,27 +46,20 @@ body:
   - type: markdown
     attributes:
       value: "## Environment"
-  - type: dropdown
-    id: python_version
+  - type: input
+    id: addon
     attributes:
-      label: Python version
-      options:
-        - "3.12"
-        - "3.13"
-        - "3.14"
-        - "Other"
+      label: Add-on and version
+      placeholder: "personal-app 1.2.2"
     validations:
       required: true
 
-  - type: dropdown
-    id: os
+  - type: input
+    id: ha_version
     attributes:
-      label: Operating System
-      options:
-        - macOS
-        - Linux
-        - Windows
-        - Other
+      label: Home Assistant version
+      description: Core, Supervisor and OS versions (Settings → About)
+      placeholder: "Core 2026.11.0, Supervisor 2026.11.0, OS 17.0"
     validations:
       required: true
 

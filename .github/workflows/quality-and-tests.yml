@@ -1,7 +1,7 @@
 # =============================================================================
 # Reusable Workflow — 👷 Quality Check & Tests
 # =============================================================================
-# Shared by: ci.yml, main-release.yml, dev-release.yml
+# Shared by: ci.yml and release.yml. Everything runs inside addons/personal-app.
 # Runs pre-commit first, then tests sequentially.
 # =============================================================================
 name: "👷 Quality Check & Tests"
@@ -16,19 +16,22 @@ jobs:
 
   pre-commit:
     name: "🧹 Pre-commit"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     timeout-minutes: 5
     defaults:
       run:
         working-directory: addons/personal-app
     steps:
       - name: Check Out
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - name: Install Python Dependencies
-        uses: ./.github/actions/install-python-deps
+        uses: $/.github/actions/install-python-deps
+        with:
+          profile: tools
 
       - name: Run Pre-commit
         id: pre_commit
@@ -38,42 +41,43 @@ jobs:
           make pre-commit
           echo "::endgroup::"
 
-      - name: Cleanup Artifacts
-        if: always()
-        uses: ./.github/actions/cleanup-artifacts
 
   tests:
-    name: "🧪 Tests"
-    runs-on: ubuntu-latest
+    name: "Full software validation (test-all)"
+    runs-on: ubuntu-26.04
     needs: pre-commit
-    timeout-minutes: 20
+    env:
+      UV_PYTHON: "3.14.8" # the add-on image runs Python 3.14 only
+    timeout-minutes: 10
     defaults:
       run:
         working-directory: addons/personal-app
     steps:
       - name: Check Out
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          persist-credentials: false
           fetch-depth: 0
 
-      - name: Copy .env
-        shell: bash
-        run: |
-          echo "::group::Copy .env"
-          cp .env.example .env
-          echo "::endgroup::"
 
       - name: Install Python Dependencies
-        uses: ./.github/actions/install-python-deps
+        uses: $/.github/actions/install-python-deps
 
-      - name: Run Tests
-        id: tests
+      - name: make test-all
+        id: software
         shell: bash
         run: |
           echo "::group::Tests output"
-          make test
+          make test-all
           echo "::endgroup::"
 
-      - name: Cleanup Artifacts
+      - name: Report comprehensive validation status
         if: always()
-        uses: ./.github/actions/cleanup-artifacts
+        env:
+          SOFTWARE_RESULT: ${{ steps.software.outcome }}
+        run: |
+          if [ "$SOFTWARE_RESULT" = success ]; then
+            echo 'All existing software suites passed. This add-on has no integration suite yet.' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'Full software validation is incomplete: make test-all failed or did not run. A focused/local-only pass is insufficient.' >> "$GITHUB_STEP_SUMMARY"
+          fi

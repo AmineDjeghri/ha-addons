@@ -1,4 +1,5 @@
-ARG BUILD_FROM
+# Supervisor >= 2026.04 no longer passes BUILD_FROM by default: keep a default.
+ARG BUILD_FROM=ghcr.io/home-assistant/base:latest
 FROM ${BUILD_FROM}
 
 # Install Python and build dependencies

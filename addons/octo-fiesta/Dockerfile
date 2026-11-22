@@ -1,4 +1,4 @@
-ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/v1ck3s/octo-fiesta:dev
 FROM ${BUILD_FROM}
 
 # Install bashio for reading HA addon options (upstream .NET image doesn't have it)

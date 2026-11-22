@@ -1,4 +1,4 @@
-ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/viren070/aiostreams:nightly
 FROM ${BUILD_FROM}
 
 # Upstream's runtime image is distroless (no shell), so there is no run.sh/bashio:

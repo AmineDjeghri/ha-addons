@@ -1,6 +1,7 @@
 # Home Assistant Addon — MediaFlow Proxy Light
-# The Supervisor injects BUILD_FROM (from build.json) and BUILD_ARCH at build time.
-ARG BUILD_FROM
+# BUILD_ARCH comes from the Supervisor; BUILD_FROM comes from build.json when passed (not by default
+# since Supervisor 2026.04), so it carries a default.
+ARG BUILD_FROM=ghcr.io/home-assistant/base-debian:latest
 FROM ${BUILD_FROM}
 
 # Single source of truth for the pinned upstream release — sed-updated by the

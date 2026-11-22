@@ -6,7 +6,6 @@ url: "https://github.com/aminedjeghri/ha-addons/tree/main/addons/beets"
 arch:
   - amd64
   - aarch64
-  - armv7
 init: false
 map:
   - media:rw

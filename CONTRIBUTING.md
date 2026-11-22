@@ -12,24 +12,20 @@ add-on's folder first — if it has its own contributing guide, that guide wins.
 This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report unacceptable behavior.
 
-## 2. Team members:
-
-- Amine DJEGHRI
-
-## 3. Add-ons overview
+## 2. Add-ons overview
 
 | Add-on | Type | Own tooling & docs |
 |--------|------|--------------------|
-| [`addons/personal-app`](addons/personal-app/) | Python (FastAPI + NiceGUI) | Yes — own `Makefile`, `pyproject.toml`, `uv.lock`, `mkdocs.yml`, pre-commit, `CONTRIBUTING.md` |
+| [`addons/personal-app`](addons/personal-app/) | Python (FastAPI + NiceGUI) | Yes — own `Makefile`, `pyproject.toml`, `uv.lock`, `properdocs.yml`, `AGENTS.md`, `CONTRIBUTING.md` |
 | Other addons (ex: addons/hermes-webui/) | Shell / container wrapper | No — see repo-wide guidelines below |
 
 > **For `personal-app`, follow its own [`CONTRIBUTING.md`](addons/personal-app/CONTRIBUTING.md).**
-> It documents the Makefile commands, `uv` workflow, and pre-commit hooks for that add-on.
-> (A MkDocs docs site may be published to the `gh-pages` branch in the future.)
+> It documents the Makefile commands, `uv` workflow, and pre-commit hooks for that add-on. Its documentation
+> site is published to the `gh-pages` branch by its release workflow.
 
-## 4. Best practices (repo-wide, for the shell-based add-ons) 💡
+## 3. Best practices (repo-wide, for the shell-based add-ons) 💡
 
-- Home Assistant add-ons follow the [Add-on configuration](https://developers.home-assistant.io/docs/add-ons/configuration/)
+- Home Assistant add-ons follow the [App configuration](https://contributors.home-assistant.io/apps/reference/configuration/)
   schema (`config.yaml`). Keep every add-on self-contained under `addons/<name>/`
   with its `config.yaml`, `Dockerfile`, `build.json` (if any), and `README.md`.
 - Write clear comments in shell scripts and fail fast (`set -euo pipefail`).
@@ -45,18 +41,19 @@ By participating, you are expected to uphold this code. Please report unacceptab
     - Do **not** add entire workflow or config files to `--exclude-files` just to silence one line — use the inline
       pragma instead, so real leaks in those files are still caught.
 
-## 5. How to contribute
+## 4. How to contribute
 
-### 5.1 Local development
+### 4.1 Local development
 
 - Fork the repository and clone your fork.
 - If you're working on `personal-app`, follow its own contributing guide
   (Makefile + `uv` workflow).
 - For the other add-ons, make your changes under `addons/<name>/` and ensure the
   YAML/config is valid.
-- Optional repo-wide quality checks run in CI (see the workflows under `.github/workflows/`).
+- CI runs only for `personal-app`, `mediaflow-proxy-light` and `aiostreams` (see the workflows under
+  `.github/workflows/`). For the other add-ons, run `pre-commit run --files <your files>` yourself.
 
-### 5.2. Pushing your work
+### 4.2 Pushing your work
 
 - Before you start working on an issue, please comment on (or create) the issue and wait for it to be assigned to you.
   If someone has already been assigned but didn't have the time to work on it lately, please communicate with them and
@@ -65,7 +62,7 @@ By participating, you are expected to uphold this code. Please report unacceptab
 1. Create a branch from **`main`** and respect the naming convention: `feature/your-feature-name`
    or `fix/your-bug-name`.
 2. Before committing your code:
-    - Run the add-on's own quality checks (for `personal-app`: `make pre-commit` and `make test`).
+    - Run the add-on's own quality checks (for `personal-app`: `make check` from `addons/personal-app/`; for the others: `pre-commit run --files <your files>`).
     - Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) — see the
       [Commit Convention](#commit-convention) section below.
 3. Open a pull request targeting **`main`**. Keep the PR description concise (1–2 lines): what changed and why.
@@ -104,7 +101,7 @@ Use a scope to narrow the context, e.g. the add-on name:
 feat(hermes-webui): ...
 fix(personal-app): ...
 ```
-Common scopes: add-on names (`hermes-webui`, `personal-app`, `nocto-fiesta`), `ci`, `deps`, `repo`.
+Common scopes: add-on names (`hermes-webui`, `personal-app`, `octo-fiesta`), `ci`, `deps`, `repo`.
 
 ### Breaking Changes
 
@@ -137,10 +134,10 @@ BREAKING CHANGE: /options no longer supports the old key
 👷 ci: add pull_request trigger to pipeline
 ```
 
-## 6. Release process
+## 5. Release process
 
 Releases are driven by [python-semantic-release](https://python-semantic-release.readthedocs.io/) in CI
-(`main-release.yml` / `dev-release.yml`), scoped per add-on (e.g. `personal-app`). Version bumps and changelog
+(`release.yml`), scoped per add-on (e.g. `personal-app`). Version bumps and changelog
 entries are generated from conventional commits — so meaningful, well-scoped commits matter.
 
 Tags are created **automatically** by semantic-release on merge to `main`. **Do NOT create tags manually** — it will

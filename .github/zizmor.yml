@@ -1,0 +1,5 @@
+rules:
+  artipacked:
+    ignore:
+      # release.yml uses credentials that actions/checkout persists
+      - release.yml
