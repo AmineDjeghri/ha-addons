@@ -2,6 +2,15 @@
 
 For full upstream release notes see the [official Octo-Fiesta releases](https://github.com/V1ck3s/octo-fiesta/releases).
 
+## dev-fe01a58 — 2026-11-24
+
+- [fix: write downloads under a hidden name until they are tagged](https://github.com/V1ck3s/octo-fiesta/commit/291d0553913095e08d857104eea6880c9ef5a8d6)
+- [fix: announce undownloaded tracks in the format they will stream in](https://github.com/V1ck3s/octo-fiesta/commit/fe01a582e9fa99aff68658177ab1707eeb82e7e2)
+
+[Compare 04ef59e...fe01a58](https://github.com/V1ck3s/octo-fiesta/compare/04ef59e...fe01a58)
+
+---
+
 ## dev-04ef59e — 2026-11-17
 
 - [feat: stream tracks while they download](https://github.com/V1ck3s/octo-fiesta/commit/04ef59ebb14845dad6d646640686f1e8409c0b51)
@@ -82,14 +91,6 @@ For full upstream release notes see the [official Octo-Fiesta releases](https://
 - [feat: allow a per-provider download path override](https://github.com/V1ck3s/octo-fiesta/commit/e15c0c72acb2168d1ec98ec90b7e6b31d50f6f14)
 
 [Compare 6841a2e...e15c0c7](https://github.com/V1ck3s/octo-fiesta/compare/6841a2e...e15c0c7)
-
----
-
-## dev-6841a2e — 2026-10-02
-
-- [fix(subsonic): keep external downloads alive when the client disconnects](https://github.com/V1ck3s/octo-fiesta/commit/6841a2ea9c227b212157d81acc4aafa5965419b2)
-
-[Compare a8386e8...6841a2e](https://github.com/V1ck3s/octo-fiesta/compare/a8386e8...6841a2e)
 
 ---
 
