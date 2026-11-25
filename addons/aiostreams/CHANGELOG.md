@@ -2,6 +2,33 @@
 
 For full upstream release notes see the [official AIOStreams releases](https://github.com/Viren070/AIOStreams/releases).
 
+## nightly-89f03f6 — 2026-11-25
+
+- [Merge pull request #1800 from Viren070/weblate-aiostreams-web-app](https://github.com/Viren070/AIOStreams/commit/fdb611832a3d43bb35582374c60764a31f07a920)
+- [chore(smart-tv): update the web app (#1786)](https://github.com/Viren070/AIOStreams/commit/3727a19195de932b99f33089735a20add12d48bf)
+- [chore(desktop): update the web app (#1788)](https://github.com/Viren070/AIOStreams/commit/fb075f1e10a00f7a4fecc93b406846a4c25fe9c8)
+- [chore(android): update the web app (#1787)](https://github.com/Viren070/AIOStreams/commit/774f341dd6835172395c66b1912d8d18099f509b)
+- [chore(smart-tv): release 0.10.0 (#1801)](https://github.com/Viren070/AIOStreams/commit/b430d1a5b3b99f2c39327e41608a1749e6601488)
+- [chore(desktop): release 0.25.0 (#1794)](https://github.com/Viren070/AIOStreams/commit/b34152eeeed0046d6727da18d52005d1e6378657)
+- [chore(android): release 0.15.0 (#1802)](https://github.com/Viren070/AIOStreams/commit/7f503d67c0de6cf2b7e67badc826ec890d830d32)
+- [chore: release 2.38.0 (#1654)](https://github.com/Viren070/AIOStreams/commit/0f1a7cfca667ce8704a3ac7777e19d9596f26744)
+- [chore(l10n): update German translation](https://github.com/Viren070/AIOStreams/commit/7178f0c5bb97e8e74b4a99a017c554b86c34e59c)
+- [chore(l10n): add Romanian translation](https://github.com/Viren070/AIOStreams/commit/18ad2582741c93de52cb29743cd427134cc63bd8)
+- [chore(l10n): add Romanian translation](https://github.com/Viren070/AIOStreams/commit/4d6b4da745e5763c5e3a19d436e5d6c3330fdf33)
+- [chore(l10n): update Romanian translation](https://github.com/Viren070/AIOStreams/commit/36b93ba4a152c2dc48259df7c82687389a6279ec)
+- [chore(l10n): update translation files](https://github.com/Viren070/AIOStreams/commit/99883beaca40ba2a1bfbdd155e52ee4b19ca0cb1)
+- [chore(l10n): add Arabic translation](https://github.com/Viren070/AIOStreams/commit/96ea044642b87586df4e60cf01acfe34e01b390c)
+- [chore(l10n): add Arabic translation](https://github.com/Viren070/AIOStreams/commit/f1daa59460ca70a1444419982ed906e4de87cc19)
+- [chore(l10n): update Romanian translation](https://github.com/Viren070/AIOStreams/commit/d0d37e7bc39fd1d4689905fd078fc77e7992db4f)
+- [chore(l10n): update Romanian translation](https://github.com/Viren070/AIOStreams/commit/7487a6af6ac41c80561b6ed48fc2484d645f8f19)
+- [chore(l10n): update Arabic translation](https://github.com/Viren070/AIOStreams/commit/71a73748538dcae927ed82b071a92e477dea5809)
+- [chore(l10n): update Arabic translation](https://github.com/Viren070/AIOStreams/commit/9bd3be34e855a0f836c6c6349316e267f868656f)
+- [chore(l10n): update Arabic translation](https://github.com/Viren070/AIOStreams/commit/e14abea038dcb884d664f00bb2ddfd82801fa298)
+
+[Compare 8eb12ba...89f03f6](https://github.com/Viren070/AIOStreams/compare/8eb12ba...89f03f6)
+
+---
+
 ## nightly-8eb12ba — 2026-11-14
 
 - [feat(android): add an upscaling network and run ExoPlayer's video through it](https://github.com/Viren070/AIOStreams/commit/8efcbbcbaf10d2e630699bf6b252a5058565f3ef)
@@ -208,33 +235,6 @@ For full upstream release notes see the [official AIOStreams releases](https://g
 - [feat(web): bigger icons in the bottom bar without names](https://github.com/Viren070/AIOStreams/commit/95d151a322add2f4392795832ed309209a15ccad)
 
 [Compare c358754...0b56aa1](https://github.com/Viren070/AIOStreams/compare/c358754...0b56aa1)
-
----
-
-## nightly-c358754 — 2026-10-31
-
-- [feat(watch-state): default the minimum resume percentage to 0](https://github.com/Viren070/AIOStreams/commit/c723b85d2f21fd3ebcb73c29f123dcf4feaa392c)
-- [fix(watch-state): skip a buffered tick once the title was played after it arrived](https://github.com/Viren070/AIOStreams/commit/a11746de77e752219e4ab5e36a576bd7f1839c09)
-- [fix(jellyfin): date progress reports on arrival and drop ones after their stop](https://github.com/Viren070/AIOStreams/commit/e6c58c36668268830879b76e38e02e3bf8ea1522)
-- [fix(jellyfin): send UserDataChanged to sockets on every replica](https://github.com/Viren070/AIOStreams/commit/47e767b2669aa35a38e63880c9cd1803921a3f80)
-- [docs: list the player's chapter sheet hooks](https://github.com/Viren070/AIOStreams/commit/65b4202cd8d3668b269de7a9b94b516d287b9e26)
-- [fix(core): read and send archive parts as [url, bytes] pairs](https://github.com/Viren070/AIOStreams/commit/e2292d18ee318c9af0371b2eaaf903b2bfefed49)
-- [feat(web): show the player's chapters in a sheet with pictures](https://github.com/Viren070/AIOStreams/commit/3a7d2f2ef017ddaf5b01dc116396d83588f8c312)
-- [fix(core): send no playback events to a pull-only watch-state addon](https://github.com/Viren070/AIOStreams/commit/71c71b995a54f523dd0db343afb01be597d3fac2)
-- [docs: add an addon development guide](https://github.com/Viren070/AIOStreams/commit/011fe521d5c689b825c21cbe2345415530806ec7)
-- [chore(docs): update next version](https://github.com/Viren070/AIOStreams/commit/a925e61b8b29013e97dca37bc10bbb9fcf576a37)
-- [chore(core): switch to @aiostreams/release-parser](https://github.com/Viren070/AIOStreams/commit/72e73e0b90c6e9496ab24a91fee3b8862a321802)
-- [chore: point eslint-plugin-import references at its current lockfile entry](https://github.com/Viren070/AIOStreams/commit/ea63043ee42f6cc956286dc9483ab3d989140818)
-- [chore(l10n): update German translation](https://github.com/Viren070/AIOStreams/commit/43437abfdefc0a38c6820143d80fe6ae893e5950)
-- [chore(l10n): update Polish translation](https://github.com/Viren070/AIOStreams/commit/ef5e53a001b717098100f8e72f70b286a5316af0)
-- [chore(l10n): update Italian translation](https://github.com/Viren070/AIOStreams/commit/1dccb259fffcb7f1be7d32d0d03e4127eed82e4b)
-- [chore(l10n): update Spanish translation](https://github.com/Viren070/AIOStreams/commit/7c5df0e99f164e88dcd56b4d4484fd0df6ffdebc)
-- [chore(l10n): update Portuguese (Brazil) translation](https://github.com/Viren070/AIOStreams/commit/2bc2671f4c4a6cff5ae91668cfcc46d8155a87c3)
-- [chore(l10n): update Malay translation](https://github.com/Viren070/AIOStreams/commit/2a8379b1e659c3f0051725a43f5ffac7afeb0100)
-- [chore(l10n): update translation files](https://github.com/Viren070/AIOStreams/commit/5d336990cfac9efd71c01813bf5aa03557882d5c)
-- [Merge pull request #1690 from Viren070/weblate-aiostreams-web-app](https://github.com/Viren070/AIOStreams/commit/c358754b0ae4758d034badf8618de6fdb7fa9333)
-
-[Compare 3474c94...c358754](https://github.com/Viren070/AIOStreams/compare/3474c94...c358754)
 
 ---
 
