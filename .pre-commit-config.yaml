@@ -33,7 +33,7 @@ repos:
         exclude: ^addons/personal-app/tests/unit/release/fixtures/release_command\.py$
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.17.5
+    rev: v0.17.6
     hooks:
       - id: ruff
         args: [ --fix ]
@@ -46,13 +46,13 @@ repos:
       - id: detect-secrets
 
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.19.3
+    rev: v4.19.4
     hooks:
       - id: commitizen
         stages: [ commit-msg ]
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.13.8
+    rev: 0.13.9
     hooks:
       # Update the uv lockfile of the personal-app workspace
       - id: uv-lock
@@ -60,7 +60,7 @@ repos:
         files: ^addons/personal-app/(uv\.lock|pyproject\.toml|backend/pyproject\.toml|frontend/pyproject\.toml)$
 
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.24.1
+    rev: v0.24.2
     hooks:
       - id: markdownlint-cli2
         files: ^addons/personal-app/.*\.md$
