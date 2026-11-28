@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/nesquena/hermes-webui:0.52.735
+ARG BUILD_FROM=ghcr.io/nesquena/hermes-webui:0.52.741
 FROM ${BUILD_FROM}
 
 # Install bashio for reading HA addon options
