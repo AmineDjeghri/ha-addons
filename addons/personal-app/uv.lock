@@ -1189,7 +1189,7 @@ dependencies = [
 requires-dist = [
     { name = "fastapi", extras = ["standard"] },
     { name = "loguru", specifier = "==0.7.3" },
-    { name = "psutil", specifier = ">=6.0.0" },
+    { name = "psutil", specifier = "==7.2.2" },
     { name = "pydantic", specifier = "==2.13.4" },
     { name = "pydantic-settings", specifier = "==2.15.0" },
     { name = "requests", specifier = "==2.34.2" },
@@ -1210,7 +1210,7 @@ dependencies = [
 requires-dist = [
     { name = "loguru", specifier = "==0.7.3" },
     { name = "nicegui", specifier = "==3.16.0" },
-    { name = "pydantic", specifier = ">=2.13.4,<2.16" },
+    { name = "pydantic", specifier = "==2.13.4" },
     { name = "pydantic-settings", specifier = ">=2.12.0" },
 ]
 
